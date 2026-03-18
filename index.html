@@ -319,17 +319,28 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .founder-quote {
-      max-width: 560px; margin: 0 auto;
+      max-width: 700px; margin: 0 auto;
       padding: 12px 0;
+      display: flex; align-items: center; gap: 40px;
     }
+    .founder-photo {
+      width: 160px; height: 160px; flex-shrink: 0;
+      border-radius: 50%; object-fit: cover;
+      border: 2px solid rgba(155,77,255,0.3);
+      filter: brightness(0.95);
+    }
+    .founder-words { flex: 1; }
     .founder-quote blockquote {
       font-family: Georgia, 'Times New Roman', serif;
-      font-size: 22px; font-weight: 400; font-style: italic;
+      font-size: 20px; font-weight: 400; font-style: italic;
       line-height: 1.7; color: var(--white);
       text-transform: lowercase; letter-spacing: 0.01em;
-      border: none; padding: 0; margin-bottom: 20px;
+      border: none; padding: 0; margin-bottom: 14px;
     }
     .founder-quote cite { font-family: Georgia, serif; font-size: 13px; color: var(--muted); font-style: italic; text-transform: lowercase; }
+    @media (max-width: 600px) {
+      .founder-quote { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+    }
 
     /* ── PANEL 6: CONNECT ─────────────────────────────────── */
     #p6 {
@@ -764,10 +775,13 @@
         <div class="ml lit-color">We ship with integrity or not at all.</div>
       </div>
       <div class="founder-quote">
-        <blockquote>
-          if i made your day 2% easier or 3% happier — that's a win. win with happy, live in love.
-        </blockquote>
-        <cite>— jeremiah smith</cite>
+        <img src="assets/jeremiah.jpg" alt="Jeremiah Smith" class="founder-photo">
+        <div class="founder-words">
+          <blockquote>
+            if i made your day 2% easier or 3% happier — that's a win. win with happy, live in love.
+          </blockquote>
+          <cite>— jeremiah smith</cite>
+        </div>
       </div>
     </div>
   </div>

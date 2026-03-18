@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Konsoles Premiere Club — Founding Members</title>
+  <link rel="icon" type="image/png" href="assets/ck-icon-1024.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #080612;
+      --card:    #0f0d1e;
+      --card2:   #13112a;
+      --cyan:    #00E5FF;
+      --blue:    #5B6CFF;
+      --purple:  #9B4DFF;
+      --magenta: #FF2D9B;
+      --teal:    #00F5C4;
+      --green:   #58DE83;
+      --amber:   #DA8E20;
+      --gold:    #F0C040;
+      --white:   #F0EEF8;
+      --muted:   #7A7890;
+      --border:  rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(8,6,18,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .nav-logo img { width:36px; height:36px; border-radius:9px; }
+    .nav-logo span { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; color:var(--white); }
+    .nav-back {
+      font-size:13px; color:var(--muted); text-decoration:none; font-weight:500;
+      padding:8px 16px; border:1px solid var(--border); border-radius:8px;
+      transition:all 0.2s;
+    }
+    .nav-back:hover { color:var(--white); border-color:rgba(255,255,255,0.2); }
+
+    /* ── HELPERS ───────────────────────────────────────────── */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 50%, #ff9f45 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-text-cool {
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--teal) 50%, var(--blue) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .label {
+      font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+      color:var(--gold); margin-bottom:16px;
+    }
+    .label-cool { color: var(--teal); }
+    section { padding: 120px 40px; max-width: 1100px; margin: 0 auto; }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 100px;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(240,192,64,0.1) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(155,77,255,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0,229,255,0.06) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background: rgba(240,192,64,0.1); border: 1px solid rgba(240,192,64,0.3);
+      border-radius: 100px; padding: 8px 20px; margin-bottom: 32px;
+      font-size:13px; font-weight:600; color:var(--gold); letter-spacing:0.5px;
+    }
+    .hero-badge span { width:6px; height:6px; background:var(--gold); border-radius:50%; display:inline-block; }
+    #hero h1 {
+      font-family:'Space Grotesk',sans-serif;
+      font-size: clamp(52px, 8vw, 100px);
+      font-weight: 800; line-height: 1.0;
+      letter-spacing: -3px; margin-bottom: 12px;
+    }
+    .hero-sub-title {
+      font-family:'Space Grotesk',sans-serif;
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 600; color: var(--muted); margin-bottom: 28px; letter-spacing:-1px;
+    }
+    .hero-body {
+      font-size:18px; color:var(--muted); max-width:580px;
+      margin: 0 auto 48px; line-height:1.8;
+    }
+    .hero-cta-row { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+    .btn-founders {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:18px 40px; border-radius:14px; text-decoration:none;
+      font-weight:800; font-size:17px; letter-spacing:-0.3px;
+      background:linear-gradient(135deg, var(--gold), var(--amber), #e07820);
+      color:#120a00; transition:all 0.3s;
+      box-shadow:0 6px 40px rgba(240,192,64,0.45);
+    }
+    .btn-founders:hover { transform:translateY(-3px); box-shadow:0 12px 56px rgba(240,192,64,0.6); }
+    .btn-tools-link {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:18px 32px; border-radius:14px; text-decoration:none;
+      font-weight:700; font-size:15px;
+      border: 1px solid var(--border); color:var(--muted);
+      transition:all 0.2s;
+    }
+    .btn-tools-link:hover { border-color:rgba(255,255,255,0.2); color:var(--white); }
+    .hero-price-tag {
+      margin-top:56px;
+      display:flex; align-items:center; justify-content:center; gap:12px;
+      font-size:15px; color:var(--muted);
+    }
+    .hero-price-tag strong { font-family:'Space Grotesk',sans-serif; font-size:22px; color:var(--gold); font-weight:700; }
+    .hero-price-tag .pill {
+      background:rgba(88,222,131,0.12); border:1px solid rgba(88,222,131,0.25);
+      color:var(--green); border-radius:100px; padding:5px 14px;
+      font-size:12px; font-weight:700; letter-spacing:0.5px;
+    }
+
+    /* ── SWEAR JOKE STRIP ──────────────────────────────────── */
+    .joke-strip {
+      background: var(--card2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 40px;
+      text-align: center;
+    }
+    .joke-strip p {
+      font-size:15px; color:var(--muted); max-width:680px; margin:0 auto; line-height:1.8;
+    }
+    .joke-strip p em { color:var(--white); font-style:italic; }
+    .joke-strip p strong { color:var(--gold); font-style:normal; }
+
+    /* ── BENEFITS GRID ─────────────────────────────────────── */
+    #benefits { padding-top: 100px; }
+    .benefits-intro { text-align:center; margin-bottom:64px; }
+    .benefits-intro h2 {
+      font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,5vw,52px);
+      font-weight:800; letter-spacing:-2px; line-height:1.1; margin-bottom:16px;
+    }
+    .benefits-intro p { font-size:17px; color:var(--muted); max-width:560px; margin:0 auto; }
+    .benefits-grid {
+      display:grid; grid-template-columns:repeat(3, 1fr);
+      gap:24px;
+    }
+    .benefit-card {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:20px; padding:32px;
+      transition:all 0.3s;
+    }
+    .benefit-card:hover {
+      border-color:rgba(240,192,64,0.25);
+      transform:translateY(-4px);
+      box-shadow:0 20px 50px rgba(240,192,64,0.06);
+    }
+    .benefit-card.highlight {
+      background:var(--card2);
+      border-color:rgba(240,192,64,0.2);
+    }
+    .benefit-icon {
+      width:52px; height:52px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:24px; margin-bottom:20px;
+      background:rgba(240,192,64,0.1);
+    }
+    .benefit-icon.cool { background:rgba(0,229,255,0.1); }
+    .benefit-icon.purple { background:rgba(155,77,255,0.12); }
+    .benefit-icon.green { background:rgba(88,222,131,0.1); }
+    .benefit-card h3 {
+      font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700;
+      margin-bottom:10px; letter-spacing:-0.3px;
+    }
+    .benefit-card p { font-size:14px; color:var(--muted); line-height:1.7; }
+    .benefit-card .tag {
+      display:inline-block; margin-top:16px;
+      font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+      color:var(--gold); background:rgba(240,192,64,0.08);
+      border:1px solid rgba(240,192,64,0.2); border-radius:6px; padding:4px 10px;
+    }
+    .benefit-card .tag.cool { color:var(--teal); background:rgba(0,245,196,0.08); border-color:rgba(0,245,196,0.2); }
+    .benefit-card .tag.green { color:var(--green); background:rgba(88,222,131,0.08); border-color:rgba(88,222,131,0.2); }
+
+    /* ── MERCH SECTION ─────────────────────────────────────── */
+    #merch {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    .merch-wrap {
+      background: var(--card2);
+      border:1px solid rgba(155,77,255,0.2);
+      border-radius:28px; padding:64px;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:60px; align-items:center;
+    }
+    .merch-copy h2 {
+      font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,4vw,44px);
+      font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:20px;
+    }
+    .merch-copy p { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:24px; }
+    .merch-items { display:flex; flex-direction:column; gap:16px; }
+    .merch-item {
+      display:flex; align-items:center; gap:16px;
+      background:rgba(255,255,255,0.03); border:1px solid var(--border);
+      border-radius:14px; padding:18px 22px;
+    }
+    .merch-item-icon { font-size:26px; }
+    .merch-item-text { flex:1; }
+    .merch-item-name { font-weight:700; font-size:15px; margin-bottom:2px; }
+    .merch-item-desc { font-size:13px; color:var(--muted); }
+    .merch-founders-tag {
+      font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+      color:var(--purple); background:rgba(155,77,255,0.1);
+      border:1px solid rgba(155,77,255,0.2); border-radius:6px; padding:3px 9px;
+    }
+
+    /* ── LIFETIME SUPPORT ──────────────────────────────────── */
+    #support {
+      padding-top: 0;
+      padding-bottom: 100px;
+    }
+    .support-card {
+      background: linear-gradient(135deg, rgba(0,229,255,0.06) 0%, rgba(0,245,196,0.04) 100%);
+      border:1px solid rgba(0,229,255,0.18);
+      border-radius:28px; padding:64px;
+      text-align:center;
+    }
+    .support-card .support-icon { font-size:56px; margin-bottom:24px; }
+    .support-card h2 {
+      font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,4vw,44px);
+      font-weight:800; letter-spacing:-1.5px; margin-bottom:20px;
+    }
+    .support-card p { font-size:16px; color:var(--muted); max-width:560px; margin:0 auto 32px; line-height:1.8; }
+    .support-features {
+      display:flex; justify-content:center; gap:32px; flex-wrap:wrap;
+      margin-top:40px;
+    }
+    .support-feature {
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+    }
+    .support-feature .sf-icon {
+      width:44px; height:44px; border-radius:12px;
+      background:rgba(0,229,255,0.1); border:1px solid rgba(0,229,255,0.18);
+      display:flex; align-items:center; justify-content:center; font-size:20px;
+    }
+    .support-feature span { font-size:13px; font-weight:600; color:var(--muted); }
+
+    /* ── PRICING TIERS ─────────────────────────────────────── */
+    #pricing { padding-top: 60px; }
+    .pricing-intro { text-align:center; margin-bottom:56px; }
+    .pricing-intro h2 {
+      font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,5vw,52px);
+      font-weight:800; letter-spacing:-2px; margin-bottom:12px;
+    }
+    .pricing-intro p { font-size:16px; color:var(--muted); max-width:500px; margin:0 auto; }
+    .pricing-grid {
+      display:grid; grid-template-columns:repeat(3, 1fr);
+      gap:24px; align-items:start;
+    }
+    .pricing-card {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:22px; padding:36px;
+      position:relative;
+    }
+    .pricing-card.featured {
+      background:var(--card2);
+      border-color:rgba(240,192,64,0.35);
+      transform:scale(1.04);
+      box-shadow:0 32px 80px rgba(240,192,64,0.12);
+    }
+    .featured-badge {
+      position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+      background:linear-gradient(135deg, var(--gold), var(--amber));
+      color:#120a00; font-size:11px; font-weight:800; letter-spacing:1.5px;
+      text-transform:uppercase; padding:6px 20px; border-radius:100px;
+      white-space:nowrap;
+    }
+    .tier-name {
+      font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700;
+      margin-bottom:6px; letter-spacing:-0.5px;
+    }
+    .tier-desc { font-size:14px; color:var(--muted); margin-bottom:28px; line-height:1.6; }
+    .tier-price {
+      display:flex; align-items:baseline; gap:6px; margin-bottom:8px;
+    }
+    .tier-price .amt {
+      font-family:'Space Grotesk',sans-serif; font-size:52px; font-weight:800;
+      line-height:1; color:var(--white);
+    }
+    .tier-price .period { font-size:14px; color:var(--muted); }
+    .tier-ot { font-size:12px; color:var(--green); font-weight:600; margin-bottom:28px; letter-spacing:0.3px; }
+    .tier-features { list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:32px; }
+    .tier-features li {
+      font-size:14px; color:var(--muted); display:flex; align-items:flex-start; gap:10px; line-height:1.5;
+    }
+    .tier-features li::before {
+      content:'✓'; color:var(--teal); font-weight:700; font-size:13px;
+      flex-shrink:0; margin-top:1px;
+    }
+    .tier-features li.gold::before { color:var(--gold); }
+    .tier-features li span { color:var(--white); }
+    .btn-tier {
+      display:block; text-align:center; padding:14px 24px;
+      border-radius:12px; text-decoration:none; font-weight:700; font-size:15px;
+      border:1px solid var(--border); color:var(--muted);
+      transition:all 0.2s;
+    }
+    .btn-tier:hover { border-color:rgba(255,255,255,0.25); color:var(--white); }
+    .btn-tier.primary {
+      background:linear-gradient(135deg, var(--gold), var(--amber), #e07820);
+      border:none; color:#120a00;
+      box-shadow:0 4px 28px rgba(240,192,64,0.4);
+    }
+    .btn-tier.primary:hover { transform:translateY(-2px); box-shadow:0 8px 40px rgba(240,192,64,0.55); }
+    .btn-tier.cool {
+      background:linear-gradient(135deg, var(--cyan), var(--teal));
+      border:none; color:#040f0f;
+      box-shadow:0 4px 24px rgba(0,229,255,0.3);
+    }
+    .btn-tier.cool:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(0,229,255,0.45); }
+    .savings-note {
+      text-align:center; margin-top:32px;
+      font-size:14px; color:var(--muted);
+    }
+    .savings-note strong { color:var(--green); }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    footer {
+      border-top:1px solid var(--border);
+      padding:40px;
+      text-align:center;
+    }
+    footer p { font-size:13px; color:var(--muted); }
+    footer a { color:var(--teal); text-decoration:none; font-weight:600; }
+    footer a:hover { text-decoration:underline; }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 20px; }
+      section { padding: 80px 24px; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.featured { transform:scale(1); }
+      .merch-wrap { grid-template-columns:1fr; padding:36px; gap:40px; }
+      .support-card { padding:40px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/ck-icon-1024.png" alt="Creative Konsoles">
+    <span>Creative Konsoles</span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to main site</a>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────────── -->
+<section id="hero">
+  <div>
+    <div class="hero-badge">
+      <span></span>
+      Founding Members Edition
+    </div>
+    <h1><span class="gradient-text">Creative Konsoles</span><br>Premiere Club</h1>
+    <p class="hero-sub-title">One time. For life. No asterisk.</p>
+    <p class="hero-body">
+      Every tool we build, every release we drop — you're already in.
+      No subscription. No renewal. No "we're raising prices" email at 2am.
+      Just lifetime access, lifetime support, and a whole lot of upside.
+    </p>
+    <div class="hero-cta-row">
+      <a href="https://gumroad.com/l/YOUR_FOUNDERS_ID" target="_blank" class="btn-founders">
+        Join the Founders Club — $49.99 →
+      </a>
+      <a href="#pricing" class="btn-tools-link">See all tiers ↓</a>
+    </div>
+    <div class="hero-price-tag">
+      <strong>$49.99</strong>
+      <span>·</span>
+      <span>one-time payment</span>
+      <span class="pill">Lifetime Access</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SWEAR JOKE STRIP ──────────────────────────────────────── -->
+<div class="joke-strip">
+  <p>
+    What exactly do you get for $49.99? Well — we had a more <em>colorful phrase</em> to describe the size of this list,
+    but our <strong>legal team</strong> (read: our conscience) said to keep it professional.
+    So let's just say: it's a <em>substantial amount</em>. A very, very <em>substantial</em> amount.
+  </p>
+</div>
+
+<!-- ── BENEFITS ──────────────────────────────────────────────── -->
+<section id="benefits">
+  <div class="benefits-intro">
+    <p class="label">What You Get</p>
+    <h2>Built for people who<br><span class="gradient-text">actually build things.</span></h2>
+    <p>This isn't a loyalty program. It's a founding stake in everything Creative Konsoles does next.</p>
+  </div>
+
+  <div class="benefits-grid">
+
+    <div class="benefit-card highlight">
+      <div class="benefit-icon">🛠</div>
+      <h3>All Three Paid Tools</h3>
+      <p>KodeKeeper, DAW Doctor, and Kalshi Konnektor — yours the moment you join. Download them all, use them forever.</p>
+      <span class="tag">Instant Access</span>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-icon">🚀</div>
+      <h3>Every Future Release</h3>
+      <p>Every tool we ship going forward — you've already paid for it. New releases drop to Founders first, before anyone else sees them.</p>
+      <span class="tag">Forever Included</span>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-icon cool">⚡</div>
+      <h3>Early Access</h3>
+      <p>Beta builds, pre-release drops, unreleased features. You're the test pilot. We want your feedback and we'll actually use it.</p>
+      <span class="tag cool">First Look</span>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-icon purple">👕</div>
+      <h3>Exclusive Merch Drop</h3>
+      <p>Wicked comfy tees, clean caps — Creative Konsoles branded and shipped to Founding Members only. Not in the store. Not for sale. Yours.</p>
+      <span class="tag" style="color:var(--purple);background:rgba(155,77,255,0.08);border-color:rgba(155,77,255,0.2)">Founding Members Only</span>
+    </div>
+
+    <div class="benefit-card">
+      <div class="benefit-icon green">🤝</div>
+      <h3>Lifetime Support</h3>
+      <p>You email us, we answer. Not a bot. Not a ticket queue. Jeremiah — directly. Questions, bugs, advice, feedback. For life.</p>
+      <span class="tag green">Direct Access</span>
+    </div>
+
+    <div class="benefit-card highlight">
+      <div class="benefit-icon">🏆</div>
+      <h3>Founder Status</h3>
+      <p>Exclusive member alliance benefits as they grow. You're not a customer — you're part of the Creative Konsoles origin story. That means something here.</p>
+      <span class="tag">Original Member</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── MERCH ──────────────────────────────────────────────────── -->
+<section id="merch">
+  <div class="merch-wrap">
+    <div class="merch-copy">
+      <p class="label">Founders Merch</p>
+      <h2>Wear it like you<br><span class="gradient-text">built it.</span></h2>
+      <p>
+        Creative Konsoles merch doesn't live in a storefront. It's not for sale.
+        The only way to get it is to be one of the people who showed up early.
+        The kind of gear you actually want to wear — and when someone asks where you got it,
+        the answer is a good story.
+      </p>
+      <p style="color:var(--muted); font-size:14px;">
+        Ships to Founding Members after your purchase is confirmed.
+        Details sent via email.
+      </p>
+    </div>
+    <div class="merch-items">
+      <div class="merch-item">
+        <div class="merch-item-icon">👕</div>
+        <div class="merch-item-text">
+          <div class="merch-item-name">Wicked Comfy Tee</div>
+          <div class="merch-item-desc">Premium heavyweight — the kind you actually want to sleep in. CK logo, clean.</div>
+        </div>
+        <span class="merch-founders-tag">Founders Only</span>
+      </div>
+      <div class="merch-item">
+        <div class="merch-item-icon">🧢</div>
+        <div class="merch-item-text">
+          <div class="merch-item-name">Creative Konsoles Cap</div>
+          <div class="merch-item-desc">Structured, minimal, dead serious. The kind of hat that says you know what you're doing.</div>
+        </div>
+        <span class="merch-founders-tag">Founders Only</span>
+      </div>
+      <div class="merch-item">
+        <div class="merch-item-icon">💾</div>
+        <div class="merch-item-text">
+          <div class="merch-item-name">Exclusive Software Drops</div>
+          <div class="merch-item-desc">First access to tools before they're public. Consider it your member benefit.</div>
+        </div>
+        <span class="merch-founders-tag">Founders Only</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LIFETIME SUPPORT ───────────────────────────────────────── -->
+<section id="support">
+  <div class="support-card">
+    <div class="support-icon">🛡</div>
+    <p class="label" style="text-align:center">Lifetime Support</p>
+    <h2>Bugs don't retire.<br><span class="gradient-text-cool">Neither do we.</span></h2>
+    <p>
+      Every Creative Konsoles tool comes with lifetime support — built into the price, no asterisk.
+      Whether you're troubleshooting on day one or day three years from now,
+      the answer is the same: reach out, and we'll fix it.
+    </p>
+    <div class="support-features">
+      <div class="support-feature">
+        <div class="sf-icon">📬</div>
+        <span>Direct email access</span>
+      </div>
+      <div class="support-feature">
+        <div class="sf-icon">⚡</div>
+        <span>Fast response times</span>
+      </div>
+      <div class="support-feature">
+        <div class="sf-icon">🔄</div>
+        <span>Free updates, always</span>
+      </div>
+      <div class="support-feature">
+        <div class="sf-icon">🤝</div>
+        <span>Real human. Not a bot.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ────────────────────────────────────────────────── -->
+<section id="pricing">
+  <div class="pricing-intro">
+    <p class="label" style="color:var(--teal)">Pricing</p>
+    <h2>Pick your level.<br><span class="gradient-text-cool">Own it forever.</span></h2>
+    <p>One-time. No subscriptions. No renewals. No surprises.</p>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- Individual tool -->
+    <div class="pricing-card">
+      <p class="tier-name">Single Tool</p>
+      <p class="tier-desc">One tool, yours forever. Comes with lifetime support and free updates.</p>
+      <div class="tier-price">
+        <span class="amt">$3<small style="font-size:28px">.99</small></span>
+        <span class="period">/ tool</span>
+      </div>
+      <p class="tier-ot">↑ One-time payment</p>
+      <ul class="tier-features">
+        <li><span>KodeKeeper</span> — or</li>
+        <li><span>DAW Doctor</span> — or</li>
+        <li><span>Kalshi Konnektor</span></li>
+        <li>Lifetime free updates</li>
+        <li>Lifetime support included</li>
+      </ul>
+      <a href="https://gumroad.com/l/YOUR_TOOLS_COLLECTION" target="_blank" class="btn-tier cool">Browse Tools →</a>
+    </div>
+
+    <!-- Founders Club — featured -->
+    <div class="pricing-card featured">
+      <div class="featured-badge">⭐ Founders Club</div>
+      <p class="tier-name"><span class="gradient-text">Premiere Club</span></p>
+      <p class="tier-desc">Everything we've built. Everything we will build. Merch. Support. Founder status.</p>
+      <div class="tier-price">
+        <span class="amt" style="background:linear-gradient(135deg,var(--gold),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">$49<small style="font-size:28px">.99</small></span>
+      </div>
+      <p class="tier-ot">↑ One-time · For life</p>
+      <ul class="tier-features">
+        <li class="gold"><span>All 3 paid tools — now</span></li>
+        <li class="gold"><span>Every future release — forever</span></li>
+        <li class="gold"><span>Early access & beta drops</span></li>
+        <li class="gold"><span>Exclusive merch (tee + cap)</span></li>
+        <li class="gold"><span>Lifetime direct support</span></li>
+        <li class="gold"><span>Founding Member status</span></li>
+        <li class="gold"><span>Exclusive member alliance benefits</span></li>
+      </ul>
+      <a href="https://gumroad.com/l/YOUR_FOUNDERS_ID" target="_blank" class="btn-tier primary">Join the Founders Club →</a>
+    </div>
+
+    <!-- Bundle -->
+    <div class="pricing-card">
+      <p class="tier-name">The Bundle</p>
+      <p class="tier-desc">All three paid tools together. Best value for the tools, no frills attached.</p>
+      <div class="tier-price">
+        <span class="amt">$12<small style="font-size:28px">.99</small></span>
+      </div>
+      <p class="tier-ot">↑ One-time payment · Save $8.98</p>
+      <ul class="tier-features">
+        <li><span>KodeKeeper</span></li>
+        <li><span>DAW Doctor</span></li>
+        <li><span>Kalshi Konnektor</span></li>
+        <li>Lifetime free updates</li>
+        <li>Lifetime support included</li>
+      </ul>
+      <a href="https://gumroad.com/l/YOUR_BUNDLE_ID" target="_blank" class="btn-tier cool">Get the Bundle →</a>
+    </div>
+
+  </div>
+
+  <p class="savings-note">
+    Founders Club is <strong>$49.99 vs $12.99 bundle</strong> — the extra $37 gets you every future tool, the merch, and founder status.
+    For anyone serious about what Creative Konsoles is building, it's not a question.
+  </p>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <p>
+    <a href="index.html">← Creative Konsoles</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/papjamzzz" target="_blank">GitHub</a>
+    &nbsp;·&nbsp;
+    Built by Jeremiah Smith with AI. Driven by integrity.
+  </p>
+</footer>
+
+</body>
+</html>

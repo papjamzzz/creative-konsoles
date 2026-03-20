@@ -280,7 +280,7 @@ header:hover .btn-fullscreen { opacity: 1; }
 .main-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: 240px 1fr 260px;
+  grid-template-columns: 270px 1fr 270px;
   gap: 0;
   min-height: 100vh;
   padding-top: 62px;
@@ -900,6 +900,68 @@ header:hover .btn-fullscreen { opacity: 1; }
 .m-bar-fill  { height: 100%; border-radius: 1px; transition: width 0.5s ease; }
 
 /* ── SHORTCUT STRIP ──────────────────────────────────── */
+/* ── DISAGREEMENT WARNING BAR ────────────────────────── */
+.disagree-bar {
+  display: flex; align-items: stretch;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 7px; overflow: hidden;
+  background: rgba(0,0,0,0.35);
+  transition: border-color 0.4s, box-shadow 0.4s;
+  min-height: 38px;
+}
+.disagree-bar.warning {
+  border-color: rgba(240,160,48,0.55);
+  box-shadow: 0 0 18px rgba(240,160,48,0.15);
+  animation: disagree-pulse 2.5s ease-in-out infinite;
+}
+.disagree-bar.critical {
+  border-color: rgba(224,85,32,0.65);
+  box-shadow: 0 0 22px rgba(224,85,32,0.20);
+  animation: disagree-pulse 1.4s ease-in-out infinite;
+}
+@keyframes disagree-pulse {
+  0%,100% { box-shadow: 0 0 14px rgba(240,160,48,0.12); }
+  50%      { box-shadow: 0 0 28px rgba(240,160,48,0.30); }
+}
+.disagree-cell {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 6px 10px; gap: 2px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s;
+}
+.disagree-cell:last-child { border-right: none; }
+.disagree-cell-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.38); white-space: nowrap;
+}
+.disagree-cell-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+}
+.disagree-cell-val.green  { color: #3DFF7A; }
+.disagree-cell-val.amber  { color: #FFD400; }
+.disagree-cell-val.red    { color: #FF4422; }
+/* Warning cell — spans full width conceptually via flex */
+.disagree-warn-cell {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 14px; flex-shrink: 0;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.disagree-warn-icon {
+  font-size: 14px; line-height: 1; flex-shrink: 0;
+}
+.disagree-warn-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.35); white-space: nowrap;
+  transition: color 0.3s;
+}
+.disagree-bar.warning .disagree-warn-text { color: #FFD400; }
+.disagree-bar.critical .disagree-warn-text { color: #FF4422; }
+
 .shortcut-strip {
   display: flex; flex-direction: column; gap: 4px;
 }
@@ -1364,6 +1426,30 @@ header:hover .btn-fullscreen { opacity: 1; }
           <span class="synth-kbd">⌘↵</span>
         </button>
         <div class="model-seq-display" id="modelSeqDisplay"></div>
+      </div>
+
+      <!-- Disagreement Warning Bar -->
+      <div class="disagree-bar" id="disagreeBar">
+        <div class="disagree-warn-cell">
+          <span class="disagree-warn-icon">◈</span>
+          <span class="disagree-warn-text" id="disagreeLabel">MODEL CONSENSUS</span>
+        </div>
+        <div class="disagree-cell">
+          <span class="disagree-cell-label">Agreement</span>
+          <span class="disagree-cell-val green" id="dAgree">—</span>
+        </div>
+        <div class="disagree-cell">
+          <span class="disagree-cell-label">Divergence</span>
+          <span class="disagree-cell-val green" id="dDiverg">—</span>
+        </div>
+        <div class="disagree-cell">
+          <span class="disagree-cell-label">Consensus</span>
+          <span class="disagree-cell-val green" id="dConsensus">—</span>
+        </div>
+        <div class="disagree-cell">
+          <span class="disagree-cell-label">Confidence</span>
+          <span class="disagree-cell-val green" id="dConfidence">—</span>
+        </div>
       </div>
 
       <!-- Results -->
@@ -2214,6 +2300,7 @@ async function synthesize() {
   let totalEstCost = 0;
   let totalOutTokens = 0;
   let context = prompt;
+  const stepOutputs = []; /* collect per-model text for disagreement analysis */
 
   for (let i = 0; i < activeModels.length; i++) {
     if (synthController.signal.aborted) break;
@@ -2267,6 +2354,7 @@ async function synthesize() {
         });
         context = result.text;
         totalOutTokens += result.outputTokens || estimateTokens(result.text);
+        stepOutputs.push({ key: k, text: result.text });
       } catch (err) {
         if (err.name === 'AbortError') break;
         outEl.innerHTML += `<span style="color:#F07C5A;font-size:10px;display:block;margin-top:4px;">⚠ ${err.message}</span>`;
@@ -2282,6 +2370,7 @@ async function synthesize() {
   out.appendChild(summary);
 
   updateCostMeter(totalEstCost);
+  updateDisagreeBar(stepOutputs);
   resetBtn(btn);
   synthController = null;
 }
@@ -2289,6 +2378,54 @@ async function synthesize() {
 function resetBtn(btn) {
   btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5 8h6M8 5l3 3-3 3"/></svg> SYNTHESIZE <span class="synth-kbd">⌘↵</span>`;
   btn.style.opacity = '1';
+}
+
+/* ── DISAGREEMENT BAR ─────────────────────────────────── */
+function updateDisagreeBar(stepOutputs) {
+  const bar   = document.getElementById('disagreeBar');
+  const label = document.getElementById('disagreeLabel');
+  const dA    = document.getElementById('dAgree');
+  const dD    = document.getElementById('dDiverg');
+  const dC    = document.getElementById('dConsensus');
+  const dConf = document.getElementById('dConfidence');
+  if (!bar || !stepOutputs || stepOutputs.length < 2) return;
+
+  /* Length variance as divergence proxy */
+  const lengths = stepOutputs.map(o => o.text.split(/\s+/).length);
+  const avgLen  = lengths.reduce((a,b) => a+b, 0) / lengths.length;
+  const variance = lengths.reduce((a,b) => a + Math.abs(b - avgLen), 0) / lengths.length;
+  const divergePct = Math.min(100, Math.round((variance / Math.max(avgLen, 1)) * 100));
+
+  /* Word overlap between first and last output as agreement proxy */
+  const words1 = new Set(stepOutputs[0].text.toLowerCase().match(/\b\w{4,}\b/g) || []);
+  const wordsN = (stepOutputs[stepOutputs.length-1].text.toLowerCase().match(/\b\w{4,}\b/g) || []);
+  const overlap = wordsN.filter(w => words1.has(w)).length;
+  const agreePct = Math.min(100, Math.round((overlap / Math.max(words1.size, 1)) * 80));
+
+  /* Consensus — how similar lengths are (low variance = high consensus) */
+  const consensusPct = Math.max(0, 100 - divergePct);
+
+  /* Confidence — composite */
+  const confidencePct = Math.round((agreePct * 0.6 + consensusPct * 0.4));
+
+  /* Color helpers */
+  const cls = v => v >= 65 ? 'green' : v >= 40 ? 'amber' : 'red';
+
+  dA.textContent    = agreePct + '%';    dA.className    = 'disagree-cell-val ' + cls(agreePct);
+  dD.textContent    = divergePct + '%';  dD.className    = 'disagree-cell-val ' + cls(100 - divergePct);
+  dC.textContent    = consensusPct + '%';dC.className    = 'disagree-cell-val ' + cls(consensusPct);
+  dConf.textContent = confidencePct + '%';dConf.className = 'disagree-cell-val ' + cls(confidencePct);
+
+  bar.className = 'disagree-bar';
+  if (agreePct < 30 || divergePct > 70) {
+    bar.classList.add('critical');
+    label.textContent = 'HIGH MODEL DISAGREEMENT DETECTED';
+  } else if (agreePct < 55 || divergePct > 45) {
+    bar.classList.add('warning');
+    label.textContent = 'ELEVATED DIVERGENCE DETECTED';
+  } else {
+    label.textContent = 'MODEL CONSENSUS';
+  }
 }
 
 /* ── MODEL STREAMING CONNECTORS ──────────────────────── */

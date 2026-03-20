@@ -531,6 +531,48 @@ header:hover .btn-fullscreen { opacity: 1; }
 .fader-unit[data-type="rely"]    .fader-thumb::after { background: #22C55E; box-shadow: 0 0 6px #22C55E; }
 .fader-unit[data-type="rely"]    .fader-thumb { color: rgba(34,197,94,0.4); }
 
+/* ── ANALYSIS TOOL STRIP ─────────────────────────────── */
+.tool-strip {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;
+}
+.tool-unit {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 11px 8px;
+  background: rgba(0,0,0,0.30);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 7px; text-align: center; position: relative;
+}
+.tool-toggle { cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+.tool-toggle:hover { border-color: rgba(255,255,255,0.20); background: rgba(255,255,255,0.03); }
+.tool-toggle.active { border-color: var(--green); background: rgba(61,255,122,0.07); }
+.tool-led {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(31,90,56,0.38);
+  transition: background 0.2s, box-shadow 0.2s; flex-shrink: 0;
+}
+.tool-toggle.active .tool-led { background: #3DFF7A; box-shadow: 0 0 10px #3DFF7A; animation: led-pulse 2s ease-in-out infinite; }
+.tool-unit-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); line-height: 1.45;
+}
+.tool-toggle.active .tool-unit-label { color: #86F5B4; }
+.tool-state-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; font-weight: 700; letter-spacing: 1px;
+  color: rgba(255,255,255,0.22); margin-top: 2px;
+}
+.tool-toggle.active .tool-state-badge { color: #3DFF7A; }
+.tool-big-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px; font-weight: 800; line-height: 1;
+  color: rgba(255,255,255,0.60); font-variant-numeric: tabular-nums;
+  transition: color 0.4s, text-shadow 0.4s;
+}
+.tool-big-val.green { color: #3DFF7A; text-shadow: 0 0 16px rgba(61,255,122,0.35); }
+.tool-big-val.amber { color: #FFD400; text-shadow: 0 0 16px rgba(255,212,0,0.35); }
+.tool-big-val.red   { color: #FF4422; text-shadow: 0 0 16px rgba(255,68,34,0.35); }
+
 /* ── RANDOMIZE BTN ───────────────────────────────────── */
 .btn-randomize {
   display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -1324,34 +1366,41 @@ header:hover .btn-fullscreen { opacity: 1; }
         </div>
       </div>
 
-      <!-- Knob Bank — Analysis Tools -->
+      <!-- Analysis Tools — functional controls -->
       <div>
         <div class="panel-label">Analysis Tools</div>
-        <div class="knob-bank" id="knobBank">
-          <div class="knob-unit" id="ku-agreement" onclick="toggleKnob('agreement')" data-info="Agreement Detection|After synthesis, highlights passages where 3 or more models used substantially similar phrasing. Flagged output appears in the Agreement tab.">
-            <div class="knob-outer">
-              <canvas class="knob-canvas-el" id="knob-agreement" width="128" height="128"></canvas>
-            </div>
-            <div class="knob-label">AGREE<br>DETECT</div>
+        <div class="tool-strip">
+
+          <!-- AGREE DETECT: toggle button, arms post-synthesis agreement scan -->
+          <div class="tool-unit tool-toggle" id="tool-agreement" onclick="toggleTool('agreement')"
+               data-info="Agreement Detection|Arms agreement analysis. After synthesis, scans all model outputs for shared concepts and phrases. Results appear in the Agreement tab — shows exactly what all 5 models converged on.">
+            <div class="tool-led"></div>
+            <div class="tool-unit-label">AGREE<br>DETECT</div>
+            <div class="tool-state-badge" id="tbadge-agreement">OFF</div>
           </div>
-          <div class="knob-unit" id="ku-consensus" onclick="toggleKnob('consensus')" data-info="Consensus Map|Visual cluster showing where all 5 models agree vs. diverge. Maps overlap zones and outlier positions across the full synthesis chain.">
-            <div class="knob-outer">
-              <canvas class="knob-canvas-el" id="knob-consensus" width="128" height="128"></canvas>
-            </div>
-            <div class="knob-label">CONSENSUS<br>MAP</div>
+
+          <!-- CONSENSUS MAP: auto gauge, updates after every run -->
+          <div class="tool-unit"
+               data-info="Consensus Map|Live consensus score across all active models. Updates automatically after every synthesis run. Green = strong consensus, amber = moderate divergence, red = high disagreement.">
+            <div class="tool-big-val" id="tval-consensus">—</div>
+            <div class="tool-unit-label">CONSENSUS<br>MAP</div>
           </div>
-          <div class="knob-unit" id="ku-delta" onclick="toggleKnob('delta')" data-info="Delta Analysis|Tracks how each model transformed the output from the previous step. Shows what was added, removed, or reframed at each node in the chain.">
-            <div class="knob-outer">
-              <canvas class="knob-canvas-el" id="knob-delta" width="128" height="128"></canvas>
-            </div>
-            <div class="knob-label">DELTA<br>ANALYSIS</div>
+
+          <!-- DELTA ANALYSIS: toggle button, arms per-step diff -->
+          <div class="tool-unit tool-toggle" id="tool-delta" onclick="toggleTool('delta')"
+               data-info="Delta Analysis|Arms delta tracking. After synthesis, shows exactly what each model added, removed, and reframed at every step in the chain. Results appear in the Delta tab.">
+            <div class="tool-led" style="background:rgba(255,212,0,0.25)"></div>
+            <div class="tool-unit-label">DELTA<br>ANALYSIS</div>
+            <div class="tool-state-badge" id="tbadge-delta">OFF</div>
           </div>
-          <div class="knob-unit" id="ku-confidence" onclick="toggleKnob('confidence')" data-info="Confidence Score|Aggregate certainty metric across all 5 models. High = strong consensus. Low = high divergence. Useful for assessing output reliability.">
-            <div class="knob-outer">
-              <canvas class="knob-canvas-el" id="knob-confidence" width="128" height="128"></canvas>
-            </div>
-            <div class="knob-label">CONFIDENCE<br>SCORE</div>
+
+          <!-- CONFIDENCE SCORE: auto numeric readout -->
+          <div class="tool-unit"
+               data-info="Confidence Score|Composite certainty metric computed after each synthesis run. Factors in agreement level, output consistency, and cross-model convergence. High = reliable output, low = treat with skepticism.">
+            <div class="tool-big-val" id="tval-confidence">—</div>
+            <div class="tool-unit-label">CONFIDENCE<br>SCORE</div>
           </div>
+
         </div>
       </div>
 
@@ -2027,153 +2076,123 @@ function switchTab(btn, tabKey) {
    On   → indicator at 5 o'clock (lower-right,  ~330° canvas)
    Range arc spans 270° through the top (12 o'clock)
 ═══════════════════════════════════════════════════════ */
-const KNOB_COLORS = {
-  agreement:  '#3DFF7A',   /* vivid green  */
-  consensus:  '#FFD400',   /* hard yellow  */
-  delta:      '#FF4422',   /* hot red-orange */
-  confidence: '#00DFFF',   /* electric cyan */
-};
-const knobStates = { agreement: false, consensus: false, delta: false, confidence: false };
+/* ═══════════════════════════════════════════════════════
+   ANALYSIS TOOLS — toggle state + real functions
+═══════════════════════════════════════════════════════ */
+const toolStates = { agreement: false, delta: false };
 
-function drawKnob(id, state) {
-  const canvas = document.getElementById('knob-' + id);
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, cy = H/2;
-  const r = W * 0.36;
-  const color = KNOB_COLORS[id];
-  ctx.clearRect(0, 0, W, H);
-
-  /* ── Range arc (7 o'clock → 5 o'clock clockwise) ── */
-  const arcStart = 2 * Math.PI / 3;
-  const arcEnd   = Math.PI / 3;
-  ctx.save();
-  ctx.beginPath();
-  ctx.arc(cx, cy, r + 9, arcStart, arcEnd, false);
-  ctx.strokeStyle = 'rgba(255,255,255,0.07)';
-  ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.stroke();
-  if (state) {
-    ctx.shadowBlur = 20; ctx.shadowColor = color;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r + 9, arcStart, arcEnd, false);
-    ctx.strokeStyle = color + 'ee';
-    ctx.lineWidth = 5; ctx.stroke();
+function toggleTool(id) {
+  toolStates[id] = !toolStates[id];
+  const unit = document.getElementById('tool-' + id);
+  const badge = document.getElementById('tbadge-' + id);
+  if (unit) unit.classList.toggle('active', toolStates[id]);
+  if (badge) badge.textContent = toolStates[id] ? 'ON' : 'OFF';
+  /* delta tool LED uses amber when active */
+  if (id === 'delta' && unit) {
+    const led = unit.querySelector('.tool-led');
+    if (led) led.style.background = toolStates[id] ? '#FFD400' : 'rgba(255,212,0,0.25)';
+    if (led) led.style.boxShadow = toolStates[id] ? '0 0 10px #FFD400' : 'none';
   }
-  ctx.restore();
-
-  /* ── Outer skirt — near-black neutral charcoal (no green tint) ── */
-  ctx.save();
-  const skirtGrad = ctx.createRadialGradient(cx - r*0.25, cy - r*0.3, r*0.05, cx, cy, r);
-  skirtGrad.addColorStop(0,   '#303030');
-  skirtGrad.addColorStop(0.55,'#1c1c1c');
-  skirtGrad.addColorStop(1,   '#0e0e0e');
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
-  ctx.fillStyle = skirtGrad; ctx.fill();
-  /* Top-left bevel highlight — silver edge catches light */
-  const bevelGrad = ctx.createLinearGradient(cx - r, cy - r, cx + r*0.4, cy + r*0.4);
-  bevelGrad.addColorStop(0,   'rgba(255,255,255,0.14)');
-  bevelGrad.addColorStop(0.35,'rgba(255,255,255,0.04)');
-  bevelGrad.addColorStop(1,   'rgba(0,0,0,0.10)');
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
-  ctx.fillStyle = bevelGrad; ctx.fill();
-  /* Rim — thin silver ring, glows color when active */
-  ctx.strokeStyle = state ? color + '90' : 'rgba(255,255,255,0.18)';
-  ctx.lineWidth = 1.5;
-  if (state) { ctx.shadowBlur = 12; ctx.shadowColor = color; }
-  ctx.stroke();
-  ctx.restore();
-
-  /* ── Serration ticks — silver/white, hardware-accurate ── */
-  ctx.save();
-  const numTicks = 32;
-  for (let i = 0; i < numTicks; i++) {
-    const a = (i / numTicks) * Math.PI * 2;
-    const major = i % 4 === 0;
-    const inner = r - (major ? 6 : 3.5);
-    const outer = r - 0.5;
-    ctx.beginPath();
-    ctx.moveTo(cx + Math.cos(a) * inner, cy + Math.sin(a) * inner);
-    ctx.lineTo(cx + Math.cos(a) * outer, cy + Math.sin(a) * outer);
-    ctx.strokeStyle = major ? 'rgba(255,255,255,0.32)' : 'rgba(255,255,255,0.11)';
-    ctx.lineWidth = major ? 1.5 : 0.8;
-    ctx.stroke();
-  }
-  ctx.restore();
-
-  /* ── Inner ledge — dark neutral collar between skirt and cap ── */
-  ctx.save();
-  const ledgeR = r * 0.73;
-  const ledgeGrad = ctx.createRadialGradient(cx - ledgeR*0.2, cy - ledgeR*0.25, 0, cx, cy, ledgeR);
-  ledgeGrad.addColorStop(0, '#222222');
-  ledgeGrad.addColorStop(1, '#111111');
-  ctx.beginPath(); ctx.arc(cx, cy, ledgeR, 0, Math.PI*2);
-  ctx.fillStyle = ledgeGrad; ctx.fill();
-  ctx.strokeStyle = 'rgba(255,255,255,0.10)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-  ctx.restore();
-
-  /* ── Colored top cap — wider, fully saturated, Waldorf-style ── */
-  const capR = r * 0.54;   /* bigger cap = more color presence */
-  ctx.save();
-  /* Flat saturated fill + soft radial depth */
-  const capGrad = ctx.createRadialGradient(cx - capR*0.22, cy - capR*0.28, 0, cx, cy, capR);
-  capGrad.addColorStop(0,   color + 'ff');
-  capGrad.addColorStop(0.72, color + 'ee');
-  capGrad.addColorStop(1,   color + '88');
-  ctx.beginPath(); ctx.arc(cx, cy, capR, 0, Math.PI*2);
-  ctx.fillStyle = capGrad;
-  /* Active: strong glow + outer bloom */
-  if (state) { ctx.shadowBlur = 28; ctx.shadowColor = color; }
-  else        { ctx.shadowBlur = 6;  ctx.shadowColor = color + '55'; }
-  ctx.fill();
-  /* Hard dark edge — separates cap from skirt */
-  ctx.strokeStyle = 'rgba(0,0,0,0.55)';
-  ctx.lineWidth = 1.8; ctx.stroke();
-  /* Dome specular — tight hot spot upper-left */
-  const hlGrad = ctx.createRadialGradient(cx - capR*0.34, cy - capR*0.40, 0, cx - capR*0.08, cy - capR*0.10, capR * 0.82);
-  hlGrad.addColorStop(0,   'rgba(255,255,255,0.62)');
-  hlGrad.addColorStop(0.38,'rgba(255,255,255,0.16)');
-  hlGrad.addColorStop(1,   'rgba(255,255,255,0)');
-  ctx.beginPath(); ctx.arc(cx, cy, capR, 0, Math.PI*2);
-  ctx.fillStyle = hlGrad; ctx.fill();
-  ctx.restore();
-
-  /* ── Indicator line — white, high contrast on vivid cap ── */
-  const indicatorAngle = state ? Math.PI / 3 : 2 * Math.PI / 3;
-  const il1 = capR * 0.16;
-  const il2 = capR * 0.86;
-  ctx.save();
-  ctx.shadowBlur = state ? 18 : 6;
-  ctx.shadowColor = '#ffffff';
-  ctx.beginPath();
-  ctx.moveTo(cx + Math.cos(indicatorAngle) * il1, cy + Math.sin(indicatorAngle) * il1);
-  ctx.lineTo(cx + Math.cos(indicatorAngle) * il2, cy + Math.sin(indicatorAngle) * il2);
-  ctx.strokeStyle = '#ffffff';
-  ctx.globalAlpha = state ? 1.0 : 0.70;
-  ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.stroke();
-  ctx.restore();
 }
 
-function initKnobs() {
-  Object.keys(knobStates).forEach(id => drawKnob(id, false));
+/* ── AGREEMENT ANALYSIS (real) ───────────────────────── */
+function runAgreementAnalysis(stepOutputs) {
+  const container = document.getElementById('outputAgreement');
+  if (!container || !stepOutputs || stepOutputs.length < 2) return;
+
+  /* Count word occurrences across model outputs */
+  const wordCounts = {};
+  stepOutputs.forEach(o => {
+    const words = new Set(o.text.toLowerCase().match(/\b[a-z]{5,}\b/g) || []);
+    words.forEach(w => { wordCounts[w] = (wordCounts[w] || 0) + 1; });
+  });
+
+  const threshold = Math.max(2, Math.ceil(stepOutputs.length * 0.55));
+  const agreed = Object.entries(wordCounts)
+    .filter(([, c]) => c >= threshold)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 28);
+
+  if (!agreed.length) {
+    container.innerHTML = `<div class="flag-card"><div class="flag-label">Agreement Detection</div>
+      <span class="output-empty">No significant shared concepts found across models.</span></div>`;
+    return;
+  }
+
+  const chips = agreed.map(([word, count]) => {
+    const strength = count / stepOutputs.length;
+    return `<span style="display:inline-block;margin:3px 2px;padding:3px 9px;
+      background:rgba(61,255,122,${strength * 0.18});
+      border:1px solid rgba(61,255,122,${strength * 0.55});
+      border-radius:4px;font-family:'JetBrains Mono',monospace;
+      font-size:10px;color:#3DFF7A;cursor:default;"
+      title="${count}/${stepOutputs.length} models">${word}
+      <span style="opacity:0.5;font-size:8px">${count}/${stepOutputs.length}</span></span>`;
+  }).join('');
+
+  container.innerHTML = `<div class="flag-card">
+    <div class="flag-label">Shared Concepts — ${agreed.length} terms in ${threshold}+ models</div>
+    <p style="font-size:10px;color:rgba(255,255,255,0.4);margin:6px 0 10px;">
+      Concepts agreed upon by the majority of models in the chain. Chip size reflects agreement strength.
+    </p>
+    <div>${chips}</div>
+  </div>`;
 }
 
-function toggleKnob(id) {
-  knobStates[id] = !knobStates[id];
-  drawKnob(id, knobStates[id]);
-  const unit = document.getElementById('ku-' + id);
-  if (unit) unit.classList.toggle('active', knobStates[id]);
-  /* also switch result tab for relevant tools */
-  if (id === 'agreement' && knobStates[id]) {
-    const btn = document.querySelector('.tab-btn:nth-child(3)');
-    if (btn) btn.click();
+/* ── DELTA ANALYSIS (real) ───────────────────────────── */
+function runDeltaAnalysis(stepOutputs) {
+  const container = document.getElementById('outputDelta');
+  if (!container || !stepOutputs || stepOutputs.length < 2) return;
+
+  let html = '';
+  for (let i = 1; i < stepOutputs.length; i++) {
+    const prev = stepOutputs[i - 1];
+    const curr = stepOutputs[i];
+    const pm   = MODELS[prev.key];
+    const cm   = MODELS[curr.key];
+
+    const prevSet  = new Set(prev.text.toLowerCase().match(/\b[a-z]{5,}\b/g) || []);
+    const currArr  = curr.text.toLowerCase().match(/\b[a-z]{5,}\b/g) || [];
+    const currSet  = new Set(currArr);
+
+    const added    = [...currSet].filter(w => !prevSet.has(w)).slice(0, 10);
+    const dropped  = [...prevSet].filter(w => !currSet.has(w)).slice(0, 10);
+    const lenDelta = currArr.length - [...(prev.text.toLowerCase().match(/\b[a-z]{5,}\b/g) || [])].length;
+    const sign     = lenDelta >= 0 ? '+' : '';
+
+    html += `<div style="margin-bottom:12px;padding:10px 12px;
+      border-left:3px solid ${cm.color};
+      background:rgba(255,255,255,0.025);border-radius:0 6px 6px 0;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;
+        color:${cm.colorHi};letter-spacing:1.5px;margin-bottom:8px;display:flex;gap:12px;align-items:center;">
+        <span>${pm.name} → ${cm.name}</span>
+        <span style="opacity:0.5">${sign}${lenDelta} concept words</span>
+      </div>
+      ${added.length ? `<div style="margin-bottom:5px;">
+        <span style="font-size:7.5px;letter-spacing:1px;color:rgba(61,255,122,0.55);font-family:'JetBrains Mono',monospace;">INTRODUCED &nbsp;</span>
+        ${added.map(w => `<span style="font-family:'JetBrains Mono',monospace;font-size:9px;
+          color:#3DFF7A;background:rgba(61,255,122,0.10);
+          padding:1px 7px;border-radius:3px;margin:2px;display:inline-block;">${w}</span>`).join('')}
+      </div>` : ''}
+      ${dropped.length ? `<div>
+        <span style="font-size:7.5px;letter-spacing:1px;color:rgba(255,68,34,0.55);font-family:'JetBrains Mono',monospace;">DROPPED &nbsp;</span>
+        ${dropped.map(w => `<span style="font-family:'JetBrains Mono',monospace;font-size:9px;
+          color:#FF4422;background:rgba(255,68,34,0.10);
+          padding:1px 7px;border-radius:3px;margin:2px;display:inline-block;">${w}</span>`).join('')}
+      </div>` : ''}
+    </div>`;
   }
-  if (id === 'delta' && knobStates[id]) {
-    const btn = document.querySelector('.tab-btn:nth-child(2)');
-    if (btn) btn.click();
-  }
+
+  container.innerHTML = html || `<span class="output-empty">Not enough model outputs to compute delta.</span>`;
+}
+
+/* ── UPDATE CONSENSUS + CONFIDENCE GAUGES ────────────── */
+function updateToolGauges(agreePct, confidencePct) {
+  const colorCls = v => v >= 65 ? 'green' : v >= 40 ? 'amber' : 'red';
+  const cv = document.getElementById('tval-consensus');
+  const cf = document.getElementById('tval-confidence');
+  if (cv) { cv.textContent = agreePct + '%'; cv.className = 'tool-big-val ' + colorCls(agreePct); }
+  if (cf) { cf.textContent = confidencePct + '%'; cf.className = 'tool-big-val ' + colorCls(confidencePct); }
 }
 
 /* ── SYS PROMPT TOGGLE ───────────────────────────────── */
@@ -2419,6 +2438,9 @@ async function synthesize() {
 
   updateCostMeter(totalEstCost);
   updateDisagreeBar(stepOutputs);
+  /* Run armed analysis tools */
+  if (toolStates.agreement) runAgreementAnalysis(stepOutputs);
+  if (toolStates.delta)     runDeltaAnalysis(stepOutputs);
   resetBtn(btn);
   synthController = null;
 }
@@ -2463,6 +2485,7 @@ function updateDisagreeBar(stepOutputs) {
   dD.textContent    = divergePct + '%';  dD.className    = 'disagree-cell-val ' + cls(100 - divergePct);
   dC.textContent    = consensusPct + '%';dC.className    = 'disagree-cell-val ' + cls(consensusPct);
   dConf.textContent = confidencePct + '%';dConf.className = 'disagree-cell-val ' + cls(confidencePct);
+  updateToolGauges(agreePct, confidencePct);
 
   bar.className = 'disagree-bar';
   if (agreePct < 30 || divergePct > 70) {
@@ -3044,7 +3067,6 @@ function initCpuMeter() {
 ═══════════════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   initFaders();
-  initKnobs();
   initOrbitalBackground();
   initHeroLogo();
   initCpuMeter();

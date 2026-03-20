@@ -1790,6 +1790,20 @@ function buildMonitorRows(weights) {
 }
 
 /* ── API ROWS ────────────────────────────────────────── */
+/* ── KEY PERSISTENCE — localStorage ─────────────────── */
+const LS_KEY = '5i_api_keys';
+function saveKeysToStorage() {
+  const saved = {};
+  Object.entries(MODELS).forEach(([k, m]) => { if (m.apiKey) saved[k] = m.apiKey; });
+  localStorage.setItem(LS_KEY, JSON.stringify(saved));
+}
+function loadKeysFromStorage() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+    Object.entries(saved).forEach(([k, v]) => { if (MODELS[k]) MODELS[k].apiKey = v; });
+  } catch(e) {}
+}
+
 function buildApiRows() {
   const container = document.getElementById('apiRows');
   if (!container) return;
@@ -1814,6 +1828,7 @@ function buildApiRows() {
       const key = prompt('Enter API key for ' + m.name + ':');
       if (key !== null) {
         m.apiKey = key.trim() || null;
+        saveKeysToStorage();
         buildApiRows();
       }
     });
@@ -2816,6 +2831,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initHeroLogo();
   initCpuMeter();
   buildRankings();
+  loadKeysFromStorage();
   buildApiRows();
   updateUI();
   initFileDrop();
@@ -2832,6 +2848,7 @@ function closeBYOK() {
 function confirmBYOK() {
   /* Clear every key */
   Object.values(MODELS).forEach(m => { m.apiKey = null; });
+  localStorage.removeItem(LS_KEY);
   buildApiRows();
   closeBYOK();
 

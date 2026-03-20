@@ -41,7 +41,7 @@ body {
   color: var(--mint);
   min-height: 100vh;
   overflow-x: hidden;
-  font-size: 13px;
+  font-size: 15px;
   user-select: none;
 }
 
@@ -397,105 +397,138 @@ header:hover .btn-fullscreen { opacity: 1; }
 }
 .fader-name {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
-  color: #ffffff; opacity: 0.85; text-align: center;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: #ffffff; opacity: 0.92; text-align: center;
 }
 .fader-val {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; color: #ffffff; font-weight: 600; text-align: center;
-  min-width: 38px; background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; padding: 2px 5px;
+  font-size: 13px; color: #ffffff; font-weight: 700; text-align: center;
+  min-width: 42px; background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.20); border-radius: 3px; padding: 2px 6px;
 }
 .fader-wrap {
   position: relative;
   width: 42px; height: 190px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(13,23,20,0.8) 100%);
-  border: 1px solid var(--border-dim);
-  border-top: 1px solid rgba(31,90,56,0.25);
-  border-bottom: 1px solid rgba(0,0,0,0.6);
+  /* dark neutral charcoal — matches knob skirt treatment */
+  background: linear-gradient(180deg, #1c1c1c 0%, #111111 100%);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(255,255,255,0.18);
+  border-bottom: 1px solid rgba(0,0,0,0.7);
   border-radius: 5px;
   cursor: ns-resize;
   overflow: visible;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), inset 0 -1px 2px rgba(88,222,131,0.04);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.05);
 }
-/* Tick marks on sides */
+/* Tick marks — left side */
 .fader-wrap::before {
   content: '';
   position: absolute;
-  right: 3px; top: 8px; bottom: 8px; width: 2px;
+  left: 3px; top: 10px; bottom: 10px; width: 2px;
   background: repeating-linear-gradient(to bottom,
-    rgba(31,90,56,0.5) 0px, rgba(31,90,56,0.5) 1px,
-    transparent 1px, transparent 10px
+    rgba(255,255,255,0.30) 0px, rgba(255,255,255,0.30) 1px,
+    transparent 1px, transparent 9px
   );
+  pointer-events: none;
+}
+/* Tick marks — right side */
+.fader-wrap::after {
+  content: '';
+  position: absolute;
+  right: 3px; top: 10px; bottom: 10px; width: 2px;
+  background: repeating-linear-gradient(to bottom,
+    rgba(255,255,255,0.30) 0px, rgba(255,255,255,0.30) 1px,
+    transparent 1px, transparent 9px
+  );
+  pointer-events: none;
 }
 .fader-track {
   position: absolute;
-  left: 50%; top: 8px; bottom: 8px; width: 4px;
+  left: 50%; top: 10px; bottom: 10px; width: 5px;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
-  border-radius: 2px;
-  border: 1px solid rgba(0,0,0,0.8);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.9);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.9), inset 0 0 2px rgba(0,0,0,0.6);
   pointer-events: none;
 }
 .fader-fill {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  border-radius: 2px;
+  border-radius: 3px;
   transition: height 0.05s linear;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0.70;
 }
+/* ── Fader thumb — Waves NS1 / mixing board style ── */
 .fader-thumb {
   position: absolute;
-  left: 50%; width: 36px; height: 20px;
+  left: 50%; width: 38px; height: 28px;
   transform: translate(-50%, 50%);
+  /* dark charcoal body — neutral, matches knob skirt */
   background: linear-gradient(180deg,
-    rgba(195,253,216,0.18) 0%,
-    rgba(195,253,216,0.10) 45%,
-    rgba(0,0,0,0.2) 50%,
-    rgba(195,253,216,0.06) 100%
+    #383838 0%,
+    #2a2a2a 35%,
+    #1e1e1e 50%,
+    #2a2a2a 65%,
+    #383838 100%
   );
-  border: 1px solid var(--border-hi);
-  border-top: 1px solid rgba(195,253,216,0.25);
-  border-bottom: 1px solid rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-top: 1px solid rgba(255,255,255,0.32);
+  border-bottom: 1px solid rgba(0,0,0,0.7);
   border-radius: 4px;
   cursor: ns-resize;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: box-shadow 0.15s;
   z-index: 10;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(195,253,216,0.08) inset;
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.7),
+    0 1px 0 rgba(255,255,255,0.10) inset,
+    0 -1px 0 rgba(0,0,0,0.5) inset;
 }
-/* Three grip lines — classic hardware fader */
+/* Horizontal ribs across the whole thumb — mixing board grip */
 .fader-thumb::before {
   content: '';
   position: absolute;
-  left: 4px; right: 4px;
-  top: 50%;
-  height: 7px;
-  margin-top: -3.5px;
+  left: 3px; right: 3px;
+  top: 4px; bottom: 4px;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(195,253,216,0.35) 0px, rgba(195,253,216,0.35) 1px,
-    transparent 1px, transparent 3px
+    rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px,
+    transparent 1px, transparent 4px
   );
-  border-radius: 0.5px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+/* Bold center accent stripe — the NS1 amber line, per-fader color */
+.fader-thumb::after {
+  content: '';
+  position: absolute;
+  left: 5px; right: 5px;
+  top: 50%; height: 2px;
+  margin-top: -1px;
+  border-radius: 1px;
+  pointer-events: none;
 }
 .fader-thumb.dragging,
 .fader-thumb:hover {
-  border-color: var(--green);
-  border-top-color: rgba(105,240,155,0.5);
-  box-shadow: 0 0 10px rgba(88,222,131,0.45), 0 2px 4px rgba(0,0,0,0.6), 0 0 20px rgba(88,222,131,0.15);
+  box-shadow:
+    0 0 14px currentColor,
+    0 3px 8px rgba(0,0,0,0.7),
+    0 1px 0 rgba(255,255,255,0.15) inset;
 }
 
 /* fader color accent per type */
-.fader-unit[data-type="cost"]    .fader-fill { background: linear-gradient(0deg, #DA8E20, #FDE68A); }
-.fader-unit[data-type="cost"]    .fader-thumb::before { background: #DA8E20; }
-.fader-unit[data-type="latency"] .fader-fill { background: linear-gradient(0deg, #3B82F6, #93C5FD); }
-.fader-unit[data-type="latency"] .fader-thumb::before { background: #3B82F6; }
-.fader-unit[data-type="agree"]   .fader-fill { background: linear-gradient(0deg, #7C3AED, #A78BFA); }
-.fader-unit[data-type="agree"]   .fader-thumb::before { background: #7C3AED; }
-.fader-unit[data-type="rely"]    .fader-fill { background: linear-gradient(0deg, #22C55E, #86EFAC); }
-.fader-unit[data-type="rely"]    .fader-thumb::before { background: #22C55E; }
+.fader-unit[data-type="cost"]    .fader-fill { background: linear-gradient(0deg, #B06810, #FFD060); }
+.fader-unit[data-type="cost"]    .fader-thumb::after { background: #FFB830; box-shadow: 0 0 6px #FFB830; }
+.fader-unit[data-type="cost"]    .fader-thumb { color: rgba(255,180,48,0.4); }
+.fader-unit[data-type="latency"] .fader-fill { background: linear-gradient(0deg, #1E4A9A, #60A5FF); }
+.fader-unit[data-type="latency"] .fader-thumb::after { background: #4D90FF; box-shadow: 0 0 6px #4D90FF; }
+.fader-unit[data-type="latency"] .fader-thumb { color: rgba(77,144,255,0.4); }
+.fader-unit[data-type="agree"]   .fader-fill { background: linear-gradient(0deg, #4A1A9A, #C084FC); }
+.fader-unit[data-type="agree"]   .fader-thumb::after { background: #A855F7; box-shadow: 0 0 6px #A855F7; }
+.fader-unit[data-type="agree"]   .fader-thumb { color: rgba(168,85,247,0.4); }
+.fader-unit[data-type="rely"]    .fader-fill { background: linear-gradient(0deg, #166534, #4ADE80); }
+.fader-unit[data-type="rely"]    .fader-thumb::after { background: #22C55E; box-shadow: 0 0 6px #22C55E; }
+.fader-unit[data-type="rely"]    .fader-thumb { color: rgba(34,197,94,0.4); }
 
 /* ── RANDOMIZE BTN ───────────────────────────────────── */
 .btn-randomize {
@@ -1337,8 +1370,8 @@ header:hover .btn-fullscreen { opacity: 1; }
       <div class="results-section">
         <div class="tabs-bar">
           <button class="tab-btn active" onclick="switchTab(this,'synthesis')">Synthesis</button>
-          <button class="tab-btn" onclick="switchTab(this,'agreement')">Agreement</button>
           <button class="tab-btn" onclick="switchTab(this,'delta')">Delta</button>
+          <button class="tab-btn" onclick="switchTab(this,'agreement')" style="margin-left:auto">Agreement</button>
         </div>
         <div class="tab-content active" id="tab-synthesis">
           <div class="output-body" id="outputSynthesis">
@@ -2000,11 +2033,11 @@ function toggleKnob(id) {
   if (unit) unit.classList.toggle('active', knobStates[id]);
   /* also switch result tab for relevant tools */
   if (id === 'agreement' && knobStates[id]) {
-    const btn = document.querySelector('.tab-btn:nth-child(2)');
+    const btn = document.querySelector('.tab-btn:nth-child(3)');
     if (btn) btn.click();
   }
   if (id === 'delta' && knobStates[id]) {
-    const btn = document.querySelector('.tab-btn:nth-child(3)');
+    const btn = document.querySelector('.tab-btn:nth-child(2)');
     if (btn) btn.click();
   }
 }

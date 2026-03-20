@@ -2253,8 +2253,8 @@ async function callModelStreaming(modelKey, { sysPrompt, userPrompt, maxTokens, 
   if (modelKey === 'claude') {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST', signal,
-      headers: { 'x-api-key': m.apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-beta': 'messages-2023-12-15' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: maxTokens, stream: true,
+      headers: { 'x-api-key': m.apiKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({ model: 'claude-3-5-haiku-20241022', max_tokens: maxTokens, stream: true,
         system: sysPrompt, messages: [{ role: 'user', content: userPrompt }] })
     });
     return streamSSE(res, signal, onToken, d => d.delta?.text || '');

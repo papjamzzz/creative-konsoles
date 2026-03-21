@@ -42,7 +42,7 @@ body {
   color: var(--mint);
   min-height: 100vh;
   overflow-x: hidden;
-  font-size: 13px;
+  font-size: 15px;
   user-select: none;
 }
 
@@ -96,7 +96,7 @@ body {
 /* ── HEADER — floating, no bar ───────────────────────── */
 header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 18px;
+  padding: 16px 22px;
   background: transparent;
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   gap: 14px;
@@ -106,13 +106,13 @@ header > *, header .logo-mark, header .header-right { pointer-events: auto; }
 .btn-fullscreen { opacity: 0; transition: opacity 0.2s; }
 header:hover .btn-fullscreen { opacity: 1; }
 .logo-mark { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.logo-icon  { width: 28px; height: 28px; border-radius: 5px; }
+.logo-icon  { width: 38px; height: 38px; border-radius: 7px; }
 .logo-5i {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 22px;
   color: var(--mint);
-  letter-spacing: 3px;
+  letter-spacing: -0.5px;
   line-height: 1;
 }
 
@@ -284,16 +284,15 @@ header:hover .btn-fullscreen { opacity: 1; }
   grid-template-columns: 270px 1fr 270px;
   gap: 0;
   min-height: 100vh;
-  padding-top: 48px;
-  padding-bottom: 22px;
+  padding-top: 62px;
 }
 
 /* ── PANELS ──────────────────────────────────────────── */
 .panel {
   border-right: 1px solid var(--border-dim);
-  padding: 10px;
+  padding: 16px;
   overflow-y: auto;
-  display: flex; flex-direction: column; gap: 10px;
+  display: flex; flex-direction: column; gap: 16px;
 }
 .panel:last-child { border-right: none; }
 .panel-label {
@@ -305,32 +304,49 @@ header:hover .btn-fullscreen { opacity: 1; }
 /* ── HERO LOGO ───────────────────────────────────────── */
 .hero-logo-section {
   display: flex; flex-direction: column; align-items: center;
-  padding: 8px 0 4px;
+  padding: 12px 0 8px;
   position: relative;
 }
 .hero-logo-wrap {
   position: relative;
-  width: 150px; height: 150px;
+  width: 210px; height: 210px;
+  animation: float 6s ease-in-out infinite;
   display: flex; align-items: center; justify-content: center;
 }
-.hero-logo-wrap::before { display: none; }
-.hero-logo-wrap::after  { display: none; }
+.hero-logo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -28px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(88,222,131,0.22) 0%, transparent 65%);
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+.hero-logo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(88,222,131,0.18);
+  box-shadow: 0 0 20px rgba(88,222,131,0.12), inset 0 0 20px rgba(88,222,131,0.06);
+  animation: pulse-ring 3.5s ease-in-out infinite 1.5s;
+}
 .hero-logo-canvas {
-  width: 148px; height: 148px;
-  filter: drop-shadow(0 0 18px rgba(88,222,131,0.30))
-          drop-shadow(0 0 4px rgba(195,253,216,0.2));
+  width: 200px; height: 200px;
+  filter: drop-shadow(0 0 40px rgba(88,222,131,0.55))
+          drop-shadow(0 0 90px rgba(88,222,131,0.22))
+          drop-shadow(0 0 4px rgba(195,253,216,0.4));
   cursor: crosshair;
 }
 .hero-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 14px; font-weight: 700; color: var(--mint);
-  letter-spacing: -0.3px; text-align: center; margin-top: 6px;
+  font-size: 16px; font-weight: 700; color: var(--mint);
+  letter-spacing: -0.3px; text-align: center; margin-top: 10px;
 }
 .hero-title span { color: var(--green); }
 .hero-subtitle {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 7px; letter-spacing: 2px; color: var(--green);
-  opacity: 0.45; text-transform: uppercase; text-align: center; margin-top: 2px;
+  font-size: 8px; letter-spacing: 2px; color: var(--green);
+  opacity: 0.5; text-transform: uppercase; text-align: center; margin-top: 3px;
 }
 
 /* ── KNOB BANK ───────────────────────────────────────── */
@@ -393,7 +409,7 @@ header:hover .btn-fullscreen { opacity: 1; }
 }
 .fader-wrap {
   position: relative;
-  width: 38px; height: 160px;
+  width: 42px; height: 190px;
   /* dark neutral charcoal — matches knob skirt treatment */
   background: linear-gradient(180deg, #1c1c1c 0%, #111111 100%);
   border: 1px solid rgba(255,255,255,0.12);
@@ -447,7 +463,7 @@ header:hover .btn-fullscreen { opacity: 1; }
 /* ── Fader thumb — Waves NS1 / mixing board style ── */
 .fader-thumb {
   position: absolute;
-  left: 50%; width: 34px; height: 24px;
+  left: 50%; width: 38px; height: 28px;
   transform: translate(-50%, 50%);
   /* dark charcoal body — neutral, matches knob skirt */
   background: linear-gradient(180deg,
@@ -577,14 +593,14 @@ header:hover .btn-fullscreen { opacity: 1; }
 .btn-randomize svg { width: 12px; height: 12px; }
 
 /* ── CENTER PANEL ────────────────────────────────────── */
-.center-panel { padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+.center-panel { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
 
 /* ── MODEL CONSOLE STRIP ─────────────────────────────── */
 .model-console {
   background: var(--inset);
   border: 1px solid var(--border-dim);
-  border-radius: 4px;
-  padding: 7px 10px;
+  border-radius: 8px;
+  padding: 10px 12px;
   display: flex; gap: 8px; align-items: center;
 }
 .console-label {
@@ -682,14 +698,14 @@ header:hover .btn-fullscreen { opacity: 1; }
 .prompt-area:focus-within { border-color: var(--border-hi); }
 
 .prompt-textarea {
-  width: 100%; min-height: 120px;
+  width: 100%; min-height: 140px;
   background: transparent; border: none; outline: none;
-  color: #ffffff; font-family: 'JetBrains Mono', monospace;
-  font-size: 13px; line-height: 1.6;
-  padding: 10px 12px; resize: vertical;
+  color: #ffffff; font-family: 'Inter', sans-serif;
+  font-size: 16px; line-height: 1.65;
+  padding: 14px 16px; resize: vertical;
   user-select: text;
 }
-.prompt-textarea::placeholder { color: rgba(232,250,242,0.28); font-size: 12px; }
+.prompt-textarea::placeholder { color: rgba(232,250,242,0.38); font-size: 15px; }
 
 /* ── DEVELOPER TOOLBAR ───────────────────────────────── */
 .dev-toolbar {
@@ -776,21 +792,23 @@ header:hover .btn-fullscreen { opacity: 1; }
 .synth-row { display: flex; gap: 8px; align-items: center; }
 .btn-synth {
   flex: 1;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  background: rgba(94,232,138,0.07);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: linear-gradient(135deg, rgba(94,232,138,0.16), rgba(94,232,138,0.06));
   border: 1px solid var(--green);
-  border-radius: 4px; padding: 10px;
-  font-family: 'JetBrains Mono', sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  border-radius: 6px; padding: 15px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px; font-weight: 700; letter-spacing: 0.5px;
   color: var(--green); cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
+  box-shadow: 0 0 24px rgba(94,232,138,0.14), inset 0 1px 0 rgba(94,232,138,0.15);
 }
 .btn-synth:hover {
-  background: rgba(94,232,138,0.14);
-  box-shadow: 0 0 14px rgba(94,232,138,0.16);
+  background: linear-gradient(135deg, rgba(94,232,138,0.26), rgba(94,232,138,0.10));
+  box-shadow: 0 0 40px rgba(94,232,138,0.28), inset 0 1px 0 rgba(94,232,138,0.2);
+  transform: translateY(-1px);
   color: var(--green-bright);
 }
-.btn-synth svg { width: 13px; height: 13px; }
+.btn-synth svg { width: 16px; height: 16px; }
 .synth-kbd {
   font-family: 'JetBrains Mono', monospace;
   font-size: 9px; color: var(--green); opacity: 0.45;
@@ -823,9 +841,9 @@ header:hover .btn-fullscreen { opacity: 1; }
 .tab-content.active { display: block; }
 
 .output-body {
-  min-height: 120px; background: rgba(9,15,13,0.70);
-  border: 1px solid var(--border-dim); border-radius: 4px; padding: 10px 12px;
-  font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.6;
+  min-height: 120px; background: rgba(14,24,20,0.55);
+  border: 1px solid var(--border-dim); border-radius: 6px; padding: 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.7;
   color: var(--mint);
 }
 .output-empty { color: rgba(232,250,242,0.28); font-style: italic; }
@@ -841,7 +859,7 @@ header:hover .btn-fullscreen { opacity: 1; }
 }
 
 /* ── RIGHT PANEL ─────────────────────────────────────── */
-.right-panel { padding: 10px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+.right-panel { padding: 16px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
 
 /* ── RANKING PANEL ───────────────────────────────────── */
 .ranking-panel { display: flex; flex-direction: column; gap: 10px; }
@@ -979,8 +997,8 @@ header:hover .btn-fullscreen { opacity: 1; }
   font-size: 14px; line-height: 1; flex-shrink: 0;
 }
 .disagree-warn-text {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
   color: rgba(255,255,255,0.35); white-space: nowrap;
   transition: color 0.3s;
 }
@@ -1077,9 +1095,9 @@ header:hover .btn-fullscreen { opacity: 1; }
   background: rgba(218,142,32,0.06);
 }
 .byok-modal-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px; font-weight: 700; color: var(--amber);
-  letter-spacing: 2px; text-transform: uppercase;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px; font-weight: 700; color: var(--amber);
+  letter-spacing: -0.5px;
 }
 .byok-modal-sub {
   font-family: 'JetBrains Mono', monospace;
@@ -1165,25 +1183,6 @@ header:hover .btn-fullscreen { opacity: 1; }
   margin: 1px 0;
 }
 
-/* ── STATUS BAR ──────────────────────────────────────── */
-.status-bar {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
-  height: 22px;
-  background: rgba(8,14,11,0.97);
-  border-top: 1px solid var(--border-dim);
-  display: flex; align-items: center;
-  padding: 0 14px; gap: 18px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; color: rgba(232,250,242,0.28);
-  letter-spacing: 0.8px;
-  pointer-events: none;
-  user-select: none;
-}
-.status-bar .sb-sep { opacity: 0.18; }
-.status-bar .sb-green { color: var(--green); opacity: 0.6; }
-.status-bar .sb-amber { color: var(--amber); opacity: 0.6; }
-.status-bar .sb-right { margin-left: auto; display: flex; gap: 18px; }
-
 /* ── SCROLLBAR ───────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -1209,11 +1208,9 @@ header:hover .btn-fullscreen { opacity: 1; }
     <div class="logo-mark">
       <canvas class="logo-icon" id="logo-icon-canvas" width="76" height="76"></canvas>
       <div class="logo-5i">5i</div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(94,232,138,0.35);letter-spacing:1px;margin-left:2px;">v1.0</span>
     </div>
 
     <div class="header-right">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(232,250,242,0.20);letter-spacing:1px;">5-MODEL SYNTHESIS</span>
       <div class="status-dot">
         <div class="dot"></div>
         <span>LIVE</span>
@@ -1237,13 +1234,13 @@ header:hover .btn-fullscreen { opacity: 1; }
         <div class="hero-logo-wrap">
           <canvas class="hero-logo-canvas" id="heroCanvas" width="400" height="400"></canvas>
         </div>
-        <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:var(--mint);letter-spacing:4px;text-align:center;margin-top:8px;line-height:1;">5i</div>
-        <div class="hero-subtitle">v1.0 · GPT→CLD→GEM→MST→GRK · 5-model chain</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:42px;color:var(--mint);letter-spacing:-2px;text-align:center;margin-top:10px;line-height:1;">5i</div>
+        <div class="hero-subtitle">The AI Synthesis Consortium</div>
       </div>
 
       <!-- Fader Bank -->
       <div>
-        <div class="panel-label">Chain Params</div>
+        <div class="panel-label">Mix Controls</div>
         <div class="fader-bank" id="faderBank">
 
           <div class="fader-unit" data-type="cost" data-fader="cost">
@@ -1603,25 +1600,6 @@ header:hover .btn-fullscreen { opacity: 1; }
 
   </div><!-- /.main-grid -->
 </div><!-- /.app -->
-
-<!-- STATUS BAR -->
-<div class="status-bar" id="statusBar">
-  <span class="sb-green">●</span>
-  <span>5i</span>
-  <span class="sb-sep">|</span>
-  <span>v1.0.0</span>
-  <span class="sb-sep">|</span>
-  <span>CHAIN: GPT→CLD→GEM→MST→GRK</span>
-  <span class="sb-sep">|</span>
-  <span id="sbModelCount">5 models active</span>
-  <div class="sb-right">
-    <span id="sbLastRun">—</span>
-    <span class="sb-sep">|</span>
-    <span id="sbCost">$0.00000</span>
-    <span class="sb-sep">|</span>
-    <span>papjamzzz / creative-konsoles</span>
-  </div>
-</div>
 
 <script>
 /* ═══════════════════════════════════════════════════════
@@ -2081,10 +2059,6 @@ function updateUI() {
   buildModelConsole(weights);
   buildMonitorRows(weights);
   buildSeqDisplay(weights);
-  /* status bar model count */
-  const active = MODEL_ORDER.filter(k => MODELS[k].active).length;
-  const sbMc = document.getElementById('sbModelCount');
-  if (sbMc) sbMc.textContent = active + ' of ' + MODEL_ORDER.length + ' models active';
 }
 
 /* ── TABS ────────────────────────────────────────────── */
@@ -2316,11 +2290,6 @@ function updateCostMeter(runCost) {
   const panelSess = document.getElementById('panelSession');
   if (panelCost) panelCost.textContent = fmt;
   if (panelSess) panelSess.textContent = '$' + sessionCost.toFixed(5);
-  /* Status bar sync */
-  const sbCost = document.getElementById('sbCost');
-  const sbLastRun = document.getElementById('sbLastRun');
-  if (sbCost) sbCost.textContent = '$' + sessionCost.toFixed(5);
-  if (sbLastRun) sbLastRun.textContent = 'LAST RUN ' + fmt;
   /* Brief ghost flare on update */
   const hud = document.getElementById('ghostHud');
   if (hud) {

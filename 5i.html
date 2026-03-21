@@ -285,6 +285,7 @@ header:hover .btn-fullscreen { opacity: 1; }
   gap: 0;
   min-height: 100vh;
   padding-top: 48px;
+  padding-bottom: 22px;
 }
 
 /* ── PANELS ──────────────────────────────────────────── */
@@ -1164,6 +1165,25 @@ header:hover .btn-fullscreen { opacity: 1; }
   margin: 1px 0;
 }
 
+/* ── STATUS BAR ──────────────────────────────────────── */
+.status-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
+  height: 22px;
+  background: rgba(8,14,11,0.97);
+  border-top: 1px solid var(--border-dim);
+  display: flex; align-items: center;
+  padding: 0 14px; gap: 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: rgba(232,250,242,0.28);
+  letter-spacing: 0.8px;
+  pointer-events: none;
+  user-select: none;
+}
+.status-bar .sb-sep { opacity: 0.18; }
+.status-bar .sb-green { color: var(--green); opacity: 0.6; }
+.status-bar .sb-amber { color: var(--amber); opacity: 0.6; }
+.status-bar .sb-right { margin-left: auto; display: flex; gap: 18px; }
+
 /* ── SCROLLBAR ───────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -1189,9 +1209,11 @@ header:hover .btn-fullscreen { opacity: 1; }
     <div class="logo-mark">
       <canvas class="logo-icon" id="logo-icon-canvas" width="76" height="76"></canvas>
       <div class="logo-5i">5i</div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(94,232,138,0.35);letter-spacing:1px;margin-left:2px;">v1.0</span>
     </div>
 
     <div class="header-right">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(232,250,242,0.20);letter-spacing:1px;">5-MODEL SYNTHESIS</span>
       <div class="status-dot">
         <div class="dot"></div>
         <span>LIVE</span>
@@ -1216,12 +1238,12 @@ header:hover .btn-fullscreen { opacity: 1; }
           <canvas class="hero-logo-canvas" id="heroCanvas" width="400" height="400"></canvas>
         </div>
         <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:var(--mint);letter-spacing:4px;text-align:center;margin-top:8px;line-height:1;">5i</div>
-        <div class="hero-subtitle">The AI Synthesis Consortium</div>
+        <div class="hero-subtitle">v1.0 · GPT→CLD→GEM→MST→GRK · 5-model chain</div>
       </div>
 
       <!-- Fader Bank -->
       <div>
-        <div class="panel-label">Mix Controls</div>
+        <div class="panel-label">Chain Params</div>
         <div class="fader-bank" id="faderBank">
 
           <div class="fader-unit" data-type="cost" data-fader="cost">
@@ -1581,6 +1603,25 @@ header:hover .btn-fullscreen { opacity: 1; }
 
   </div><!-- /.main-grid -->
 </div><!-- /.app -->
+
+<!-- STATUS BAR -->
+<div class="status-bar" id="statusBar">
+  <span class="sb-green">●</span>
+  <span>5i</span>
+  <span class="sb-sep">|</span>
+  <span>v1.0.0</span>
+  <span class="sb-sep">|</span>
+  <span>CHAIN: GPT→CLD→GEM→MST→GRK</span>
+  <span class="sb-sep">|</span>
+  <span id="sbModelCount">5 models active</span>
+  <div class="sb-right">
+    <span id="sbLastRun">—</span>
+    <span class="sb-sep">|</span>
+    <span id="sbCost">$0.00000</span>
+    <span class="sb-sep">|</span>
+    <span>papjamzzz / creative-konsoles</span>
+  </div>
+</div>
 
 <script>
 /* ═══════════════════════════════════════════════════════
@@ -2040,6 +2081,10 @@ function updateUI() {
   buildModelConsole(weights);
   buildMonitorRows(weights);
   buildSeqDisplay(weights);
+  /* status bar model count */
+  const active = MODEL_ORDER.filter(k => MODELS[k].active).length;
+  const sbMc = document.getElementById('sbModelCount');
+  if (sbMc) sbMc.textContent = active + ' of ' + MODEL_ORDER.length + ' models active';
 }
 
 /* ── TABS ────────────────────────────────────────────── */
@@ -2271,6 +2316,11 @@ function updateCostMeter(runCost) {
   const panelSess = document.getElementById('panelSession');
   if (panelCost) panelCost.textContent = fmt;
   if (panelSess) panelSess.textContent = '$' + sessionCost.toFixed(5);
+  /* Status bar sync */
+  const sbCost = document.getElementById('sbCost');
+  const sbLastRun = document.getElementById('sbLastRun');
+  if (sbCost) sbCost.textContent = '$' + sessionCost.toFixed(5);
+  if (sbLastRun) sbLastRun.textContent = 'LAST RUN ' + fmt;
   /* Brief ghost flare on update */
   const hud = document.getElementById('ghostHud');
   if (hud) {

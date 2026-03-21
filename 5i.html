@@ -2429,16 +2429,97 @@ async function synthesize() {
     }
   }
 
+  /* ══ CONSENSUS SYNTHESIS — the actual payoff ══════════ */
+  /* Take all model outputs + original prompt → one clean answer */
+  let consensusText = '';
+  if (stepOutputs.length >= 1 && !synthController?.signal.aborted) {
+
+    /* Pick best available synthesizer: Claude first, then GPT, then whoever */
+    const synthKey = ['claude','gpt','gemini','mistral','grok'].find(k => MODELS[k].apiKey);
+
+    if (synthKey) {
+      const sm = MODELS[synthKey];
+
+      /* Build the synthesis payload */
+      const chainText = stepOutputs.map((o, i) => {
+        const mm = MODELS[o.key];
+        return `[${mm.name}]\n${o.text}`;
+      }).join('\n\n---\n\n');
+
+      const synthUserPrompt =
+        `Original question: "${prompt}"\n\n` +
+        `Below are responses from ${stepOutputs.length} AI models. ` +
+        `Synthesize them into ONE clear, authoritative consensus answer that directly addresses the original question. ` +
+        `Do not reference the models or say "the AIs agree". Just give the best unified answer:\n\n${chainText}`;
+
+      /* Inject consensus block at the TOP of the output area */
+      const consensusBlock = document.createElement('div');
+      consensusBlock.style.cssText = `
+        margin-bottom:20px;
+        padding:18px 20px;
+        background: linear-gradient(135deg, rgba(61,255,122,0.07) 0%, rgba(0,0,0,0.25) 100%);
+        border:1px solid rgba(61,255,122,0.35);
+        border-radius:10px;
+        animation:fadeIn 0.2s ease;
+        position:relative;
+      `;
+      consensusBlock.innerHTML = `
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#3DFF7A;box-shadow:0 0 10px #3DFF7A;flex-shrink:0;"></div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#3DFF7A;">Consensus</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">synthesized by ${sm.name}</span>
+        </div>
+        <div id="consensus-out" style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:#E8FAF2;"></div>
+      `;
+      /* Prepend consensus above individual outputs */
+      out.insertBefore(consensusBlock, out.firstChild);
+
+      const consensusOutEl = document.getElementById('consensus-out');
+
+      /* Divider between consensus and chain outputs */
+      const divider = document.createElement('div');
+      divider.style.cssText = `
+        margin:18px 0 14px;
+        display:flex;align-items:center;gap:12px;
+        font-family:'JetBrains Mono',monospace;font-size:8px;
+        letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.22);
+      `;
+      divider.innerHTML = `<div style="flex:1;height:1px;background:rgba(255,255,255,0.07)"></div>MODEL CHAIN — HOW WE GOT HERE<div style="flex:1;height:1px;background:rgba(255,255,255,0.07)"></div>`;
+      out.insertBefore(divider, consensusBlock.nextSibling);
+
+      /* Stream the synthesis */
+      try {
+        const synthResult = await callModelStreaming(synthKey, {
+          sysPrompt: 'You are a synthesis engine. Distill multiple AI perspectives into one clean, definitive, well-written answer. No meta-commentary. Just the best answer.',
+          userPrompt: synthUserPrompt,
+          maxTokens: MAX_TOKENS * 2,
+          signal: synthController?.signal,
+          onToken: (chunk) => {
+            consensusText += chunk;
+            consensusOutEl.textContent = consensusText;
+            out.scrollTop = 0; /* keep consensus in view */
+          }
+        });
+        const synthCost = estimateStepCost(synthKey, synthUserPrompt, MAX_TOKENS * 2);
+        totalEstCost += synthCost;
+        totalOutTokens += estimateTokens(consensusText);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          consensusOutEl.innerHTML = `<span style="color:#F07C5A;">⚠ Synthesis failed: ${err.message}</span>`;
+        }
+      }
+    }
+  }
+
   /* ── Run summary bar ─────────────────────────────────── */
-  const elapsed  = ((performance.now() - t0) / 1000).toFixed(1);
-  const summary  = document.createElement('div');
+  const elapsed = ((performance.now() - t0) / 1000).toFixed(1);
+  const summary = document.createElement('div');
   summary.style.cssText = 'margin-top:14px;padding:7px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:4px;display:flex;gap:14px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;font-size:9px;color:rgba(255,255,255,0.45);';
-  summary.innerHTML = `<span>⏱ ${elapsed}s</span><span>🔗 ${activeModels.length} models</span><span>~${totalOutTokens} tokens out</span><span>est $${totalEstCost.toFixed(5)}</span>`;
+  summary.innerHTML = `<span>⏱ ${elapsed}s</span><span>🔗 ${activeModels.length} models + synthesis</span><span>~${totalOutTokens} tokens</span><span>est $${totalEstCost.toFixed(5)}</span>`;
   out.appendChild(summary);
 
   updateCostMeter(totalEstCost);
   updateDisagreeBar(stepOutputs);
-  /* Run armed analysis tools */
   if (toolStates.agreement) runAgreementAnalysis(stepOutputs);
   if (toolStates.delta)     runDeltaAnalysis(stepOutputs);
   resetBtn(btn);

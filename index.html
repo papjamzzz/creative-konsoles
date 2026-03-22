@@ -1,937 +1,1571 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Creative Konsoles — Precision Milled Software</title>
-  <meta name="description" content="Creative Konsoles builds precision software for creators, producers, and traders. Five AIs. One Answer. Flagship product: 5i." />
-  <link rel="icon" type="image/png" href="assets/ck-icon-1024.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#004be3',
-            secondary: '#00685a',
-            tertiary: '#fdd400',
-            surface: '#f6f6f8',
-            'inverse-surface': '#0c0e10',
-            'on-surface': '#2d2f31',
-            'outline-variant': '#acadaf',
-            'ck-dark': '#0B1210',
-            'ck-green': '#5EE88A',
-          },
-          fontFamily: {
-            grotesk: ['Space Grotesk', 'sans-serif'],
-            inter: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          borderRadius: {
-            DEFAULT: '0px',
-            none: '0px',
-            sm: '0px',
-            md: '0px',
-            lg: '0px',
-            xl: '0px',
-            '2xl': '0px',
-            '3xl': '0px',
-            full: '0px',
-          },
-        },
-      },
-    };
-  </script>
+  <meta name="description" content="Creative Konsoles makes precision software for music producers, traders, and builders. Every tool ships with purpose.">
+  <link rel="icon" type="image/png" href="assets/ck-icon-1024.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-    * { border-radius: 0 !important; }
-    html { font-family: 'Inter', sans-serif; }
-    h1, h2, h3, h4, h5, h6, .font-grotesk { font-family: 'Space Grotesk', sans-serif; }
-    .font-mono-ck { font-family: 'JetBrains Mono', monospace; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    #nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    :root {
+      --white: #ffffff;
+      --black: #1a1a1a;
+      --green: #5EE88A;
+      --green-dark: #1F5A38;
+      --green-tint: #f0faf4;
+      --off-white: #f5f5f0;
+      --blue: #004be3;
+      --muted: #6b6b6b;
+      --border: #eeeeee;
+      --font-head: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
 
-    .hero-glow {
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ── UTILITIES ── */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+    }
+
+    .btn-green {
+      display: inline-block;
+      background: var(--green);
+      color: var(--black);
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+    .btn-green:hover { background: #4bd977; }
+
+    .btn-blue {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--white);
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: opacity 0.15s;
+    }
+    .btn-blue:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      display: inline-block;
+      color: var(--black);
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      border-bottom: 1.5px solid var(--black);
+      padding-bottom: 1px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-ghost:hover { color: var(--muted); border-color: var(--muted); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      color: var(--black);
+    }
+
+    .nav-brand img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--black); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      background: var(--white);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .hero-headline {
+      font-family: var(--font-head);
+      font-size: clamp(52px, 6vw, 84px);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 28px;
+    }
+
+    .hero-headline .accent {
+      color: var(--green-dark);
+    }
+
+    .hero-sub {
+      font-size: 19px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 440px;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 56px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border: 1px solid #ddd;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      background: var(--white);
+    }
+
+    /* ── HERO VISUAL ── */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orb-canvas {
+      width: 460px;
+      height: 420px;
+      position: relative;
+      background: linear-gradient(135deg, #f8fdf9 0%, #eaf9f1 50%, #f0f8ff 100%);
+      border: 1px solid #e8f5ed;
+      overflow: hidden;
+    }
+
+    .orb-canvas::before {
+      content: '';
       position: absolute;
-      width: 600px;
-      height: 600px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
       background: radial-gradient(circle, rgba(94,232,138,0.12) 0%, transparent 70%);
-      pointer-events: none;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
-    .prism-glow {
-      filter: drop-shadow(0 0 32px rgba(94,232,138,0.35)) drop-shadow(0 0 80px rgba(94,232,138,0.15));
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #004be3 0%, #0062ff 100%);
-      transition: opacity 0.15s, transform 0.15s;
-    }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-
-    .btn-ghost {
-      border: 1px solid rgba(255,255,255,0.25);
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.05); }
-
-    .chain-arrow { color: #5EE88A; font-size: 1.25rem; line-height: 1; }
-
-    .model-card { border-left: 3px solid; }
-
-    .bento-large { grid-column: span 2; }
-    @media (max-width: 768px) { .bento-large { grid-column: span 1; } }
-
-    .stat-badge {
-      border: 1px solid rgba(94,232,138,0.3);
-      background: rgba(94,232,138,0.05);
+    .orb-glow {
+      filter: blur(24px);
+      opacity: 0.4;
     }
 
-    .platform-badge {
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      transition: border-color 0.15s;
+    /* GPT — top left */
+    .orb-1 {
+      width: 72px; height: 72px;
+      background: radial-gradient(circle at 35% 35%, #4ade80, #16a34a);
+      top: 80px; left: 60px;
+      box-shadow: 0 0 0 8px rgba(74,222,128,0.12);
     }
-    .platform-badge:hover { border-color: rgba(94,232,138,0.4); }
+    .orb-1-glow { width: 100px; height: 100px; background: #22c55e; top: 66px; left: 46px; }
 
-    section { scroll-margin-top: 64px; }
-
-    #mobile-menu { display: none; }
-    #mobile-menu.open { display: flex; }
-
-    .email-input {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: white;
-      outline: none;
-      transition: border-color 0.15s;
+    /* Claude — top right */
+    .orb-2 {
+      width: 64px; height: 64px;
+      background: radial-gradient(circle at 35% 35%, #a78bfa, #6d28d9);
+      top: 90px; right: 70px;
+      box-shadow: 0 0 0 8px rgba(167,139,250,0.12);
     }
-    .email-input:focus { border-color: #004be3; }
-    .email-input::placeholder { color: rgba(255,255,255,0.35); }
+    .orb-2-glow { width: 90px; height: 90px; background: #7c3aed; top: 78px; right: 58px; }
 
-    .product-card { transition: transform 0.15s, box-shadow 0.15s; }
-    .product-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.10); }
-    .product-card-dark:hover { box-shadow: 0 8px 48px rgba(94,232,138,0.08); }
-
-    .scroll-indicator { animation: bounce 2s infinite; }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
+    /* Gemini — center */
+    .orb-3 {
+      width: 88px; height: 88px;
+      background: radial-gradient(circle at 35% 35%, #60a5fa, #1d4ed8);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 12px rgba(96,165,250,0.12);
+    }
+    .orb-3-glow {
+      width: 130px; height: 130px;
+      background: #3b82f6;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
     }
 
-    .badge-pill {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.65rem;
+    /* Mistral — bottom left */
+    .orb-4 {
+      width: 58px; height: 58px;
+      background: radial-gradient(circle at 35% 35%, #fbbf24, #d97706);
+      bottom: 90px; left: 80px;
+      box-shadow: 0 0 0 8px rgba(251,191,36,0.12);
+    }
+    .orb-4-glow { width: 84px; height: 84px; background: #f59e0b; bottom: 77px; left: 67px; }
+
+    /* Grok — bottom right */
+    .orb-5 {
+      width: 60px; height: 60px;
+      background: radial-gradient(circle at 35% 35%, #f87171, #dc2626);
+      bottom: 80px; right: 80px;
+      box-shadow: 0 0 0 8px rgba(248,113,113,0.12);
+    }
+    .orb-5-glow { width: 88px; height: 88px; background: #ef4444; bottom: 66px; right: 66px; }
+
+    .orb-label {
+      position: absolute;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .label-1 { top: 158px; left: 62px; }
+    .label-2 { top: 160px; right: 52px; }
+    .label-3 { top: 50%; left: 50%; transform: translate(-50%, 52px); white-space: nowrap; }
+    .label-4 { bottom: 58px; left: 68px; }
+    .label-5 { bottom: 50px; right: 62px; }
+
+    .orb-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
       letter-spacing: 0.12em;
+      color: var(--green-dark);
+      background: rgba(94,232,138,0.15);
+      border: 1px solid rgba(94,232,138,0.3);
+      padding: 5px 14px;
+      white-space: nowrap;
+    }
+
+    /* ── FEATURED: 5i ── */
+    .section-5i {
+      background: var(--green-tint);
+      padding: 100px 0;
+    }
+
+    .five-i-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    .five-i-headline {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+
+    .five-i-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 420px;
+    }
+
+    .stat-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .stat-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      background: rgba(94,232,138,0.2);
+      border: 1px solid rgba(94,232,138,0.4);
+      color: var(--green-dark);
+    }
+
+    /* 5i CSS Mockup */
+    .five-i-mockup {
+      background: #0B1210;
+      padding: 32px;
+      position: relative;
+      min-height: 280px;
+    }
+
+    .mockup-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+
+    .mockup-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .mockup-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: #4a7a5a;
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+
+    .mockup-models {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .model-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .model-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+    }
+
+    .model-name-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      color: #4a7a5a;
+      text-transform: uppercase;
+    }
+
+    .model-arrow {
+      color: #2a5a3a;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .mockup-input {
+      background: #0f1f17;
+      border: 1px solid #1e3a28;
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #3a8a5a;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .mockup-synth-btn {
+      background: var(--green);
+      color: var(--black);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      padding: 10px 24px;
+      border: none;
+      cursor: default;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .mockup-progress-track {
+      background: #0f1f17;
+      height: 4px;
+      width: 100%;
+    }
+
+    .mockup-progress-fill {
+      background: var(--green);
+      height: 100%;
+      width: 72%;
+      box-shadow: 0 0 8px rgba(94,232,138,0.5);
+    }
+
+    /* AI Model Cards Row */
+    .model-cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 48px;
+    }
+
+    .model-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-top: 3px solid transparent;
+    }
+
+    .model-card-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .model-card-provider {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    /* ── ALL PRODUCTS ── */
+    .section-products {
+      background: var(--white);
+      padding: 100px 0;
+    }
+
+    .section-headline {
+      font-family: var(--font-head);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 56px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .product-card:hover {
+      border-color: var(--green);
+      box-shadow: 0 4px 24px rgba(94,232,138,0.1);
+    }
+
+    .product-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .product-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-live {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      padding: 3px 8px;
+      background: rgba(94,232,138,0.15);
+      border: 1px solid rgba(94,232,138,0.35);
+      color: var(--green-dark);
+      text-transform: uppercase;
+    }
+
+    .badge-port {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .product-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .product-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .product-link {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      display: inline-block;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .product-link:hover { color: var(--black); border-color: var(--black); }
+
+    .product-icon-box {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* ── CUSTOM SOFTWARE ── */
+    .section-custom {
+      background: var(--off-white);
+      padding: 100px 0;
+    }
+
+    .custom-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 56px;
+      margin-bottom: 56px;
+    }
+
+    .custom-col-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      margin-bottom: 14px;
+    }
+
+    .custom-col p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .custom-col strong {
+      color: var(--black);
       font-weight: 600;
     }
 
-    .link-underline {
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.15s;
+    .platform-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
     }
-    .link-underline:hover { border-color: currentColor; }
+
+    .platform-badge {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 100px;
+      border: 1.5px solid;
+    }
+
+    /* ── POWERED BY ── */
+    .section-powered {
+      background: var(--white);
+      padding: 100px 0;
+    }
+
+    .ai-cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+      margin-bottom: 56px;
+    }
+
+    .ai-card {
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-top: 4px solid transparent;
+    }
+
+    .ai-company {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .ai-model {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .ai-role {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .stack-section {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stack-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stack-items {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stack-item {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      color: var(--black);
+    }
+
+    .github-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .github-note {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .github-link {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--black);
+      border-bottom: 1.5px solid var(--black);
+      padding-bottom: 1px;
+      transition: color 0.15s;
+    }
+    .github-link:hover { color: var(--muted); }
+
+    /* ── FOR PRODUCERS ── */
+    .section-producers {
+      background: var(--green-tint);
+      padding: 100px 0;
+    }
+
+    .producer-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+      margin-bottom: 40px;
+    }
+
+    .producer-card {
+      background: var(--white);
+      border: 1px solid #d6f0e0;
+      padding: 36px;
+    }
+
+    .producer-card-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .producer-card-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .producer-card-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .vst-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .vst-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 5px 12px;
+      border: 1px solid #b8e8cc;
+      color: var(--green-dark);
+      background: rgba(94,232,138,0.08);
+    }
+
+    /* ── BETA CTA ── */
+    .section-beta {
+      background: var(--black);
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .beta-headline {
+      font-family: var(--font-head);
+      font-size: clamp(32px, 4.5vw, 60px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.08;
+    }
+
+    .beta-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 44px;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .beta-form {
+      display: flex;
+      gap: 0;
+      max-width: 440px;
+      margin: 0 auto 16px;
+    }
+
+    .beta-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 15px;
+      outline: none;
+      border-radius: 0;
+    }
+    .beta-input::placeholder { color: rgba(255,255,255,0.3); }
+    .beta-input:focus { border-color: var(--green); }
+
+    .beta-btn {
+      padding: 14px 24px;
+      background: var(--green);
+      color: var(--black);
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      border-radius: 0;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .beta-btn:hover { background: #4bd977; }
+
+    .beta-fine {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .beta-success {
+      display: none;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      margin-top: 20px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 60px 0 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .footer-brand img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .footer-tagline {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul a {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .footer-col ul a:hover { color: var(--black); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-github {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .footer-github:hover { color: var(--black); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .ai-cards { grid-template-columns: repeat(3, 1fr); }
+      .model-cards { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+
+      .hero {
+        padding: 100px 0 60px;
+        min-height: auto;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 0 20px;
+      }
+
+      .orb-canvas {
+        width: 100%;
+        max-width: 400px;
+        height: 300px;
+        margin: 0 auto;
+      }
+
+      .five-i-grid { grid-template-columns: 1fr; gap: 48px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .custom-grid { grid-template-columns: 1fr; gap: 28px; }
+      .ai-cards { grid-template-columns: repeat(2, 1fr); }
+      .model-cards { grid-template-columns: repeat(2, 1fr); }
+      .producer-cards { grid-template-columns: 1fr; }
+      .footer-links { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
+
+      .beta-form { flex-direction: column; }
+      .beta-btn { width: 100%; }
+
+      .stack-section { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 20px; }
+      .nav-inner { padding: 0 20px; }
+      .ai-cards { grid-template-columns: 1fr; }
+      .model-cards { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
-<body class="bg-white text-on-surface">
+<body>
 
-<!-- ============================================================ -->
-<!-- 1. NAV -->
-<!-- ============================================================ -->
-<nav id="nav" class="fixed top-0 left-0 right-0 z-50 bg-white/95 border-b border-gray-100" style="height:64px;">
-  <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-
-    <a href="#" class="flex items-center gap-3 no-underline">
-      <img src="assets/ck-icon-1024.png" alt="CK" style="width:28px;height:28px;object-fit:contain;" onerror="this.style.display='none'" />
-      <span class="font-grotesk font-bold text-on-surface tracking-tight text-base">Creative Konsoles</span>
-    </a>
-
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#home" class="font-grotesk font-medium text-sm text-on-surface hover:text-primary transition-colors link-underline">Home</a>
-      <a href="#five-i" class="font-grotesk font-medium text-sm text-on-surface hover:text-primary transition-colors link-underline">5i</a>
-      <a href="#products" class="font-grotesk font-medium text-sm text-on-surface hover:text-primary transition-colors link-underline">Software</a>
-      <a href="#about" class="font-grotesk font-medium text-sm text-on-surface hover:text-primary transition-colors link-underline">About</a>
-    </div>
-
-    <div class="flex items-center gap-4">
-      <a href="#beta" class="btn-primary hidden md:inline-flex items-center px-5 py-2 text-white font-grotesk font-semibold text-sm tracking-wide">
-        Join Beta
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="assets/ck-icon-1024.png" alt="CK" onerror="this.style.opacity='0'; this.style.width='0'">
+        Creative Konsoles
       </a>
-      <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
-        <span class="w-5 h-0.5 bg-on-surface block"></span>
-        <span class="w-5 h-0.5 bg-on-surface block"></span>
-        <span class="w-5 h-0.5 bg-on-surface block"></span>
-      </button>
-    </div>
-  </div>
-
-  <div id="mobile-menu" class="flex-col bg-white border-t border-gray-100 px-6 py-4 gap-4 md:hidden">
-    <a href="#home" class="font-grotesk font-medium text-sm text-on-surface">Home</a>
-    <a href="#five-i" class="font-grotesk font-medium text-sm text-on-surface">5i</a>
-    <a href="#products" class="font-grotesk font-medium text-sm text-on-surface">Software</a>
-    <a href="#about" class="font-grotesk font-medium text-sm text-on-surface">About</a>
-    <a href="#beta" class="btn-primary inline-flex items-center justify-center px-5 py-2.5 text-white font-grotesk font-semibold text-sm tracking-wide">
-      Join Beta
-    </a>
-  </div>
-</nav>
-
-<!-- ============================================================ -->
-<!-- 2. HERO -->
-<!-- ============================================================ -->
-<section id="home" class="relative overflow-hidden" style="background:#0B1210; min-height:calc(100vh - 64px); margin-top:64px;">
-  <div class="hero-glow"></div>
-
-  <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-28 grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-8 items-center" style="min-height:calc(100vh - 64px);">
-
-    <!-- Left 60% -->
-    <div class="md:col-span-3 flex flex-col gap-6">
-
-      <div class="inline-flex w-fit">
-        <span class="badge-pill px-3 py-1 text-ck-green tracking-widest" style="border:1px solid rgba(94,232,138,0.3); background:rgba(94,232,138,0.06);">
-          LAUNCHING SOON · BETA ACTIVE
-        </span>
-      </div>
-
+      <ul class="nav-links">
+        <li><a href="#products">Products</a></li>
+        <li><a href="#5i">5i</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="https://github.com/papjamzzz" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
       <div>
-        <div class="font-grotesk font-bold text-white leading-none" style="font-size:clamp(96px,14vw,180px); letter-spacing:-0.04em; line-height:0.9;">
-          5i
+        <a href="#beta" class="btn-green">Get Early Access</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <span class="eyebrow hero-eyebrow">Software for Creators</span>
+        <h1 class="hero-headline">Tools built<br><span class="accent">using thought.</span></h1>
+        <p class="hero-sub">Creative Konsoles makes precision software for music producers, traders, and builders. Every tool ships with purpose.</p>
+        <div class="hero-ctas">
+          <a href="#5i" class="btn-green">Explore 5i &rarr;</a>
+          <a href="#products" class="btn-ghost">View all tools</a>
         </div>
-        <div class="font-grotesk font-semibold tracking-widest mt-3" style="color:#5EE88A; font-size:clamp(14px,2vw,20px); letter-spacing:0.22em;">
-          FIVE AIs. ONE ANSWER.
+        <div class="hero-pills">
+          <span class="pill">5i</span>
+          <span class="pill">DAW Doctor</span>
+          <span class="pill">Track Tracks</span>
+          <span class="pill">Stream Fader</span>
+          <span class="pill">Kalshi Konnektor</span>
+          <span class="pill">Kode Keeper</span>
         </div>
       </div>
 
-      <p class="font-inter text-base leading-relaxed" style="color:rgba(255,255,255,0.6); max-width:520px;">
-        One prompt. Sequential synthesis through GPT-4o, Claude, Gemini, Mistral, and Grok. Each model builds on the last. One authoritative verdict.
-      </p>
-
-      <div class="flex flex-wrap gap-3 mt-2">
-        <a href="#beta" class="btn-primary inline-flex items-center px-6 py-3 text-white font-grotesk font-bold text-sm tracking-widest">
-          REQUEST BETA ACCESS
-        </a>
-        <a href="https://github.com/papjamzzz/5i" target="_blank" rel="noopener" class="btn-ghost inline-flex items-center gap-2 px-6 py-3 text-white font-grotesk font-semibold text-sm tracking-wide">
-          VIEW ON GITHUB <span>→</span>
-        </a>
-      </div>
-
-      <div class="flex flex-wrap gap-2 mt-4">
-        <div class="flex items-center gap-2 px-3 py-1.5" style="background:rgba(16,163,127,0.1); border:1px solid rgba(16,163,127,0.25);">
-          <span class="w-2 h-2 block" style="background:#10a37f;"></span>
-          <span class="font-mono-ck text-xs" style="color:#10a37f;">GPT-4o</span>
-        </div>
-        <div class="flex items-center gap-2 px-3 py-1.5" style="background:rgba(201,100,66,0.1); border:1px solid rgba(201,100,66,0.25);">
-          <span class="w-2 h-2 block" style="background:#c96442;"></span>
-          <span class="font-mono-ck text-xs" style="color:#c96442;">Claude 3.5</span>
-        </div>
-        <div class="flex items-center gap-2 px-3 py-1.5" style="background:rgba(66,133,244,0.1); border:1px solid rgba(66,133,244,0.25);">
-          <span class="w-2 h-2 block" style="background:#4285f4;"></span>
-          <span class="font-mono-ck text-xs" style="color:#4285f4;">Gemini 2.0</span>
-        </div>
-        <div class="flex items-center gap-2 px-3 py-1.5" style="background:rgba(240,90,26,0.1); border:1px solid rgba(240,90,26,0.25);">
-          <span class="w-2 h-2 block" style="background:#f05a1a;"></span>
-          <span class="font-mono-ck text-xs" style="color:#f05a1a;">Mistral Large</span>
-        </div>
-        <div class="flex items-center gap-2 px-3 py-1.5" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15);">
-          <span class="w-2 h-2 block" style="background:#e0e0e0;"></span>
-          <span class="font-mono-ck text-xs" style="color:#e0e0e0;">Grok 3</span>
+      <div class="hero-visual">
+        <div class="orb-canvas">
+          <!-- Glow layers (behind orbs) -->
+          <div class="orb orb-glow orb-1-glow"></div>
+          <div class="orb orb-glow orb-2-glow"></div>
+          <div class="orb orb-glow orb-3-glow"></div>
+          <div class="orb orb-glow orb-4-glow"></div>
+          <div class="orb orb-glow orb-5-glow"></div>
+          <!-- Orbs -->
+          <div class="orb orb-1"></div>
+          <div class="orb orb-2"></div>
+          <div class="orb orb-3"></div>
+          <div class="orb orb-4"></div>
+          <div class="orb orb-5"></div>
+          <!-- Labels -->
+          <span class="orb-label label-1">GPT-4o</span>
+          <span class="orb-label label-2">Claude</span>
+          <span class="orb-label label-3">Gemini</span>
+          <span class="orb-label label-4">Mistral</span>
+          <span class="orb-label label-5">Grok</span>
+          <!-- Badge -->
+          <span class="orb-badge">5i &mdash; Five Intelligences</span>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Right 40% -->
-    <div class="md:col-span-2 flex flex-col items-center gap-6">
-      <div class="relative flex items-center justify-center w-full">
-        <img
-          src="assets/5ai-v3-prism.png"
-          alt="5i Synthesis Engine"
-          class="prism-glow w-full max-w-sm"
-          style="object-fit:contain;"
-          onerror="this.src='assets/5ai-v1-bloom.png'; this.onerror=function(){this.style.display='none'};"
-        />
-      </div>
-      <div class="flex gap-3 flex-wrap justify-center">
-        <div class="stat-badge px-4 py-2 flex flex-col items-center gap-0.5">
-          <span class="font-mono-ck font-semibold text-ck-green text-lg leading-none">5</span>
-          <span class="badge-pill text-ck-green tracking-widest" style="font-size:0.6rem;">MODELS</span>
-        </div>
-        <div class="stat-badge px-4 py-2 flex flex-col items-center gap-0.5">
-          <span class="font-mono-ck font-semibold text-ck-green text-lg leading-none">1</span>
-          <span class="badge-pill text-ck-green tracking-widest" style="font-size:0.6rem;">VERDICT</span>
-        </div>
-        <div class="stat-badge px-4 py-2 flex flex-col items-center gap-0.5">
-          <span class="font-mono-ck font-semibold text-ck-green text-lg leading-none">0</span>
-          <span class="badge-pill text-ck-green tracking-widest" style="font-size:0.6rem;">LATENCY</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 scroll-indicator">
-    <span class="font-mono-ck text-xs tracking-widest" style="color:rgba(255,255,255,0.25);">SCROLL</span>
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="color:rgba(255,255,255,0.25);"><path d="M8 3L8 13M8 13L4 9M8 13L12 9" stroke="currentColor" stroke-width="1.5"/></svg>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- 3. THE 5i ENGINE -->
-<!-- ============================================================ -->
-<section id="five-i" class="bg-white py-20 md:py-28">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="mb-14">
-      <span class="badge-pill text-secondary tracking-widest" style="border-bottom:2px solid #00685a; padding-bottom:2px;">THE SYNTHESIS CHAIN</span>
-      <h2 class="font-grotesk font-bold text-on-surface mt-4 leading-tight" style="font-size:clamp(32px,5vw,56px);">
-        Five Intelligences.<br />Sequential. Self-correcting.
-      </h2>
-    </div>
-
-    <!-- Chain flow -->
-    <div class="flex flex-wrap items-center gap-2 md:gap-3 mb-16 overflow-x-auto pb-2">
-      <div class="flex items-center gap-2 px-4 py-2.5" style="background:#f0fdf4; border:1px solid #10a37f;">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 13,4.5 13,9.5 7,13 1,9.5 1,4.5" fill="#10a37f"/></svg>
-        <span class="font-grotesk font-semibold text-sm" style="color:#10a37f;">GPT-4o</span>
-      </div>
-      <span class="chain-arrow">→</span>
-      <div class="flex items-center gap-2 px-4 py-2.5" style="background:#fff5f2; border:1px solid #c96442;">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" fill="#c96442" opacity="0.9"/></svg>
-        <span class="font-grotesk font-semibold text-sm" style="color:#c96442;">Claude 3.5</span>
-      </div>
-      <span class="chain-arrow">→</span>
-      <div class="flex items-center gap-2 px-4 py-2.5" style="background:#f0f4ff; border:1px solid #4285f4;">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,1 9,5 13,7 9,9 7,13 5,9 1,7 5,5" fill="#4285f4"/></svg>
-        <span class="font-grotesk font-semibold text-sm" style="color:#4285f4;">Gemini 2.0</span>
-      </div>
-      <span class="chain-arrow">→</span>
-      <div class="flex items-center gap-2 px-4 py-2.5" style="background:#fff8f5; border:1px solid #f05a1a;">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L5 2L7 8L9 2L12 12" stroke="#f05a1a" stroke-width="2" fill="none"/></svg>
-        <span class="font-grotesk font-semibold text-sm" style="color:#f05a1a;">Mistral Large</span>
-      </div>
-      <span class="chain-arrow">→</span>
-      <div class="flex items-center gap-2 px-4 py-2.5" style="background:#f5f5f5; border:1px solid #1a1a1a;">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2L12 12M12 2L2 12" stroke="#1a1a1a" stroke-width="2.5"/></svg>
-        <span class="font-grotesk font-semibold text-sm" style="color:#1a1a1a;">Grok 3</span>
-      </div>
-      <span class="chain-arrow">→</span>
-      <div class="flex items-center gap-2 px-4 py-2.5" style="background:#0B1210; border:1px solid #5EE88A;">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" fill="none" stroke="#5EE88A" stroke-width="1.5"/><circle cx="7" cy="7" r="2" fill="#5EE88A"/></svg>
-        <span class="font-grotesk font-bold text-sm" style="color:#5EE88A;">SYNTHESIS</span>
-      </div>
-    </div>
-
-    <!-- 5 model cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
-      <div class="model-card p-5 bg-gray-50" style="border-left-color:#10a37f;">
-        <div class="flex items-center gap-2 mb-3">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><polygon points="9,1 17,5 17,13 9,17 1,13 1,5" fill="#10a37f"/></svg>
-          <div>
-            <div class="font-grotesk font-bold text-sm text-on-surface">GPT-4o</div>
-            <div class="font-inter text-xs text-gray-400">OpenAI</div>
+  <!-- ── FEATURED: 5i ── -->
+  <section class="section-5i" id="5i">
+    <div class="container">
+      <span class="eyebrow">Flagship Product</span>
+      <div class="five-i-grid">
+        <div class="five-i-left">
+          <h2 class="five-i-headline">5i &mdash;<br>Five Intelligences.</h2>
+          <p class="five-i-sub">One prompt. Sequential synthesis through GPT-4o, Claude, Gemini, Mistral, and Grok. Each AI builds on the last. One authoritative verdict.</p>
+          <div class="stat-pills">
+            <span class="stat-pill">5 Models</span>
+            <span class="stat-pill">1 Verdict</span>
+            <span class="stat-pill">Live on Railway</span>
           </div>
+          <a href="https://web-production-94a13.up.railway.app" target="_blank" rel="noopener" class="btn-green">Try 5i &rarr;</a>
         </div>
-        <p class="font-inter text-xs leading-relaxed" style="color:#6b7280;">Broad knowledge synthesis &amp; structured reasoning.</p>
-        <div class="mt-3 h-1 bg-gray-200 w-full">
-          <div class="h-1" style="background:#10a37f; width:92%;"></div>
-        </div>
-      </div>
 
-      <div class="model-card p-5 bg-gray-50" style="border-left-color:#c96442;">
-        <div class="flex items-center gap-2 mb-3">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" fill="#c96442"/></svg>
-          <div>
-            <div class="font-grotesk font-bold text-sm text-on-surface">Claude 3.5</div>
-            <div class="font-inter text-xs text-gray-400">Anthropic</div>
+        <!-- 5i CSS Mockup -->
+        <div class="five-i-mockup">
+          <div class="mockup-bar">
+            <div class="mockup-dot" style="background:#ff5f57;"></div>
+            <div class="mockup-dot" style="background:#febc2e;"></div>
+            <div class="mockup-dot" style="background:#28c840;"></div>
           </div>
-        </div>
-        <p class="font-inter text-xs leading-relaxed" style="color:#6b7280;">Creative synthesis &amp; nuanced reasoning.</p>
-        <div class="mt-3 h-1 bg-gray-200 w-full">
-          <div class="h-1" style="background:#c96442; width:88%;"></div>
-        </div>
-      </div>
-
-      <div class="model-card p-5 bg-gray-50" style="border-left-color:#4285f4;">
-        <div class="flex items-center gap-2 mb-3">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><polygon points="9,1 11,7 17,9 11,11 9,17 7,11 1,9 7,7" fill="#4285f4"/></svg>
-          <div>
-            <div class="font-grotesk font-bold text-sm text-on-surface">Gemini 2.0</div>
-            <div class="font-inter text-xs text-gray-400">Google DeepMind</div>
-          </div>
-        </div>
-        <p class="font-inter text-xs leading-relaxed" style="color:#6b7280;">Multimodal analysis &amp; factual grounding.</p>
-        <div class="mt-3 h-1 bg-gray-200 w-full">
-          <div class="h-1" style="background:#4285f4; width:85%;"></div>
-        </div>
-      </div>
-
-      <div class="model-card p-5 bg-gray-50" style="border-left-color:#f05a1a;">
-        <div class="flex items-center gap-2 mb-3">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 16L6 2L9 10L12 2L16 16" stroke="#f05a1a" stroke-width="2.5" fill="none"/></svg>
-          <div>
-            <div class="font-grotesk font-bold text-sm text-on-surface">Mistral Large</div>
-            <div class="font-inter text-xs text-gray-400">Mistral AI</div>
-          </div>
-        </div>
-        <p class="font-inter text-xs leading-relaxed" style="color:#6b7280;">European sovereignty &amp; technical precision.</p>
-        <div class="mt-3 h-1 bg-gray-200 w-full">
-          <div class="h-1" style="background:#f05a1a; width:80%;"></div>
-        </div>
-      </div>
-
-      <div class="model-card p-5 bg-gray-50" style="border-left-color:#1a1a1a;">
-        <div class="flex items-center gap-2 mb-3">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3L15 15M15 3L3 15" stroke="#1a1a1a" stroke-width="3"/></svg>
-          <div>
-            <div class="font-grotesk font-bold text-sm text-on-surface">Grok 3</div>
-            <div class="font-inter text-xs text-gray-400">xAI</div>
-          </div>
-        </div>
-        <p class="font-inter text-xs leading-relaxed" style="color:#6b7280;">Real-time intelligence &amp; contrarian verification.</p>
-        <div class="mt-3 h-1 bg-gray-200 w-full">
-          <div class="h-1" style="background:#1a1a1a; width:82%;"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- How it works 3-step -->
-    <div class="border-t border-gray-100 pt-12">
-      <span class="badge-pill text-outline-variant tracking-widest" style="font-size:0.65rem;">HOW IT WORKS</span>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-0 mt-8">
-        <div class="p-8 bg-surface">
-          <div class="font-mono-ck text-3xl font-semibold text-primary mb-4">01</div>
-          <div class="font-grotesk font-bold text-lg text-on-surface mb-2">Input</div>
-          <p class="font-inter text-sm leading-relaxed text-gray-500">Write your prompt once. 5i handles the rest — no prompt engineering required.</p>
-        </div>
-        <div class="p-8" style="background:#eef2ff;">
-          <div class="font-mono-ck text-3xl font-semibold text-primary mb-4">02</div>
-          <div class="font-grotesk font-bold text-lg text-on-surface mb-2">Chain</div>
-          <p class="font-inter text-sm leading-relaxed text-gray-500">Each AI receives the previous model's output as context. The chain self-corrects and compounds intelligence.</p>
-        </div>
-        <div class="p-8" style="background:#0B1210;">
-          <div class="font-mono-ck text-3xl font-semibold mb-4" style="color:#5EE88A;">03</div>
-          <div class="font-grotesk font-bold text-lg text-white mb-2">Verdict</div>
-          <p class="font-inter text-sm leading-relaxed" style="color:rgba(255,255,255,0.5);">One authoritative answer. Distilled from five perspectives. No noise.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- 4. PRODUCTS GRID -->
-<!-- ============================================================ -->
-<section id="products" class="py-20 md:py-28" style="background:#f0f2f5;">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="mb-14">
-      <span class="badge-pill text-primary tracking-widest" style="border-bottom:2px solid #004be3; padding-bottom:2px;">THE PRECISION TOOLKIT</span>
-      <h2 class="font-grotesk font-bold text-on-surface mt-4 leading-tight" style="font-size:clamp(32px,5vw,52px);">
-        Eight tools. One ecosystem.
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-      <!-- LARGE: 5i -->
-      <div class="bento-large product-card product-card-dark flex flex-col justify-between p-8" style="background:#0B1210; min-height:280px;">
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <span class="font-grotesk font-black text-white" style="font-size:3rem; line-height:1; letter-spacing:-0.04em;">5i</span>
-            <span class="badge-pill text-ck-green px-2 py-0.5" style="border:1px solid rgba(94,232,138,0.4); font-size:0.6rem;">FLAGSHIP</span>
-          </div>
-          <p class="font-inter text-sm leading-relaxed" style="color:rgba(255,255,255,0.55); max-width:380px;">Five intelligences in one interface. Sequential AI synthesis that produces one authoritative answer from GPT-4o, Claude, Gemini, Mistral, and Grok.</p>
-        </div>
-        <div class="flex items-center justify-between mt-6 pt-4" style="border-top:1px solid rgba(255,255,255,0.08);">
-          <div class="flex items-center gap-3">
-            <span class="badge-pill text-ck-green tracking-widest" style="font-size:0.6rem;">LIVE</span>
-            <span class="font-mono-ck text-xs" style="color:rgba(255,255,255,0.3);">:5555</span>
-          </div>
-          <a href="https://github.com/papjamzzz/5i" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-ck-green hover:opacity-75 transition-opacity tracking-wide">GITHUB →</a>
-        </div>
-      </div>
-
-      <!-- DAW Doctor -->
-      <div class="product-card p-6 bg-white flex flex-col justify-between" style="min-height:220px;">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <img src="assets/dawdoctor-logo.png" alt="DAW Doctor" style="width:32px;height:32px;object-fit:contain;" onerror="this.style.display='none'" />
-            <div>
-              <div class="font-grotesk font-bold text-on-surface text-base">DAW Doctor</div>
-              <div class="font-inter text-xs text-gray-400">Audio Diagnostics</div>
+          <div class="mockup-title">5i &mdash; Synthesis Engine</div>
+          <div class="mockup-models">
+            <div class="model-node">
+              <div class="model-dot" style="background:#22C55E;"></div>
+              <span class="model-name-label">GPT</span>
+            </div>
+            <span class="model-arrow">&rarr;</span>
+            <div class="model-node">
+              <div class="model-dot" style="background:#7C3AED;"></div>
+              <span class="model-name-label">Claude</span>
+            </div>
+            <span class="model-arrow">&rarr;</span>
+            <div class="model-node">
+              <div class="model-dot" style="background:#3B82F6;"></div>
+              <span class="model-name-label">Gemini</span>
+            </div>
+            <span class="model-arrow">&rarr;</span>
+            <div class="model-node">
+              <div class="model-dot" style="background:#F59E0B;"></div>
+              <span class="model-name-label">Mistral</span>
+            </div>
+            <span class="model-arrow">&rarr;</span>
+            <div class="model-node">
+              <div class="model-dot" style="background:#EF4444;"></div>
+              <span class="model-name-label">Grok</span>
             </div>
           </div>
-          <p class="font-inter text-sm text-gray-500 leading-relaxed">Diagnose your Ableton session. CPU hogs, plugin conflicts, latency spikes — identified and explained.</p>
-        </div>
-        <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #f0f2f5;">
-          <div class="flex items-center gap-2">
-            <span class="badge-pill text-secondary px-2 py-0.5" style="border:1px solid #00685a; font-size:0.6rem;">LIVE</span>
-            <span class="font-mono-ck text-xs text-gray-300">:5558</span>
+          <div class="mockup-input">What's the most efficient sorting algorithm?_</div>
+          <div class="mockup-synth-btn">SYNTHESIZE</div>
+          <div class="mockup-progress-track">
+            <div class="mockup-progress-fill"></div>
           </div>
-          <a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-primary hover:opacity-70 transition-opacity tracking-wide">GITHUB →</a>
         </div>
       </div>
 
-      <!-- Track Tracks -->
-      <div class="product-card p-6 bg-white flex flex-col justify-between" style="min-height:220px;">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <img src="assets/tracktracks-logo.png" alt="Track Tracks" style="width:32px;height:32px;object-fit:contain;" onerror="this.style.display='none'" />
-            <div>
-              <div class="font-grotesk font-bold text-on-surface text-base">Track Tracks</div>
-              <div class="font-inter text-xs text-gray-400">CPU Monitor</div>
+      <!-- AI Model Cards -->
+      <div class="model-cards">
+        <div class="model-card" style="border-top-color: #22C55E;">
+          <div class="model-card-name">GPT-4o</div>
+          <div class="model-card-provider">OpenAI</div>
+        </div>
+        <div class="model-card" style="border-top-color: #7C3AED;">
+          <div class="model-card-name">Claude 3.5</div>
+          <div class="model-card-provider">Anthropic</div>
+        </div>
+        <div class="model-card" style="border-top-color: #3B82F6;">
+          <div class="model-card-name">Gemini 2.0</div>
+          <div class="model-card-provider">Google</div>
+        </div>
+        <div class="model-card" style="border-top-color: #F0A030;">
+          <div class="model-card-name">Mistral Large</div>
+          <div class="model-card-provider">Mistral AI</div>
+        </div>
+        <div class="model-card" style="border-top-color: #E05520;">
+          <div class="model-card-name">Grok 3</div>
+          <div class="model-card-provider">xAI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ALL PRODUCTS ── -->
+  <section class="section-products" id="products">
+    <div class="container">
+      <h2 class="section-headline">The full toolkit.</h2>
+      <p class="section-sub">Eight precision tools. All open source. All built to ship.</p>
+
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-card-top">
+            <img src="assets/5ai-v3-prism.png" class="product-logo" alt="5i" onerror="this.style.opacity='0'; this.style.width='0'">
+            <div class="product-badges">
+              <span class="badge-live">Live</span>
             </div>
           </div>
-          <p class="font-inter text-sm text-gray-500 leading-relaxed">Real-time CPU and process monitoring for music producers. Know exactly what's killing your performance.</p>
+          <div class="product-name">5i</div>
+          <div class="product-desc">Five AI models. One synthesized verdict. Sequential intelligence for any question.</div>
+          <a href="https://github.com/papjamzzz/5i" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/5i ↗</a>
         </div>
-        <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #f0f2f5;">
-          <div class="flex items-center gap-2">
-            <span class="badge-pill text-secondary px-2 py-0.5" style="border:1px solid #00685a; font-size:0.6rem;">LIVE</span>
-            <span class="font-mono-ck text-xs text-gray-300">:5557</span>
-          </div>
-          <a href="https://github.com/papjamzzz/Track-Tracks" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-primary hover:opacity-70 transition-opacity tracking-wide">GITHUB →</a>
-        </div>
-      </div>
 
-      <!-- Stream Fader -->
-      <div class="product-card p-6 bg-white flex flex-col justify-between">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <img src="assets/streamfader-icon.jpg" alt="Stream Fader" style="width:32px;height:32px;object-fit:cover;" onerror="this.style.display='none'" />
-            <div>
-              <div class="font-grotesk font-bold text-on-surface text-base">Stream Fader</div>
-              <div class="font-inter text-xs text-gray-400">Streaming Control</div>
+        <div class="product-card">
+          <div class="product-card-top">
+            <img src="assets/dawdoctor-logo.png" class="product-logo" alt="DAW Doctor" onerror="this.style.opacity='0'; this.style.width='0'">
+            <div class="product-badges">
+              <span class="badge-live">Live</span>
+              <span class="badge-port">&middot; 5558</span>
             </div>
           </div>
-          <p class="font-inter text-sm text-gray-500 leading-relaxed">Live stream management and audio routing for production environments.</p>
+          <div class="product-name">DAW Doctor</div>
+          <div class="product-desc">OBD diagnostics for Ableton Live. Scan, diagnose, fix.</div>
+          <a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/Daw-Doctor ↗</a>
         </div>
-        <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #f0f2f5;">
-          <div class="flex items-center gap-2">
-            <span class="badge-pill text-secondary px-2 py-0.5" style="border:1px solid #00685a; font-size:0.6rem;">LIVE</span>
-            <span class="font-mono-ck text-xs text-gray-300">:5556</span>
-          </div>
-          <a href="https://github.com/papjamzzz/Stream-Fader" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-primary hover:opacity-70 transition-opacity tracking-wide">GITHUB →</a>
-        </div>
-      </div>
 
-      <!-- Kalshi Konnektor -->
-      <div class="product-card p-6 bg-white flex flex-col justify-between">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <img src="assets/kalshi-logo.png" alt="Kalshi Konnektor" style="width:32px;height:32px;object-fit:contain;" onerror="this.style.display='none'" />
-            <div>
-              <div class="font-grotesk font-bold text-on-surface text-base">Kalshi Konnektor</div>
-              <div class="font-inter text-xs text-gray-400">Market Data</div>
+        <div class="product-card">
+          <div class="product-card-top">
+            <img src="assets/tracktracks-logo.png" class="product-logo" alt="Track Tracks" onerror="this.style.opacity='0'; this.style.width='0'">
+            <div class="product-badges">
+              <span class="badge-live">Live</span>
+              <span class="badge-port">&middot; 5557</span>
             </div>
           </div>
-          <p class="font-inter text-sm text-gray-500 leading-relaxed">Real-time prediction market data and analytics for Kalshi traders.</p>
+          <div class="product-name">Track Tracks</div>
+          <div class="product-desc">Per-track CPU monitor for Ableton producers. Know which plugin is costing you.</div>
+          <a href="https://github.com/papjamzzz/Track-Tracks" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/Track-Tracks ↗</a>
         </div>
-        <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #f0f2f5;">
-          <div class="flex items-center gap-2">
-            <span class="badge-pill text-secondary px-2 py-0.5" style="border:1px solid #00685a; font-size:0.6rem;">LIVE</span>
-            <span class="font-mono-ck text-xs text-gray-300">:5555</span>
-          </div>
-          <a href="https://github.com/papjamzzz/kalshi-konnektor" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-primary hover:opacity-70 transition-opacity tracking-wide">GITHUB →</a>
-        </div>
-      </div>
 
-      <!-- KK Trader -->
-      <div class="product-card p-6 flex flex-col justify-between" style="background:#fafafa; border:1px solid #e8e8e8;">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <img src="assets/kk-logo-1024.png" alt="KK Trader" style="width:32px;height:32px;object-fit:contain;" onerror="this.style.display='none'" />
-            <div>
-              <div class="font-grotesk font-bold text-on-surface text-base">KK Trader</div>
-              <div class="font-inter text-xs text-gray-400">Autonomous Trading</div>
+        <div class="product-card">
+          <div class="product-card-top">
+            <img src="assets/streamfader-icon.jpg" class="product-logo" alt="Stream Fader" onerror="this.style.opacity='0'; this.style.width='0'">
+            <div class="product-badges">
+              <span class="badge-live">Live</span>
+              <span class="badge-port">&middot; 5556</span>
             </div>
           </div>
-          <p class="font-inter text-sm text-gray-500 leading-relaxed">Fully autonomous Kalshi trading bot. Rules-based, event-driven, no manual intervention required.</p>
+          <div class="product-name">Stream Fader</div>
+          <div class="product-desc">DJ crossfader for streaming content scores. Blend and transition live audio.</div>
+          <a href="https://github.com/papjamzzz/Stream-Fader" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/Stream-Fader ↗</a>
         </div>
-        <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #f0f2f5;">
-          <div class="flex items-center gap-2">
-            <span class="badge-pill text-secondary px-2 py-0.5" style="border:1px solid #00685a; font-size:0.6rem;">LIVE</span>
-            <span class="font-mono-ck text-xs text-gray-300">:5559</span>
-          </div>
-          <a href="https://github.com/papjamzzz/kalshi-trader" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-primary hover:opacity-70 transition-opacity tracking-wide">GITHUB →</a>
-        </div>
-      </div>
 
-      <!-- Kode Keeper -->
-      <div class="product-card p-6 flex flex-col justify-between" style="background:#fafafa; border:1px solid #e8e8e8;">
-        <div>
-          <div class="flex items-center gap-2 mb-3">
-            <div class="w-8 h-8 flex items-center justify-center" style="background:#0B1210;">
-              <span class="font-mono-ck text-xs font-bold" style="color:#5EE88A;">KK</span>
-            </div>
-            <div>
-              <div class="font-grotesk font-bold text-on-surface text-base">Kode Keeper</div>
-              <div class="font-inter text-xs text-gray-400">Mission Control</div>
+        <div class="product-card">
+          <div class="product-card-top">
+            <img src="assets/kalshi-logo.png" class="product-logo" alt="Kalshi Konnektor" onerror="this.style.opacity='0'; this.style.width='0'">
+            <div class="product-badges">
+              <span class="badge-live">Live</span>
+              <span class="badge-port">&middot; 5555</span>
             </div>
           </div>
-          <p class="font-inter text-sm text-gray-500 leading-relaxed">Claude Code mission control. Track projects, sessions, and deployments from one hub.</p>
+          <div class="product-name">Kalshi Konnektor</div>
+          <div class="product-desc">Real-time edge detection for Kalshi prediction markets. Trade with precision.</div>
+          <a href="https://github.com/papjamzzz/kalshi-konnektor" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/kalshi-konnektor ↗</a>
         </div>
-        <div class="flex items-center justify-between mt-4 pt-3" style="border-top:1px solid #f0f2f5;">
-          <div class="flex items-center gap-2">
-            <span class="badge-pill text-secondary px-2 py-0.5" style="border:1px solid #00685a; font-size:0.6rem;">LIVE</span>
-            <span class="font-mono-ck text-xs text-gray-300">:5560</span>
-          </div>
-          <a href="https://github.com/papjamzzz/kodekeeper" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-primary hover:opacity-70 transition-opacity tracking-wide">GITHUB →</a>
-        </div>
-      </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- 5. CUSTOM SOFTWARE -->
-<!-- ============================================================ -->
-<section id="custom" class="py-20 md:py-28" style="background:#0B1210;">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start mb-16">
-      <div>
-        <h2 class="font-grotesk font-black text-white leading-none" style="font-size:clamp(36px,6vw,72px); letter-spacing:-0.03em;">
-          WE BUILD SOFTWARE<br />FOR ANYTHING.
-        </h2>
-      </div>
-      <div class="flex flex-col justify-center">
-        <p class="font-inter text-base leading-relaxed mb-6" style="color:rgba(255,255,255,0.55);">
-          Custom development. Any operating system. Any device. Any application. Lowest prices in the industry.
-        </p>
-        <a href="mailto:hello@creativekonsoles.com" class="btn-primary inline-flex items-center w-fit px-6 py-3 text-white font-grotesk font-bold text-sm tracking-widest">
-          GET A QUOTE →
-        </a>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-0 mb-16">
-      <div class="p-8" style="border:1px solid rgba(255,255,255,0.06);">
-        <div class="font-grotesk font-bold tracking-widest text-ck-green text-xs mb-4">ANY PLATFORM</div>
-        <div class="space-y-2">
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">macOS</div>
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">Windows</div>
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">Linux</div>
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">iOS</div>
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">Android</div>
-        </div>
-      </div>
-      <div class="p-8" style="border:1px solid rgba(255,255,255,0.06); border-left:none; border-right:none;">
-        <div class="font-grotesk font-bold tracking-widest text-ck-green text-xs mb-4">ANY APPLICATION</div>
-        <div class="space-y-2">
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">Audio tools</div>
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">Trading bots</div>
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">AI applications</div>
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">Dashboards</div>
-          <div class="font-inter text-sm" style="color:rgba(255,255,255,0.6);">Automation</div>
-        </div>
-      </div>
-      <div class="p-8" style="border:1px solid rgba(255,255,255,0.06);">
-        <div class="font-grotesk font-bold tracking-widest text-ck-green text-xs mb-4">LOWEST PRICES</div>
-        <p class="font-inter text-sm leading-relaxed" style="color:rgba(255,255,255,0.6);">
-          Tools built using thought, not bloat. No agency overhead. No middlemen. Direct to you.
-        </p>
-      </div>
-    </div>
-
-    <div class="flex flex-wrap gap-3">
-      <div class="platform-badge flex items-center gap-2 px-4 py-2.5">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M11.5 1C10.2 1 9.1 1.9 8.5 3 7.9 1.9 6.8 1 5.5 1 3.5 1 2 2.7 2 4.8c0 3.6 6.5 10.2 6.5 10.2S15 8.4 15 4.8C15 2.7 13.5 1 11.5 1z" fill="rgba(255,255,255,0.5)"/></svg>
-        <span class="font-grotesk font-semibold text-xs tracking-wide" style="color:rgba(255,255,255,0.6);">macOS</span>
-      </div>
-      <div class="platform-badge flex items-center gap-2 px-4 py-2.5">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" fill="rgba(255,255,255,0.15)"/><path d="M5 11L8 5L11 11" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"/><path d="M6.5 9H9.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/></svg>
-        <span class="font-grotesk font-semibold text-xs tracking-wide" style="color:rgba(255,255,255,0.6);">App Store</span>
-      </div>
-      <div class="platform-badge flex items-center gap-2 px-4 py-2.5">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="3,2 13,8 3,14" fill="rgba(255,255,255,0.5)"/></svg>
-        <span class="font-grotesk font-semibold text-xs tracking-wide" style="color:rgba(255,255,255,0.6);">Google Play</span>
-      </div>
-      <div class="platform-badge flex items-center gap-2 px-4 py-2.5">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="9" y="2" width="5" height="6" fill="rgba(255,255,255,0.5)"/><rect x="2" y="9" width="6" height="5" fill="rgba(255,255,255,0.5)"/><rect x="9" y="9" width="5" height="5" fill="rgba(255,255,255,0.5)"/></svg>
-        <span class="font-grotesk font-semibold text-xs tracking-wide" style="color:rgba(255,255,255,0.6);">Windows</span>
-      </div>
-      <div class="platform-badge flex items-center gap-2 px-4 py-2.5">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M5 8L3 14H13L11 8" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/></svg>
-        <span class="font-grotesk font-semibold text-xs tracking-wide" style="color:rgba(255,255,255,0.6);">Linux</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- 6. POWERED BY -->
-<!-- ============================================================ -->
-<section class="bg-white py-20 md:py-28">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="mb-14">
-      <span class="badge-pill text-outline-variant tracking-widest" style="font-size:0.65rem;">POWERED BY</span>
-      <h2 class="font-grotesk font-bold text-on-surface mt-4" style="font-size:clamp(28px,4vw,48px);">Built on the world's best AI.</h2>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
-      <div class="p-6 bg-surface">
-        <span class="px-2 py-0.5 text-white font-mono-ck text-xs font-semibold inline-block mb-3" style="background:#10a37f;">GPT</span>
-        <div class="font-grotesk font-bold text-sm text-on-surface mb-0.5">OpenAI</div>
-        <div class="font-mono-ck text-xs text-gray-400 mb-3">GPT-4o</div>
-        <p class="font-inter text-xs text-gray-500 leading-relaxed">The foundation. Sets the initial synthesis context.</p>
-      </div>
-      <div class="p-6 bg-surface">
-        <span class="px-2 py-0.5 text-white font-mono-ck text-xs font-semibold inline-block mb-3" style="background:#c96442;">ANT</span>
-        <div class="font-grotesk font-bold text-sm text-on-surface mb-0.5">Anthropic</div>
-        <div class="font-mono-ck text-xs text-gray-400 mb-3">Claude 3.5 Haiku</div>
-        <p class="font-inter text-xs text-gray-500 leading-relaxed">Refines nuance. Adds ethical depth and creative synthesis.</p>
-      </div>
-      <div class="p-6 bg-surface">
-        <span class="px-2 py-0.5 text-white font-mono-ck text-xs font-semibold inline-block mb-3" style="background:#4285f4;">GGL</span>
-        <div class="font-grotesk font-bold text-sm text-on-surface mb-0.5">Google DeepMind</div>
-        <div class="font-mono-ck text-xs text-gray-400 mb-3">Gemini 2.0 Flash</div>
-        <p class="font-inter text-xs text-gray-500 leading-relaxed">Grounds in facts. Adds multimodal intelligence.</p>
-      </div>
-      <div class="p-6 bg-surface">
-        <span class="px-2 py-0.5 text-white font-mono-ck text-xs font-semibold inline-block mb-3" style="background:#1a1a1a;">XAI</span>
-        <div class="font-grotesk font-bold text-sm text-on-surface mb-0.5">xAI</div>
-        <div class="font-mono-ck text-xs text-gray-400 mb-3">Grok 3 Mini</div>
-        <p class="font-inter text-xs text-gray-500 leading-relaxed">Challenges consensus. Real-time contrarianism.</p>
-      </div>
-      <div class="p-6 bg-surface">
-        <span class="px-2 py-0.5 text-white font-mono-ck text-xs font-semibold inline-block mb-3" style="background:#f05a1a;">MST</span>
-        <div class="font-grotesk font-bold text-sm text-on-surface mb-0.5">Mistral AI</div>
-        <div class="font-mono-ck text-xs text-gray-400 mb-3">Mistral Large</div>
-        <p class="font-inter text-xs text-gray-500 leading-relaxed">European independence. Technical precision.</p>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-12" style="border-top:1px solid #f0f2f5;">
-      <div>
-        <div class="font-grotesk font-bold text-on-surface mb-3 tracking-wide">OPEN SOURCE</div>
-        <p class="font-inter text-sm text-gray-500 leading-relaxed mb-4">All Creative Konsoles products are open source. Every line of code on GitHub. No black boxes.</p>
-        <a href="https://github.com/papjamzzz" target="_blank" rel="noopener" class="font-grotesk font-semibold text-sm text-primary link-underline tracking-wide">
-          github.com/papjamzzz →
-        </a>
-      </div>
-      <div>
-        <div class="font-grotesk font-bold text-on-surface mb-3 tracking-wide">STACK</div>
-        <div class="flex flex-wrap gap-2">
-          <span class="badge-pill px-3 py-1.5 bg-surface text-on-surface" style="border:1px solid #e0e0e0;">Python</span>
-          <span class="badge-pill px-3 py-1.5 bg-surface text-on-surface" style="border:1px solid #e0e0e0;">Flask</span>
-          <span class="badge-pill px-3 py-1.5 bg-surface text-on-surface" style="border:1px solid #e0e0e0;">Railway</span>
-          <span class="badge-pill px-3 py-1.5 bg-surface text-on-surface" style="border:1px solid #e0e0e0;">Tailwind</span>
-          <span class="badge-pill px-3 py-1.5 bg-surface text-on-surface" style="border:1px solid #e0e0e0;">GitHub Actions</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- 7. FOR CREATORS -->
-<!-- ============================================================ -->
-<section id="creators" class="py-20 md:py-28" style="background:#f6f6f8;">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="mb-12">
-      <span class="badge-pill text-secondary tracking-widest" style="border-bottom:2px solid #00685a; padding-bottom:2px;">BUILT FOR ABLETON PRODUCERS</span>
-      <h2 class="font-grotesk font-black text-on-surface mt-4 leading-tight" style="font-size:clamp(32px,5vw,60px); letter-spacing:-0.02em;">
-        Finally know which<br />plugin is killing<br />your CPU.
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-      <div class="product-card p-8 bg-white flex flex-col justify-between" style="min-height:280px;">
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <img src="assets/dawdoctor-logo.png" alt="DAW Doctor" style="width:40px;height:40px;object-fit:contain;" onerror="this.style.display='none'" />
-            <div>
-              <div class="font-grotesk font-bold text-on-surface text-xl">DAW Doctor</div>
-              <div class="font-inter text-sm text-gray-400">Ableton Session Diagnostics</div>
+        <div class="product-card">
+          <div class="product-card-top">
+            <img src="assets/kk-logo-1024.png" class="product-logo" alt="KK Trader" onerror="this.style.opacity='0'; this.style.width='0'">
+            <div class="product-badges">
+              <span class="badge-live">Live</span>
+              <span class="badge-port">&middot; 5559</span>
             </div>
           </div>
-          <p class="font-inter text-sm leading-relaxed text-gray-500 mb-4">Scan your Ableton session. CPU hogs, plugin conflicts, RAM usage — identified, ranked, and explained in plain language. Stop guessing.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="badge-pill px-2 py-1 bg-surface" style="border:1px solid #e0e0e0; font-size:0.6rem; color:#6b7280;">VST3</span>
-            <span class="badge-pill px-2 py-1 bg-surface" style="border:1px solid #e0e0e0; font-size:0.6rem; color:#6b7280;">AU</span>
-            <span class="badge-pill px-2 py-1 bg-surface" style="border:1px solid #e0e0e0; font-size:0.6rem; color:#6b7280;">AAX</span>
-            <span class="badge-pill px-2 py-1 bg-surface" style="border:1px solid #e0e0e0; font-size:0.6rem; color:#6b7280;">macOS</span>
-          </div>
+          <div class="product-name">KK Trader</div>
+          <div class="product-desc">Autonomous 24/7 Kalshi trading bot. Set the parameters. Let it run.</div>
+          <a href="https://github.com/papjamzzz/kalshi-trader" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/kalshi-trader ↗</a>
         </div>
-        <div class="flex items-center justify-between mt-6 pt-4" style="border-top:1px solid #f0f2f5;">
-          <span class="badge-pill text-secondary px-2 py-0.5" style="border:1px solid #00685a; font-size:0.6rem;">LIVE · :5558</span>
-          <a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-primary tracking-wide link-underline">GITHUB →</a>
-        </div>
-      </div>
 
-      <div class="product-card p-8 bg-white flex flex-col justify-between" style="min-height:280px;">
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <img src="assets/tracktracks-logo.png" alt="Track Tracks" style="width:40px;height:40px;object-fit:contain;" onerror="this.style.display='none'" />
-            <div>
-              <div class="font-grotesk font-bold text-on-surface text-xl">Track Tracks</div>
-              <div class="font-inter text-sm text-gray-400">Real-Time CPU Monitor</div>
+        <div class="product-card">
+          <div class="product-card-top">
+            <div class="product-icon-box" style="background:#1a1a1a; color:#5EE88A;">KK</div>
+            <div class="product-badges">
+              <span class="badge-live">Live</span>
+              <span class="badge-port">&middot; 5560</span>
             </div>
           </div>
-          <p class="font-inter text-sm leading-relaxed text-gray-500 mb-4">Live system monitoring built for producers. Track CPU per core, memory pressure, and process spikes — without leaving your session.</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="badge-pill px-2 py-1 bg-surface" style="border:1px solid #e0e0e0; font-size:0.6rem; color:#6b7280;">macOS</span>
-            <span class="badge-pill px-2 py-1 bg-surface" style="border:1px solid #e0e0e0; font-size:0.6rem; color:#6b7280;">Real-Time</span>
-            <span class="badge-pill px-2 py-1 bg-surface" style="border:1px solid #e0e0e0; font-size:0.6rem; color:#6b7280;">Open Source</span>
+          <div class="product-name">Kode Keeper</div>
+          <div class="product-desc">Claude Code mission control dashboard. All sessions, all history, one place.</div>
+          <a href="https://github.com/papjamzzz/kodekeeper" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/kodekeeper ↗</a>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card-top">
+            <div class="product-icon-box" style="background:#5EE88A; color:#1a1a1a; font-size:16px;">&nearr;</div>
+            <div class="product-badges">
+              <span class="badge-live">Live</span>
+              <span class="badge-port">&middot; 5554</span>
+            </div>
           </div>
+          <div class="product-name">Launcher</div>
+          <div class="product-desc">Central hub for all Creative Konsoles tools. One click to any app.</div>
+          <a href="https://github.com/papjamzzz/launcher" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/launcher ↗</a>
         </div>
-        <div class="flex items-center justify-between mt-6 pt-4" style="border-top:1px solid #f0f2f5;">
-          <span class="badge-pill text-secondary px-2 py-0.5" style="border:1px solid #00685a; font-size:0.6rem;">LIVE · :5557</span>
-          <a href="https://github.com/papjamzzz/Track-Tracks" target="_blank" rel="noopener" class="font-grotesk font-semibold text-xs text-primary tracking-wide link-underline">GITHUB →</a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CUSTOM SOFTWARE ── -->
+  <section class="section-custom" id="about">
+    <div class="container">
+      <h2 class="section-headline">We build software<br>for anything.</h2>
+      <p class="section-sub">Custom development at the lowest prices in the industry.<br>Any platform. Any application. No agency overhead &mdash; direct to you.</p>
+
+      <div class="custom-grid">
+        <div class="custom-col">
+          <div class="custom-col-title">Any Platform</div>
+          <p><strong>macOS &middot; iOS &middot; Android</strong><br>Windows &middot; Linux &middot; Web<br><br>Native or cross-platform. We build where your users are.</p>
+        </div>
+        <div class="custom-col">
+          <div class="custom-col-title">Any Application</div>
+          <p><strong>Audio tools &middot; Trading systems</strong><br>AI apps &middot; Dashboards &middot; Automation<br><br>If you can describe it, we can build it. Usually faster than you expect.</p>
+        </div>
+        <div class="custom-col">
+          <div class="custom-col-title">Lowest Prices</div>
+          <p><strong>No bloat. No overhead.</strong><br>No account managers. No decks.<br><br>Tools built using thought &mdash; not templates. Direct to you, direct to done.</p>
+        </div>
+      </div>
+
+      <div class="platform-badges">
+        <span class="platform-badge" style="background:#000; color:#fff; border-color:#000;">macOS</span>
+        <span class="platform-badge" style="background:#007AFF; color:#fff; border-color:#007AFF;">iOS App Store</span>
+        <span class="platform-badge" style="background:#3DDC84; color:#fff; border-color:#3DDC84;">Google Play</span>
+        <span class="platform-badge" style="background:#0078D4; color:#fff; border-color:#0078D4;">Windows</span>
+        <span class="platform-badge" style="background:#FCC624; color:#000; border-color:#e0b000;">Linux</span>
+        <span class="platform-badge" style="background:#f5f5f0; color:#1a1a1a; border-color:#ccc;">Web</span>
+      </div>
+
+      <a href="mailto:hello@creativekonsoles.com" class="btn-blue">Start a project &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ── POWERED BY ── -->
+  <section class="section-powered">
+    <div class="container">
+      <h2 class="section-headline">Built on the world's<br>best AI.</h2>
+      <p class="section-sub">5i chains all five together. Everything else runs on the right one for the job.</p>
+
+      <div class="ai-cards">
+        <div class="ai-card" style="border-top-color: #10a37f;">
+          <div class="ai-company">OpenAI</div>
+          <div class="ai-model">GPT-4o</div>
+          <div class="ai-role">First in chain. Sets the initial synthesis baseline.</div>
+        </div>
+        <div class="ai-card" style="border-top-color: #c96442;">
+          <div class="ai-company">Anthropic</div>
+          <div class="ai-model">Claude 3.5</div>
+          <div class="ai-role">Second in chain. Refines and adds nuance.</div>
+        </div>
+        <div class="ai-card" style="border-top-color: #4285f4;">
+          <div class="ai-company">Google</div>
+          <div class="ai-model">Gemini 2.0</div>
+          <div class="ai-role">Third. Cross-reference and fact check.</div>
+        </div>
+        <div class="ai-card" style="border-top-color: #f05a1a;">
+          <div class="ai-company">Mistral AI</div>
+          <div class="ai-model">Mistral Large</div>
+          <div class="ai-role">Fourth. Precision editing and compression.</div>
+        </div>
+        <div class="ai-card" style="border-top-color: #1a1a1a;">
+          <div class="ai-company">xAI</div>
+          <div class="ai-model">Grok 3</div>
+          <div class="ai-role">Final verdict. Authoritative synthesis from all four.</div>
+        </div>
+      </div>
+
+      <div class="github-row">
+        <span class="github-note">All products on GitHub &rarr;</span>
+        <a href="https://github.com/papjamzzz" target="_blank" rel="noopener" class="github-link">github.com/papjamzzz</a>
+      </div>
+
+      <div class="stack-section">
+        <span class="stack-label">Stack</span>
+        <div class="stack-items">
+          <span class="stack-item">Python</span>
+          <span class="stack-item">Flask</span>
+          <span class="stack-item">Railway</span>
+          <span class="stack-item">GitHub Pages</span>
+          <span class="stack-item">Vanilla JS</span>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="flex flex-wrap gap-3 items-center">
-      <span class="font-grotesk font-semibold text-xs text-gray-400 tracking-widest">COMPATIBLE WITH</span>
-      <span class="badge-pill px-3 py-1.5" style="background:#0B1210; color:white; font-size:0.7rem;">VST3</span>
-      <span class="badge-pill px-3 py-1.5" style="background:#0B1210; color:white; font-size:0.7rem;">Audio Units</span>
-      <span class="badge-pill px-3 py-1.5" style="background:#0B1210; color:white; font-size:0.7rem;">AAX</span>
-      <span class="badge-pill px-3 py-1.5" style="background:#0B1210; color:white; font-size:0.7rem;">Ableton Live</span>
-      <span class="badge-pill px-3 py-1.5" style="background:#0B1210; color:white; font-size:0.7rem;">Logic Pro</span>
-    </div>
+  <!-- ── FOR PRODUCERS ── -->
+  <section class="section-producers">
+    <div class="container">
+      <span class="eyebrow">For Music Producers</span>
+      <h2 class="section-headline" style="margin-top:16px;">Made for Ableton<br>producers.</h2>
+      <p class="section-sub">Two tools built specifically for music production &mdash; because your CPU matters and your sessions shouldn&rsquo;t crash.</p>
 
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- 8. BETA CTA -->
-<!-- ============================================================ -->
-<section id="beta" class="py-24 md:py-32" style="background:#0c0e10;">
-  <div class="max-w-4xl mx-auto px-6 text-center">
-
-    <span class="badge-pill text-ck-green tracking-widest" style="border:1px solid rgba(94,232,138,0.25); padding: 4px 12px; font-size:0.65rem;">EARLY ACCESS</span>
-
-    <h2 class="font-grotesk font-black text-white mt-6 mb-4 leading-none" style="font-size:clamp(36px,7vw,80px); letter-spacing:-0.03em;">
-      BUILD THE FUTURE<br />OF CREATIVE WORK.
-    </h2>
-
-    <p class="font-inter text-base leading-relaxed mb-10 mx-auto" style="color:rgba(255,255,255,0.5); max-width:480px;">
-      Join the Creative Konsoles beta. Early access to 5i — five intelligences in one interface. First 100 users get lifetime pro access.
-    </p>
-
-    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6" onsubmit="handleBetaSubmit(event)">
-      <input
-        type="email"
-        id="beta-email"
-        placeholder="your@email.com"
-        class="email-input flex-1 px-4 py-3 font-inter text-sm"
-        required
-      />
-      <button type="submit" class="btn-primary px-6 py-3 text-white font-grotesk font-bold text-sm tracking-widest whitespace-nowrap">
-        GET ACCESS
-      </button>
-    </form>
-    <div id="beta-success" style="display:none;" class="font-grotesk text-sm text-ck-green tracking-wide mb-4">
-      You're in. We'll be in touch.
-    </div>
-
-    <p class="font-inter text-xs" style="color:rgba(255,255,255,0.25);">
-      No spam. Cancel anytime. First 100 users get lifetime pro access.
-    </p>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- 9. FOOTER -->
-<!-- ============================================================ -->
-<footer id="about" class="py-16" style="background:#f0f2f5;">
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-10 mb-10" style="border-bottom:1px solid #e0e2e5;">
-      <div class="flex items-center gap-3">
-        <img src="assets/ck-icon-1024.png" alt="Creative Konsoles" style="width:32px;height:32px;object-fit:contain;" onerror="this.style.display='none'" />
-        <div>
-          <div class="font-grotesk font-bold text-on-surface">Creative Konsoles</div>
-          <div class="font-mono-ck text-xs text-gray-400 tracking-widest">PRECISION MILLED SOFTWARE</div>
+      <div class="producer-cards">
+        <div class="producer-card">
+          <div class="producer-card-icon">&#127978;</div>
+          <div class="producer-card-name">DAW Doctor</div>
+          <p class="producer-card-desc">Know exactly what&rsquo;s wrong with your system before it crashes your session. Scan every component, get a diagnosis, get a fix. OBD for Ableton.</p>
+          <a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener" class="btn-ghost" style="font-size:13px;">View on GitHub &rarr;</a>
+        </div>
+        <div class="producer-card">
+          <div class="producer-card-icon">&#128202;</div>
+          <div class="producer-card-name">Track Tracks</div>
+          <p class="producer-card-desc">See CPU usage per track, per plugin, in real time. Stop guessing which Serum instance is murdering your session. Know instantly.</p>
+          <a href="https://github.com/papjamzzz/Track-Tracks" target="_blank" rel="noopener" class="btn-ghost" style="font-size:13px;">View on GitHub &rarr;</a>
         </div>
       </div>
-      <a href="https://github.com/papjamzzz" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2 bg-white" style="border:1px solid #e0e0e0;">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C4.13 1 1 4.13 1 8c0 3.09 2.01 5.72 4.79 6.65.35.06.48-.15.48-.34v-1.2C4.18 13.57 3.78 12.24 3.78 12.24c-.32-.8-.78-1.01-.78-1.01-.64-.44.05-.43.05-.43.7.05 1.07.72 1.07.72.63 1.07 1.65.76 2.05.58.06-.45.24-.76.44-.94-1.57-.18-3.22-.78-3.22-3.49 0-.77.28-1.4.72-1.9-.07-.18-.31-.9.07-1.87 0 0 .59-.19 1.93.72A6.72 6.72 0 018 5.8a6.72 6.72 0 011.76.24c1.34-.91 1.93-.72 1.93-.72.38.97.14 1.69.07 1.87.45.5.72 1.13.72 1.9 0 2.72-1.66 3.31-3.24 3.49.25.22.48.65.48 1.31v1.94c0 .19.12.41.48.34C12.99 13.72 15 11.09 15 8c0-3.87-3.13-7-7-7z" fill="#374151"/></svg>
-        <span class="font-grotesk font-semibold text-xs text-on-surface">papjamzzz</span>
-      </a>
-    </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
-      <div>
-        <div class="font-grotesk font-bold text-on-surface text-xs tracking-widest mb-4">PRODUCTS</div>
-        <div class="flex flex-col gap-2">
-          <a href="#five-i" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">5i</a>
-          <a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">DAW Doctor</a>
-          <a href="https://github.com/papjamzzz/Track-Tracks" target="_blank" rel="noopener" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">Track Tracks</a>
-          <a href="https://github.com/papjamzzz/Stream-Fader" target="_blank" rel="noopener" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">Stream Fader</a>
-          <a href="https://github.com/papjamzzz/kalshi-konnektor" target="_blank" rel="noopener" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">Kalshi Konnektor</a>
-          <a href="https://github.com/papjamzzz/kalshi-trader" target="_blank" rel="noopener" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">KK Trader</a>
-        </div>
-      </div>
-      <div>
-        <div class="font-grotesk font-bold text-on-surface text-xs tracking-widest mb-4">COMPANY</div>
-        <div class="flex flex-col gap-2">
-          <a href="#about" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">About</a>
-          <a href="https://github.com/papjamzzz" target="_blank" rel="noopener" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">GitHub</a>
-          <a href="#" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">Blog</a>
-          <a href="mailto:hello@creativekonsoles.com" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">Contact</a>
-        </div>
-      </div>
-      <div>
-        <div class="font-grotesk font-bold text-on-surface text-xs tracking-widest mb-4">PLATFORM</div>
-        <div class="flex flex-col gap-2">
-          <span class="font-inter text-sm text-gray-500">macOS</span>
-          <span class="font-inter text-sm text-gray-500">iOS</span>
-          <span class="font-inter text-sm text-gray-500">Android</span>
-          <span class="font-inter text-sm text-gray-500">Windows</span>
-        </div>
-      </div>
-      <div>
-        <div class="font-grotesk font-bold text-on-surface text-xs tracking-widest mb-4">LEGAL</div>
-        <div class="flex flex-col gap-2">
-          <a href="#" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">Privacy</a>
-          <a href="#" class="font-inter text-sm text-gray-500 hover:text-primary transition-colors">Terms</a>
-        </div>
+      <div class="vst-badges">
+        <span class="vst-badge">VST3</span>
+        <span class="vst-badge">AU</span>
+        <span class="vst-badge">AAX</span>
+        <span class="vst-badge">Ableton Live 11+</span>
+        <span class="vst-badge">macOS</span>
       </div>
     </div>
+  </section>
 
-    <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2" style="border-top:1px solid #e0e2e5;">
-      <span class="font-mono-ck text-xs text-gray-400">
-        &copy; 2026 Creative Konsoles. Precision Milled Software. All products on GitHub.
-      </span>
-      <a href="https://github.com/papjamzzz" target="_blank" rel="noopener" class="font-mono-ck text-xs text-gray-400 hover:text-primary transition-colors">
-        github.com/papjamzzz
-      </a>
+  <!-- ── BETA CTA ── -->
+  <section class="section-beta" id="beta">
+    <div class="container">
+      <h2 class="beta-headline">Join the Creative<br>Konsoles beta.</h2>
+      <p class="beta-sub">Early access to 5i and all future tools. First 100 users get lifetime pro access.</p>
+
+      <form class="beta-form" id="betaForm" onsubmit="handleBeta(event)">
+        <input type="email" class="beta-input" placeholder="your@email.com" required id="betaEmail">
+        <button type="submit" class="beta-btn">Get Access</button>
+      </form>
+      <p class="beta-fine" id="betaFine">No spam. Cancel anytime.</p>
+      <div class="beta-success" id="betaSuccess">Access confirmed. You&rsquo;re on the list.</div>
     </div>
+  </section>
 
-  </div>
-</footer>
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/ck-icon-1024.png" alt="CK" onerror="this.style.opacity='0'; this.style.width='0'">
+          Creative Konsoles
+        </div>
+        <div class="footer-tagline">&copy; 2026 Creative Konsoles. Precision Milled Software.</div>
+      </div>
 
-<script>
-  const toggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  toggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-  });
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-col-title">Products</div>
+          <ul>
+            <li><a href="#5i">5i</a></li>
+            <li><a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener">DAW Doctor</a></li>
+            <li><a href="https://github.com/papjamzzz/Track-Tracks" target="_blank" rel="noopener">Track Tracks</a></li>
+            <li><a href="https://github.com/papjamzzz/Stream-Fader" target="_blank" rel="noopener">Stream Fader</a></li>
+            <li><a href="https://github.com/papjamzzz/kalshi-konnektor" target="_blank" rel="noopener">Kalshi Konnektor</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="https://github.com/papjamzzz" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Platform</div>
+          <ul>
+            <li><a href="#">macOS</a></li>
+            <li><a href="#">iOS</a></li>
+            <li><a href="#">Android</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Legal</div>
+          <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
 
-  function handleBetaSubmit(e) {
-    e.preventDefault();
-    const email = document.getElementById('beta-email').value;
-    if (email) {
-      document.getElementById('beta-success').style.display = 'block';
-      document.getElementById('beta-email').value = '';
-      document.getElementById('beta-email').placeholder = 'Submitted!';
+      <div class="footer-bottom">
+        <span class="footer-copy">Built with precision. Shipped with purpose.</span>
+        <a href="https://github.com/papjamzzz" target="_blank" rel="noopener" class="footer-github">github.com/papjamzzz &#8599;</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function handleBeta(e) {
+      e.preventDefault();
+      var email = document.getElementById('betaEmail').value;
+      if (email) {
+        document.getElementById('betaForm').style.display = 'none';
+        document.getElementById('betaFine').style.display = 'none';
+        document.getElementById('betaSuccess').style.display = 'block';
+      }
     }
-  }
-</script>
+
+    // Nav active state on scroll
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', function() {
+      var current = '';
+      sections.forEach(function(section) {
+        if (pageYOffset >= section.offsetTop - 80) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(function(link) {
+        link.style.color = '';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.color = '#1a1a1a';
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>

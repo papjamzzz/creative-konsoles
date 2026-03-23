@@ -941,6 +941,19 @@
       margin-top: 20px;
     }
 
+    .beta-error {
+      display: none;
+      color: #ff6b6b;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    .beta-error a {
+      color: #ff6b6b;
+      text-decoration: underline;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--white);
@@ -1474,11 +1487,15 @@
       <p class="beta-sub">Early access to 5i and all future tools. First 100 users get lifetime pro access.</p>
 
       <form class="beta-form" id="betaForm" onsubmit="handleBeta(event)">
-        <input type="email" class="beta-input" placeholder="your@email.com" required id="betaEmail">
-        <button type="submit" class="beta-btn">Get Access</button>
+        <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_KEY">
+        <input type="hidden" name="subject" value="New Creative Konsoles Beta Signup">
+        <input type="hidden" name="from_name" value="Creative Konsoles Website">
+        <input type="email" class="beta-input" placeholder="your@email.com" required id="betaEmail" name="email">
+        <button type="submit" class="beta-btn" id="betaBtn">Get Access</button>
       </form>
       <p class="beta-fine" id="betaFine">No spam. Cancel anytime.</p>
       <div class="beta-success" id="betaSuccess">Access confirmed. You&rsquo;re on the list.</div>
+      <div class="beta-error" id="betaError">Something went wrong. Email us directly: <a href="mailto:support@creativekonsoles.com">support@creativekonsoles.com</a></div>
     </div>
   </section>
 
@@ -1545,13 +1562,35 @@
   </footer>
 
   <script>
-    function handleBeta(e) {
+    async function handleBeta(e) {
       e.preventDefault();
+      var form = document.getElementById('betaForm');
+      var btn = document.getElementById('betaBtn');
       var email = document.getElementById('betaEmail').value;
-      if (email) {
-        document.getElementById('betaForm').style.display = 'none';
+      if (!email) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        var data = new FormData(form);
+        var res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: data
+        });
+        var json = await res.json();
+
+        if (json.success) {
+          form.style.display = 'none';
+          document.getElementById('betaFine').style.display = 'none';
+          document.getElementById('betaSuccess').style.display = 'block';
+        } else {
+          throw new Error('API error');
+        }
+      } catch (err) {
+        form.style.display = 'none';
         document.getElementById('betaFine').style.display = 'none';
-        document.getElementById('betaSuccess').style.display = 'block';
+        document.getElementById('betaError').style.display = 'block';
       }
     }
 

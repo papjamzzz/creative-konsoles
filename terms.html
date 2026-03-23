@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Service — Creative Konsoles</title>
+  <link rel="icon" type="image/png" href="assets/ck-icon-1024.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --white: #ffffff;
+      --black: #1a1a1a;
+      --green: #5EE88A;
+      --green-dark: #1F5A38;
+      --gray: #666;
+      --border: #e5e5e5;
+      --font-head: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 40px;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+      font-family: var(--font-head);
+      font-weight: 700; font-size: 18px;
+      color: var(--black);
+    }
+    .nav-brand img { width: 28px; height: 28px; border-radius: 6px; }
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--black); }
+
+    /* ── HERO ── */
+    .terms-hero {
+      background: #0a0a0a;
+      padding: 64px 40px 48px;
+      text-align: center;
+    }
+    .terms-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--green);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .terms-title {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .terms-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── CONTENT ── */
+    .terms-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 40px 100px;
+    }
+
+    .terms-section {
+      margin-bottom: 44px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid var(--border);
+    }
+    .terms-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 14px;
+    }
+
+    p {
+      color: #444;
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--black); font-weight: 600; }
+
+    /* ── FOOTER ── */
+    .terms-footer {
+      background: #0a0a0a;
+      padding: 40px;
+      text-align: center;
+    }
+    .terms-footer p {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(255,255,255,0.30);
+      margin: 0;
+    }
+    .terms-footer a {
+      color: var(--green);
+      text-decoration: none;
+    }
+    .terms-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .nav-inner { padding: 0 20px; }
+      .terms-hero { padding: 48px 20px 36px; }
+      .terms-body { padding: 40px 20px 80px; }
+      .terms-footer { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">
+      <img src="assets/ck-icon-1024.png" alt="CK" onerror="this.style.display='none'">
+      Creative Konsoles
+    </a>
+    <a class="nav-back" href="/">&larr; Back to site</a>
+  </div>
+</nav>
+
+<div class="terms-hero">
+  <div class="terms-eyebrow">Legal</div>
+  <h1 class="terms-title">Terms of Service</h1>
+  <div class="terms-date">Effective date: March 23, 2026 &nbsp;·&nbsp; Creative Konsoles</div>
+</div>
+
+<div class="terms-body">
+
+  <div class="terms-section">
+    <div class="section-num">§ 01</div>
+    <h2>The Service</h2>
+    <p>Creative Konsoles ("we," "us," "our") operates 5i and related software tools available at <strong>creativekonsoles.com</strong>. 5i routes user prompts to third-party AI model APIs — including OpenAI, Anthropic, Google, xAI, and Mistral — and returns synthesized results. Access is provided on a subscription basis.</p>
+    <p>By creating an account or purchasing a subscription, you agree to these Terms of Service in full.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 02</div>
+    <h2>Payment &amp; Billing</h2>
+    <p>Subscriptions are billed monthly on a recurring basis starting from the date of purchase. You authorize Creative Konsoles to charge your payment method on the same calendar day each month.</p>
+    <p>All prices are listed in USD. We reserve the right to update pricing with <strong>30 days written notice</strong> to the email address on file. Continued use of the service after the effective date of a price change constitutes acceptance of the new price.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 03</div>
+    <h2>Refund Policy</h2>
+    <p>All sales are final. We do not offer refunds for partial months of service or unused syntheses within a billing period.</p>
+    <p>If a verified technical failure on our end prevents access to the service for more than 48 consecutive hours, contact <a href="mailto:support@creativekonsoles.com">support@creativekonsoles.com</a> and we will review your case individually. We do not guarantee a refund in all circumstances.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 04</div>
+    <h2>Usage Limits</h2>
+    <p>Each subscription plan includes a monthly synthesis limit as described on the pricing page at <strong>creativekonsoles.com/#pricing</strong>. Unused syntheses do not roll over to the following billing period.</p>
+    <p>Upon reaching your monthly limit, access to server-side synthesis will pause until your next billing cycle begins or until you purchase a synthesis top-up. Your subscription remains active during this period — only synthesis execution is paused.</p>
+    <p>The <strong>Foundational Synthesis</strong> plan includes unlimited syntheses with no monthly cap.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 05</div>
+    <h2>Acceptable Use</h2>
+    <p>You agree not to use Creative Konsoles services to:</p>
+    <p>— Generate content that is illegal, defamatory, or violates the rights of others<br>
+    — Harass, threaten, or harm any individual<br>
+    — Attempt to circumvent usage limits, access controls, or rate limiting<br>
+    — Resell, sublicense, or share account access with unauthorized parties<br>
+    — Reverse engineer or extract proprietary logic from our systems<br>
+    — Violate the terms of service of any third-party AI provider whose API we use</p>
+    <p>We reserve the right to suspend or terminate accounts that violate this policy, without notice and without refund.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 06</div>
+    <h2>Third-Party AI Providers</h2>
+    <p>5i routes your prompts to third-party AI APIs operated by OpenAI, Anthropic, Google, xAI, and Mistral. We are not responsible for the availability, accuracy, content, or behavior of these third-party services.</p>
+    <p>Downtime, rate limiting, model changes, or policy changes by these providers may affect service quality or availability. Such events do not constitute a breach of these terms and are not grounds for a refund.</p>
+    <p>When using server-provided keys, your prompts are transmitted to these providers in accordance with their respective terms of service and privacy policies.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 07</div>
+    <h2>Data &amp; Privacy</h2>
+    <p>We do not permanently store your prompts or AI-generated responses. Prompts are transmitted to third-party AI providers to fulfill your request and are not retained on our servers beyond the duration of the request.</p>
+    <p>We collect your email address for billing, account management, and support purposes. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+    <p>Payment processing is handled by Stripe. We do not store your card details. See Stripe's privacy policy for details on how payment data is handled.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 08</div>
+    <h2>Disclaimers</h2>
+    <p>The service is provided <strong>"as is"</strong> without warranty of any kind, express or implied. AI-generated content may be incomplete, inaccurate, or misleading.</p>
+    <p><strong>Do not rely on 5i outputs for legal, medical, financial, safety-critical, or emergency decisions.</strong> We accept no liability for actions taken based on AI-generated content.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 09</div>
+    <h2>Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, Creative Konsoles' total liability to you for any claim arising from use of the service shall not exceed the total amount you paid us in the <strong>30 days immediately preceding</strong> the event giving rise to the claim.</p>
+    <p>We are not liable for indirect, incidental, consequential, or punitive damages of any kind.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 10</div>
+    <h2>Changes to These Terms</h2>
+    <p>We may update these Terms of Service at any time. When we do, we will update the effective date at the top of this page and, where material changes are made, notify you via the email address on file.</p>
+    <p>Continued use of the service after the effective date of any update constitutes your acceptance of the revised terms.</p>
+  </div>
+
+  <div class="terms-section">
+    <div class="section-num">§ 11</div>
+    <h2>Contact</h2>
+    <p>Questions about these terms or your subscription:</p>
+    <p>
+      <strong>Email:</strong> <a href="mailto:support@creativekonsoles.com">support@creativekonsoles.com</a><br>
+      <strong>Website:</strong> <a href="https://creativekonsoles.com">creativekonsoles.com</a>
+    </p>
+  </div>
+
+</div>
+
+<div class="terms-footer">
+  <p>&copy; 2026 Creative Konsoles &nbsp;·&nbsp; <a href="/">Home</a> &nbsp;·&nbsp; <a href="mailto:support@creativekonsoles.com">support@creativekonsoles.com</a></p>
+</div>
+
+</body>
+</html>

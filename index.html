@@ -1008,6 +1008,100 @@
       .pricing-card.featured { order: -1; }
     }
 
+    /* ── SBS Comparison ── */
+    .sbs-wrap {
+      max-width: 760px;
+      margin: 64px auto 0;
+    }
+    .sbs-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.30);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .sbs-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .sbs-table thead th {
+      padding: 20px 28px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .sbs-table thead th:first-child {
+      background: transparent;
+      color: rgba(255,255,255,0.30);
+      text-align: left;
+      width: 44%;
+    }
+    .sbs-table thead th.col-base {
+      background: #0e1f12;
+      color: var(--green);
+      border: 1px solid rgba(94,232,138,0.25);
+      border-bottom: none;
+    }
+    .sbs-table thead th.col-found {
+      background: #111;
+      color: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-bottom: none;
+    }
+    .sbs-table tbody tr {
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .sbs-table tbody tr:first-child { border-top: none; }
+    .sbs-table tbody td {
+      padding: 14px 28px;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+    .sbs-table tbody td:first-child {
+      color: rgba(255,255,255,0.50);
+      text-align: left;
+      font-size: 13px;
+    }
+    .sbs-table tbody td.col-base {
+      background: rgba(14,31,18,0.55);
+      color: rgba(255,255,255,0.80);
+      border-left: 1px solid rgba(94,232,138,0.15);
+      border-right: 1px solid rgba(94,232,138,0.15);
+      text-align: center;
+    }
+    .sbs-table tbody td.col-found {
+      background: rgba(17,17,17,0.55);
+      color: rgba(255,255,255,0.80);
+      border-left: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+    .sbs-table tfoot td {
+      padding: 16px 28px 0;
+    }
+    .sbs-table tfoot td.col-base {
+      background: rgba(14,31,18,0.55);
+      border: 1px solid rgba(94,232,138,0.25);
+      border-top: none;
+      border-radius: 0 0 0 0;
+    }
+    .sbs-table tfoot td.col-found {
+      background: rgba(17,17,17,0.55);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: none;
+    }
+    .sbs-check { color: var(--green); font-weight: 700; }
+    .sbs-x     { color: rgba(255,255,255,0.20); }
+    @media (max-width: 600px) {
+      .sbs-table tbody td, .sbs-table thead th { padding: 12px 14px; font-size: 13px; }
+      .sbs-table tbody td:first-child { font-size: 12px; }
+    }
+
     .section-beta {
       background: var(--black);
       padding: 100px 0;
@@ -1652,7 +1746,7 @@
         <div class="pricing-card featured">
           <div class="pricing-badge">EARLY ACCESS</div>
           <div class="pricing-tier">Base Synthesis</div>
-          <div class="pricing-price">$20<span>/mo</span></div>
+          <div class="pricing-price">$18<span>/mo</span></div>
           <div class="pricing-desc">Server keys included. No API accounts needed. Just ask.</div>
           <ul class="pricing-features">
             <li>All 5 AI models</li>
@@ -1669,7 +1763,7 @@
         <!-- UNLIMITED -->
         <div class="pricing-card">
           <div class="pricing-tier">Foundational Synthesis</div>
-          <div class="pricing-price">$89<span>/mo</span></div>
+          <div class="pricing-price">$88<span>/mo</span></div>
           <div class="pricing-desc">High-volume teams and power users. API access included.</div>
           <ul class="pricing-features">
             <li>All 5 AI models</li>
@@ -1683,6 +1777,79 @@
         </div>
 
       </div>
+
+      <!-- SBS Comparison -->
+      <div class="sbs-wrap">
+        <div class="sbs-label">Plan Comparison</div>
+        <table class="sbs-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="col-base">Base Synthesis<br><span style="font-size:20px;letter-spacing:0;font-family:var(--font-body);font-weight:700;color:var(--green);">$18</span><span style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:400;">/mo</span></th>
+              <th class="col-found">Foundational Synthesis<br><span style="font-size:20px;letter-spacing:0;font-family:var(--font-body);font-weight:700;color:rgba(255,255,255,0.75);">$88</span><span style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:400;">/mo</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Syntheses / month</td>
+              <td class="col-base">100</td>
+              <td class="col-found">1,000</td>
+            </tr>
+            <tr>
+              <td>AI models</td>
+              <td class="col-base">All 5</td>
+              <td class="col-found">All 5</td>
+            </tr>
+            <tr>
+              <td>Server API keys included</td>
+              <td class="col-base"><span class="sbs-check">✓</span></td>
+              <td class="col-found"><span class="sbs-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Konsole Mode</td>
+              <td class="col-base"><span class="sbs-check">✓</span></td>
+              <td class="col-found"><span class="sbs-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Priority support</td>
+              <td class="col-base"><span class="sbs-check">✓</span></td>
+              <td class="col-found"><span class="sbs-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>API access</td>
+              <td class="col-base"><span class="sbs-x">—</span></td>
+              <td class="col-found"><span class="sbs-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>SLA guarantee</td>
+              <td class="col-base"><span class="sbs-x">—</span></td>
+              <td class="col-found"><span class="sbs-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Team seats</td>
+              <td class="col-base"><span class="sbs-x">—</span></td>
+              <td class="col-found">Up to 5</td>
+            </tr>
+            <tr>
+              <td>Founding price locked</td>
+              <td class="col-base"><span class="sbs-check">✓</span></td>
+              <td class="col-found"><span class="sbs-check">✓</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td class="col-base" style="padding-bottom:20px;">
+                <a href="https://buy.stripe.com/aFa8wJ8WU8Ei0Ie6dN7g403" class="btn-pricing primary" style="margin-top:8px;">Get Base &rarr;</a>
+              </td>
+              <td class="col-found" style="padding-bottom:20px;">
+                <a href="https://buy.stripe.com/fZu8wJ6OM8Ei4Yu31B7g402" class="btn-pricing" style="margin-top:8px;">Get Foundational &rarr;</a>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
     </div>
   </section>
 

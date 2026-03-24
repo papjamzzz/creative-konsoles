@@ -1008,6 +1008,66 @@
       .pricing-card.featured { order: -1; }
     }
 
+    /* ── Enterprise Card ── */
+    .enterprise-card {
+      max-width: 900px;
+      margin: 20px auto 0;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      text-align: left;
+    }
+    .enterprise-card:hover { border-color: rgba(255,255,255,0.20); }
+    .enterprise-left { flex: 1; }
+    .enterprise-tier {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.40);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .enterprise-headline {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .enterprise-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+    .enterprise-right { flex-shrink: 0; }
+    .btn-enterprise {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: transparent;
+      color: rgba(255,255,255,0.70);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .btn-enterprise:hover { border-color: rgba(255,255,255,0.40); color: var(--white); }
+    @media (max-width: 700px) {
+      .enterprise-card { flex-direction: column; gap: 20px; padding: 28px 24px; }
+      .enterprise-right { width: 100%; }
+      .btn-enterprise { display: block; text-align: center; width: 100%; box-sizing: border-box; }
+    }
+
     /* ── SBS Comparison ── */
     .sbs-wrap {
       max-width: 760px;
@@ -1093,6 +1153,24 @@
     .sbs-table tfoot td.col-found {
       background: rgba(17,17,17,0.55);
       border: 1px solid rgba(255,255,255,0.08);
+      border-top: none;
+    }
+    .sbs-table thead th.col-ent {
+      background: #111;
+      color: rgba(255,255,255,0.40);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-bottom: none;
+    }
+    .sbs-table tbody td.col-ent {
+      background: rgba(17,17,17,0.35);
+      color: rgba(255,255,255,0.65);
+      border-left: 1px solid rgba(255,255,255,0.05);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+    .sbs-table tfoot td.col-ent {
+      background: rgba(17,17,17,0.35);
+      border: 1px solid rgba(255,255,255,0.06);
       border-top: none;
     }
     .sbs-check { color: var(--green); font-weight: 700; }
@@ -1778,6 +1856,18 @@
 
       </div>
 
+      <!-- Enterprise Card -->
+      <div class="enterprise-card">
+        <div class="enterprise-left">
+          <div class="enterprise-tier">Enterprise</div>
+          <div class="enterprise-headline">Built for teams that move at scale.</div>
+          <div class="enterprise-desc">Custom volume, dedicated support, white-label options, and direct integration. Reach out today and we&rsquo;ll have one of the crew get back to you.</div>
+        </div>
+        <div class="enterprise-right">
+          <a href="mailto:support@creativekonsoles.com" class="btn-enterprise">Contact Us &rarr;</a>
+        </div>
+      </div>
+
       <!-- SBS Comparison -->
       <div class="sbs-wrap">
         <div class="sbs-label">Plan Comparison</div>
@@ -1787,6 +1877,7 @@
               <th></th>
               <th class="col-base">Base Synthesis<br><span style="font-size:20px;letter-spacing:0;font-family:var(--font-body);font-weight:700;color:var(--green);">$18</span><span style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:400;">/mo</span></th>
               <th class="col-found">Foundational Synthesis<br><span style="font-size:20px;letter-spacing:0;font-family:var(--font-body);font-weight:700;color:rgba(255,255,255,0.75);">$88</span><span style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:400;">/mo</span></th>
+              <th class="col-ent">Enterprise<br><span style="font-size:16px;letter-spacing:0;font-family:var(--font-body);font-weight:600;color:rgba(255,255,255,0.55);">Custom</span></th>
             </tr>
           </thead>
           <tbody>
@@ -1794,46 +1885,67 @@
               <td>Syntheses / month</td>
               <td class="col-base">100</td>
               <td class="col-found">1,000</td>
+              <td class="col-ent">Custom</td>
             </tr>
             <tr>
               <td>AI models</td>
               <td class="col-base">All 5</td>
               <td class="col-found">All 5</td>
+              <td class="col-ent">All 5</td>
             </tr>
             <tr>
               <td>Server API keys included</td>
               <td class="col-base"><span class="sbs-check">✓</span></td>
               <td class="col-found"><span class="sbs-check">✓</span></td>
+              <td class="col-ent"><span class="sbs-check">✓</span></td>
             </tr>
             <tr>
               <td>Konsole Mode</td>
               <td class="col-base"><span class="sbs-check">✓</span></td>
               <td class="col-found"><span class="sbs-check">✓</span></td>
+              <td class="col-ent"><span class="sbs-check">✓</span></td>
             </tr>
             <tr>
               <td>Priority support</td>
               <td class="col-base"><span class="sbs-check">✓</span></td>
               <td class="col-found"><span class="sbs-check">✓</span></td>
+              <td class="col-ent"><span class="sbs-check">✓</span></td>
             </tr>
             <tr>
               <td>API access</td>
               <td class="col-base"><span class="sbs-x">—</span></td>
               <td class="col-found"><span class="sbs-check">✓</span></td>
+              <td class="col-ent"><span class="sbs-check">✓</span></td>
             </tr>
             <tr>
               <td>SLA guarantee</td>
               <td class="col-base"><span class="sbs-x">—</span></td>
               <td class="col-found"><span class="sbs-check">✓</span></td>
+              <td class="col-ent"><span class="sbs-check">✓</span></td>
             </tr>
             <tr>
               <td>Team seats</td>
               <td class="col-base"><span class="sbs-x">—</span></td>
               <td class="col-found">Up to 5</td>
+              <td class="col-ent">Unlimited</td>
+            </tr>
+            <tr>
+              <td>White-label options</td>
+              <td class="col-base"><span class="sbs-x">—</span></td>
+              <td class="col-found"><span class="sbs-x">—</span></td>
+              <td class="col-ent"><span class="sbs-check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Dedicated onboarding</td>
+              <td class="col-base"><span class="sbs-x">—</span></td>
+              <td class="col-found"><span class="sbs-x">—</span></td>
+              <td class="col-ent"><span class="sbs-check">✓</span></td>
             </tr>
             <tr>
               <td>Founding price locked</td>
               <td class="col-base"><span class="sbs-check">✓</span></td>
               <td class="col-found"><span class="sbs-check">✓</span></td>
+              <td class="col-ent"><span class="sbs-x">—</span></td>
             </tr>
           </tbody>
           <tfoot>
@@ -1844,6 +1956,9 @@
               </td>
               <td class="col-found" style="padding-bottom:20px;">
                 <a href="https://buy.stripe.com/fZu8wJ6OM8Ei4Yu31B7g402" class="btn-pricing" style="margin-top:8px;">Get Foundational &rarr;</a>
+              </td>
+              <td class="col-ent" style="padding-bottom:20px;">
+                <a href="mailto:support@creativekonsoles.com" class="btn-pricing" style="margin-top:8px;">Contact Us &rarr;</a>
               </td>
             </tr>
           </tfoot>

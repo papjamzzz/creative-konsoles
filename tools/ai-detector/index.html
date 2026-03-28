@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ai? — Creative Konsoles</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --body-bg:   #141820;
+  --chassis:   #1C2130;
+  --panel:     #222838;
+  --panel2:    #1A1F2E;
+  --recess:    #131724;
+  --rim:       #2E3650;
+  --rim2:      #3A4560;
+  --cyan:      #00D4C8;
+  --cyan2:     #40EEE4;
+  --cyan-glow: rgba(0,212,200,0.25);
+  --cyan-dim:  rgba(0,212,200,0.5);
+  --hot:       #FF4D8A;
+  --amber:     #FFAA00;
+  --green:     #00E87A;
+  --text:      #D8E4F0;
+  --muted:     rgba(216,228,240,0.45);
+  --muted2:    rgba(216,228,240,0.22);
+  --led-off:   rgba(0,212,200,0.08);
+}
+
+body {
+  background: var(--body-bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px 80px;
+}
+
+/* ── GRAIN TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── DEVICE SHELL ── */
+.device {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 780px;
+  background: var(--chassis);
+  border-radius: 16px;
+  border: 1px solid var(--rim);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.6),
+    0 24px 80px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--panel2);
+  border-bottom: 1px solid var(--rim);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wordmark {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 2px;
+}
+.wordmark span { color: var(--cyan); }
+.wordmark .ck {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-left: 10px;
+  font-weight: 400;
+}
+.topbar-controls { display: flex; align-items: center; gap: 16px; }
+.top-led {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--led-off);
+  box-shadow: none;
+  transition: all 0.3s;
+}
+.top-led.on {
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan), 0 0 16px var(--cyan-dim);
+}
+.top-btn {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--recess);
+  border: 1px solid var(--rim);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--muted);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.05);
+  transition: all 0.15s;
+}
+.top-btn:hover { color: var(--cyan); border-color: var(--cyan-dim); }
+
+/* ── MODE STRIP ── */
+.mode-strip {
+  background: var(--recess);
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+  padding: 0 24px;
+  display: flex;
+  gap: 0;
+}
+.mode-tab {
+  padding: 10px 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s;
+}
+.mode-tab:hover { color: var(--muted); }
+.mode-tab.active {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+}
+
+/* ── MAIN BODY ── */
+.body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+/* ── INPUT BAY ── */
+.bay {
+  background: var(--recess);
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+.bay-header {
+  background: var(--panel2);
+  border-bottom: 1px solid var(--rim);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bay-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.bay-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted2);
+}
+textarea {
+  width: 100%;
+  min-height: 140px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+  padding: 18px;
+  resize: vertical;
+  outline: none;
+}
+textarea::placeholder { color: var(--muted2); font-style: italic; }
+.bay-footer {
+  background: var(--panel2);
+  border-top: 1px solid var(--rim);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fmt-btn {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--rim);
+  cursor: pointer;
+  background: var(--recess);
+  transition: all 0.15s;
+}
+.fmt-btn.active, .fmt-btn:hover {
+  color: var(--cyan);
+  border-color: var(--cyan-dim);
+  background: var(--led-off);
+}
+
+/* ── TRIGGER ROW ── */
+.trigger-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── SCAN BUTTON ── */
+.scan-btn {
+  flex: 1;
+  background: linear-gradient(180deg, #2A3550 0%, #1C2540 100%);
+  border: 1px solid var(--rim2);
+  border-radius: 10px;
+  padding: 0 28px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -2px 4px rgba(0,0,0,0.3),
+    0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.scan-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--cyan-glow) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.scan-btn:hover::before { opacity: 1; }
+.scan-btn:hover {
+  border-color: var(--cyan-dim);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    inset 0 -2px 4px rgba(0,0,0,0.3),
+    0 4px 24px rgba(0,212,200,0.15);
+}
+.scan-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+}
+.scan-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan2);
+  position: relative;
+}
+.scan-glyph {
+  font-size: 18px;
+  position: relative;
+}
+
+/* ── KNOB CLUSTER ── */
+.knob-cluster { display: flex; gap: 12px; }
+.knob-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.knob {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #3A4560, #1A2035);
+  border: 1px solid var(--rim2);
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.5),
+    inset 0 -1px 2px rgba(255,255,255,0.04),
+    0 2px 8px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(0,0,0,0.4);
+  position: relative;
+  cursor: pointer;
+}
+.knob::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: var(--cyan);
+  border-radius: 1px;
+  box-shadow: 0 0 4px var(--cyan);
+}
+.knob-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-align: center;
+}
+
+/* ── RESULT SECTION ── */
+.result-section { display: none; }
+.result-section.visible { display: flex; flex-direction: column; gap: 16px; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── VERDICT DISPLAY ── */
+.verdict-display {
+  background: var(--recess);
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+.verdict-screen {
+  background: #0D111A;
+  margin: 16px;
+  border-radius: 8px;
+  padding: 20px 24px;
+  border: 1px solid rgba(0,0,0,0.6);
+  box-shadow: inset 0 2px 12px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+}
+/* Scanline effect */
+.verdict-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+  pointer-events: none;
+}
+.verdict-inner { position: relative; z-index: 1; }
+.verdict-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.screen-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.scan-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted2);
+}
+.verdict-readout {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.verdict-readout.verdict-ai    { color: var(--hot); text-shadow: 0 0 20px rgba(255,77,138,0.4); }
+.verdict-readout.verdict-human { color: var(--green); text-shadow: 0 0 20px rgba(0,232,122,0.4); }
+.verdict-readout.verdict-mixed { color: var(--amber); text-shadow: 0 0 20px rgba(255,170,0,0.4); }
+.verdict-sub {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── VU METER ── */
+.vu-section {
+  padding: 16px 20px;
+  border-top: 1px solid var(--rim);
+}
+.vu-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.vu-row:last-child { margin-bottom: 0; }
+.vu-name {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  width: 56px;
+  flex-shrink: 0;
+}
+.vu-name.ai-name    { color: var(--hot); }
+.vu-name.mix-name   { color: var(--amber); }
+.vu-name.human-name { color: var(--green); }
+.vu-track {
+  flex: 1;
+  height: 8px;
+  background: var(--recess);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+  display: flex;
+  gap: 1px;
+}
+.vu-segment {
+  flex: 1;
+  height: 100%;
+  border-radius: 1px;
+  transition: background 0.4s ease;
+}
+.vu-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.vu-pct.ai-pct    { color: var(--hot); }
+.vu-pct.mix-pct   { color: var(--amber); }
+.vu-pct.human-pct { color: var(--green); }
+
+/* ── MODEL BAYS ── */
+.model-bays {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+}
+@media (max-width: 600px) { .model-bays { grid-template-columns: repeat(2,1fr); } }
+
+.model-bay {
+  background: var(--recess);
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 10px;
+  padding: 14px 12px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04);
+}
+.mbay-name {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 10px;
+}
+.mbay-disc {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.mbay-disc::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--chassis);
+  border: 1px solid rgba(0,0,0,0.4);
+}
+.mbay-bar-track {
+  height: 4px;
+  background: var(--chassis);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+}
+.mbay-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--hot), rgba(255,77,138,0.4));
+}
+.mbay-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hot);
+  text-align: center;
+}
+
+/* ── SIGNAL PANEL ── */
+.signal-panel {
+  background: var(--recess);
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 12px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+.signal-header {
+  background: var(--panel2);
+  border-bottom: 1px solid var(--rim);
+  padding: 10px 18px;
+}
+.signal-header .bay-label { color: var(--muted2); }
+.signal-list { padding: 14px 18px; display: flex; flex-direction: column; gap: 10px; }
+.signal-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sig-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.sig-name {
+  font-size: 11px;
+  color: var(--muted);
+  flex: 1;
+  font-family: 'JetBrains Mono', monospace;
+}
+.sig-val {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.sig-val.hot  { color: var(--hot); }
+.sig-val.warm { color: var(--amber); }
+.sig-val.cool { color: var(--green); }
+.sig-val.cyan { color: var(--cyan); }
+
+/* ── LOADING ── */
+.loading-section {
+  display: none;
+  background: var(--recess);
+  border: 1px solid rgba(0,0,0,0.5);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
+}
+.loading-section.visible { display: block; }
+.loading-ring {
+  width: 48px; height: 48px;
+  border: 2px solid var(--rim);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── BOTTOM BAR ── */
+.bottom-bar {
+  background: var(--panel2);
+  border-top: 1px solid var(--rim);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.version {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--muted2);
+  letter-spacing: 1px;
+}
+.trial-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.trial-pips { display: flex; gap: 4px; }
+.pip {
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 6px var(--cyan-dim);
+}
+.pip.used { background: var(--rim); box-shadow: none; }
+.trial-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.upgrade-btn {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  padding: 5px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--cyan-dim);
+  background: var(--led-off);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.upgrade-btn:hover { background: var(--cyan-glow); }
+</style>
+</head>
+<body>
+<div class="device">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="wordmark">
+      Ai<span>?</span>
+      <span class="ck">CREATIVE KONSOLES</span>
+    </div>
+    <div class="topbar-controls">
+      <div class="top-led" id="status-led"></div>
+      <div class="top-btn" title="Settings">⚙</div>
+      <div class="top-btn" title="Power">⏻</div>
+    </div>
+  </div>
+
+  <!-- MODE STRIP -->
+  <div class="mode-strip">
+    <div class="mode-tab active" onclick="switchMode('text',this)">Text</div>
+    <div class="mode-tab" onclick="switchMode('image',this)">Image</div>
+    <div class="mode-tab" onclick="switchMode('mixed',this)">Mixed</div>
+    <div class="mode-tab" onclick="switchMode('api',this)">API</div>
+  </div>
+
+  <!-- MAIN BODY -->
+  <div class="body">
+
+    <!-- INPUT BAY -->
+    <div class="bay">
+      <div class="bay-header">
+        <span class="bay-label">Input Bay — Text Analysis</span>
+        <span class="bay-counter" id="char-count">0 / ∞</span>
+      </div>
+      <textarea id="text-input"
+        placeholder="Drop any text here — email, article, essay, code, social post, anything..."
+        oninput="updateCount()"></textarea>
+      <div class="bay-footer">
+        <div class="fmt-btn active">Plain</div>
+        <div class="fmt-btn">Code</div>
+        <div class="fmt-btn">Academic</div>
+        <div class="fmt-btn">Social</div>
+      </div>
+    </div>
+
+    <!-- TRIGGER ROW -->
+    <div class="trigger-row">
+      <div class="knob-cluster">
+        <div class="knob-wrap">
+          <div class="knob" style="--r:40deg"></div>
+          <div class="knob-label">Depth</div>
+        </div>
+        <div class="knob-wrap">
+          <div class="knob" style="transform:rotate(20deg)"></div>
+          <div class="knob-label">Thresh</div>
+        </div>
+      </div>
+      <button class="scan-btn" onclick="runScan()">
+        <span class="scan-glyph">⚡</span>
+        <span class="scan-label">Analyze</span>
+      </button>
+      <div class="knob-cluster">
+        <div class="knob-wrap">
+          <div class="knob" style="transform:rotate(-15deg)"></div>
+          <div class="knob-label">Models</div>
+        </div>
+        <div class="knob-wrap">
+          <div class="knob" style="transform:rotate(60deg)"></div>
+          <div class="knob-label">Gain</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading-section" id="loading">
+      <div class="loading-ring"></div>
+      <div class="loading-text">Running Detection Models</div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="result-section" id="results">
+
+      <!-- VERDICT DISPLAY -->
+      <div class="verdict-display">
+        <div class="verdict-screen">
+          <div class="verdict-inner">
+            <div class="verdict-label-row">
+              <span class="screen-label">Detection Verdict</span>
+              <span class="scan-id" id="scan-id">SCAN-0000</span>
+            </div>
+            <div class="verdict-readout" id="verdict-readout">AI-GENERATED</div>
+            <div class="verdict-sub" id="verdict-sub">CONFIDENCE 87% · 4 MODELS · 2.1s</div>
+          </div>
+        </div>
+
+        <!-- VU METER -->
+        <div class="vu-section">
+          <div class="vu-row">
+            <span class="vu-name ai-name">AI</span>
+            <div class="vu-track" id="vu-ai"></div>
+            <span class="vu-pct ai-pct" id="pct-ai">72%</span>
+          </div>
+          <div class="vu-row">
+            <span class="vu-name mix-name">Mixed</span>
+            <div class="vu-track" id="vu-mix"></div>
+            <span class="vu-pct mix-pct" id="pct-mix">15%</span>
+          </div>
+          <div class="vu-row">
+            <span class="vu-name human-name">Human</span>
+            <div class="vu-track" id="vu-human"></div>
+            <span class="vu-pct human-pct" id="pct-human">13%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODEL BAYS -->
+      <div class="model-bays">
+        <div class="model-bay">
+          <div class="mbay-name">GPTZero</div>
+          <div class="mbay-disc" style="background:radial-gradient(circle, #FF4D8A, #8B1A4A)"></div>
+          <div class="mbay-bar-track"><div class="mbay-bar-fill" id="mb1" style="width:78%"></div></div>
+          <div class="mbay-pct" id="mp1">78%</div>
+        </div>
+        <div class="model-bay">
+          <div class="mbay-name">Originality</div>
+          <div class="mbay-disc" style="background:radial-gradient(circle, #FF7A4D, #8B3A1A)"></div>
+          <div class="mbay-bar-track"><div class="mbay-bar-fill" id="mb2" style="width:81%"></div></div>
+          <div class="mbay-pct" id="mp2">81%</div>
+        </div>
+        <div class="model-bay">
+          <div class="mbay-name">Copyleaks</div>
+          <div class="mbay-disc" style="background:radial-gradient(circle, #FFAA00, #8B6A00)"></div>
+          <div class="mbay-bar-track"><div class="mbay-bar-fill" id="mb3" style="width:65%"></div></div>
+          <div class="mbay-pct" id="mp3">65%</div>
+        </div>
+        <div class="model-bay">
+          <div class="mbay-name">Sapling</div>
+          <div class="mbay-disc" style="background:radial-gradient(circle, #00D4C8, #006B65)"></div>
+          <div class="mbay-bar-track"><div class="mbay-bar-fill" id="mb4" style="width:64%"></div></div>
+          <div class="mbay-pct" id="mp4">64%</div>
+        </div>
+      </div>
+
+      <!-- SIGNAL PANEL -->
+      <div class="signal-panel">
+        <div class="signal-header">
+          <span class="bay-label">Signal Analysis</span>
+        </div>
+        <div class="signal-list">
+          <div class="signal-row">
+            <div class="sig-dot" style="background:var(--hot); box-shadow:0 0 6px var(--hot)"></div>
+            <span class="sig-name">Perplexity (sentence predictability)</span>
+            <span class="sig-val hot">VERY LOW — AI SIGNAL</span>
+          </div>
+          <div class="signal-row">
+            <div class="sig-dot" style="background:var(--amber); box-shadow:0 0 6px var(--amber)"></div>
+            <span class="sig-name">Burstiness (sentence variation)</span>
+            <span class="sig-val warm">LOW — UNIFORM</span>
+          </div>
+          <div class="signal-row">
+            <div class="sig-dot" style="background:var(--hot); box-shadow:0 0 6px var(--hot)"></div>
+            <span class="sig-name">Repetitive phrasing patterns</span>
+            <span class="sig-val hot">DETECTED</span>
+          </div>
+          <div class="signal-row">
+            <div class="sig-dot" style="background:var(--green); box-shadow:0 0 6px var(--green)"></div>
+            <span class="sig-name">Colloquial / idiomatic language</span>
+            <span class="sig-val cool">MINIMAL</span>
+          </div>
+          <div class="signal-row">
+            <div class="sig-dot" style="background:var(--cyan); box-shadow:0 0 6px var(--cyan)"></div>
+            <span class="sig-name">Structural predictability</span>
+            <span class="sig-val cyan">FORMULAIC</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="bottom-bar">
+    <div class="version">V.1.0.0 · Ai? · CK</div>
+    <div class="trial-strip">
+      <div class="trial-pips">
+        <div class="pip"></div>
+        <div class="pip used"></div>
+        <div class="pip used"></div>
+      </div>
+      <span class="trial-label">1 of 3 free</span>
+    </div>
+    <button class="upgrade-btn">Pro — $19/mo</button>
+  </div>
+
+</div>
+
+<script>
+function switchMode(mode, el) {
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function updateCount() {
+  const v = document.getElementById('text-input').value;
+  const w = v.trim() ? v.trim().split(/\s+/).length : 0;
+  document.getElementById('char-count').textContent = w + ' words';
+}
+
+function buildVU(trackId, pct, color, litColor) {
+  const track = document.getElementById(trackId);
+  track.innerHTML = '';
+  const total = 20;
+  const lit = Math.round((pct / 100) * total);
+  for (let i = 0; i < total; i++) {
+    const seg = document.createElement('div');
+    seg.className = 'vu-segment';
+    seg.style.background = i < lit ? litColor : 'rgba(255,255,255,0.04)';
+    track.appendChild(seg);
+  }
+}
+
+function runScan() {
+  const led = document.getElementById('status-led');
+  const loading = document.getElementById('loading');
+  const results = document.getElementById('results');
+
+  results.classList.remove('visible');
+  loading.classList.add('visible');
+  led.classList.add('on');
+
+  const aiPct  = 52 + Math.floor(Math.random() * 32);
+  const mixPct = 5  + Math.floor(Math.random() * 18);
+  const humPct = Math.max(0, 100 - aiPct - mixPct);
+  const conf   = 75 + Math.floor(Math.random() * 20);
+
+  const m1 = 60 + Math.floor(Math.random() * 25);
+  const m2 = 60 + Math.floor(Math.random() * 25);
+  const m3 = 50 + Math.floor(Math.random() * 30);
+  const m4 = 50 + Math.floor(Math.random() * 30);
+
+  const ts = Date.now().toString().slice(-4);
+
+  setTimeout(() => {
+    loading.classList.remove('visible');
+
+    // Verdict
+    const readout = document.getElementById('verdict-readout');
+    const sub     = document.getElementById('verdict-sub');
+    readout.className = 'verdict-readout';
+
+    if (aiPct > 60) {
+      readout.textContent = 'AI-GENERATED';
+      readout.classList.add('verdict-ai');
+    } else if (humPct > 55) {
+      readout.textContent = 'HUMAN WRITTEN';
+      readout.classList.add('verdict-human');
+    } else {
+      readout.textContent = 'MIXED ORIGIN';
+      readout.classList.add('verdict-mixed');
+    }
+
+    sub.textContent = `CONFIDENCE ${conf}% · 4 MODELS · 2.${Math.floor(Math.random()*9)}s`;
+    document.getElementById('scan-id').textContent = `SCAN-${ts}`;
+
+    // Percentages
+    document.getElementById('pct-ai').textContent    = aiPct + '%';
+    document.getElementById('pct-mix').textContent   = mixPct + '%';
+    document.getElementById('pct-human').textContent = humPct + '%';
+
+    // VU meters
+    buildVU('vu-ai',    aiPct,  'var(--hot)',   '#FF4D8A');
+    buildVU('vu-mix',   mixPct, 'var(--amber)', '#FFAA00');
+    buildVU('vu-human', humPct, 'var(--green)', '#00E87A');
+
+    // Model bays
+    const models = [[m1,'mb1','mp1'],[m2,'mb2','mp2'],[m3,'mb3','mp3'],[m4,'mb4','mp4']];
+    models.forEach(([pct,bid,pid]) => {
+      document.getElementById(bid).style.width = pct + '%';
+      document.getElementById(pid).textContent = pct + '%';
+    });
+
+    results.classList.add('visible');
+    led.classList.remove('on');
+
+    // Update pip
+    const pips = document.querySelectorAll('.pip');
+    pips.forEach(p => p.classList.add('used'));
+    pips[0].classList.remove('used');
+
+  }, 2000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Finance — Jeremiah Smith</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #09100E;
+  --surface:  #111A16;
+  --surface2: #162019;
+  --border:   rgba(94,232,138,0.12);
+  --border2:  rgba(94,232,138,0.06);
+  --green:    #5EE88A;
+  --green2:   #86F5B4;
+  --red:      #FF5C3A;
+  --amber:    #F5A623;
+  --blue:     #4DA8FF;
+  --purple:   #A78BFA;
+  --text:     #F0FBF4;
+  --muted:    rgba(240,251,244,0.45);
+  --muted2:   rgba(240,251,244,0.25);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* ── LAYOUT ── */
+.page { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* ── TOP BAR ── */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+}
+.topbar-left h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+.topbar-left .date {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.topbar-right .tag {
+  background: rgba(94,232,138,0.1);
+  border: 1px solid rgba(94,232,138,0.2);
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* ── REVENUE HERO ── */
+.hero {
+  background: linear-gradient(135deg, rgba(94,232,138,0.08) 0%, rgba(94,232,138,0.02) 100%);
+  border: 1px solid rgba(94,232,138,0.2);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.hero-icon { font-size: 36px; }
+.hero-text { flex: 1; }
+.hero-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.hero-amount {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--green2);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.hero-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.hero-sub strong { color: var(--text); }
+.hero-badge {
+  background: var(--green);
+  color: #09100E;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* ── STAT GRID ── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+@media (max-width: 700px) { .stat-grid { grid-template-columns: repeat(2,1fr); } }
+
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+.stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.stat-value {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.stat-value.red   { color: var(--red); }
+.stat-value.amber { color: var(--amber); }
+.stat-value.green { color: var(--green); }
+.stat-value.blue  { color: var(--blue); }
+.stat-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+/* ── SECTION ── */
+.section { margin-bottom: 28px; }
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.section-icon { font-size: 16px; }
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+}
+.section-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--muted2);
+}
+
+/* ── CARDS ── */
+.cards { display: flex; flex-direction: column; gap: 6px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: border-color 0.15s;
+}
+.card:hover { border-color: var(--border); }
+
+.card-icon {
+  font-size: 20px;
+  width: 36px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.card-main { flex: 1; min-width: 0; }
+.card-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.card-desc {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.card-right { text-align: right; flex-shrink: 0; }
+.card-amount {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.card-amount.green  { color: var(--green); }
+.card-amount.red    { color: var(--red); }
+.card-amount.amber  { color: var(--amber); }
+.card-amount.muted  { color: var(--muted); }
+.card-freq {
+  font-size: 11px;
+  color: var(--muted2);
+  margin-top: 2px;
+}
+
+/* ── PILL TAGS ── */
+.pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.pill-dev    { background: rgba(77,168,255,0.12); color: var(--blue); }
+.pill-music  { background: rgba(167,139,250,0.12); color: var(--purple); }
+.pill-life   { background: rgba(245,166,35,0.12); color: var(--amber); }
+.pill-infra  { background: rgba(94,232,138,0.1); color: var(--green); }
+
+/* ── ALERTS ── */
+.alerts { display: flex; flex-direction: column; gap: 8px; }
+
+.alert-card {
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border: 1px solid;
+}
+.alert-card.red    { background: rgba(255,92,58,0.06);  border-color: rgba(255,92,58,0.2); }
+.alert-card.amber  { background: rgba(245,166,35,0.06); border-color: rgba(245,166,35,0.2); }
+.alert-card.green  { background: rgba(94,232,138,0.05); border-color: rgba(94,232,138,0.2); }
+
+.alert-icon { font-size: 18px; margin-top: 1px; flex-shrink: 0; }
+.alert-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.alert-body  { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+.alert-action {
+  margin-top: 8px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.alert-card.amber .alert-action { color: var(--amber); }
+.alert-card.green .alert-action { color: var(--green); }
+
+/* ── GOAL BAR ── */
+.goal-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.goal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 14px;
+}
+.goal-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.goal-pct   { font-size: 28px; font-weight: 800; color: var(--green); letter-spacing: -1px; }
+.bar-track {
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  height: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--green), var(--green2));
+  width: 0.625%;
+}
+.goal-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── PRICING TABLE ── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+@media (max-width: 700px) { .pricing-grid { grid-template-columns: repeat(2,1fr); } }
+
+.price-card {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+.price-card.highlight {
+  border-color: rgba(94,232,138,0.3);
+  background: rgba(94,232,138,0.05);
+}
+.price-tier  { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.price-cost  { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+.price-subs  { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.price-note  { font-size: 11px; color: var(--green); margin-top: 6px; font-weight: 600; }
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border2); margin: 8px 0; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted2);
+  padding-top: 32px;
+  border-top: 1px solid var(--border2);
+  margin-top: 48px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>Finance Overview</h1>
+      <div class="date">Jeremiah Stephen Smith · March 27, 2026</div>
+    </div>
+    <div class="topbar-right">
+      <span class="tag">LIVE DATA</span>
+    </div>
+  </div>
+
+  <!-- REVENUE HERO -->
+  <div class="hero">
+    <div class="hero-icon">🎉</div>
+    <div class="hero-text">
+      <div class="hero-label">First Revenue · Creative Konsoles</div>
+      <div class="hero-amount">$18.75</div>
+      <div class="hero-sub">Stripe payment received <strong>March 23</strong> from your first subscriber. Your payout (after fees) lands in your bank account.</div>
+    </div>
+    <div class="hero-badge">FIRST EVER</div>
+  </div>
+
+  <!-- STAT GRID -->
+  <div class="stat-grid">
+    <div class="stat">
+      <div class="stat-label">Monthly Revenue</div>
+      <div class="stat-value green">$18.75</div>
+      <div class="stat-note">1 active subscriber</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Monthly Costs</div>
+      <div class="stat-value red">~$80</div>
+      <div class="stat-note">Tools + subscriptions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Issues Flagged</div>
+      <div class="stat-value amber">3</div>
+      <div class="stat-note">Cards declining</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">90-Day Goal</div>
+      <div class="stat-value blue">$3,000</div>
+      <div class="stat-note">158 subscribers @ $19</div>
+    </div>
+  </div>
+
+  <!-- ISSUES — FIRST, MOST IMPORTANT -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⚠️</span>
+      <span class="section-title">Needs Attention</span>
+    </div>
+    <div class="alerts">
+
+      <div class="alert-card red">
+        <div class="alert-icon">🔴</div>
+        <div>
+          <div class="alert-title">Anthropic API out of credits — Claude broken in 5i right now</div>
+          <div class="alert-body">4 failed charges today ($10.94, $15.94, $19.44, $9.56). Your card on file is declining. Claude model shows HTTP 400 error in 5i until this is fixed.</div>
+          <span class="alert-action">→ Fix at console.anthropic.com/settings/billing</span>
+        </div>
+      </div>
+
+      <div class="alert-card red">
+        <div class="alert-icon">🔴</div>
+        <div>
+          <div class="alert-title">Amazon — 4+ orders cancelled due to payment failure</div>
+          <div class="alert-body">Orders declined Mar 12–16. Same card issue. Update payment method on Amazon to clear pending orders.</div>
+          <span class="alert-action">→ Fix at amazon.com/your-account/payment</span>
+        </div>
+      </div>
+
+      <div class="alert-card amber">
+        <div class="alert-icon">🟡</div>
+        <div>
+          <div class="alert-title">Kalshi prediction market — orders cancelled, insufficient funds</div>
+          <div class="alert-body">Small bets (34¢–44¢) being auto-cancelled. Not a money problem — a focus problem. Pause this until income is stable.</div>
+          <span class="alert-action">→ Consider pausing Kalshi account</span>
+        </div>
+      </div>
+
+      <div class="alert-card green">
+        <div class="alert-icon">📈</div>
+        <div>
+          <div class="alert-title">Credit score improving — Milestone Mastercard payment received</div>
+          <div class="alert-body">Credit Karma flagged improvement Mar 17. $100 payment posted. Keep the momentum.</div>
+          <span class="alert-action">→ No action needed — keep going</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INCOME -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💰</span>
+      <span class="section-title">Income</span>
+      <span class="section-count">March 2026</span>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-main">
+          <div class="card-name">Creative Konsoles — Stripe</div>
+          <div class="card-desc">First subscriber · underwaterfile@proton.me · March 23</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount green">+$18.75</div>
+          <div class="card-freq">~$18.15 after fees</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECURRING SUBSCRIPTIONS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🔄</span>
+      <span class="section-title">Monthly Subscriptions</span>
+      <span class="section-count">~$80/mo total</span>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <div class="card-main">
+          <div class="card-name">Anthropic Claude <span class="pill pill-dev">Dev</span></div>
+          <div class="card-desc">API credits (pay-as-you-go) — currently empty, needs top-up</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount red">~$20–30</div>
+          <div class="card-freq">variable</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <div class="card-main">
+          <div class="card-name">ChatGPT Pro <span class="pill pill-dev">Dev</span></div>
+          <div class="card-desc">Daily use — consider if Claude covers your needs</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount muted">~$20.00</div>
+          <div class="card-freq">monthly</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🌊</div>
+        <div class="card-main">
+          <div class="card-name">Mistral AI Studio <span class="pill pill-dev">Dev</span></div>
+          <div class="card-desc">API access · Invoice Mar 20</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount muted">$10.00</div>
+          <div class="card-freq">monthly</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">𝕏</div>
+        <div class="card-main">
+          <div class="card-name">X Developer Platform <span class="pill pill-dev">Dev</span></div>
+          <div class="card-desc">Twitter API access · Receipt Mar 23</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount muted">$5.00</div>
+          <div class="card-freq">monthly</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🚂</div>
+        <div class="card-main">
+          <div class="card-name">Railway.com <span class="pill pill-infra">Infra</span></div>
+          <div class="card-desc">Hosting for 5i app</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount muted">~$5.00</div>
+          <div class="card-freq">monthly</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎵</div>
+        <div class="card-main">
+          <div class="card-name">Spotify Premium <span class="pill pill-music">Music</span></div>
+          <div class="card-desc">Restarted Mar 21 — had payment issue, now active</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount muted">$11.99</div>
+          <div class="card-freq">monthly</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">☁️</div>
+        <div class="card-main">
+          <div class="card-name">Google One 100GB <span class="pill pill-life">Life</span></div>
+          <div class="card-desc">Charged Mar 16 · Amex-8004</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount muted">$2.11</div>
+          <div class="card-freq">monthly</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ONE-TIME -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🧾</span>
+      <span class="section-title">One-Time Charges</span>
+      <span class="section-count">March 2026</span>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <div class="card-main">
+          <div class="card-name">Namecheap</div>
+          <div class="card-desc">Domain · creativekonsoles.com · Mar 21 · card 3075</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount muted">$10.18</div>
+          <div class="card-freq">one-time</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <div class="card-main">
+          <div class="card-name">Anthropic API Credits (×4 top-ups)</div>
+          <div class="card-desc">Multiple credit purchases Mar 17–26 (some failed, some succeeded)</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount muted">~$40–50</div>
+          <div class="card-freq">this month</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💳</div>
+        <div class="card-main">
+          <div class="card-name">Milestone Mastercard Payment</div>
+          <div class="card-desc">Debt repayment · Mar 20 · improving credit score</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount amber">$100.00</div>
+          <div class="card-freq">payment</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 90-DAY GOAL -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🎯</span>
+      <span class="section-title">90-Day Goal Tracker</span>
+    </div>
+    <div class="goal-block">
+      <div class="goal-top">
+        <div>
+          <div class="goal-label">$3,000/month by June 2026</div>
+          <div style="font-size:12px; color:var(--muted); margin-top:4px;">$18.75 earned so far this month</div>
+        </div>
+        <div class="goal-pct">0.6%</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill"></div></div>
+      <div class="goal-row">
+        <span>$18.75 today</span>
+        <span>$3,000 goal</span>
+      </div>
+
+      <div class="divider" style="margin:20px 0;"></div>
+
+      <div style="font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">How to get there</div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-tier">$9/mo</div>
+          <div class="price-cost">334</div>
+          <div class="price-subs">subscribers needed</div>
+          <div class="price-note" style="color:var(--red);">Too low</div>
+        </div>
+        <div class="price-card highlight">
+          <div class="price-tier">$19/mo ★</div>
+          <div class="price-cost">158</div>
+          <div class="price-subs">subscribers needed</div>
+          <div class="price-note">Sweet spot</div>
+        </div>
+        <div class="price-card">
+          <div class="price-tier">$49/mo</div>
+          <div class="price-cost">62</div>
+          <div class="price-subs">subscribers needed</div>
+          <div class="price-note" style="color:var(--blue);">Realistic</div>
+        </div>
+        <div class="price-card">
+          <div class="price-tier">$99/mo teams</div>
+          <div class="price-cost">31</div>
+          <div class="price-subs">subscribers needed</div>
+          <div class="price-note" style="color:var(--green2);">Best path</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COST CUTS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">✂️</span>
+      <span class="section-title">Quick Saves</span>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">⏸️</div>
+        <div class="card-main">
+          <div class="card-name">Pause Kalshi</div>
+          <div class="card-desc">Prediction markets are a distraction. Pause until income is stable.</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount green">Save ~$5</div>
+          <div class="card-freq">do today</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤔</div>
+        <div class="card-main">
+          <div class="card-name">Audit ChatGPT Pro</div>
+          <div class="card-desc">Do you still need it if Cowork + Claude Code cover your workflow?</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount green">Save $20</div>
+          <div class="card-freq">this week</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-main">
+          <div class="card-name">Review Mistral AI usage</div>
+          <div class="card-desc">Is it being used enough to justify $10/month?</div>
+        </div>
+        <div class="card-right">
+          <div class="card-amount green">Save $10</div>
+          <div class="card-freq">next month</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Built by Claude · March 27, 2026 · Sourced from Gmail receipts<br>
+    Update monthly — share new receipts and say "update my finance dashboard"
+  </div>
+
+</div>
+</body>
+</html>

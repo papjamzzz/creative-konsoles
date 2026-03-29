@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Making It Up — Daily AI Quiz · Creative Konsoles</title>
+<link rel="icon" type="image/png" href="/assets/ck-icon-1024.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Inter:wght@700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-weight: 700; }
+:root {
+  --bg: #0C1018; --chassis: #181F2E; --panel: #1E2538;
+  --recess: #0F1420; --rim: #2A3350; --rim2: #364068;
+  --cyan: #00E5D8; --cyan2: #50F5EC; --cyan-glow: rgba(0,229,216,0.35);
+  --cyan-dim: rgba(0,229,216,0.7); --cyan-trace: rgba(0,229,216,0.10);
+  --green: #00F080; --green-glow: rgba(0,240,128,0.35);
+  --hot: #FF3D82; --hot-glow: rgba(255,61,130,0.35);
+  --amber: #FFB000; --amber-glow: rgba(255,176,0,0.35);
+  --text: #E8F4FF; --muted: rgba(232,244,255,0.75); --muted2: rgba(232,244,255,0.45);
+  --glow-text: 0 0 10px rgba(232,244,255,0.5), 0 0 20px rgba(232,244,255,0.2);
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px 80px;
+}
+
+/* ── STREAK BADGE (fixed top-right, always visible) ── */
+#streak-badge {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: #0F1420;
+  border: 1.5px solid rgba(0,229,216,0.35);
+  border-radius: 14px;
+  padding: 12px 16px;
+  text-align: center;
+  min-width: 88px;
+  box-shadow: 0 0 24px rgba(0,229,216,0.18), 0 8px 32px rgba(0,0,0,0.6);
+  font-family: 'JetBrains Mono', monospace;
+}
+#streak-badge .sb-fire { font-size: 22px; line-height: 1.2; display: block; }
+#streak-badge .sb-num {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--cyan);
+  text-shadow: 0 0 14px var(--cyan-dim), 0 0 28px var(--cyan-glow), 0 0 40px rgba(0,229,216,0.2);
+  line-height: 1;
+  display: block;
+  letter-spacing: -1px;
+}
+#streak-badge .sb-label {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-shadow: 0 0 8px rgba(232,244,255,0.3);
+  display: block;
+  margin-top: 2px;
+}
+#streak-badge .sb-best {
+  font-size: 8px;
+  font-weight: 800;
+  color: rgba(0,229,216,0.5);
+  text-shadow: 0 0 6px rgba(0,229,216,0.3);
+  display: block;
+  margin-top: 3px;
+  letter-spacing: 1px;
+}
+
+/* ── DEVICE ── */
+.device {
+  width: 100%; max-width: 720px;
+  background: var(--chassis);
+  border-radius: 18px;
+  border: 1px solid var(--rim);
+  box-shadow: 0 0 60px rgba(0,229,216,0.07), 0 32px 100px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.07);
+  overflow: hidden;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--panel);
+  border-bottom: 1px solid var(--rim);
+  padding: 14px 26px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.topbar-left { display: flex; flex-direction: column; gap: 5px; }
+.logo-row { display: flex; align-items: center; gap: 10px; }
+.logo-5i {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan-dim), 0 0 24px var(--cyan-glow);
+  border: 1.5px solid rgba(0,229,216,0.5);
+  border-radius: 6px;
+  padding: 2px 8px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 10px rgba(0,229,216,0.15);
+}
+.logo-ck {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--muted2);
+  text-shadow: 0 0 8px rgba(232,244,255,0.3);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+.back-link {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  padding: 8px 26px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rim);
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--cyan); }
+.wordmark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: var(--glow-text);
+}
+.wordmark span { color: var(--cyan); text-shadow: 0 0 14px var(--cyan-dim), 0 0 28px var(--cyan-glow); }
+.top-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted2);
+  letter-spacing: 1px;
+  text-align: right;
+  text-shadow: 0 0 8px rgba(232,244,255,0.25);
+}
+.top-date { color: var(--cyan); display: block; text-shadow: 0 0 12px var(--cyan-dim), 0 0 24px var(--cyan-glow); }
+
+/* ── SCREENS ── */
+.screen { display: none; animation: fadeIn 0.3s ease; }
+.screen.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── INTRO ── */
+.intro-body { padding: 40px 32px; text-align: center; }
+.intro-icon {
+  width: 72px; height: 72px;
+  background: var(--recess);
+  border: 1px solid var(--rim2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 28px;
+  box-shadow: 0 0 30px var(--cyan-glow);
+}
+.intro-title {
+  font-size: 34px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+  text-shadow: var(--glow-text);
+}
+.intro-title span { color: var(--cyan); text-shadow: 0 0 20px var(--cyan-dim), 0 0 40px var(--cyan-glow); }
+.intro-sub {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto 32px;
+  text-shadow: 0 0 12px rgba(232,244,255,0.25);
+}
+.streak-bar {
+  background: var(--recess);
+  border: 1px solid var(--rim);
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 32px;
+  gap: 8px;
+}
+.streak-stat { text-align: center; }
+.streak-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--cyan);
+  text-shadow: 0 0 16px var(--cyan-dim), 0 0 32px var(--cyan-glow);
+  display: block;
+}
+.streak-lbl {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-shadow: 0 0 8px rgba(232,244,255,0.25);
+}
+.divider { width: 1px; height: 40px; background: var(--rim); }
+.start-btn {
+  background: linear-gradient(180deg, #253050 0%, #1A2240 100%);
+  border: 1px solid var(--rim2);
+  border-radius: 12px;
+  padding: 18px 40px;
+  color: var(--cyan2);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 30px rgba(0,229,216,0.10);
+  text-shadow: 0 0 14px var(--cyan-dim), 0 0 28px var(--cyan-glow);
+}
+.start-btn:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 40px rgba(0,229,216,0.25), 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* ── QUESTION SCREEN ── */
+.q-body { padding: 32px; }
+.q-progress-bar {
+  height: 3px;
+  background: var(--recess);
+  border-radius: 2px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.q-progress-fill {
+  height: 100%;
+  background: var(--cyan);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--cyan-dim);
+  transition: width 0.4s ease;
+}
+.q-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.q-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-shadow: 0 0 8px rgba(232,244,255,0.3);
+}
+.q-cat {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan-dim), 0 0 20px var(--cyan-glow);
+  background: var(--cyan-trace);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,229,216,0.2);
+}
+.q-text {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.5;
+  margin-bottom: 28px;
+  letter-spacing: -0.3px;
+  text-shadow: 0 0 20px rgba(232,244,255,0.4), 0 0 40px rgba(232,244,255,0.15);
+}
+.q-options { display: flex; flex-direction: column; gap: 10px; }
+.q-option {
+  background: var(--recess);
+  border: 1px solid var(--rim);
+  border-radius: 10px;
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.15s;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-shadow: 0 0 10px rgba(232,244,255,0.2);
+}
+.q-option:hover:not(.disabled) {
+  border-color: var(--rim2);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 0 14px rgba(0,229,216,0.08);
+}
+.q-option.selected {
+  border-color: var(--cyan);
+  background: var(--cyan-trace);
+  box-shadow: 0 0 16px rgba(0,229,216,0.12);
+}
+.q-option.disabled { cursor: default; pointer-events: none; }
+.opt-key {
+  width: 30px; height: 30px; flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--panel);
+  border: 1px solid var(--rim2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--muted2);
+  text-shadow: 0 0 6px rgba(232,244,255,0.3);
+  transition: all 0.15s;
+}
+.q-option.selected .opt-key {
+  background: var(--cyan-trace);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan-dim);
+}
+.opt-text { flex: 1; }
+.q-footer { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+.q-skip {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-shadow: 0 0 8px rgba(232,244,255,0.2);
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.15s;
+}
+.q-skip:hover { color: var(--muted); text-shadow: 0 0 10px rgba(232,244,255,0.4); }
+.q-next-btn {
+  background: var(--cyan-trace);
+  border: 1px solid var(--cyan-dim);
+  border-radius: 8px;
+  padding: 12px 32px;
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+  opacity: 0.35;
+  pointer-events: none;
+  text-shadow: 0 0 10px var(--cyan-trace);
+}
+.q-next-btn.enabled {
+  opacity: 1;
+  pointer-events: all;
+  box-shadow: 0 0 20px var(--cyan-glow);
+  text-shadow: 0 0 12px var(--cyan-dim), 0 0 24px var(--cyan-glow);
+}
+.q-next-btn.enabled:hover { background: var(--cyan-glow); }
+
+/* ── RESULTS ── */
+.results-body { padding: 32px; }
+.score-display {
+  background: var(--recess);
+  border: 1px solid var(--rim);
+  border-radius: 14px;
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.score-display::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+  pointer-events: none;
+}
+.score-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-shadow: 0 0 8px rgba(232,244,255,0.25);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 12px;
+}
+.score-big {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 86px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -2px;
+  position: relative;
+}
+.score-sub {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--muted);
+  text-shadow: 0 0 10px rgba(232,244,255,0.3);
+}
+.score-grade {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── STREAK CELEBRATION ── */
+.streak-celebration {
+  display: none;
+  background: linear-gradient(135deg, rgba(0,229,216,0.08), rgba(0,229,216,0.03));
+  border: 1.5px solid rgba(0,229,216,0.3);
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(0,229,216,0.12);
+}
+.streak-celebration.show { display: block; }
+.streak-cel-main {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--cyan);
+  text-shadow: 0 0 16px var(--cyan-dim), 0 0 32px var(--cyan-glow);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+}
+.streak-cel-sub {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted2);
+  text-shadow: 0 0 8px rgba(232,244,255,0.25);
+  margin-top: 4px;
+}
+
+/* ── PATTERN CARD ── */
+.pattern-card {
+  background: var(--recess);
+  border: 1px solid var(--rim2);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 24px;
+}
+.pattern-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan-dim), 0 0 24px var(--cyan-glow);
+  margin-bottom: 14px;
+}
+.pattern-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.pattern-cat {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--muted);
+  text-shadow: 0 0 8px rgba(232,244,255,0.25);
+  flex: 1;
+  font-family: 'JetBrains Mono', monospace;
+}
+.pattern-bar-wrap { flex: 2; height: 6px; background: var(--chassis); border-radius: 3px; overflow: hidden; }
+.pattern-bar { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+.pattern-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 800;
+  width: 36px;
+  text-align: right;
+}
+
+/* ── REVIEW ── */
+.review-section-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-shadow: 0 0 8px rgba(232,244,255,0.2);
+  margin-bottom: 14px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.review-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+.review-item {
+  background: var(--recess);
+  border-radius: 12px;
+  border: 1px solid var(--rim);
+  padding: 16px 18px;
+}
+.review-item.correct { border-color: rgba(0,240,128,0.3); }
+.review-item.wrong   { border-color: rgba(255,61,130,0.3); }
+.review-item.skipped { border-color: rgba(255,176,0,0.25); }
+.review-top { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; }
+.review-icon { font-size: 17px; flex-shrink: 0; margin-top: 2px; font-style: normal; }
+.review-q {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  text-shadow: 0 0 8px rgba(232,244,255,0.2);
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+.review-a {
+  font-size: 16px;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(232,244,255,0.2);
+}
+.review-correct-ans {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--muted2);
+  text-shadow: 0 0 6px rgba(232,244,255,0.2);
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.review-explanation {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+  color: rgba(232,244,255,0.75);
+  text-shadow: 0 0 8px rgba(232,244,255,0.2);
+  border-top: 1px solid var(--rim);
+  padding-top: 10px;
+  margin-top: 2px;
+}
+.review-explanation strong {
+  color: var(--cyan);
+  font-weight: 800;
+  text-shadow: 0 0 10px var(--cyan-dim), 0 0 20px var(--cyan-glow);
+}
+
+/* ── ACTION BUTTONS ── */
+.results-actions { display: flex; gap: 12px; }
+.res-btn {
+  flex: 1; padding: 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+.res-btn.primary {
+  background: var(--cyan-trace);
+  border: 1.5px solid var(--cyan-dim);
+  color: var(--cyan);
+  box-shadow: 0 0 24px var(--cyan-glow);
+  text-shadow: 0 0 12px var(--cyan-dim), 0 0 24px var(--cyan-glow);
+}
+.res-btn.primary:hover { background: var(--cyan-glow); }
+.res-btn.secondary {
+  background: var(--recess);
+  border: 1px solid var(--rim);
+  color: var(--muted);
+  text-shadow: 0 0 8px rgba(232,244,255,0.2);
+}
+.res-btn.secondary:hover { border-color: var(--rim2); color: var(--text); }
+
+/* ── BOTTOM BAR ── */
+.bottom-bar {
+  background: var(--panel);
+  border-top: 1px solid var(--rim);
+  padding: 11px 26px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.version {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted2);
+  text-shadow: 0 0 6px rgba(232,244,255,0.2);
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<!-- ── STREAK BADGE (always visible, top-right corner) ── -->
+<div id="streak-badge">
+  <span class="sb-fire" id="sb-fire">⚡</span>
+  <span class="sb-num" id="sb-num">0</span>
+  <span class="sb-label">Day Streak</span>
+  <span class="sb-best" id="sb-best">BEST: 0</span>
+</div>
+
+<a href="/" class="back-link">← Creative Konsoles</a>
+<div class="device">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="logo-row">
+        <span class="logo-5i">5i</span>
+        <span class="logo-ck">Creative Konsoles</span>
+      </div>
+      <div class="wordmark">Making <span>It Up</span></div>
+    </div>
+    <div class="top-meta">
+      <span class="top-date" id="today-date"></span>
+      <span>10 questions · AI industry</span>
+    </div>
+  </div>
+
+  <!-- INTRO SCREEN -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-body">
+      <div class="intro-icon">🧠</div>
+      <h1 class="intro-title">Making <span>It Up</span></h1>
+      <p class="intro-sub">10 questions about AI — the companies, people, models, and concepts shaping the industry. Score is hidden until the end. Every question gets a full explanation whether you nail it or not.</p>
+      <div class="streak-bar">
+        <div class="streak-stat">
+          <span class="streak-num" id="stat-streak">0</span>
+          <span class="streak-lbl">Day Streak</span>
+        </div>
+        <div class="divider"></div>
+        <div class="streak-stat">
+          <span class="streak-num" id="stat-avg">—</span>
+          <span class="streak-lbl">Avg Score</span>
+        </div>
+        <div class="divider"></div>
+        <div class="streak-stat">
+          <span class="streak-num" id="stat-total">0</span>
+          <span class="streak-lbl">Tests Taken</span>
+        </div>
+        <div class="divider"></div>
+        <div class="streak-stat">
+          <span class="streak-num" id="stat-best">—</span>
+          <span class="streak-lbl">Best Score</span>
+        </div>
+      </div>
+      <button class="start-btn" onclick="startQuiz()">Start Today's Quiz</button>
+    </div>
+  </div>
+
+  <!-- QUESTION SCREEN -->
+  <div class="screen" id="screen-question">
+    <div class="q-body">
+      <div class="q-progress-bar"><div class="q-progress-fill" id="progress-fill"></div></div>
+      <div class="q-meta">
+        <span class="q-num" id="q-num">Question 1 of 10</span>
+        <span class="q-cat" id="q-cat">Models</span>
+      </div>
+      <div class="q-text" id="q-text">Loading question...</div>
+      <div class="q-options" id="q-options"></div>
+      <div class="q-footer">
+        <span class="q-skip" onclick="skipQuestion()">Skip →</span>
+        <button class="q-next-btn" id="next-btn" onclick="nextQuestion()">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div class="screen" id="screen-results">
+    <div class="results-body">
+
+      <div class="streak-celebration" id="streak-cel">
+        <div class="streak-cel-main" id="streak-cel-main"></div>
+        <div class="streak-cel-sub" id="streak-cel-sub"></div>
+      </div>
+
+      <div class="score-display">
+        <div class="score-label">Today's Score</div>
+        <div class="score-big" id="score-big">0/10</div>
+        <div class="score-sub" id="score-sub">—</div>
+        <div class="score-grade" id="score-grade"></div>
+      </div>
+
+      <div class="pattern-card" id="pattern-card">
+        <div class="pattern-title">Performance by Category</div>
+        <div id="pattern-rows"></div>
+      </div>
+
+      <div class="review-section-title">Question Breakdown</div>
+      <div class="review-list" id="review-list"></div>
+
+      <div class="results-actions">
+        <button class="res-btn primary" onclick="resetQuiz()">Take Again</button>
+        <button class="res-btn secondary" onclick="shareScore()">Copy Score</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="version">MAKING IT UP · CREATIVE KONSOLES · V.3</div>
+    <div class="version" id="bottom-meta">FOR JEREMIAH</div>
+  </div>
+
+</div>
+
+<script>
+// ── QUESTION BANK — 50 questions ──
+const QUESTION_BANK = [
+
+  // COMPANIES
+  { cat: 'Companies', q: 'Which company created ChatGPT?', opts: ['Google DeepMind','OpenAI','Anthropic','Meta AI'], ans: 1,
+    exp: '<strong>OpenAI</strong> launched ChatGPT in November 2022. It hit 1 million users in 5 days — the fastest product adoption in history. Backed by Microsoft ($10B+), it triggered the modern AI race.' },
+
+  { cat: 'Companies', q: 'Anthropic was founded primarily by former employees of which company?', opts: ['Google','Meta','OpenAI','Microsoft'], ans: 2,
+    exp: '<strong>Anthropic</strong> was founded in 2021 by Dario Amodei, Daniela Amodei, and others who left OpenAI over AI safety disagreements. Anthropic makes Claude — the AI you use every day.' },
+
+  { cat: 'Companies', q: 'Which tech giant owns a reported 49% stake in OpenAI?', opts: ['Apple','Amazon','Google','Microsoft'], ans: 3,
+    exp: '<strong>Microsoft</strong> invested $10B+ in OpenAI and receives about 49% of profits until it recoups the investment. This deal powers Copilot across all Microsoft products.' },
+
+  { cat: 'Companies', q: 'Grok is an AI assistant created by which company?', opts: ['xAI (Elon Musk)','Apple','Nvidia','Salesforce'], ans: 0,
+    exp: '<strong>xAI</strong> was founded by Elon Musk in 2023 after he left OpenAI\'s board. Grok is integrated into X (formerly Twitter) and has real-time access to posts.' },
+
+  { cat: 'Companies', q: 'Mistral AI is headquartered in which country?', opts: ['USA','UK','France','Germany'], ans: 2,
+    exp: '<strong>Mistral AI</strong> was founded in Paris in 2023 and quickly became the most important European AI lab. Known for efficient, open-weight models that punch above their size.' },
+
+  { cat: 'Companies', q: 'Which company makes the Claude family of AI models?', opts: ['OpenAI','Google','Anthropic','Cohere'], ans: 2,
+    exp: '<strong>Anthropic</strong> makes Claude — the model behind this very app. Claude comes in Haiku (fast), Sonnet (balanced), and Opus (most powerful) tiers.' },
+
+  { cat: 'Companies', q: 'Perplexity AI is primarily known as an AI-powered what?', opts: ['Image generator','Search engine','Code assistant','Translation tool'], ans: 1,
+    exp: '<strong>Perplexity</strong> is an AI-powered search engine that gives direct answers with cited sources, directly competing with Google Search.' },
+
+  { cat: 'Companies', q: 'Which semiconductor company became one of the most valuable in the world driven by AI chip demand?', opts: ['Intel','AMD','Qualcomm','Nvidia'], ans: 3,
+    exp: '<strong>Nvidia</strong> makes the GPUs (H100, A100) that train almost every major AI model. Its market cap briefly exceeded $3 trillion in 2024 — more than the entire GDP of France.' },
+
+  { cat: 'Companies', q: "Google's main family of AI models is called:", opts: ['Bard','Gemini','LaMDA','PaLM'], ans: 1,
+    exp: '<strong>Gemini</strong> is Google\'s current AI model family, replacing Bard. Gemini Ultra competes directly with GPT-4 and Claude. Google has more AI talent than anyone but struggled to ship.' },
+
+  { cat: 'Companies', q: "Meta's open-source AI model family is called:", opts: ['Galactica','Falcon','LLaMA','Bloom'], ans: 2,
+    exp: '<strong>LLaMA</strong> (Large Language Model Meta AI) is Meta\'s open-weight model family. LLaMA 3 is one of the best freely available models — you can literally run it on your MacBook.' },
+
+  // MODELS & TECH
+  { cat: 'Models', q: 'What does "LLM" stand for?', opts: ['Large Language Model','Linear Learning Machine','Layered Logic Module','Linked Language Matrix'], ans: 0,
+    exp: '<strong>LLM = Large Language Model.</strong> These are trained on massive text datasets to predict and generate text. GPT, Claude, and Gemini are all LLMs. "Large" refers to both data and parameter count.' },
+
+  { cat: 'Models', q: 'GPT-4 is described as a "multimodal" model. What does that mean?', opts: ['It runs on multiple computers','It can process text AND images','It uses multiple training datasets','It supports many languages'], ans: 1,
+    exp: '<strong>Multimodal</strong> means the model processes multiple types of inputs — text, images, audio. GPT-4V can analyze a photo; Claude can read a PDF. This mirrors how humans naturally think.' },
+
+  { cat: 'Models', q: 'What is "fine-tuning" in the context of AI models?', opts: ['Optimizing hardware performance','Further training a model on specific data','Reducing model file size','Speeding up inference time'], ans: 1,
+    exp: '<strong>Fine-tuning</strong> takes a general model and trains it further on specific data. Companies use it to make models better at customer service, legal work, or coding for their specific use case.' },
+
+  { cat: 'Models', q: 'What does "context window" mean?', opts: ['The UI window the AI runs in',"How much text the model can read and remember at once","The AI's training data range","The output character limit"], ans: 1,
+    exp: '<strong>Context window</strong> is how much the model can "see" at once — measured in tokens. Claude 3 has up to 200K tokens — enough to read a full novel. Your 5i app uses the full context window per request.' },
+
+  { cat: 'Models', q: 'What is "hallucination" in AI?', opts: ['When AI generates visual outputs','When AI confidently states incorrect information','A memory management bug','When a model runs out of context'], ans: 1,
+    exp: '<strong>Hallucination</strong> is the #1 reliability problem with current AI. Models generate plausible-sounding but false information with complete confidence. Always verify facts the AI gives you.' },
+
+  { cat: 'Models', q: 'What is "RAG" in AI development?', opts: ['Retrieval-Augmented Generation','Rapid Adaptive Growth','Recursive Attention Gate','Random Aggregation Grid'], ans: 0,
+    exp: '<strong>RAG = Retrieval-Augmented Generation.</strong> Instead of relying only on training data, RAG systems search a database first, then feed relevant results to the model. Dramatically improves accuracy.' },
+
+  { cat: 'Models', q: 'What is "prompt engineering"?', opts: ['Building hardware for AI','Crafting inputs to get better AI outputs','Programming neural networks','Writing model training scripts'], ans: 1,
+    exp: '<strong>Prompt engineering</strong> is crafting inputs to get better outputs from AI. The same question phrased two different ways can get dramatically different results. This is a real, valuable skill.' },
+
+  { cat: 'Models', q: 'What is "RLHF" — a key technique used to improve models like ChatGPT?', opts: ['Reinforcement Learning from Human Feedback','Recursive Layer Hierarchical Framework','Rapid Learning via High Frequency','Recurrent LSTM Hybrid Formation'], ans: 0,
+    exp: '<strong>RLHF = Reinforcement Learning from Human Feedback.</strong> Humans rate model outputs; those ratings teach the model what "good" looks like. This transformed raw GPT-3 into the helpful ChatGPT.' },
+
+  // PEOPLE
+  { cat: 'People', q: 'Sam Altman is the CEO of which AI company?', opts: ['Anthropic','DeepMind','OpenAI','Mistral'], ans: 2,
+    exp: '<strong>Sam Altman</strong> became CEO of OpenAI in 2019. In November 2023 he was briefly fired and reinstated within 5 days in a dramatic boardroom saga that dominated global news.' },
+
+  { cat: 'People', q: 'Who is widely called the "Godfather of AI" and won the 2024 Nobel Prize in Physics?', opts: ['Yann LeCun','Geoffrey Hinton','Andrew Ng','Yoshua Bengio'], ans: 1,
+    exp: '<strong>Geoffrey Hinton</strong> pioneered deep learning and backpropagation — the foundation of modern AI. He left Google in 2023 to speak freely about AI risks, saying he regrets his life\'s work.' },
+
+  { cat: 'People', q: 'Dario Amodei is the CEO of which safety-focused AI company?', opts: ['OpenAI','Google DeepMind','Anthropic','Inflection AI'], ans: 2,
+    exp: '<strong>Dario Amodei</strong> co-founded Anthropic with his sister Daniela (President) after leaving OpenAI. The company raised $7.5B+ and is the most safety-focused major AI lab.' },
+
+  { cat: 'People', q: 'Yann LeCun is the Chief AI Scientist at which company?', opts: ['Apple','Meta','Amazon','Nvidia'], ans: 1,
+    exp: '<strong>Yann LeCun</strong> at Meta invented convolutional neural networks (CNNs) in the 1980s-90s. He\'s also famously skeptical that current LLMs will ever reach human-level intelligence.' },
+
+  { cat: 'People', q: 'Elon Musk co-founded OpenAI and later left. What AI company did he then start?', opts: ['Grok Labs','xAI','TruthAI','Tesla AI'], ans: 1,
+    exp: '<strong>xAI</strong> — Musk co-founded OpenAI in 2015 but left the board in 2018. In 2023 he launched xAI with the Grok model. He\'s also sued OpenAI, claiming it abandoned its nonprofit mission.' },
+
+  { cat: 'People', q: 'Andrew Ng is best known in AI for:', opts: ['Founding OpenAI',"Creating Coursera's deep learning courses and Google Brain",'Inventing the Transformer',"Leading Nvidia's AI research"], ans: 1,
+    exp: '<strong>Andrew Ng</strong> co-founded Google Brain and created one of the most popular ML courses ever on Coursera. He\'s one of the best AI educators and founders of deeplearning.ai.' },
+
+  // INDUSTRY
+  { cat: 'Industry', q: 'What does "open source" mean when applied to an AI model?', opts: ['The model runs in a web browser',"The model's weights/code are publicly available",'The model is free forever','The model was crowd-trained'], ans: 1,
+    exp: '<strong>Open source AI</strong> means the model\'s weights (the "brain") are publicly available. You can download LLaMA 3 and run it on your own Mac. Closed models like GPT-4 and Claude keep weights private.' },
+
+  { cat: 'Industry', q: 'What is a "model API"?', opts: ['A way to physically access AI hardware','A programming interface to use an AI model in your own app','A type of AI training method','A benchmark test for AI models'], ans: 1,
+    exp: '<strong>Model APIs</strong> are how most AI products are built — including your 5i app. You send a request, get a response. OpenAI, Anthropic, Google all have APIs. You pay per token used.' },
+
+  { cat: 'Industry', q: 'What does "AGI" stand for?', opts: ['Automated General Intelligence','Artificial General Intelligence','Advanced Generative Input','Adaptive Growth Interface'], ans: 1,
+    exp: '<strong>AGI = Artificial General Intelligence.</strong> Hypothetical AI that can do any intellectual task a human can. Today\'s AI is "narrow" — great at specific things. OpenAI\'s stated mission is to build AGI.' },
+
+  { cat: 'Industry', q: 'What is "inference" in AI?', opts: ['Training a new model','Running a trained model to generate outputs','Evaluating model performance','Compressing a model for deployment'], ans: 1,
+    exp: '<strong>Inference</strong> is running the model — what happens when you type a prompt and get a response. Training happens once (costs millions). Inference happens billions of times per day. Your API costs are inference costs.' },
+
+  { cat: 'Industry', q: 'AI "tokens" are roughly equivalent to:', opts: ['Characters','Words or word fragments (about 4 chars each)','Sentences','Paragraphs'], ans: 1,
+    exp: '<strong>Tokens</strong> are the atomic unit AI models process. ~4 characters each on average. "Making It Up" = 4 tokens. APIs charge per token. A 100K context window = about 75,000 words — a full novel.' },
+
+  { cat: 'Industry', q: 'What is "AI safety" research primarily focused on?', opts: ['Making AI run faster',"Ensuring AI systems behave as intended and don't cause harm",'Reducing AI electricity usage','Making AI more accessible to businesses'], ans: 1,
+    exp: '<strong>AI safety</strong> covers alignment (doing what we actually want), interpretability (understanding why AI does what it does), and preventing catastrophic outcomes as models get more capable.' },
+
+  // PRODUCTS
+  { cat: 'Products', q: 'What product category is GitHub Copilot in?', opts: ['AI image generation','AI code assistant','AI customer service','AI data analysis'], ans: 1,
+    exp: '<strong>GitHub Copilot</strong> was the first major AI coding tool, launched in 2021. Powered by OpenAI, it writes, completes, and debugs code in real-time inside your editor. Now used by millions of developers.' },
+
+  { cat: 'Products', q: 'Midjourney, DALL-E, and Stable Diffusion all do what?', opts: ['Generate music from text','Generate images from text prompts','Translate between languages','Analyze documents'], ans: 1,
+    exp: '<strong>Text-to-image generation</strong> is AI\'s most visible consumer breakthrough. Type a description, get a photorealistic image. Midjourney is cloud-only; Stable Diffusion can run locally on your M1.' },
+
+  { cat: 'Products', q: 'What is Hugging Face primarily known for?', opts: ['A social network for AI researchers','A platform for sharing and running open-source AI models','An AI chip manufacturer','A cloud computing provider'], ans: 1,
+    exp: '<strong>Hugging Face</strong> is the GitHub of AI — hundreds of thousands of open models, datasets, and demos. Essential infrastructure for the AI developer ecosystem. Most open-source models start there.' },
+
+  { cat: 'Products', q: 'What was special about ChatGPT when it launched in November 2022?', opts: ['It was the first AI ever made','It reached 1 million users in 5 days — faster than any product in history','It was completely free with no limits','It could generate images and video'], ans: 1,
+    exp: '<strong>ChatGPT\'s launch</strong> changed everything. 1 million users in 5 days (Instagram took 2.5 months). It made AI mainstream overnight and triggered the biggest wave of tech investment since the internet.' },
+
+  { cat: 'Products', q: 'What is LangChain used for?', opts: ['Training language models from scratch','Building applications that chain together AI model calls','Translating between languages','Hosting AI models in the cloud'], ans: 1,
+    exp: '<strong>LangChain</strong> is a developer framework for building AI apps. It chains AI calls with databases, APIs, and tools. It\'s the kind of tool you\'d use to build something like 5i — multiple models in sequence.' },
+
+  // CONCEPTS
+  { cat: 'Concepts', q: 'What is "few-shot prompting"?', opts: ['Running a model with minimal GPU power','Giving the model a few examples in your prompt to guide its response','A fast training technique','Limiting model output length'], ans: 1,
+    exp: '<strong>Few-shot prompting</strong> shows the model examples of what you want before your actual request. "Here are 3 examples of good responses → now do this." Far more reliable than describing the format in words.' },
+
+  { cat: 'Concepts', q: '"Temperature" in AI generation controls:', opts: ['Computational heat levels','Randomness/creativity of the output (higher = more creative)','Response speed','Token budget'], ans: 1,
+    exp: '<strong>Temperature</strong> is a dial from 0 to 2. Temperature 0 = deterministic, same answer every time. Temperature 1+ = creative and unpredictable. For code or facts: low. For brainstorming: high.' },
+
+  { cat: 'Concepts', q: 'What is an "embedding" in AI?', opts: ['Inserting AI into a website','A numerical representation of text that captures meaning','A type of neural network layer','An image compression technique'], ans: 1,
+    exp: '<strong>Embeddings</strong> convert words/sentences into lists of numbers (vectors). Similar meanings cluster together in this "vector space." Core to semantic search, recommendation systems, and RAG.' },
+
+  { cat: 'Concepts', q: 'What does "multimodal" AI mean?', opts: ['AI that works in multiple countries','AI that can process multiple types of data (text, images, audio, etc.)','AI trained on multiple datasets','AI that runs on multiple devices'], ans: 1,
+    exp: '<strong>Multimodal AI</strong> handles multiple types of input simultaneously — text, images, audio, video. Claude can read a PDF you upload. GPT-4 can look at a screenshot and describe what\'s wrong.' },
+
+  { cat: 'Concepts', q: 'What is "chain of thought" prompting?', opts: ['Linking multiple AI models together','Asking the model to show its reasoning step by step','A type of memory management','Connecting API calls in sequence'], ans: 1,
+    exp: '<strong>Chain of thought</strong> (adding "think step by step" to a prompt) dramatically improves AI accuracy on complex reasoning. By showing its work, the model makes fewer logic errors.' },
+
+  { cat: 'Concepts', q: 'What is a "vector database" used for in AI applications?', opts: ['Storing training data as video files','Storing and searching AI embeddings for similarity/retrieval','A type of GPU memory','Caching model outputs'], ans: 1,
+    exp: '<strong>Vector databases</strong> (Pinecone, Chroma, Weaviate) store embeddings and let you find semantically similar content instantly. Essential for RAG systems — "find me context relevant to this question."' },
+
+  { cat: 'Concepts', q: 'What does "zero-shot" mean in AI tasks?', opts: ["The model uses no training data","The model performs a task it wasn't specifically trained for, with no examples","Running a model without a GPU","Generating output with zero randomness"], ans: 1,
+    exp: '<strong>Zero-shot</strong> means no examples given — the model figures it out from training alone. GPT-4 can translate Swahili, write code, and analyze a balance sheet without being explicitly taught each task.' },
+
+  { cat: 'Concepts', q: 'What is "model collapse" in AI?', opts: ['When a server running a model crashes','When models trained on AI-generated data progressively lose quality','When a model runs out of context','Memory overflow during inference'], ans: 1,
+    exp: '<strong>Model collapse</strong> — as the internet fills with AI-generated content, future models trained on that data progressively degrade. Like copying a copy of a copy. A growing concern for the next generation of models.' },
+
+];
+
+// ── STATE ──
+let currentQuiz = [];
+let currentQ = 0;
+let answers = [];
+let stats = { streak: 0, scores: [], lastDate: null, best: null, bestStreak: 0 };
+
+// ── INIT ──
+function init() {
+  document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
+  loadStats();
+  updateStatsDisplay();
+}
+
+function loadStats() {
+  try {
+    const s = JSON.parse(localStorage.getItem('miu_quiz_stats') || '{}');
+    if (s.streak !== undefined) stats = { bestStreak: 0, ...s };
+  } catch(e) {}
+}
+
+function saveStats() {
+  if (stats.streak > (stats.bestStreak || 0)) stats.bestStreak = stats.streak;
+  localStorage.setItem('miu_quiz_stats', JSON.stringify(stats));
+}
+
+function updateStatsDisplay() {
+  document.getElementById('stat-streak').textContent = stats.streak || 0;
+  document.getElementById('stat-total').textContent  = stats.scores ? stats.scores.length : 0;
+  const avg = stats.scores && stats.scores.length
+    ? Math.round(stats.scores.reduce((a,b) => a+b, 0) / stats.scores.length * 10) + '%'
+    : '—';
+  document.getElementById('stat-avg').textContent  = avg;
+  document.getElementById('stat-best').textContent = stats.best !== null && stats.best !== undefined
+    ? Math.round(stats.best * 10) + '%' : '—';
+
+  // Update fixed streak badge
+  const streak = stats.streak || 0;
+  document.getElementById('sb-num').textContent = streak;
+  document.getElementById('sb-best').textContent = 'BEST: ' + (stats.bestStreak || 0);
+  const fire = document.getElementById('sb-fire');
+  if (streak === 0)      fire.textContent = '⚡';
+  else if (streak < 3)   fire.textContent = '🔥';
+  else if (streak < 7)   fire.textContent = '🔥';
+  else                   fire.textContent = '🔥🔥';
+}
+
+// ── BUILD DAILY QUIZ ──
+function buildQuiz() {
+  const today = new Date();
+  const seed  = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
+  const rng   = seededRandom(seed);
+
+  const cats = ['Companies', 'Models', 'People', 'Industry', 'Products', 'Concepts'];
+  const selected = [];
+  const used = new Set();
+
+  cats.forEach(cat => {
+    const pool = QUESTION_BANK.filter((q, i) => q.cat === cat && !used.has(i));
+    if (pool.length) {
+      const pick = pool[Math.floor(rng() * pool.length)];
+      const idx  = QUESTION_BANK.indexOf(pick);
+      used.add(idx);
+      selected.push({ ...pick, idx });
+    }
+  });
+
+  while (selected.length < 10) {
+    const remaining = QUESTION_BANK.filter((_, i) => !used.has(i));
+    if (!remaining.length) break;
+    const pick = remaining[Math.floor(rng() * remaining.length)];
+    const idx  = QUESTION_BANK.indexOf(pick);
+    used.add(idx);
+    selected.push({ ...pick, idx });
+  }
+
+  for (let i = selected.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [selected[i], selected[j]] = [selected[j], selected[i]];
+  }
+
+  return selected.slice(0, 10);
+}
+
+function seededRandom(seed) {
+  let s = seed;
+  return function() {
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
+}
+
+// ── QUIZ FLOW ──
+function startQuiz() {
+  currentQuiz = buildQuiz();
+  currentQ    = 0;
+  answers     = new Array(10).fill(null);
+  showScreen('question');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = currentQuiz[currentQ];
+  const pct = (currentQ / 10) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('q-num').textContent  = `Question ${currentQ + 1} of ${currentQuiz.length}`;
+  document.getElementById('q-cat').textContent  = q.cat;
+  document.getElementById('q-text').textContent = q.q;
+
+  const optsEl = document.getElementById('q-options');
+  optsEl.innerHTML = '';
+  const keys = ['A','B','C','D'];
+  q.opts.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'q-option';
+    div.onclick = () => selectAnswer(i);
+    div.innerHTML = `<span class="opt-key">${keys[i]}</span><span class="opt-text">${opt}</span>`;
+    optsEl.appendChild(div);
+  });
+
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.className = 'q-next-btn';
+  nextBtn.textContent = currentQ < currentQuiz.length - 1 ? 'Next →' : 'See Results';
+
+  if (answers[currentQ] !== null) {
+    selectAnswer(answers[currentQ], true);
+  }
+}
+
+function selectAnswer(idx, restore = false) {
+  if (!restore) answers[currentQ] = idx;
+  document.querySelectorAll('.q-option').forEach((o, i) => {
+    o.classList.toggle('selected', i === idx);
+  });
+  document.getElementById('next-btn').className = 'q-next-btn enabled';
+}
+
+function skipQuestion() {
+  answers[currentQ] = null;
+  nextQuestion();
+}
+
+function nextQuestion() {
+  if (answers[currentQ] === null && !confirm('Skip this question?')) return;
+  if (currentQ < currentQuiz.length - 1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+// ── RESULTS ──
+function showResults() {
+  showScreen('results');
+
+  let correct = 0;
+  const catScores = {};
+
+  currentQuiz.forEach((q, i) => {
+    if (!catScores[q.cat]) catScores[q.cat] = { correct: 0, total: 0 };
+    catScores[q.cat].total++;
+    if (answers[i] === q.ans) { correct++; catScores[q.cat].correct++; }
+  });
+
+  const scorePct  = correct / 10;
+  const pct       = Math.round(scorePct * 100);
+
+  // Update stats & streak
+  stats.scores = stats.scores || [];
+  stats.scores.push(scorePct);
+  if (stats.scores.length > 60) stats.scores = stats.scores.slice(-60);
+
+  const today = new Date().toDateString();
+  const wasNewDay = stats.lastDate !== today;
+  const streakBefore = stats.streak || 0;
+
+  if (wasNewDay) {
+    if (stats.lastDate === new Date(Date.now() - 86400000).toDateString()) {
+      stats.streak = (stats.streak || 0) + 1;
+    } else {
+      stats.streak = 1;
+    }
+  }
+  stats.lastDate = today;
+  stats.best = stats.best !== null ? Math.max(stats.best, scorePct) : scorePct;
+  saveStats();
+  updateStatsDisplay();
+
+  // Streak celebration banner
+  const celEl = document.getElementById('streak-cel');
+  if (wasNewDay && stats.streak > 1) {
+    celEl.classList.add('show');
+    const isNewBest = stats.streak >= (stats.bestStreak || 0);
+    document.getElementById('streak-cel-main').textContent =
+      isNewBest
+        ? `🔥 NEW BEST STREAK: ${stats.streak} DAYS`
+        : `🔥 ${stats.streak} DAY STREAK`;
+    document.getElementById('streak-cel-sub').textContent =
+      isNewBest
+        ? "Personal record. You're locked in."
+        : "Keep showing up. This is how it compounds.";
+  } else {
+    celEl.classList.remove('show');
+  }
+
+  // Score display
+  const scoreColor = pct >= 80 ? '#00F080' : pct >= 60 ? '#FFB000' : '#FF3D82';
+  const scoreGlow  = pct >= 80 ? 'rgba(0,240,128,0.35)' : pct >= 60 ? 'rgba(255,176,0,0.35)' : 'rgba(255,61,130,0.35)';
+  const el = document.getElementById('score-big');
+  el.textContent   = `${correct}/10`;
+  el.style.color   = scoreColor;
+  el.style.textShadow = `0 0 30px ${scoreGlow}, 0 0 60px ${scoreGlow}, 0 0 90px ${scoreGlow}`;
+
+  const subText  = pct >= 80 ? 'Strong session.' : pct >= 60 ? 'Solid. Keep building.' : 'Good to know where to dig in.';
+  const gradeMap = [[90,'🔥 On Fire'],[80,'Sharp'],[70,'Solid'],[60,'Getting There'],[0,'Keep Going']];
+  const grade    = gradeMap.find(([t]) => pct >= t)[1];
+
+  document.getElementById('score-sub').textContent = subText;
+  const gradeEl = document.getElementById('score-grade');
+  gradeEl.textContent       = grade;
+  gradeEl.style.background  = `rgba(${pct>=80?'0,240,128':pct>=60?'255,176,0':'255,61,130'},0.12)`;
+  gradeEl.style.color       = scoreColor;
+  gradeEl.style.border      = `1px solid ${scoreColor}50`;
+  gradeEl.style.textShadow  = `0 0 10px ${scoreGlow}, 0 0 20px ${scoreGlow}`;
+
+  // Category breakdown
+  const patternRows = document.getElementById('pattern-rows');
+  patternRows.innerHTML = '';
+  const catColors = { Companies:'#00E5D8', Models:'#00F080', People:'#FFB000', Industry:'#FF3D82', Products:'#7B68EE', Concepts:'#50F5EC' };
+  Object.entries(catScores).forEach(([cat, {correct: c, total: t}]) => {
+    const p     = Math.round((c/t)*100);
+    const color = catColors[cat] || '#00E5D8';
+    const row   = document.createElement('div');
+    row.className = 'pattern-row';
+    row.innerHTML = `
+      <span class="pattern-cat">${cat} (${c}/${t})</span>
+      <div class="pattern-bar-wrap"><div class="pattern-bar" style="width:${p}%;background:linear-gradient(90deg,${color},${color}60);box-shadow:0 0 6px ${color}60"></div></div>
+      <span class="pattern-pct" style="color:${color};text-shadow:0 0 8px ${color}80">${p}%</span>
+    `;
+    patternRows.appendChild(row);
+  });
+
+  // Answer review
+  const reviewList = document.getElementById('review-list');
+  reviewList.innerHTML = '';
+
+  currentQuiz.forEach((q, i) => {
+    const userAns   = answers[i];
+    const isCorrect = userAns === q.ans;
+    const skipped   = userAns === null;
+    const cls       = skipped ? 'skipped' : isCorrect ? 'correct' : 'wrong';
+    const icon      = skipped ? '—' : isCorrect ? '✓' : '✗';
+    const iconColor = skipped ? '#FFB000' : isCorrect ? '#00F080' : '#FF3D82';
+    const iconGlow  = skipped ? 'rgba(255,176,0,0.5)' : isCorrect ? 'rgba(0,240,128,0.5)' : 'rgba(255,61,130,0.5)';
+
+    const div = document.createElement('div');
+    div.className = `review-item ${cls}`;
+
+    let ansLine = '';
+    if (skipped) {
+      ansLine = `<div class="review-a" style="color:#FFB000;text-shadow:0 0 10px rgba(255,176,0,0.5)">Skipped</div>
+                 <div class="review-correct-ans">Answer: ${q.opts[q.ans]}</div>`;
+    } else if (isCorrect) {
+      ansLine = `<div class="review-a" style="color:#00F080;text-shadow:0 0 12px rgba(0,240,128,0.6)">✓ ${q.opts[userAns]}</div>`;
+    } else {
+      ansLine = `<div class="review-a" style="color:#FF3D82;text-shadow:0 0 12px rgba(255,61,130,0.6)">✗ You said: ${q.opts[userAns]}</div>
+                 <div class="review-correct-ans">Correct: ${q.opts[q.ans]}</div>`;
+    }
+
+    div.innerHTML = `
+      <div class="review-top">
+        <span class="review-icon" style="color:${iconColor};text-shadow:0 0 10px ${iconGlow}">${icon}</span>
+        <div>
+          <div class="review-q">${q.q}</div>
+          ${ansLine}
+        </div>
+      </div>
+      <div class="review-explanation">${q.exp}</div>
+    `;
+    reviewList.appendChild(div);
+  });
+
+  updateStatsDisplay();
+}
+
+function resetQuiz() {
+  showScreen('intro');
+  updateStatsDisplay();
+}
+
+function shareScore() {
+  const today   = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const correct = answers.filter((a, i) => a === currentQuiz[i].ans).length;
+  const text    = `Making It Up — ${today}\n${correct}/10 ✓\n🔥 ${stats.streak} day streak\nCreative Konsoles · creativekonsoles.com`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.res-btn.secondary');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy Score', 1500);
+  });
+}
+
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+}
+
+init();
+</script>
+</body>
+</html>

@@ -2611,7 +2611,7 @@ async function callModelStreaming(modelKey, { sysPrompt, userPrompt, maxTokens, 
   /* ── Gemini (Google) — cheapest: $0.075/M ── */
   if (modelKey === 'gemini') {
     /* Gemini supports streaming via fetch with alt=sse */
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${m.apiKey}`, {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:streamGenerateContent?alt=sse&key=${m.apiKey}`, {
       method: 'POST', signal,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ system_instruction: { parts: [{ text: sysPrompt }] },
@@ -2637,7 +2637,7 @@ async function callModelStreaming(modelKey, { sysPrompt, userPrompt, maxTokens, 
     const res = await fetch('https://api.x.ai/v1/chat/completions', {
       method: 'POST', signal,
       headers: { 'Authorization': 'Bearer ' + m.apiKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'grok-3-mini-beta', max_tokens: maxTokens, stream: true,
+      body: JSON.stringify({ model: 'grok-3-mini', max_tokens: maxTokens, stream: true,
         messages: [{ role: 'system', content: sysPrompt }, { role: 'user', content: userPrompt }] })
     });
     return streamSSE(res, signal, onToken, d => d.choices?.[0]?.delta?.content || '');

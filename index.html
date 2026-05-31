@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Creative Konsoles — Tools that think with you.</title>
   <meta name="description" content="Creative Konsoles builds precision software for AI, audio, and data. Every tool ships with purpose.">
-  <meta name="keywords" content="Creative Konsoles, AI tools, Gain, 5i, StreamFader, Memoir, custom software">
   <link rel="canonical" href="https://creativekonsoles.com">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://creativekonsoles.com">
@@ -17,18 +16,7 @@
   <meta name="twitter:description" content="Precision software for AI, audio, and data.">
   <meta name="twitter:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Creative Konsoles",
-    "url": "https://creativekonsoles.com",
-    "description": "Creative Konsoles builds precision software for AI, audio, and data.",
-    "logo": "https://creativekonsoles.com/assets/ck-icon-1024.png",
-    "sameAs": [
-      "https://x.com/RealRealEyes",
-      "https://github.com/papjamzzz"
-    ]
-  }
+  {"@context":"https://schema.org","@type":"Organization","name":"Creative Konsoles","url":"https://creativekonsoles.com","logo":"https://creativekonsoles.com/assets/ck-icon-1024.png"}
   </script>
   <link rel="icon" type="image/png" href="assets/ck-icon-1024.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,429 +25,197 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --black:   #111111;
-      --white:   #ffffff;
-      --rule:    #111111;
-      --gain:    #CC1800;
-      --5i:      #0040FF;
-      --sf:      #C49A00;
-      --memoir:  #7700CC;
-      --custom:  #111111;
-      --grid:    1px solid #111111;
+      --black:  #111111;
+      --white:  #ffffff;
+      --gain:   #CC1800;
+      --5i:     #0040FF;
+      --sf:     #C49A00;
+      --memoir: #7700CC;
+      --grid:   1px solid #111111;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--black);
-      overflow-x: hidden;
-    }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
 
     /* ── HEADER ── */
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 64px;
-      border-bottom: var(--grid);
-      position: sticky;
-      top: 0;
-      background: var(--white);
-      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px; border-bottom: var(--grid);
+      position: sticky; top: 0; background: var(--white); z-index: 100;
     }
-
-    .wordmark {
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--black);
-      text-decoration: none;
-    }
-
-    nav {
-      display: flex;
-      gap: 0;
-    }
-
+    .wordmark { font-size: 13px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    nav { display: flex; }
     nav a {
-      display: block;
-      padding: 0 20px;
-      height: 64px;
-      line-height: 64px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--black);
-      text-decoration: none;
-      border-left: var(--grid);
-      transition: background .12s;
+      display: block; padding: 0 20px; height: 64px; line-height: 64px;
+      font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--black); text-decoration: none; border-left: var(--grid); transition: background .12s;
     }
     nav a:hover { background: var(--black); color: var(--white); }
 
     /* ── HERO ── */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 64px);
-      border-bottom: var(--grid);
-    }
-
+    .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 64px); border-bottom: var(--grid); }
     .hero-left {
-      padding: 80px 60px;
-      border-right: var(--grid);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 32px;
+      padding: 80px 60px; border-right: var(--grid);
+      display: flex; flex-direction: column; justify-content: center; gap: 32px;
     }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--black);
-      opacity: .45;
-    }
-
-    .hero-headline {
-      font-size: clamp(44px, 5.5vw, 80px);
-      font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -.02em;
-      color: var(--black);
-    }
-
-    .hero-headline em {
-      font-style: normal;
-      color: var(--gain);
-    }
-
-    .hero-sub {
-      font-size: 17px;
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--black);
-      opacity: .6;
-      max-width: 420px;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 0;
-      align-items: center;
-      margin-top: 8px;
-    }
-
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; opacity: .45; }
+    .hero-headline { font-size: clamp(44px, 5.5vw, 80px); font-weight: 900; line-height: 1.0; letter-spacing: -.02em; }
+    .hero-headline em { font-style: normal; color: var(--gain); }
+    .hero-sub { font-size: 17px; line-height: 1.6; opacity: .6; max-width: 420px; }
+    .hero-cta { display: flex; margin-top: 8px; }
     .btn-primary {
-      display: inline-block;
-      height: 52px;
-      padding: 0 36px;
-      background: var(--black);
-      color: var(--white);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      text-decoration: none;
-      line-height: 52px;
-      border: 2px solid var(--black);
-      transition: all .12s;
+      display: inline-block; height: 52px; padding: 0 36px;
+      background: var(--black); color: var(--white);
+      font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+      text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s;
     }
     .btn-primary:hover { background: var(--white); color: var(--black); }
-
     .btn-secondary {
-      display: inline-block;
-      height: 52px;
-      padding: 0 36px;
-      background: transparent;
-      color: var(--black);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      text-decoration: none;
-      line-height: 52px;
-      border: 2px solid var(--black);
-      border-left: none;
-      transition: all .12s;
+      display: inline-block; height: 52px; padding: 0 36px;
+      background: transparent; color: var(--black);
+      font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+      text-decoration: none; line-height: 52px; border: 2px solid var(--black); border-left: none; transition: all .12s;
     }
     .btn-secondary:hover { background: var(--black); color: var(--white); }
 
-    /* ── HERO RIGHT — DE STIJL COMPOSITION ── */
+    /* ── HERO RIGHT — DE STIJL SLIDING DOORS ── */
     .hero-right {
       display: grid;
       grid-template-columns: 3fr 1fr 2fr;
       grid-template-rows: 2fr 1fr 2fr;
     }
 
+    /* Base block */
     .block { border-right: var(--grid); border-bottom: var(--grid); }
-    .block:last-child { border-right: none; }
-    .block-gain    { background: var(--gain);   grid-column: 1; grid-row: 1; }
-    .block-white1  { background: var(--white);  grid-column: 2; grid-row: 1; }
-    .block-5i      { background: var(--5i);     grid-column: 3; grid-row: 1 / 3; border-right: none; }
-    .block-sf      { background: var(--sf);     grid-column: 1; grid-row: 2; }
-    .block-white2  { background: var(--white);  grid-column: 2; grid-row: 2; }
-    .block-white3  { background: var(--white);  grid-column: 1; grid-row: 3; border-bottom: none; }
-    .block-memoir  { background: var(--memoir); grid-column: 2 / 4; grid-row: 3; border-right: none; border-bottom: none; }
+    .block-white1 { background: var(--white); grid-column: 2; grid-row: 1; }
+    .block-white2 { background: var(--white); grid-column: 2; grid-row: 2; }
+    .block-white3 { background: var(--white); grid-column: 1; grid-row: 3; border-bottom: none; }
+
+    /* Interactive blocks — grid positions */
+    .iblock { border-right: var(--grid); border-bottom: var(--grid); position: relative; overflow: hidden; cursor: pointer; }
+    .iblock-gain   { grid-column: 1;   grid-row: 1; }
+    .iblock-5i     { grid-column: 3;   grid-row: 1 / 3; border-right: none; }
+    .iblock-sf     { grid-column: 1;   grid-row: 2; }
+    .iblock-memoir { grid-column: 2/4; grid-row: 3; border-right: none; border-bottom: none; }
+
+    /* Door panel — the colored face */
+    .door-panel {
+      position: absolute; inset: 0; z-index: 2;
+      will-change: transform;
+      /* weighted door: slow start (inertia), builds momentum, friction stop */
+      transition: transform 0.92s cubic-bezier(0.4, 0.0, 0.12, 1.0);
+    }
+    /* Hover: subtle label fades in */
+    .door-panel::after {
+      content: attr(data-label);
+      position: absolute; bottom: 12px; left: 14px;
+      font-size: 9px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      transition: color .2s;
+    }
+    .iblock:hover .door-panel::after { color: rgba(255,255,255,0.7); }
+
+    /* Open states — each block slides a different direction (centrifugal) */
+    .iblock-gain.open   .door-panel { transform: translateY(-102%); }
+    .iblock-5i.open     .door-panel { transform: translateX(102%);  }
+    .iblock-sf.open     .door-panel { transform: translateY(102%);  }
+    .iblock-memoir.open .door-panel { transform: translateX(-102%); }
+
+    /* Closing gets slightly different feel (heavier return) */
+    .iblock-gain   .door-panel { transition-duration: 0.92s; }
+    .iblock-5i     .door-panel { transition-duration: 1.05s; }
+    .iblock-sf     .door-panel { transition-duration: 0.80s; }
+    .iblock-memoir .door-panel { transition-duration: 1.10s; }
+
+    /* Content hidden behind the door */
+    .door-content {
+      position: absolute; inset: 0; z-index: 1;
+      background: #060606;
+    }
+    .door-content canvas {
+      display: block; width: 100%; height: 100%;
+    }
+
+    /* Close button appears inside when open */
+    .door-close {
+      position: absolute; top: 10px; right: 12px; z-index: 3;
+      font-size: 9px; font-weight: 800; letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+      cursor: pointer; display: none;
+      transition: color .15s;
+    }
+    .iblock.open .door-close { display: block; }
+    .door-close:hover { color: rgba(255,255,255,0.8); }
 
     /* ── SECTION LABEL ── */
     .section-label {
-      padding: 0 40px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      border-bottom: var(--grid);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-      color: var(--black);
-      opacity: .4;
+      padding: 0 40px; height: 48px; display: flex; align-items: center;
+      border-bottom: var(--grid); font-size: 10px; font-weight: 700;
+      letter-spacing: .24em; text-transform: uppercase; opacity: .4;
     }
 
     /* ── PRODUCTS GRID ── */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-bottom: var(--grid);
-    }
-
+    .products { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: var(--grid); }
     .product-card {
-      border-right: var(--grid);
-      text-decoration: none;
-      color: var(--black);
-      display: flex;
-      flex-direction: column;
-      transition: background .12s;
-      position: relative;
-      overflow: hidden;
+      border-right: var(--grid); text-decoration: none; color: var(--black);
+      display: flex; flex-direction: column; transition: background .12s;
+      position: relative; overflow: hidden;
     }
     .product-card:last-child { border-right: none; }
     .product-card:nth-child(3) { border-right: var(--grid); }
     .product-card:nth-child(4) { border-top: var(--grid); }
     .product-card:nth-child(5) { border-top: var(--grid); }
     .product-card:nth-child(6) { border-top: var(--grid); border-right: none; }
-
     .product-card:hover { background: #f5f5f5; }
     .product-card:hover .card-arrow { opacity: 1; transform: translate(0,0); }
+    .card-accent { height: 6px; width: 100%; }
+    .card-body { padding: 36px 36px 44px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
+    .card-name { font-size: 26px; font-weight: 900; letter-spacing: -.01em; line-height: 1; }
+    .card-type { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; }
+    .card-desc { font-size: 15px; line-height: 1.55; opacity: .7; margin-top: auto; }
+    .card-link { font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; opacity: .4; margin-top: 24px; display: flex; align-items: center; gap: 8px; }
+    .card-arrow { opacity: 0; transform: translate(-4px,0); transition: all .15s; }
 
-    .card-accent {
-      height: 6px;
-      width: 100%;
-    }
-
-    .card-body {
-      padding: 36px 36px 44px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .card-name {
-      font-size: 26px;
-      font-weight: 900;
-      letter-spacing: -.01em;
-      line-height: 1;
-    }
-
-    .card-type {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      opacity: .4;
-    }
-
-    .card-desc {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.55;
-      opacity: .7;
-      margin-top: auto;
-    }
-
-    .card-link {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      opacity: .4;
-      margin-top: 24px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-arrow {
-      opacity: 0;
-      transform: translate(-4px, 0);
-      transition: all .15s;
-    }
-
-    /* ── CUSTOM BUILDS STRIP ── */
-    .builds-strip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: var(--grid);
-      min-height: 280px;
-    }
-
-    .builds-left {
-      background: var(--black);
-      color: var(--white);
-      padding: 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 20px;
-      border-right: var(--grid);
-    }
-
-    .builds-eyebrow {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      opacity: .5;
-    }
-
-    .builds-headline {
-      font-size: clamp(28px, 3vw, 44px);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -.02em;
-    }
-
-    .builds-sub {
-      font-size: 15px;
-      line-height: 1.6;
-      opacity: .6;
-      max-width: 360px;
-    }
-
-    .btn-white {
-      display: inline-block;
-      margin-top: 8px;
-      height: 48px;
-      padding: 0 32px;
-      background: var(--white);
-      color: var(--black);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      text-decoration: none;
-      line-height: 48px;
-      border: 2px solid var(--white);
-      align-self: flex-start;
-      transition: all .12s;
-    }
+    /* ── BUILDS STRIP ── */
+    .builds-strip { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--grid); min-height: 280px; }
+    .builds-left { background: var(--black); color: var(--white); padding: 60px; display: flex; flex-direction: column; justify-content: center; gap: 20px; border-right: var(--grid); }
+    .builds-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; opacity: .5; }
+    .builds-headline { font-size: clamp(28px, 3vw, 44px); font-weight: 900; line-height: 1.05; letter-spacing: -.02em; }
+    .builds-sub { font-size: 15px; line-height: 1.6; opacity: .6; max-width: 360px; }
+    .btn-white { display: inline-block; margin-top: 8px; height: 48px; padding: 0 32px; background: var(--white); color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 48px; border: 2px solid var(--white); align-self: flex-start; transition: all .12s; }
     .btn-white:hover { background: transparent; color: var(--white); }
-
-    .builds-right {
-      padding: 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0;
-    }
-
-    .builds-item {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 20px 0;
-      border-bottom: var(--grid);
-      font-size: 14px;
-      font-weight: 500;
-    }
+    .builds-right { padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+    .builds-item { display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: var(--grid); font-size: 14px; font-weight: 500; }
     .builds-item:last-child { border-bottom: none; }
-
-    .builds-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--black);
-      flex-shrink: 0;
-    }
+    .builds-dot { width: 8px; height: 8px; background: var(--black); flex-shrink: 0; }
 
     /* ── FOOTER ── */
-    footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 60px;
-      border-top: var(--grid);
-    }
-
-    .footer-left {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      opacity: .35;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 0;
-    }
-
-    .footer-links a {
-      display: block;
-      padding: 0 20px;
-      height: 60px;
-      line-height: 60px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--black);
-      text-decoration: none;
-      border-left: var(--grid);
-      opacity: .4;
-      transition: opacity .12s;
-    }
+    footer { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-top: var(--grid); }
+    .footer-left { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .35; }
+    .footer-links { display: flex; }
+    .footer-links a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); opacity: .4; transition: opacity .12s; }
     .footer-links a:hover { opacity: 1; }
 
     /* ── MOBILE ── */
     @media (max-width: 900px) {
       header { padding: 0 20px; }
       nav a { padding: 0 14px; font-size: 10px; }
-
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left { padding: 60px 28px; border-right: none; border-bottom: var(--grid); }
-      .hero-right {
-        height: 50vw;
-        grid-template-columns: 3fr 1fr 2fr;
-        grid-template-rows: 2fr 1fr 2fr;
-      }
-
+      .hero-right { height: 50vw; }
       .products { grid-template-columns: 1fr 1fr; }
       .product-card:nth-child(2) { border-right: none; }
       .product-card:nth-child(3) { border-top: var(--grid); border-right: var(--grid); }
       .product-card:nth-child(4) { border-top: var(--grid); border-right: none; }
       .product-card:nth-child(5) { border-top: var(--grid); border-right: var(--grid); }
       .product-card:nth-child(6) { border-top: var(--grid); }
-
       .builds-strip { grid-template-columns: 1fr; }
       .builds-left { border-right: none; border-bottom: var(--grid); padding: 40px 28px; }
       .builds-right { padding: 40px 28px; }
-
       footer { flex-direction: column; height: auto; padding: 20px; gap: 12px; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
       .footer-links a { border-left: none; border-top: var(--grid); }
     }
-
     @media (max-width: 600px) {
       .hero-headline { font-size: 38px; }
       .products { grid-template-columns: 1fr; }
@@ -471,143 +227,548 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a class="wordmark" href="/">Creative Konsoles</a>
-    <nav>
-      <a href="#products">Products</a>
-      <a href="https://build.creativekonsoles.com" target="_blank">Build</a>
-      <a href="mailto:support@creativekonsoles.com">Contact</a>
-    </nav>
-  </header>
+<!-- HEADER -->
+<header>
+  <a class="wordmark" href="/">Creative Konsoles</a>
+  <nav>
+    <a href="#products">Products</a>
+    <a href="https://build.creativekonsoles.com" target="_blank">Build</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+  </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-eyebrow">Precision software studio</div>
-      <h1 class="hero-headline">Tools that<br>think <em>with</em> you.</h1>
-      <p class="hero-sub">We build sharp, purposeful software for AI, audio, and data. No bloat. No agencies. Just tools that work.</p>
-      <div class="hero-cta">
-        <a class="btn-primary" href="#products">See the tools</a>
-        <a class="btn-secondary" href="https://build.creativekonsoles.com" target="_blank">Custom build</a>
-      </div>
-    </div>
-    <div class="hero-right" aria-hidden="true">
-      <div class="block block-gain"></div>
-      <div class="block block-white1"></div>
-      <div class="block block-5i"></div>
-      <div class="block block-sf"></div>
-      <div class="block block-white2"></div>
-      <div class="block block-white3"></div>
-      <div class="block block-memoir"></div>
-    </div>
-  </section>
-
-  <!-- PRODUCTS -->
-  <div class="section-label" id="products">Products</div>
-  <div class="products">
-
-    <a class="product-card" href="https://gain.creativekonsoles.com" target="_blank">
-      <div class="card-accent" style="background:var(--gain)"></div>
-      <div class="card-body">
-        <div>
-          <div class="card-name">Gain</div>
-          <div class="card-type">AI Behavioral Mixer</div>
-        </div>
-        <p class="card-desc">Dial in how AI thinks. Eight behavioral parameters — effort, confidence, verbosity, boldness — tuned in real time.</p>
-        <div class="card-link">gain.creativekonsoles.com <span class="card-arrow">→</span></div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://web-production-94a13.up.railway.app" target="_blank">
-      <div class="card-accent" style="background:var(--5i)"></div>
-      <div class="card-body">
-        <div>
-          <div class="card-name">5i</div>
-          <div class="card-type">Parallel AI Synthesis</div>
-        </div>
-        <p class="card-desc">One prompt. Five models simultaneously. GPT-4o, Claude, Gemini, Grok, Mistral — parallel response plus unified synthesis verdict.</p>
-        <div class="card-link">5i synthesis engine <span class="card-arrow">→</span></div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://stream.creativekonsoles.com" target="_blank">
-      <div class="card-accent" style="background:var(--sf)"></div>
-      <div class="card-body">
-        <div>
-          <div class="card-name">StreamFader</div>
-          <div class="card-type">Live Mix Control</div>
-        </div>
-        <p class="card-desc">Real-time streaming mix control. Faders, levels, and state — managed from a single clean interface.</p>
-        <div class="card-link">stream.creativekonsoles.com <span class="card-arrow">→</span></div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://memoir.creativekonsoles.com" target="_blank">
-      <div class="card-accent" style="background:var(--memoir)"></div>
-      <div class="card-body">
-        <div>
-          <div class="card-name">Memoir</div>
-          <div class="card-type">Voice Memoir Engine</div>
-        </div>
-        <p class="card-desc">Speak your story. Memoir transcribes, structures, and preserves voice-recorded memories into a searchable personal archive.</p>
-        <div class="card-link">memoir.creativekonsoles.com <span class="card-arrow">→</span></div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://dawdoctor.creativekonsoles.com" target="_blank">
-      <div class="card-accent" style="background:#1a1a1a"></div>
-      <div class="card-body">
-        <div>
-          <div class="card-name">DAW Doctor</div>
-          <div class="card-type">Producer Diagnostic</div>
-        </div>
-        <p class="card-desc">Diagnose your DAW. Plugin conflicts, CPU spikes, routing problems — analyzed and explained in plain language.</p>
-        <div class="card-link">dawdoctor.creativekonsoles.com <span class="card-arrow">→</span></div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://build.creativekonsoles.com" target="_blank">
-      <div class="card-accent" style="background:#555"></div>
-      <div class="card-body">
-        <div>
-          <div class="card-name">Build</div>
-          <div class="card-type">Custom Software</div>
-        </div>
-        <p class="card-desc">Need something built to spec? One builder, no agency markup. Tools, dashboards, automations — scoped and shipped fast.</p>
-        <div class="card-link">build.creativekonsoles.com <span class="card-arrow">→</span></div>
-      </div>
-    </a>
-
-  </div>
-
-  <!-- CUSTOM BUILDS -->
-  <div class="builds-strip">
-    <div class="builds-left">
-      <div class="builds-eyebrow">Custom work</div>
-      <div class="builds-headline">Built to spec.<br>No agency markup.</div>
-      <p class="builds-sub">Tell us what you need. We scope it, price it, and ship it. Dashboards, automations, AI integrations — any stack.</p>
-      <a class="btn-white" href="https://build.creativekonsoles.com" target="_blank">Start a project</a>
-    </div>
-    <div class="builds-right">
-      <div class="builds-item"><div class="builds-dot"></div>Internal tools and dashboards</div>
-      <div class="builds-item"><div class="builds-dot"></div>AI integrations and automations</div>
-      <div class="builds-item"><div class="builds-dot"></div>Data pipelines and monitors</div>
-      <div class="builds-item"><div class="builds-dot"></div>Audio and streaming utilities</div>
-      <div class="builds-item"><div class="builds-dot"></div>Scope to ship in days, not months</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Precision software studio</div>
+    <h1 class="hero-headline">Tools that<br>think <em>with</em> you.</h1>
+    <p class="hero-sub">We build sharp, purposeful software for AI, audio, and data. No bloat. No agencies. Just tools that work.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#products">See the tools</a>
+      <a class="btn-secondary" href="https://build.creativekonsoles.com" target="_blank">Custom build</a>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-left">© 2026 Creative Konsoles</div>
-    <div class="footer-links">
-      <a href="https://x.com/RealRealEyes" target="_blank">X</a>
-      <a href="https://github.com/papjamzzz" target="_blank">GitHub</a>
-      <a href="mailto:support@creativekonsoles.com">Contact</a>
-      <a href="/terms.html">Terms</a>
-    </div>
-  </footer>
+  <div class="hero-right" aria-label="Interactive canvas demos — click each panel">
 
+    <!-- BLOOD — red / gain block — slides UP -->
+    <div class="iblock iblock-gain" id="ib-blood" onclick="toggleBlock('blood')">
+      <div class="door-panel" style="background:var(--gain)" data-label="Blood"></div>
+      <div class="door-content"><canvas id="cv-blood"></canvas></div>
+      <span class="door-close" onclick="event.stopPropagation();closeBlock('blood')">✕ close</span>
+    </div>
+
+    <div class="block block-white1"></div>
+
+    <!-- BIOCANVAS — blue / 5i block — slides RIGHT -->
+    <div class="iblock iblock-5i" id="ib-bio" onclick="toggleBlock('bio')">
+      <div class="door-panel" style="background:var(--5i)" data-label="Biocanvas"></div>
+      <div class="door-content"><canvas id="cv-bio"></canvas></div>
+      <span class="door-close" onclick="event.stopPropagation();closeBlock('bio')">✕ close</span>
+    </div>
+
+    <!-- ROTARY — yellow / sf block — slides DOWN -->
+    <div class="iblock iblock-sf" id="ib-rot" onclick="toggleBlock('rot')">
+      <div class="door-panel" style="background:var(--sf)" data-label="Rotary"></div>
+      <div class="door-content"><canvas id="cv-rot"></canvas></div>
+      <span class="door-close" onclick="event.stopPropagation();closeBlock('rot')">✕ close</span>
+    </div>
+
+    <div class="block block-white2"></div>
+    <div class="block block-white3"></div>
+
+    <!-- SWARM — purple / memoir block — slides LEFT -->
+    <div class="iblock iblock-memoir" id="ib-swarm" onclick="toggleBlock('swarm')">
+      <div class="door-panel" style="background:var(--memoir)" data-label="Swarm"></div>
+      <div class="door-content"><canvas id="cv-swarm"></canvas></div>
+      <span class="door-close" onclick="event.stopPropagation();closeBlock('swarm')">✕ close</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<div class="section-label" id="products">Products</div>
+<div class="products">
+  <a class="product-card" href="https://gain.creativekonsoles.com" target="_blank">
+    <div class="card-accent" style="background:var(--gain)"></div>
+    <div class="card-body">
+      <div><div class="card-name">Gain</div><div class="card-type">AI Behavioral Mixer</div></div>
+      <p class="card-desc">Dial in how AI thinks. Eight behavioral parameters — effort, confidence, verbosity, boldness — tuned in real time.</p>
+      <div class="card-link">gain.creativekonsoles.com <span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="product-card" href="https://web-production-94a13.up.railway.app" target="_blank">
+    <div class="card-accent" style="background:var(--5i)"></div>
+    <div class="card-body">
+      <div><div class="card-name">5i</div><div class="card-type">Parallel AI Synthesis</div></div>
+      <p class="card-desc">One prompt. Five models simultaneously. GPT-4o, Claude, Gemini, Grok, Mistral — parallel response plus unified synthesis verdict.</p>
+      <div class="card-link">5i synthesis engine <span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="product-card" href="https://stream.creativekonsoles.com" target="_blank">
+    <div class="card-accent" style="background:var(--sf)"></div>
+    <div class="card-body">
+      <div><div class="card-name">StreamFader</div><div class="card-type">Live Mix Control</div></div>
+      <p class="card-desc">Real-time streaming mix control. Faders, levels, and state — managed from a single clean interface.</p>
+      <div class="card-link">stream.creativekonsoles.com <span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="product-card" href="https://memoir.creativekonsoles.com" target="_blank">
+    <div class="card-accent" style="background:var(--memoir)"></div>
+    <div class="card-body">
+      <div><div class="card-name">Memoir</div><div class="card-type">Voice Memoir Engine</div></div>
+      <p class="card-desc">Speak your story. Memoir transcribes, structures, and preserves voice-recorded memories into a searchable personal archive.</p>
+      <div class="card-link">memoir.creativekonsoles.com <span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="product-card" href="https://dawdoctor.creativekonsoles.com" target="_blank">
+    <div class="card-accent" style="background:#1a1a1a"></div>
+    <div class="card-body">
+      <div><div class="card-name">DAW Doctor</div><div class="card-type">Producer Diagnostic</div></div>
+      <p class="card-desc">Diagnose your DAW. Plugin conflicts, CPU spikes, routing problems — analyzed and explained in plain language.</p>
+      <div class="card-link">dawdoctor.creativekonsoles.com <span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="product-card" href="https://build.creativekonsoles.com" target="_blank">
+    <div class="card-accent" style="background:#555"></div>
+    <div class="card-body">
+      <div><div class="card-name">Build</div><div class="card-type">Custom Software</div></div>
+      <p class="card-desc">Need something built to spec? One builder, no agency markup. Tools, dashboards, automations — scoped and shipped fast.</p>
+      <div class="card-link">build.creativekonsoles.com <span class="card-arrow">→</span></div>
+    </div>
+  </a>
+</div>
+
+<!-- BUILDS STRIP -->
+<div class="builds-strip">
+  <div class="builds-left">
+    <div class="builds-eyebrow">Custom work</div>
+    <div class="builds-headline">Built to spec.<br>No agency markup.</div>
+    <p class="builds-sub">Tell us what you need. We scope it, price it, and ship it. Dashboards, automations, AI integrations — any stack.</p>
+    <a class="btn-white" href="https://build.creativekonsoles.com" target="_blank">Start a project</a>
+  </div>
+  <div class="builds-right">
+    <div class="builds-item"><div class="builds-dot"></div>Internal tools and dashboards</div>
+    <div class="builds-item"><div class="builds-dot"></div>AI integrations and automations</div>
+    <div class="builds-item"><div class="builds-dot"></div>Data pipelines and monitors</div>
+    <div class="builds-item"><div class="builds-dot"></div>Audio and streaming utilities</div>
+    <div class="builds-item"><div class="builds-dot"></div>Scope to ship in days, not months</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Creative Konsoles</div>
+  <div class="footer-links">
+    <a href="https://x.com/RealRealEyes" target="_blank">X</a>
+    <a href="https://github.com/papjamzzz" target="_blank">GitHub</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+<script>
+// ── DOOR ENGINE ──────────────────────────────────────────────
+const blocks = {
+  blood: { el: 'ib-blood', cv: 'cv-blood', init: initBlood,  instance: null },
+  bio:   { el: 'ib-bio',   cv: 'cv-bio',   init: initBio,    instance: null },
+  rot:   { el: 'ib-rot',   cv: 'cv-rot',   init: initRotary, instance: null },
+  swarm: { el: 'ib-swarm', cv: 'cv-swarm', init: initSwarm,  instance: null },
+};
+
+function toggleBlock(key) {
+  const b = blocks[key];
+  const el = document.getElementById(b.el);
+  const isOpen = el.classList.contains('open');
+  if (isOpen) { closeBlock(key); return; }
+  openBlock(key);
+}
+
+function openBlock(key) {
+  const b = blocks[key];
+  const el = document.getElementById(b.el);
+  const cv = document.getElementById(b.cv);
+  el.classList.add('open');
+  if (!b.instance) {
+    // Size canvas to container
+    const rect = cv.parentElement.getBoundingClientRect();
+    cv.width  = Math.round(rect.width)  || 300;
+    cv.height = Math.round(rect.height) || 300;
+    b.instance = b.init(cv);
+  }
+  b.instance.start();
+}
+
+function closeBlock(key) {
+  const b = blocks[key];
+  const el = document.getElementById(b.el);
+  el.classList.remove('open');
+  if (b.instance) b.instance.stop();
+}
+
+// ── BLOOD ────────────────────────────────────────────────────
+// Microscopic blood cells drifting on a dark field
+function initBlood(cv) {
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  let raf, running = false;
+
+  const cells = Array.from({length: 38}, () => ({
+    x:  Math.random() * W,
+    y:  Math.random() * H,
+    r:  7 + Math.random() * 7,
+    vx: 0.25 + Math.random() * 0.35,
+    vy: (Math.random() - 0.5) * 0.18,
+    t:  Math.random() * Math.PI * 2,
+    scatter: 0,
+  }));
+
+  function drawCell(x, y, r) {
+    // Outer rim
+    const g = ctx.createRadialGradient(x, y, r * 0.28, x, y, r);
+    g.addColorStop(0,   'rgba(120, 8, 8, 0.35)');
+    g.addColorStop(0.55,'rgba(195, 22, 22, 0.72)');
+    g.addColorStop(1,   'rgba(155, 8, 8, 0.9)');
+    ctx.beginPath();
+    ctx.ellipse(x, y, r, r * 0.72, 0, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+    // Biconcave depression
+    const d = ctx.createRadialGradient(x, y, 0, x, y, r * 0.36);
+    d.addColorStop(0,   'rgba(8, 0, 0, 0.55)');
+    d.addColorStop(1,   'rgba(8, 0, 0, 0)');
+    ctx.beginPath();
+    ctx.ellipse(x, y, r * 0.38, r * 0.27, 0, 0, Math.PI * 2);
+    ctx.fillStyle = d;
+    ctx.fill();
+  }
+
+  function tick() {
+    ctx.fillStyle = 'rgba(4, 0, 0, 0.25)';
+    ctx.fillRect(0, 0, W, H);
+
+    cells.forEach(c => {
+      c.t += 0.012;
+      c.x += c.vx + (c.scatter > 0.05 ? Math.cos(c.t * 1.7) * c.scatter : 0);
+      c.y += c.vy + Math.sin(c.t) * 0.12 + (c.scatter > 0.05 ? Math.sin(c.t * 2.1) * c.scatter : 0);
+      c.scatter *= 0.93;
+      if (c.x > W + c.r) { c.x = -c.r; c.y = Math.random() * H; }
+      if (c.x < -c.r)    { c.x = W + c.r; }
+      if (c.y > H + c.r) c.y = -c.r;
+      if (c.y < -c.r)    c.y = H + c.r;
+      drawCell(c.x, c.y, c.r);
+    });
+    if (running) raf = requestAnimationFrame(tick);
+  }
+
+  cv.addEventListener('click', () => {
+    cells.forEach(c => {
+      c.scatter = 2.5 + Math.random() * 2;
+      c.vx = (Math.random() - 0.35) * 1.8;
+      c.vy = (Math.random() - 0.5)  * 1.6;
+    });
+    setTimeout(() => cells.forEach(c => {
+      c.vx = 0.25 + Math.random() * 0.35;
+      c.vy = (Math.random() - 0.5) * 0.18;
+    }), 900);
+  });
+
+  return {
+    start() { running = true; tick(); },
+    stop()  { running = false; if (raf) cancelAnimationFrame(raf); },
+  };
+}
+
+// ── BIOCANVAS ────────────────────────────────────────────────
+// Five glowing nodes (models) connected by live signal lines
+function initBio(cv) {
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  let raf, running = false;
+  const cx = W / 2, cy = H / 2;
+
+  // 5 nodes arranged in pentagon
+  const nodes = Array.from({length: 5}, (_, i) => {
+    const a = (i / 5) * Math.PI * 2 - Math.PI / 2;
+    const dist = Math.min(W, H) * 0.32;
+    return {
+      x: cx + Math.cos(a) * dist,
+      y: cy + Math.sin(a) * dist,
+      r: 6 + Math.random() * 4,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.018 + Math.random() * 0.012,
+      active: false,
+      pulse: 0,
+    };
+  });
+
+  // Center synthesis node
+  const center = { x: cx, y: cy, r: 10, phase: 0, pulse: 0 };
+
+  // Signal packets traveling along edges
+  const signals = [];
+  function spawnSignal() {
+    const from = Math.floor(Math.random() * 5);
+    const to   = Math.random() < 0.5 ? 5 : Math.floor(Math.random() * 5);
+    signals.push({ from, to, t: 0, speed: 0.008 + Math.random() * 0.006 });
+  }
+  setInterval(spawnSignal, 400);
+
+  function tick() {
+    ctx.fillStyle = 'rgba(0, 4, 16, 0.28)';
+    ctx.fillRect(0, 0, W, H);
+
+    // Connection lines
+    nodes.forEach((n, i) => {
+      // To center
+      ctx.beginPath();
+      ctx.moveTo(n.x, n.y);
+      ctx.lineTo(cx, cy);
+      ctx.strokeStyle = 'rgba(0, 80, 220, 0.12)';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+      // To adjacent
+      const j = (i + 1) % 5;
+      ctx.beginPath();
+      ctx.moveTo(n.x, n.y);
+      ctx.lineTo(nodes[j].x, nodes[j].y);
+      ctx.strokeStyle = 'rgba(0, 100, 255, 0.08)';
+      ctx.stroke();
+    });
+
+    // Signal packets
+    for (let i = signals.length - 1; i >= 0; i--) {
+      const s = signals[i];
+      s.t += s.speed;
+      const src = s.from < 5 ? nodes[s.from] : center;
+      const dst = s.to   < 5 ? nodes[s.to]   : center;
+      const px = src.x + (dst.x - src.x) * s.t;
+      const py = src.y + (dst.y - src.y) * s.t;
+      ctx.beginPath();
+      ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(80, 160, 255, ${0.9 - s.t * 0.6})`;
+      ctx.fill();
+      if (s.t >= 1) {
+        if (s.to < 5) nodes[s.to].pulse = 1;
+        else center.pulse = 1;
+        signals.splice(i, 1);
+      }
+    }
+
+    // Outer nodes
+    nodes.forEach(n => {
+      n.phase += n.speed;
+      n.pulse  = Math.max(0, n.pulse - 0.04);
+      const glow = n.r + 14 * n.pulse;
+      const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glow + 6);
+      g.addColorStop(0,   `rgba(120, 190, 255, ${0.85 + 0.15 * Math.sin(n.phase)})`);
+      g.addColorStop(0.4, `rgba(40, 100, 230, 0.6)`);
+      g.addColorStop(1,   'rgba(0, 40, 180, 0)');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, glow + 6, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180, 220, 255, ${0.7 + 0.3 * Math.sin(n.phase)})`;
+      ctx.fill();
+    });
+
+    // Center synthesis node
+    center.phase = (center.phase + 0.022) % (Math.PI * 2);
+    center.pulse  = Math.max(0, center.pulse - 0.03);
+    const cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, 22 + 12 * center.pulse);
+    cg.addColorStop(0,   'rgba(200, 230, 255, 0.95)');
+    cg.addColorStop(0.5, 'rgba(60, 140, 255, 0.5)');
+    cg.addColorStop(1,   'rgba(0, 60, 200, 0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, 22 + 12 * center.pulse, 0, Math.PI * 2);
+    ctx.fillStyle = cg;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(cx, cy, center.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(240, 248, 255, 0.95)';
+    ctx.fill();
+
+    if (running) raf = requestAnimationFrame(tick);
+  }
+
+  cv.addEventListener('click', e => {
+    const rect = cv.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (W / rect.width);
+    const my = (e.clientY - rect.top)  * (H / rect.height);
+    nodes.forEach(n => {
+      if (Math.hypot(n.x - mx, n.y - my) < 24) { n.pulse = 1.5; center.pulse = 0.8; }
+    });
+  });
+
+  return {
+    start() { running = true; tick(); },
+    stop()  { running = false; if (raf) cancelAnimationFrame(raf); },
+  };
+}
+
+// ── ROTARY ───────────────────────────────────────────────────
+// Grail-style concentric rings, each at different speed/direction
+function initRotary(cv) {
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const cx = W / 2, cy = H / 2;
+  let raf, running = false;
+
+  const rings = [
+    { r: Math.min(W,H)*0.38, w: 3,   speed:  0.008,  angle: 0,    ticks: 60, color: 'rgba(220,165,0,0.9)'  },
+    { r: Math.min(W,H)*0.28, w: 5,   speed: -0.013,  angle: 0.8,  ticks: 40, color: 'rgba(200,140,0,0.8)'  },
+    { r: Math.min(W,H)*0.18, w: 4,   speed:  0.022,  angle: 1.6,  ticks: 24, color: 'rgba(255,200,50,0.85)' },
+    { r: Math.min(W,H)*0.09, w: 7,   speed: -0.04,   angle: 0,    ticks: 12, color: 'rgba(255,220,80,0.9)'  },
+  ];
+  let boost = 0;
+
+  function drawRing(ring) {
+    const spd = ring.speed * (1 + boost);
+    ring.angle += spd;
+
+    // Arc
+    ctx.beginPath();
+    ctx.arc(cx, cy, ring.r, ring.angle, ring.angle + Math.PI * 1.6);
+    ctx.strokeStyle = ring.color;
+    ctx.lineWidth = ring.w;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Tick marks
+    for (let i = 0; i < ring.ticks; i++) {
+      const a = ring.angle + (i / ring.ticks) * Math.PI * 2;
+      const len = (i % (ring.ticks / 4) === 0) ? 10 : 4;
+      const inner = ring.r - len / 2;
+      const outer = ring.r + len / 2;
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(a) * inner, cy + Math.sin(a) * inner);
+      ctx.lineTo(cx + Math.cos(a) * outer, cy + Math.sin(a) * outer);
+      ctx.strokeStyle = ring.color;
+      ctx.lineWidth = i % (ring.ticks / 4) === 0 ? 2 : 1;
+      ctx.lineCap = 'butt';
+      ctx.stroke();
+    }
+  }
+
+  // Center dot
+  function drawCenter() {
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 18);
+    g.addColorStop(0,   'rgba(255, 215, 60, 1)');
+    g.addColorStop(0.5, 'rgba(200, 140, 0, 0.6)');
+    g.addColorStop(1,   'rgba(180, 100, 0, 0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,230,80,0.95)';
+    ctx.fill();
+  }
+
+  function tick() {
+    ctx.fillStyle = 'rgba(4, 3, 0, 0.35)';
+    ctx.fillRect(0, 0, W, H);
+    boost = Math.max(0, boost - 0.015);
+    rings.forEach(drawRing);
+    drawCenter();
+    if (running) raf = requestAnimationFrame(tick);
+  }
+
+  cv.addEventListener('click', () => { boost = 4; });
+
+  return {
+    start() { running = true; tick(); },
+    stop()  { running = false; if (raf) cancelAnimationFrame(raf); },
+  };
+}
+
+// ── SWARM ────────────────────────────────────────────────────
+// Meditative boid swarm — chases mouse, orbits center when idle
+function initSwarm(cv) {
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  let raf, running = false;
+  let mx = W / 2, my = H / 2;
+  let mouseIn = false;
+  let breathe = 0;
+
+  const pts = Array.from({length: 110}, () => ({
+    x:  W/2 + (Math.random()-0.5)*W*0.6,
+    y:  H/2 + (Math.random()-0.5)*H*0.6,
+    vx: (Math.random()-0.5)*1.2,
+    vy: (Math.random()-0.5)*1.2,
+    r:  0.8 + Math.random()*1.4,
+    phase: Math.random()*Math.PI*2,
+  }));
+
+  function tick() {
+    breathe += 0.018;
+    const tx = mouseIn ? mx : W/2 + Math.cos(breathe*0.4)*W*0.08;
+    const ty = mouseIn ? my : H/2 + Math.sin(breathe*0.3)*H*0.06;
+
+    ctx.fillStyle = 'rgba(4, 0, 10, 0.22)';
+    ctx.fillRect(0, 0, W, H);
+
+    pts.forEach(p => {
+      p.phase += 0.008;
+      const dx = tx - p.x, dy = ty - p.y;
+      const d  = Math.sqrt(dx*dx + dy*dy) + 1;
+
+      // Attraction (stronger when closer)
+      const f = Math.min(1.2, 60 / (d * d) + 0.004);
+      p.vx += dx/d * f;
+      p.vy += dy/d * f;
+
+      // Gentle swirl perpendicular force
+      p.vx += -dy/d * 0.012;
+      p.vy +=  dx/d * 0.012;
+
+      // Noise
+      p.vx += (Math.random()-0.5)*0.06;
+      p.vy += (Math.random()-0.5)*0.06;
+
+      // Friction
+      p.vx *= 0.93;
+      p.vy *= 0.93;
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Soft boundary
+      if (p.x < 0) { p.x = 0; p.vx *= -0.5; }
+      if (p.x > W) { p.x = W; p.vx *= -0.5; }
+      if (p.y < 0) { p.y = 0; p.vy *= -0.5; }
+      if (p.y > H) { p.y = H; p.vy *= -0.5; }
+
+      const speed  = Math.sqrt(p.vx*p.vx + p.vy*p.vy);
+      const bright = Math.min(1, 0.4 + speed * 0.15);
+      const hue    = 270 + Math.sin(p.phase)*25;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r + speed * 0.3, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${hue}, 70%, ${50 + speed*8}%, ${bright})`;
+      ctx.fill();
+    });
+
+    if (running) raf = requestAnimationFrame(tick);
+  }
+
+  cv.addEventListener('mousemove', e => {
+    const rect = cv.getBoundingClientRect();
+    mx = (e.clientX - rect.left) * (W / rect.width);
+    my = (e.clientY - rect.top)  * (H / rect.height);
+    mouseIn = true;
+  });
+  cv.addEventListener('mouseleave', () => { mouseIn = false; });
+
+  return {
+    start() { running = true; tick(); },
+    stop()  { running = false; if (raf) cancelAnimationFrame(raf); },
+  };
+}
+</script>
 </body>
 </html>

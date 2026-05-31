@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creative Konsoles — Precision Milled Software</title>
-  <meta name="description" content="Creative Konsoles makes precision software for music producers, traders, and builders. Every tool ships with purpose.">
-  <meta name="keywords" content="Creative Konsoles, AI tools, music producer software, trading tools, StreamFader, Memoir, 5i AI synthesis">
+  <title>Creative Konsoles — Tools that think with you.</title>
+  <meta name="description" content="Creative Konsoles builds precision software for AI, audio, and data. Every tool ships with purpose.">
+  <meta name="keywords" content="Creative Konsoles, AI tools, Gain, 5i, StreamFader, Memoir, custom software">
   <link rel="canonical" href="https://creativekonsoles.com">
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://creativekonsoles.com">
-  <meta property="og:title" content="Creative Konsoles — Precision Milled Software">
-  <meta property="og:description" content="Creative Konsoles makes precision software for music producers, traders, and builders. Every tool ships with purpose.">
+  <meta property="og:title" content="Creative Konsoles — Tools that think with you.">
+  <meta property="og:description" content="Precision software for AI, audio, and data.">
   <meta property="og:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Creative Konsoles — Precision Milled Software">
-  <meta name="twitter:description" content="Creative Konsoles makes precision software for music producers, traders, and builders. Every tool ships with purpose.">
+  <meta name="twitter:title" content="Creative Konsoles — Tools that think with you.">
+  <meta name="twitter:description" content="Precision software for AI, audio, and data.">
   <meta name="twitter:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
   <script type="application/ld+json">
   {
@@ -24,2331 +22,592 @@
     "@type": "Organization",
     "name": "Creative Konsoles",
     "url": "https://creativekonsoles.com",
-    "description": "Creative Konsoles makes precision software for music producers, traders, and builders.",
+    "description": "Creative Konsoles builds precision software for AI, audio, and data.",
     "logo": "https://creativekonsoles.com/assets/ck-icon-1024.png",
     "sameAs": [
-      "https://www.linkedin.com/in/jeremiahsmith3335/",
       "https://x.com/RealRealEyes",
       "https://github.com/papjamzzz"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "support@creativekonsoles.com",
-      "contactType": "customer support"
-    }
+    ]
   }
   </script>
   <link rel="icon" type="image/png" href="assets/ck-icon-1024.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --white: #ffffff;
-      --black: #1a1a1a;
-      --green: #5EE88A;
-      --green-dark: #1F5A38;
-      --green-tint: #f0faf4;
-      --off-white: #f5f5f0;
-      --blue: #004be3;
-      --muted: #6b6b6b;
-      --border: #eeeeee;
-      --font-head: 'Space Grotesk', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --black:   #111111;
+      --white:   #ffffff;
+      --rule:    #111111;
+      --gain:    #CC1800;
+      --5i:      #0040FF;
+      --sf:      #C49A00;
+      --memoir:  #7700CC;
+      --custom:  #111111;
+      --grid:    1px solid #111111;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font-body);
+      font-family: 'Inter', sans-serif;
       background: var(--white);
       color: var(--black);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    /* ── UTILITIES ── */
-    .container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--green-dark);
-    }
-
-    .btn-green {
-      display: inline-block;
-      background: var(--green);
-      color: var(--black);
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 14px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 0;
-      cursor: pointer;
-      letter-spacing: 0.01em;
-      transition: background 0.15s;
-    }
-    .btn-green:hover { background: #4bd977; }
-
-    .btn-blue {
-      display: inline-block;
-      background: var(--blue);
-      color: var(--white);
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 14px;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 0;
-      cursor: pointer;
-      letter-spacing: 0.01em;
-      transition: opacity 0.15s;
-    }
-    .btn-blue:hover { opacity: 0.85; }
-
-    .btn-ghost {
-      display: inline-block;
-      color: var(--black);
-      font-family: var(--font-body);
-      font-weight: 500;
-      font-size: 15px;
-      border-bottom: 1.5px solid var(--black);
-      padding-bottom: 1px;
-      cursor: pointer;
-      transition: color 0.15s, border-color 0.15s;
-    }
-    .btn-ghost:hover { color: var(--muted); border-color: var(--muted); }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      height: 60px;
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-inner {
+    /* ── HEADER ── */
+    header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 32px;
+      padding: 0 40px;
+      height: 64px;
+      border-bottom: var(--grid);
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      z-index: 100;
     }
 
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: -0.01em;
+    .wordmark {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
       color: var(--black);
+      text-decoration: none;
     }
 
-    .nav-brand img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-    }
-
-    .nav-links {
+    nav {
       display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
+      gap: 0;
     }
 
-    .nav-links a {
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--muted);
-      transition: color 0.15s;
+    nav a {
+      display: block;
+      padding: 0 20px;
+      height: 64px;
+      line-height: 64px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-left: var(--grid);
+      transition: background .12s;
     }
-    .nav-links a:hover { color: var(--black); }
+    nav a:hover { background: var(--black); color: var(--white); }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 120px 0 80px;
-      background: var(--white);
-    }
-
-    .hero-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      width: 100%;
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 32px;
+      min-height: calc(100vh - 64px);
+      border-bottom: var(--grid);
+    }
+
+    .hero-left {
+      padding: 80px 60px;
+      border-right: var(--grid);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
     }
 
     .hero-eyebrow {
-      display: inline-block;
-      margin-bottom: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: .45;
     }
 
     .hero-headline {
-      font-family: var(--font-head);
-      font-size: clamp(52px, 6vw, 84px);
-      font-weight: 700;
-      line-height: 1.02;
-      letter-spacing: -0.03em;
+      font-size: clamp(44px, 5.5vw, 80px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -.02em;
       color: var(--black);
-      margin-bottom: 28px;
     }
 
-    .hero-headline .accent {
-      color: var(--green-dark);
+    .hero-headline em {
+      font-style: normal;
+      color: var(--gain);
     }
 
     .hero-sub {
-      font-size: 19px;
-      color: var(--muted);
-      line-height: 1.65;
-      max-width: 440px;
-      margin-bottom: 40px;
-    }
-
-    .hero-ctas {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      margin-bottom: 56px;
-    }
-
-    .hero-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .pill {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      padding: 6px 14px;
-      border: 1px solid #ddd;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      background: var(--white);
-    }
-
-    /* ── HERO VISUAL ── */
-    .hero-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .orb-canvas {
-      width: 460px;
-      height: 420px;
-      position: relative;
-      background: linear-gradient(135deg, #f8fdf9 0%, #eaf9f1 50%, #f0f8ff 100%);
-      border: 1px solid #e8f5ed;
-      overflow: hidden;
-    }
-
-    .orb-canvas::before {
-      content: '';
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(94,232,138,0.12) 0%, transparent 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    .orb-glow {
-      filter: blur(24px);
-      opacity: 0.4;
-    }
-
-    /* GPT — top left */
-    .orb-1 {
-      width: 72px; height: 72px;
-      background: radial-gradient(circle at 35% 35%, #4ade80, #16a34a);
-      top: 80px; left: 60px;
-      box-shadow: 0 0 0 8px rgba(74,222,128,0.12);
-    }
-    .orb-1-glow { width: 100px; height: 100px; background: #22c55e; top: 66px; left: 46px; }
-
-    /* Claude — top right */
-    .orb-2 {
-      width: 64px; height: 64px;
-      background: radial-gradient(circle at 35% 35%, #a78bfa, #6d28d9);
-      top: 90px; right: 70px;
-      box-shadow: 0 0 0 8px rgba(167,139,250,0.12);
-    }
-    .orb-2-glow { width: 90px; height: 90px; background: #7c3aed; top: 78px; right: 58px; }
-
-    /* Gemini — center */
-    .orb-3 {
-      width: 88px; height: 88px;
-      background: radial-gradient(circle at 35% 35%, #60a5fa, #1d4ed8);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 0 12px rgba(96,165,250,0.12);
-    }
-    .orb-3-glow {
-      width: 130px; height: 130px;
-      background: #3b82f6;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    /* Mistral — bottom left */
-    .orb-4 {
-      width: 58px; height: 58px;
-      background: radial-gradient(circle at 35% 35%, #fbbf24, #d97706);
-      bottom: 90px; left: 80px;
-      box-shadow: 0 0 0 8px rgba(251,191,36,0.12);
-    }
-    .orb-4-glow { width: 84px; height: 84px; background: #f59e0b; bottom: 77px; left: 67px; }
-
-    /* Grok — bottom right */
-    .orb-5 {
-      width: 60px; height: 60px;
-      background: radial-gradient(circle at 35% 35%, #f87171, #dc2626);
-      bottom: 80px; right: 80px;
-      box-shadow: 0 0 0 8px rgba(248,113,113,0.12);
-    }
-    .orb-5-glow { width: 88px; height: 88px; background: #ef4444; bottom: 66px; right: 66px; }
-
-    .orb-label {
-      position: absolute;
-      font-family: var(--font-mono);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .label-1 { top: 158px; left: 62px; }
-    .label-2 { top: 160px; right: 52px; }
-    .label-3 { top: 50%; left: 50%; transform: translate(-50%, 52px); white-space: nowrap; }
-    .label-4 { bottom: 58px; left: 68px; }
-    .label-5 { bottom: 50px; right: 62px; }
-
-    .orb-badge {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      color: var(--green-dark);
-      background: rgba(94,232,138,0.15);
-      border: 1px solid rgba(94,232,138,0.3);
-      padding: 5px 14px;
-      white-space: nowrap;
-    }
-
-    /* ── FEATURED: 5i ── */
-    .section-5i {
-      background: var(--green-tint);
-      padding: 100px 0;
-    }
-
-    .five-i-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      margin-top: 48px;
-    }
-
-    .five-i-headline {
-      font-family: var(--font-head);
-      font-size: clamp(36px, 4vw, 56px);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.08;
-      margin-bottom: 20px;
-    }
-
-    .five-i-sub {
       font-size: 17px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 32px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--black);
+      opacity: .6;
       max-width: 420px;
     }
 
-    .stat-pills {
+    .hero-cta {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 36px;
-    }
-
-    .stat-pill {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      padding: 6px 14px;
-      background: rgba(94,232,138,0.2);
-      border: 1px solid rgba(94,232,138,0.4);
-      color: var(--green-dark);
-    }
-
-    /* 5i CSS Mockup */
-    .five-i-mockup {
-      background: #0B1210;
-      padding: 32px;
-      position: relative;
-      min-height: 280px;
-    }
-
-    .mockup-bar {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 28px;
-    }
-
-    .mockup-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .mockup-title {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      color: #4a7a5a;
-      margin-bottom: 32px;
-      text-transform: uppercase;
-    }
-
-    .mockup-models {
-      display: flex;
+      gap: 0;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
+      margin-top: 8px;
     }
 
-    .model-node {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .model-dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-    }
-
-    .model-name-label {
-      font-family: var(--font-mono);
-      font-size: 8px;
-      letter-spacing: 0.1em;
-      color: #4a7a5a;
-      text-transform: uppercase;
-    }
-
-    .model-arrow {
-      color: #2a5a3a;
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    .mockup-input {
-      background: #0f1f17;
-      border: 1px solid #1e3a28;
-      padding: 10px 14px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: #3a8a5a;
-      margin-bottom: 20px;
-      letter-spacing: 0.05em;
-    }
-
-    .mockup-synth-btn {
-      background: var(--green);
-      color: var(--black);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      padding: 10px 24px;
-      border: none;
-      cursor: default;
-      margin-bottom: 16px;
+    .btn-primary {
       display: inline-block;
-    }
-
-    .mockup-progress-track {
-      background: #0f1f17;
-      height: 4px;
-      width: 100%;
-    }
-
-    .mockup-progress-fill {
-      background: var(--green);
-      height: 100%;
-      width: 72%;
-      box-shadow: 0 0 8px rgba(94,232,138,0.5);
-    }
-
-    /* AI Model Cards Row */
-    .model-cards {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-      margin-top: 48px;
-    }
-
-    .model-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 16px;
-      border-top: 3px solid transparent;
-    }
-
-    .model-card-name {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .model-card-provider {
+      height: 52px;
+      padding: 0 36px;
+      background: var(--black);
+      color: var(--white);
       font-size: 11px;
-      color: var(--muted);
-      font-family: var(--font-mono);
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      line-height: 52px;
+      border: 2px solid var(--black);
+      transition: all .12s;
+    }
+    .btn-primary:hover { background: var(--white); color: var(--black); }
+
+    .btn-secondary {
+      display: inline-block;
+      height: 52px;
+      padding: 0 36px;
+      background: transparent;
+      color: var(--black);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      line-height: 52px;
+      border: 2px solid var(--black);
+      border-left: none;
+      transition: all .12s;
+    }
+    .btn-secondary:hover { background: var(--black); color: var(--white); }
+
+    /* ── HERO RIGHT — DE STIJL COMPOSITION ── */
+    .hero-right {
+      display: grid;
+      grid-template-columns: 3fr 1fr 2fr;
+      grid-template-rows: 2fr 1fr 2fr;
     }
 
-    /* ── ALL PRODUCTS ── */
-    .section-products {
-      background: var(--white);
-      padding: 100px 0;
-    }
+    .block { border-right: var(--grid); border-bottom: var(--grid); }
+    .block:last-child { border-right: none; }
+    .block-gain    { background: var(--gain);   grid-column: 1; grid-row: 1; }
+    .block-white1  { background: var(--white);  grid-column: 2; grid-row: 1; }
+    .block-5i      { background: var(--5i);     grid-column: 3; grid-row: 1 / 3; border-right: none; }
+    .block-sf      { background: var(--sf);     grid-column: 1; grid-row: 2; }
+    .block-white2  { background: var(--white);  grid-column: 2; grid-row: 2; }
+    .block-white3  { background: var(--white);  grid-column: 1; grid-row: 3; border-bottom: none; }
+    .block-memoir  { background: var(--memoir); grid-column: 2 / 4; grid-row: 3; border-right: none; border-bottom: none; }
 
-    .section-headline {
-      font-family: var(--font-head);
-      font-size: clamp(32px, 4vw, 52px);
+    /* ── SECTION LABEL ── */
+    .section-label {
+      padding: 0 40px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      border-bottom: var(--grid);
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      margin-bottom: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: .4;
     }
 
-    .section-sub {
-      font-size: 17px;
-      color: var(--muted);
-      margin-bottom: 56px;
-    }
-
-    .products-grid {
+    /* ── PRODUCTS GRID ── */
+    .products {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      border-bottom: var(--grid);
     }
 
     .product-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 28px;
+      border-right: var(--grid);
+      text-decoration: none;
+      color: var(--black);
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .product-card:hover {
-      border-color: var(--green);
-      box-shadow: 0 4px 24px rgba(94,232,138,0.1);
-    }
-
-    .product-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .product-logo {
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-    }
-
-    .product-badges {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .badge-live {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      padding: 3px 8px;
-      background: rgba(94,232,138,0.15);
-      border: 1px solid rgba(94,232,138,0.35);
-      color: var(--green-dark);
-      text-transform: uppercase;
-    }
-
-    .badge-port {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    .product-name {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: -0.01em;
-    }
-
-    .product-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.55;
-      flex: 1;
-    }
-
-    .product-link {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 2px;
-      display: inline-block;
-      transition: color 0.15s, border-color 0.15s;
-    }
-    .product-link:hover { color: var(--black); border-color: var(--black); }
-
-    .product-icon-box {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    /* ── CUSTOM SOFTWARE ── */
-    .section-custom {
-      background: var(--off-white);
-      padding: 100px 0;
-    }
-
-    .custom-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-top: 56px;
-      margin-bottom: 56px;
-    }
-
-    .custom-col-title {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--green-dark);
-      margin-bottom: 14px;
-    }
-
-    .custom-col p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .custom-col strong {
-      color: var(--black);
-      font-weight: 600;
-    }
-
-    .platform-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 40px;
-    }
-
-    .platform-badge {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      padding: 7px 16px;
-      border-radius: 100px;
-      border: 1.5px solid;
-    }
-
-    /* ── POWERED BY ── */
-    .section-powered {
-      background: var(--white);
-      padding: 100px 0;
-    }
-
-    .ai-cards {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      margin-top: 48px;
-      margin-bottom: 56px;
-    }
-
-    .ai-card {
-      border: 1px solid var(--border);
-      padding: 20px;
-      border-top: 4px solid transparent;
-    }
-
-    .ai-company {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .ai-model {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .ai-role {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .stack-section {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .stack-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .stack-items {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .stack-item {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 12px;
-      border: 1px solid var(--border);
-      color: var(--black);
-    }
-
-    .github-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-    }
-
-    .github-note {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .github-link {
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--black);
-      border-bottom: 1.5px solid var(--black);
-      padding-bottom: 1px;
-      transition: color 0.15s;
-    }
-    .github-link:hover { color: var(--muted); }
-
-    /* ── FOR PRODUCERS ── */
-    .section-producers {
-      background: var(--green-tint);
-      padding: 100px 0;
-    }
-
-    .producer-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 48px;
-      margin-bottom: 40px;
-    }
-
-    .producer-card {
-      background: var(--white);
-      border: 1px solid #d6f0e0;
-      padding: 36px;
-    }
-
-    .producer-card-icon {
-      font-size: 28px;
-      margin-bottom: 16px;
-    }
-
-    .producer-card-name {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 22px;
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
-
-    .producer-card-desc {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 24px;
-    }
-
-    .vst-badges {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .vst-badge {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      padding: 5px 12px;
-      border: 1px solid #b8e8cc;
-      color: var(--green-dark);
-      background: rgba(94,232,138,0.08);
-    }
-
-    /* ── BETA CTA ── */
-    /* ── PRICING ── */
-    .section-pricing {
-      background: #0a0a0a;
-      padding: 100px 0 60px;
-      text-align: center;
-    }
-    .pricing-headline {
-      font-family: var(--font-head);
-      font-size: clamp(28px, 3.5vw, 48px);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-    .pricing-sub {
-      color: rgba(255,255,255,0.45);
-      font-size: 16px;
-      margin-bottom: 56px;
-    }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .pricing-card {
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 36px 28px;
-      text-align: left;
+      transition: background .12s;
       position: relative;
-      transition: border-color 0.2s;
-    }
-    .pricing-card:hover { border-color: rgba(255,255,255,0.18); }
-    .pricing-card.featured {
-      border-color: var(--green);
-      background: linear-gradient(160deg, #0e1f12 0%, #111 100%);
-    }
-    .pricing-badge {
-      position: absolute;
-      top: -12px; left: 50%;
-      transform: translateX(-50%);
-      background: var(--green);
-      color: #000;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 4px 14px;
-      border-radius: 20px;
-    }
-    .pricing-tier {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.40);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-    }
-    .pricing-price {
-      font-family: var(--font-head);
-      font-size: 42px;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .pricing-price span {
-      font-size: 16px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.40);
-    }
-    .pricing-desc {
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 28px;
-      margin-top: 8px;
-      line-height: 1.5;
-    }
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .pricing-features li {
-      font-size: 14px;
-      color: rgba(255,255,255,0.75);
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.4;
-    }
-    .pricing-features li::before {
-      content: '✓';
-      color: var(--green);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .pricing-features li.dim { color: rgba(255,255,255,0.35); }
-    .pricing-features li.dim::before { color: rgba(255,255,255,0.20); content: '–'; }
-    .btn-pricing {
-      display: block; width: 100%;
-      padding: 13px 20px;
-      border-radius: 8px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: transparent;
-      color: rgba(255,255,255,0.60);
-    }
-    .btn-pricing:hover { border-color: rgba(255,255,255,0.35); color: var(--white); }
-    .btn-pricing.primary {
-      background: var(--green);
-      border-color: var(--green);
-      color: #000;
-      font-weight: 700;
-    }
-    .btn-pricing.primary:hover {
-      background: #4bd977;
-      border-color: #4bd977;
-      box-shadow: 0 0 24px rgba(61,210,100,0.30);
-    }
-    .pricing-note {
-      font-size: 12px;
-      color: rgba(255,255,255,0.28);
-      margin-top: 12px;
-      text-align: center;
-    }
-    @media (max-width: 700px) {
-      .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
-      .pricing-card.featured { order: -1; }
-    }
-
-    /* ── Enterprise Card ── */
-    .enterprise-card {
-      max-width: 900px;
-      margin: 20px auto 0;
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 16px;
-      padding: 36px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-      text-align: left;
-    }
-    .enterprise-card:hover { border-color: rgba(255,255,255,0.20); }
-    .enterprise-left { flex: 1; }
-    .enterprise-tier {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.40);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .enterprise-headline {
-      font-family: var(--font-head);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-    .enterprise-desc {
-      font-size: 14px;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.6;
-      max-width: 480px;
-    }
-    .enterprise-right { flex-shrink: 0; }
-    .btn-enterprise {
-      display: inline-block;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.20);
-      background: transparent;
-      color: rgba(255,255,255,0.70);
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-    .btn-enterprise:hover { border-color: rgba(255,255,255,0.40); color: var(--white); }
-    @media (max-width: 700px) {
-      .enterprise-card { flex-direction: column; gap: 20px; padding: 28px 24px; }
-      .enterprise-right { width: 100%; }
-      .btn-enterprise { display: block; text-align: center; width: 100%; box-sizing: border-box; }
-    }
-
-    /* ── SBS Comparison ── */
-    .sbs-wrap {
-      max-width: 760px;
-      margin: 64px auto 0;
-    }
-    .sbs-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      color: rgba(255,255,255,0.30);
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-    .sbs-table {
-      width: 100%;
-      border-collapse: collapse;
-      border-radius: 12px;
       overflow: hidden;
     }
-    .sbs-table thead th {
-      padding: 20px 28px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    .sbs-table thead th:first-child {
-      background: transparent;
-      color: rgba(255,255,255,0.30);
-      text-align: left;
-      width: 44%;
-    }
-    .sbs-table thead th.col-base {
-      background: #0e1f12;
-      color: var(--green);
-      border: 1px solid rgba(94,232,138,0.25);
-      border-bottom: none;
-    }
-    .sbs-table thead th.col-found {
-      background: #111;
-      color: rgba(255,255,255,0.55);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-bottom: none;
-    }
-    .sbs-table tbody tr {
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .sbs-table tbody tr:first-child { border-top: none; }
-    .sbs-table tbody td {
-      padding: 14px 28px;
-      font-size: 14px;
-      vertical-align: middle;
-    }
-    .sbs-table tbody td:first-child {
-      color: rgba(255,255,255,0.50);
-      text-align: left;
-      font-size: 13px;
-    }
-    .sbs-table tbody td.col-base {
-      background: rgba(14,31,18,0.55);
-      color: rgba(255,255,255,0.80);
-      border-left: 1px solid rgba(94,232,138,0.15);
-      border-right: 1px solid rgba(94,232,138,0.15);
-      text-align: center;
-    }
-    .sbs-table tbody td.col-found {
-      background: rgba(17,17,17,0.55);
-      color: rgba(255,255,255,0.80);
-      border-left: 1px solid rgba(255,255,255,0.06);
-      border-right: 1px solid rgba(255,255,255,0.06);
-      text-align: center;
-    }
-    .sbs-table tfoot td {
-      padding: 16px 28px 0;
-    }
-    .sbs-table tfoot td.col-base {
-      background: rgba(14,31,18,0.55);
-      border: 1px solid rgba(94,232,138,0.25);
-      border-top: none;
-      border-radius: 0 0 0 0;
-    }
-    .sbs-table tfoot td.col-found {
-      background: rgba(17,17,17,0.55);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-top: none;
-    }
-    .sbs-table thead th.col-ent {
-      background: #111;
-      color: rgba(255,255,255,0.40);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-bottom: none;
-    }
-    .sbs-table tbody td.col-ent {
-      background: rgba(17,17,17,0.35);
-      color: rgba(255,255,255,0.65);
-      border-left: 1px solid rgba(255,255,255,0.05);
-      border-right: 1px solid rgba(255,255,255,0.05);
-      text-align: center;
-    }
-    .sbs-table tfoot td.col-ent {
-      background: rgba(17,17,17,0.35);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-top: none;
-    }
-    .sbs-check { color: var(--green); font-weight: 700; }
-    .sbs-x     { color: rgba(255,255,255,0.20); }
-    @media (max-width: 600px) {
-      .sbs-table tbody td, .sbs-table thead th { padding: 12px 14px; font-size: 13px; }
-      .sbs-table tbody td:first-child { font-size: 12px; }
+    .product-card:last-child { border-right: none; }
+    .product-card:nth-child(3) { border-right: var(--grid); }
+    .product-card:nth-child(4) { border-top: var(--grid); }
+    .product-card:nth-child(5) { border-top: var(--grid); }
+    .product-card:nth-child(6) { border-top: var(--grid); border-right: none; }
+
+    .product-card:hover { background: #f5f5f5; }
+    .product-card:hover .card-arrow { opacity: 1; transform: translate(0,0); }
+
+    .card-accent {
+      height: 6px;
+      width: 100%;
     }
 
-    .section-beta {
-      background: var(--black);
-      padding: 100px 0;
-      text-align: center;
-    }
-
-    .beta-headline {
-      font-family: var(--font-head);
-      font-size: clamp(32px, 4.5vw, 60px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: var(--white);
-      margin-bottom: 16px;
-      line-height: 1.08;
-    }
-
-    .beta-sub {
-      font-size: 17px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 44px;
-      max-width: 440px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
-
-    .beta-form {
-      display: flex;
-      gap: 0;
-      max-width: 440px;
-      margin: 0 auto 16px;
-    }
-
-    .beta-input {
+    .card-body {
+      padding: 36px 36px 44px;
       flex: 1;
-      padding: 14px 18px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.06);
-      color: var(--white);
-      font-family: var(--font-body);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card-name {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -.01em;
+      line-height: 1;
+    }
+
+    .card-type {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      opacity: .4;
+    }
+
+    .card-desc {
       font-size: 15px;
-      outline: none;
-      border-radius: 0;
+      font-weight: 400;
+      line-height: 1.55;
+      opacity: .7;
+      margin-top: auto;
     }
-    .beta-input::placeholder { color: rgba(255,255,255,0.3); }
-    .beta-input:focus { border-color: var(--green); }
 
-    .beta-btn {
-      padding: 14px 24px;
-      background: var(--green);
+    .card-link {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .4;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-arrow {
+      opacity: 0;
+      transform: translate(-4px, 0);
+      transition: all .15s;
+    }
+
+    /* ── CUSTOM BUILDS STRIP ── */
+    .builds-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: var(--grid);
+      min-height: 280px;
+    }
+
+    .builds-left {
+      background: var(--black);
+      color: var(--white);
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      border-right: var(--grid);
+    }
+
+    .builds-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      opacity: .5;
+    }
+
+    .builds-headline {
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+
+    .builds-sub {
+      font-size: 15px;
+      line-height: 1.6;
+      opacity: .6;
+      max-width: 360px;
+    }
+
+    .btn-white {
+      display: inline-block;
+      margin-top: 8px;
+      height: 48px;
+      padding: 0 32px;
+      background: var(--white);
       color: var(--black);
-      font-family: var(--font-head);
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      line-height: 48px;
+      border: 2px solid var(--white);
+      align-self: flex-start;
+      transition: all .12s;
+    }
+    .btn-white:hover { background: transparent; color: var(--white); }
+
+    .builds-right {
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .builds-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: var(--grid);
       font-size: 14px;
-      border: none;
-      cursor: pointer;
-      border-radius: 0;
-      white-space: nowrap;
-      transition: background 0.15s;
+      font-weight: 500;
     }
-    .beta-btn:hover { background: #4bd977; }
+    .builds-item:last-child { border-bottom: none; }
 
-    .beta-fine {
-      font-size: 12px;
-      color: rgba(255,255,255,0.3);
-    }
-
-    .beta-success {
-      display: none;
-      color: var(--green);
-      font-family: var(--font-mono);
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      margin-top: 20px;
-    }
-
-    .beta-error {
-      display: none;
-      color: #ff6b6b;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      margin-top: 20px;
-    }
-
-    .beta-error a {
-      color: #ff6b6b;
-      text-decoration: underline;
+    .builds-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--black);
+      flex-shrink: 0;
     }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--white);
-      border-top: 1px solid var(--border);
-      padding: 60px 0 40px;
-    }
-
-    .footer-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 48px;
+      padding: 0 40px;
+      height: 60px;
+      border-top: var(--grid);
     }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    .footer-brand img {
-      width: 24px;
-      height: 24px;
-      object-fit: contain;
-    }
-
-    .footer-tagline {
-      font-family: var(--font-mono);
+    .footer-left {
       font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      opacity: .35;
     }
 
     .footer-links {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      margin-bottom: 48px;
+      display: flex;
+      gap: 0;
     }
 
-    .footer-col-title {
-      font-family: var(--font-head);
+    .footer-links a {
+      display: block;
+      padding: 0 20px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 10px;
       font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.06em;
+      letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--black);
-      margin-bottom: 16px;
+      text-decoration: none;
+      border-left: var(--grid);
+      opacity: .4;
+      transition: opacity .12s;
     }
+    .footer-links a:hover { opacity: 1; }
 
-    .footer-col ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      header { padding: 0 20px; }
+      nav a { padding: 0 14px; font-size: 10px; }
 
-    .footer-col ul a {
-      font-size: 14px;
-      color: var(--muted);
-      transition: color 0.15s;
-    }
-    .footer-col ul a:hover { color: var(--black); }
-
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-copy {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .footer-github {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--muted);
-      transition: color 0.15s;
-    }
-    .footer-github:hover { color: var(--black); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .ai-cards { grid-template-columns: repeat(3, 1fr); }
-      .model-cards { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-
-      .hero {
-        padding: 100px 0 60px;
-        min-height: auto;
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 60px 28px; border-right: none; border-bottom: var(--grid); }
+      .hero-right {
+        height: 50vw;
+        grid-template-columns: 3fr 1fr 2fr;
+        grid-template-rows: 2fr 1fr 2fr;
       }
 
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        padding: 0 20px;
-      }
+      .products { grid-template-columns: 1fr 1fr; }
+      .product-card:nth-child(2) { border-right: none; }
+      .product-card:nth-child(3) { border-top: var(--grid); border-right: var(--grid); }
+      .product-card:nth-child(4) { border-top: var(--grid); border-right: none; }
+      .product-card:nth-child(5) { border-top: var(--grid); border-right: var(--grid); }
+      .product-card:nth-child(6) { border-top: var(--grid); }
 
-      .orb-canvas {
-        width: 100%;
-        max-width: 400px;
-        height: 300px;
-        margin: 0 auto;
-      }
+      .builds-strip { grid-template-columns: 1fr; }
+      .builds-left { border-right: none; border-bottom: var(--grid); padding: 40px 28px; }
+      .builds-right { padding: 40px 28px; }
 
-      .five-i-grid { grid-template-columns: 1fr; gap: 48px; }
-      .products-grid { grid-template-columns: 1fr; }
-      .custom-grid { grid-template-columns: 1fr; gap: 28px; }
-      .ai-cards { grid-template-columns: repeat(2, 1fr); }
-      .model-cards { grid-template-columns: repeat(2, 1fr); }
-      .producer-cards { grid-template-columns: 1fr; }
-      .footer-links { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .footer-bottom { flex-direction: column; gap: 8px; align-items: flex-start; }
-
-      .beta-form { flex-direction: column; }
-      .beta-btn { width: 100%; }
-
-      .stack-section { flex-direction: column; align-items: flex-start; gap: 16px; }
+      footer { flex-direction: column; height: auto; padding: 20px; gap: 12px; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .footer-links a { border-left: none; border-top: var(--grid); }
     }
 
-    @media (max-width: 480px) {
-      .container { padding: 0 20px; }
-      .nav-inner { padding: 0 20px; }
-      .ai-cards { grid-template-columns: 1fr; }
-      .model-cards { grid-template-columns: 1fr; }
-      .products-grid { grid-template-columns: 1fr; }
+    @media (max-width: 600px) {
+      .hero-headline { font-size: 38px; }
+      .products { grid-template-columns: 1fr; }
+      .product-card { border-right: none !important; border-top: var(--grid); }
+      .product-card:first-child { border-top: none; }
+      nav { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── NAV ── -->
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="assets/ck-icon-1024.png" alt="CK" onerror="this.style.opacity='0'; this.style.width='0'">
-        Creative Konsoles
-      </a>
-      <ul class="nav-links">
-        <li><a href="#suite">Suite</a></li>
-        <li><a href="#5i">5i</a></li>
-        <li><a href="https://build.creativekonsoles.com" target="_blank">Custom Builds</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="https://github.com/papjamzzz" target="_blank" rel="noopener">GitHub</a></li>
-      </ul>
-      <div style="display:flex;align-items:center;gap:16px;">
-        <a href="https://x.com/creativekonsole" target="_blank" rel="noopener" title="X" style="color:var(--muted);transition:color 0.15s;" onmouseover="this.style.color='#1a1a1a'" onmouseout="this.style.color=''">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/jeremiahsmith3335/" target="_blank" rel="noopener" title="LinkedIn" style="color:var(--muted);transition:color 0.15s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color=''">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=61576497442325" target="_blank" rel="noopener" title="Facebook" style="color:var(--muted);transition:color 0.15s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color=''">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        <a href="#pricing" class="btn-green">See Pricing</a>
-      </div>
-    </div>
-  </nav>
+  <!-- HEADER -->
+  <header>
+    <a class="wordmark" href="/">Creative Konsoles</a>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="https://build.creativekonsoles.com" target="_blank">Build</a>
+      <a href="mailto:support@creativekonsoles.com">Contact</a>
+    </nav>
+  </header>
 
-  <!-- ── HERO ── -->
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <span class="eyebrow hero-eyebrow">Flagship — Live Now</span>
-        <h1 class="hero-headline">5i &mdash;<br><span class="accent">Five Intelligences.</span></h1>
-        <p class="hero-sub">One prompt. Five AI models running simultaneously — GPT, Claude, Gemini, Mistral, and Grok. They all answer at once. Then a synthesis engine finds where they agree. That convergence is your answer.</p>
-        <div class="hero-ctas">
-          <a href="https://5i.creativekonsoles.com" target="_blank" rel="noopener" class="btn-green">Try 5i Free &rarr;</a>
-          <a href="#suite" class="btn-ghost">View all tools</a>
-        </div>
-        <div class="hero-pills">
-          <span class="pill">GPT-4o</span>
-          <span class="pill">Claude</span>
-          <span class="pill">Gemini</span>
-          <span class="pill">Mistral</span>
-          <span class="pill">Grok</span>
-        </div>
+    <div class="hero-left">
+      <div class="hero-eyebrow">Precision software studio</div>
+      <h1 class="hero-headline">Tools that<br>think <em>with</em> you.</h1>
+      <p class="hero-sub">We build sharp, purposeful software for AI, audio, and data. No bloat. No agencies. Just tools that work.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#products">See the tools</a>
+        <a class="btn-secondary" href="https://build.creativekonsoles.com" target="_blank">Custom build</a>
       </div>
-
-      <div class="hero-visual">
-        <div class="orb-canvas" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:24px 20px;background:linear-gradient(135deg,#f8fdf9,#eaf9f1,#f0f8ff);">
-          <!-- PROMPT -->
-          <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Your prompt</div>
-          <div style="font-family:var(--font-mono);font-size:12px;background:var(--white);border:1px solid var(--border);padding:8px 16px;color:var(--black);margin-bottom:16px;max-width:280px;text-align:center;">"What should I know about this?"</div>
-
-          <!-- PARALLEL ARROW DOWN -->
-          <div style="display:flex;align-items:flex-end;justify-content:center;gap:8px;margin-bottom:12px;">
-            <div style="width:1px;height:20px;background:linear-gradient(to bottom,var(--border),#22c55e);"></div>
-            <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;padding-bottom:2px;">runs in parallel</div>
-            <div style="width:1px;height:20px;background:linear-gradient(to bottom,var(--border),#22c55e);"></div>
-          </div>
-
-          <!-- 5 MODEL BADGES -->
-          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:16px;">
-            <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;padding:5px 10px;background:#f0fdf4;border:1.5px solid #22c55e;color:#166534;">GPT-4o</span>
-            <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;padding:5px 10px;background:#faf5ff;border:1.5px solid #7c3aed;color:#5b21b6;">Claude</span>
-            <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;padding:5px 10px;background:#eff6ff;border:1.5px solid #3b82f6;color:#1d4ed8;">Gemini</span>
-            <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;padding:5px 10px;background:#fffbeb;border:1.5px solid #f59e0b;color:#92400e;">Mistral</span>
-            <span style="font-family:var(--font-mono);font-size:10px;font-weight:700;padding:5px 10px;background:#fef2f2;border:1.5px solid #ef4444;color:#991b1b;">Grok</span>
-          </div>
-
-          <!-- CONVERGE ARROW -->
-          <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;">
-            <div style="width:1px;height:20px;background:linear-gradient(to bottom,#22c55e,var(--green-dark));"></div>
-            <div style="font-family:var(--font-mono);font-size:9px;color:var(--green-dark);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;">synthesis · convergence</div>
-            <div style="width:1px;height:20px;background:linear-gradient(to bottom,#22c55e,var(--green-dark));"></div>
-          </div>
-
-          <!-- VERDICT -->
-          <div style="background:var(--green-dark);color:var(--white);font-family:var(--font-head);font-size:13px;font-weight:700;padding:10px 24px;letter-spacing:0.05em;text-align:center;">ONE VERDICT</div>
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:8px;letter-spacing:0.08em;">where the models agree = the truth</div>
-        </div>
-      </div>
+    </div>
+    <div class="hero-right" aria-hidden="true">
+      <div class="block block-gain"></div>
+      <div class="block block-white1"></div>
+      <div class="block block-5i"></div>
+      <div class="block block-sf"></div>
+      <div class="block block-white2"></div>
+      <div class="block block-white3"></div>
+      <div class="block block-memoir"></div>
     </div>
   </section>
 
-  <!-- ── THE SUITE ── -->
-  <section id="suite" style="background:var(--off-white);padding:100px 0;">
-    <div class="container">
-      <h2 class="section-headline">Pick up something sharp.</h2>
+  <!-- PRODUCTS -->
+  <div class="section-label" id="products">Products</div>
+  <div class="products">
 
-      <!-- ALL 4 CARDS — UNIFORM GRID -->
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px;">
-
-        <!-- Stream Fader — ENTERTAINMENT -->
-        <div style="background:#1a1200;border:2px solid #f59e0b;border-top:4px solid #f59e0b;padding:36px;display:flex;flex-direction:column;gap:16px;position:relative;">
-          <div style="position:absolute;top:-1px;right:24px;background:#f59e0b;color:#000;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.15em;padding:3px 10px;">ENTERTAINMENT</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
-            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-dark);background:rgba(94,232,138,0.12);border:1px solid rgba(94,232,138,0.3);padding:3px 10px;">LIVE</span>
-            <span style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.35);">STREAMING · TOOLS</span>
-          </div>
-          <img src="assets/streamfader-logo.png" alt="Stream Fader" style="height:80px;object-fit:contain;object-position:left;" onerror="this.style.display='none'">
-          <p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;">DJ-style crossfader for streaming content. Blend critic scores and audience ratings in real time. Find what's actually worth watching.</p>
-          <a href="https://stream.creativekonsoles.com" target="_blank" rel="noopener" style="display:inline-block;background:#f59e0b;color:#000;font-family:var(--font-head);font-weight:600;font-size:14px;padding:12px 24px;text-decoration:none;width:fit-content;margin-top:auto;">Take Me To StreamFader &rarr;</a>
-        </div>
-
-        <!-- 5i — FLAGSHIP -->
-        <div style="background:#0a1a10;border:2px solid var(--green);border-top:4px solid var(--green);padding:36px;display:flex;flex-direction:column;gap:16px;position:relative;">
-          <div style="position:absolute;top:-1px;right:24px;background:var(--green);color:#000;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.15em;padding:3px 10px;">FLAGSHIP</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
-            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-dark);background:rgba(94,232,138,0.12);border:1px solid rgba(94,232,138,0.3);padding:3px 10px;">LIVE</span>
-            <span style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.35);">AI · SYNTHESIS</span>
-          </div>
-          <img src="assets/5i-logo.png" alt="5i" style="height:80px;object-fit:contain;object-position:left;" onerror="this.style.display='none'">
-          <p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;">One prompt. Five models run simultaneously — GPT, Claude, Gemini, Mistral, Grok. A synthesis engine finds where they agree. Agreement is signal. That's your answer.</p>
-          <a href="https://5i.creativekonsoles.com" target="_blank" rel="noopener" style="display:inline-block;background:var(--green);color:#000;font-family:var(--font-head);font-weight:600;font-size:14px;padding:12px 24px;text-decoration:none;width:fit-content;margin-top:auto;">Try 5i Free &rarr;</a>
-        </div>
-
-        <!-- Memoir — WELLNESS -->
-        <div style="background:#150f04;border:2px solid #e0a830;border-top:4px solid #e0a830;padding:36px;display:flex;flex-direction:column;gap:16px;position:relative;">
-          <div style="position:absolute;top:-1px;right:24px;background:#e0a830;color:#000;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.15em;padding:3px 10px;">WELLNESS</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
-            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-dark);background:rgba(94,232,138,0.12);border:1px solid rgba(94,232,138,0.3);padding:3px 10px;">LIVE</span>
-            <span style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.35);">VOICE · MEMOIR</span>
-          </div>
-          <img src="assets/memoir-logo.png" alt="Memoir" style="height:80px;object-fit:contain;object-position:left;" onerror="this.style.display='none'">
-          <p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;">Speak your memories. AI weaves them into your memoir. Tap the mic, tell a story — Memoir listens, transcribes, and turns your words into chapters worth keeping.</p>
-          <a href="https://memoir.creativekonsoles.com" target="_blank" rel="noopener" style="display:inline-block;background:#e0a830;color:#000;font-family:var(--font-head);font-weight:600;font-size:14px;padding:12px 24px;text-decoration:none;width:fit-content;margin-top:auto;">Make Your Memoir &rarr;</a>
-        </div>
-
-        <!-- Kode Keeper — FOR BUILDERS -->
-        <div style="background:#0d1a16;border:2px solid #3b82f6;border-top:4px solid #3b82f6;padding:36px;display:flex;flex-direction:column;gap:16px;position:relative;">
-          <div style="position:absolute;top:-1px;right:24px;background:#3b82f6;color:#fff;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:0.15em;padding:3px 10px;">FOR BUILDERS</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
-            <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-dark);background:rgba(94,232,138,0.12);border:1px solid rgba(94,232,138,0.3);padding:3px 10px;">LIVE</span>
-            <span style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.35);">DEV · DASHBOARD</span>
-          </div>
-          <img src="assets/kode-keeper-logo.png" alt="Kode Keeper" style="height:80px;object-fit:contain;object-position:left;" onerror="this.style.display='none'">
-          <p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;">Claude Code mission control. Context oscilloscope, token VU meters, cost tracker, live git patch bay, bot health heartbeat. The control room for AI-assisted development.</p>
-          <a href="https://keeper.creativekonsoles.com" target="_blank" rel="noopener" style="display:inline-block;background:#3b82f6;color:#fff;font-family:var(--font-head);font-weight:600;font-size:14px;padding:12px 24px;text-decoration:none;width:fit-content;margin-top:auto;">Open Kode Keeper &rarr;</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FEATURED: 5i ── -->
-  <section class="section-5i" id="5i">
-    <div class="container">
-      <span class="eyebrow">Flagship Product</span>
-      <div class="five-i-grid">
-        <div class="five-i-left">
-          <h2 class="five-i-headline">5i &mdash;<br>Five Intelligences.</h2>
-          <p class="five-i-sub">One prompt. Five models run simultaneously — no waiting, no chaining. A synthesis engine analyzes where they converge. Agreement = signal. Disagreement = uncertainty. One verdict in seconds.</p>
-          <div class="stat-pills">
-            <span class="stat-pill">5 Models · Parallel</span>
-            <span class="stat-pill">1 Verdict</span>
-            <span class="stat-pill">Live at 5i.creativekonsoles.com</span>
-          </div>
-          <a href="https://5i.creativekonsoles.com" target="_blank" rel="noopener" class="btn-green">Try 5i &rarr;</a>
-        </div>
-
-        <!-- 5i CSS Mockup -->
-        <div class="five-i-mockup">
-          <div class="mockup-bar">
-            <div class="mockup-dot" style="background:#ff5f57;"></div>
-            <div class="mockup-dot" style="background:#febc2e;"></div>
-            <div class="mockup-dot" style="background:#28c840;"></div>
-          </div>
-          <div class="mockup-title">5i &mdash; Synthesis Engine</div>
-          <div class="mockup-models">
-            <div class="model-node">
-              <div class="model-dot" style="background:#22C55E;"></div>
-              <span class="model-name-label">GPT</span>
-            </div>
-            <span class="model-arrow">&rarr;</span>
-            <div class="model-node">
-              <div class="model-dot" style="background:#7C3AED;"></div>
-              <span class="model-name-label">Claude</span>
-            </div>
-            <span class="model-arrow">&rarr;</span>
-            <div class="model-node">
-              <div class="model-dot" style="background:#3B82F6;"></div>
-              <span class="model-name-label">Gemini</span>
-            </div>
-            <span class="model-arrow">&rarr;</span>
-            <div class="model-node">
-              <div class="model-dot" style="background:#F59E0B;"></div>
-              <span class="model-name-label">Mistral</span>
-            </div>
-            <span class="model-arrow">&rarr;</span>
-            <div class="model-node">
-              <div class="model-dot" style="background:#EF4444;"></div>
-              <span class="model-name-label">Grok</span>
-            </div>
-          </div>
-          <div class="mockup-input">What's the most efficient sorting algorithm?_</div>
-          <div class="mockup-synth-btn">SYNTHESIZE</div>
-          <div class="mockup-progress-track">
-            <div class="mockup-progress-fill"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Model Cards -->
-      <div class="model-cards">
-        <div class="model-card" style="border-top-color: #22C55E;">
-          <div class="model-card-name">GPT-4o</div>
-          <div class="model-card-provider">OpenAI</div>
-        </div>
-        <div class="model-card" style="border-top-color: #7C3AED;">
-          <div class="model-card-name">Claude 3.5</div>
-          <div class="model-card-provider">Anthropic</div>
-        </div>
-        <div class="model-card" style="border-top-color: #3B82F6;">
-          <div class="model-card-name">Gemini 2.0</div>
-          <div class="model-card-provider">Google</div>
-        </div>
-        <div class="model-card" style="border-top-color: #F0A030;">
-          <div class="model-card-name">Mistral Large</div>
-          <div class="model-card-provider">Mistral AI</div>
-        </div>
-        <div class="model-card" style="border-top-color: #E05520;">
-          <div class="model-card-name">Grok 3</div>
-          <div class="model-card-provider">xAI</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── ALL PRODUCTS ── -->
-  <section class="section-products" id="products">
-    <div class="container">
-      <h2 class="section-headline">The full toolkit.</h2>
-      <p class="section-sub">Eight precision tools. All open source. All built to ship.</p>
-
-      <div class="products-grid">
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <img src="assets/5ai-v3-prism.png" class="product-logo" alt="5i" onerror="this.style.opacity='0'; this.style.width='0'">
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-            </div>
-          </div>
-          <div class="product-name">5i</div>
-          <div class="product-desc">Five AI models running in parallel. One synthesized verdict. Where they agree is your answer.</div>
-          <a href="https://github.com/papjamzzz/5i" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/5i ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <img src="assets/dawdoctor-logo.png" class="product-logo" alt="DAW Doctor" onerror="this.style.opacity='0'; this.style.width='0'">
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5558</span>
-            </div>
-          </div>
-          <div class="product-name">DAW Doctor</div>
-          <div class="product-desc">OBD diagnostics for Ableton Live. Scan, diagnose, fix. Auto cloud backup — never lose a session again.</div>
-          <a href="https://dawdoctor.creativekonsoles.com" target="_blank" rel="noopener" class="product-link">dawdoctor.creativekonsoles.com ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <img src="assets/streamfader-logo.png" class="product-logo" alt="Stream Fader" onerror="this.style.opacity='0'; this.style.width='0'">
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5556</span>
-            </div>
-          </div>
-          <div class="product-name">Stream Fader</div>
-          <div class="product-desc">DJ-style crossfader for streaming content. Blend critic scores and audience ratings. Find what's actually worth watching.</div>
-          <a href="https://stream.creativekonsoles.com" target="_blank" rel="noopener" class="product-link">stream.creativekonsoles.com ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <img src="assets/kalshi-logo.png" class="product-logo" alt="Kalshi Konnektor" onerror="this.style.opacity='0'; this.style.width='0'">
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5555</span>
-            </div>
-          </div>
-          <div class="product-name">Kalshi Konnektor</div>
-          <div class="product-desc">Real-time edge detection for Kalshi prediction markets. Trade with precision.</div>
-          <a href="https://github.com/papjamzzz/kalshi-konnektor" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/kalshi-konnektor ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <img src="assets/kk-logo-1024.png" class="product-logo" alt="KK Trader" onerror="this.style.opacity='0'; this.style.width='0'">
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5559</span>
-            </div>
-          </div>
-          <div class="product-name">KK Trader</div>
-          <div class="product-desc">Autonomous 24/7 Kalshi trading bot. Set the parameters. Let it run.</div>
-          <a href="https://github.com/papjamzzz/kalshi-trader" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/kalshi-trader ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:#1a1a1a; color:#5EE88A;">KK</div>
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5560</span>
-            </div>
-          </div>
-          <div class="product-name">Kode Keeper</div>
-          <div class="product-desc">Claude Code mission control dashboard. All sessions, all history, one place.</div>
-          <a href="https://github.com/papjamzzz/kodekeeper" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/kodekeeper ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:transparent; padding:0; overflow:hidden;"><img src="assets/launcher-logo.jpg" alt="Launcher" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;"></div>
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5554</span>
-            </div>
-          </div>
-          <div class="product-name">Launcher</div>
-          <div class="product-desc">Central hub for all Creative Konsoles tools. One click to any app.</div>
-          <a href="https://github.com/papjamzzz/launcher" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/launcher ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:#0a0807; color:#e0a830; font-family:Georgia,serif; font-style:italic; font-size:22px; letter-spacing:-0.01em;">M</div>
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5565</span>
-            </div>
-          </div>
-          <div class="product-name">Memoir</div>
-          <div class="product-desc">Speak your memories. AI weaves them into your memoir. Voice-to-chapter storytelling for the life you've lived.</div>
-          <a href="https://memoir.creativekonsoles.com" target="_blank" rel="noopener" class="product-link">memoir.creativekonsoles.com ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:#0d1a12; color:#4ade80; font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:0.08em;">YS</div>
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5570</span>
-            </div>
-          </div>
-          <div class="product-name">YourSound</div>
-          <div class="product-desc">Record, process, and export your audio. Clean capture with zero friction.</div>
-          <a href="https://github.com/papjamzzz/yoursound" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/yoursound ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:#100d1a; color:#a78bfa; font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:0.08em;">WY</div>
-            <div class="product-badges">
-              <span class="badge-live" style="background:rgba(167,139,250,0.15);color:#a78bfa;border-color:rgba(167,139,250,0.4);">Alpha</span>
-              <span class="badge-port">&middot; 5564</span>
-            </div>
-          </div>
-          <div class="product-name">WithYou</div>
-          <div class="product-desc">AI voice companion for emotional support. 12 support modes. Built for the moments when you need to feel heard.</div>
-          <a href="https://github.com/papjamzzz/empathybot" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/empathybot ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:#0f1a10; color:#86efac; font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:0.06em;">KW</div>
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; 5563</span>
-            </div>
-          </div>
-          <div class="product-name">Key Watcher</div>
-          <div class="product-desc">API key health monitor. All your providers, all your keys, live status in one dashboard.</div>
-          <a href="https://github.com/papjamzzz/key-watcher" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/key-watcher ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:#0a0a14; color:#818cf8; font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:0.06em;">CG</div>
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; Railway</span>
-            </div>
-          </div>
-          <div class="product-name">Crypto Grid</div>
-          <div class="product-desc">Autonomous crypto grid trading bot. Self-adjusting buy/sell ladder for BTC-USD. Runs 24/7. Paper mode + live execution.</div>
-          <a href="https://github.com/papjamzzz/crypto-grid" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/crypto-grid ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:#0a1410; color:#34d399; font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:0.06em;">CK</div>
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; Railway</span>
-            </div>
-          </div>
-          <div class="product-name">Check'd</div>
-          <div class="product-desc">AI-vetted product discovery. Every listing reviewed by Claude before it goes live. Signal over noise — no spam, no affiliate traps.</div>
-          <a href="https://github.com/papjamzzz/checkd" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/checkd ↗</a>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card-top">
-            <div class="product-icon-box" style="background:#140a0a; color:#f87171; font-family:var(--font-mono); font-size:13px; font-weight:700; letter-spacing:0.06em;">MC</div>
-            <div class="product-badges">
-              <span class="badge-live">Live</span>
-              <span class="badge-port">&middot; Vercel</span>
-            </div>
-          </div>
-          <div class="product-name">Me-Chanic</div>
-          <div class="product-desc">AI vehicle triage. Upload OBD fault codes, get a ranked diagnosis, cost estimate, and repair plan before you spend shop money.</div>
-          <a href="https://github.com/papjamzzz/me-chanic" target="_blank" rel="noopener" class="product-link">github.com/papjamzzz/me-chanic ↗</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── CUSTOM SOFTWARE ── -->
-  <section class="section-custom" id="about">
-    <div class="container">
-      <h2 class="section-headline">We build software<br>for anything.</h2>
-      <p class="section-sub">Custom development at the lowest prices in the industry.<br>Any platform. Any application. No agency overhead &mdash; direct to you.</p>
-
-      <div class="custom-grid">
-        <div class="custom-col">
-          <div class="custom-col-title">Any Platform</div>
-          <p><strong>macOS &middot; iOS &middot; Android</strong><br>Windows &middot; Linux &middot; Web<br><br>Native or cross-platform. We build where your users are.</p>
-        </div>
-        <div class="custom-col">
-          <div class="custom-col-title">Any Application</div>
-          <p><strong>Audio tools &middot; Trading systems</strong><br>AI apps &middot; Dashboards &middot; Automation<br><br>If you can describe it, we can build it. Usually faster than you expect.</p>
-        </div>
-        <div class="custom-col">
-          <div class="custom-col-title">Lowest Prices</div>
-          <p><strong>No bloat. No overhead.</strong><br>No account managers. No decks.<br><br>Tools built using thought &mdash; not templates. Direct to you, direct to done.</p>
-        </div>
-      </div>
-
-      <div class="platform-badges">
-        <span class="platform-badge" style="background:#000; color:#fff; border-color:#000;">macOS</span>
-        <span class="platform-badge" style="background:#f5f5f0; color:#1a1a1a; border-color:#ccc;">Web</span>
-        <span class="platform-badge" style="background:#1a1a1a; color:#5EE88A; border-color:#5EE88A;">Railway</span>
-        <span class="platform-badge" style="background:#f5f5f0; color:#1a1a1a; border-color:#ccc;">GitHub Pages</span>
-      </div>
-
-      <a href="mailto:hello@creativekonsoles.com" class="btn-blue">Start a project &rarr;</a>
-    </div>
-  </section>
-
-  <!-- ── POWERED BY ── -->
-  <section class="section-powered">
-    <div class="container">
-      <h2 class="section-headline">Built on the world's<br>best AI.</h2>
-      <p class="section-sub">5i chains all five together. Everything else runs on the right one for the job.</p>
-
-      <div class="ai-cards">
-        <div class="ai-card" style="border-top-color: #10a37f;">
-          <div class="ai-company">OpenAI</div>
-          <div class="ai-model">GPT-4o</div>
-          <div class="ai-role">First in chain. Sets the initial synthesis baseline.</div>
-        </div>
-        <div class="ai-card" style="border-top-color: #c96442;">
-          <div class="ai-company">Anthropic</div>
-          <div class="ai-model">Claude 3.5</div>
-          <div class="ai-role">Second in chain. Refines and adds nuance.</div>
-        </div>
-        <div class="ai-card" style="border-top-color: #4285f4;">
-          <div class="ai-company">Google</div>
-          <div class="ai-model">Gemini 2.0</div>
-          <div class="ai-role">Third. Cross-reference and fact check.</div>
-        </div>
-        <div class="ai-card" style="border-top-color: #f05a1a;">
-          <div class="ai-company">Mistral AI</div>
-          <div class="ai-model">Mistral Large</div>
-          <div class="ai-role">Fourth. Precision editing and compression.</div>
-        </div>
-        <div class="ai-card" style="border-top-color: #1a1a1a;">
-          <div class="ai-company">xAI</div>
-          <div class="ai-model">Grok 3</div>
-          <div class="ai-role">Final verdict. Authoritative synthesis from all four.</div>
-        </div>
-      </div>
-
-      <div class="github-row">
-        <span class="github-note">All products on GitHub &rarr;</span>
-        <a href="https://github.com/papjamzzz" target="_blank" rel="noopener" class="github-link">github.com/papjamzzz</a>
-      </div>
-
-      <div class="stack-section">
-        <span class="stack-label">Stack</span>
-        <div class="stack-items">
-          <span class="stack-item">Python</span>
-          <span class="stack-item">Flask</span>
-          <span class="stack-item">Railway</span>
-          <span class="stack-item">GitHub Pages</span>
-          <span class="stack-item">Vanilla JS</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FOR PRODUCERS ── -->
-  <section class="section-producers">
-    <div class="container">
-      <span class="eyebrow">For Music Producers</span>
-      <h2 class="section-headline" style="margin-top:16px;">Made for Ableton<br>producers.</h2>
-      <p class="section-sub">Two tools built specifically for music production &mdash; because your CPU matters and your sessions shouldn&rsquo;t crash.</p>
-
-      <div class="producer-cards">
-        <div class="producer-card">
-          <div class="producer-card-icon">&#127978;</div>
-          <div class="producer-card-name">DAW Doctor</div>
-          <p class="producer-card-desc">Know exactly what&rsquo;s wrong with your system before it crashes your session. Scan every component, get a diagnosis, get a fix. OBD for Ableton.</p>
-          <a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener" class="btn-ghost" style="font-size:13px;">View on GitHub &rarr;</a>
-        </div>
-        <div class="producer-card">
-          <div class="producer-card-icon">&#128202;</div>
-          <div class="producer-card-name">Track Tracks</div>
-          <p class="producer-card-desc">See CPU usage per track, per plugin, in real time. Stop guessing which Serum instance is murdering your session. Know instantly.</p>
-          <a href="https://github.com/papjamzzz/Track-Tracks" target="_blank" rel="noopener" class="btn-ghost" style="font-size:13px;">View on GitHub &rarr;</a>
-        </div>
-      </div>
-
-      <div class="vst-badges">
-        <span class="vst-badge">VST3</span>
-        <span class="vst-badge">AU</span>
-        <span class="vst-badge">AAX</span>
-        <span class="vst-badge">Ableton Live 11+</span>
-        <span class="vst-badge">macOS</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── PRICING ── -->
-  <section class="section-pricing" id="pricing">
-    <div class="container">
-      <h2 class="pricing-headline">Simple pricing.<br>No surprises.</h2>
-      <p class="pricing-sub">Start free with your own keys. Go Pro when you&rsquo;re ready.</p>
-
-      <div class="pricing-grid">
-
-        <!-- FREE -->
-        <div class="pricing-card">
-          <div class="pricing-tier">Free</div>
-          <div class="pricing-price">$0<span>/mo</span></div>
-          <div class="pricing-desc">Bring your own API keys. Full access, your cost.</div>
-          <ul class="pricing-features">
-            <li>All 5 AI models</li>
-            <li>Unlimited syntheses</li>
-            <li>BYOK — your API keys</li>
-            <li>Dark + light mode</li>
-            <li class="dim">No server keys included</li>
-            <li class="dim">No priority support</li>
-          </ul>
-          <a href="https://github.com/papjamzzz/5i" target="_blank" class="btn-pricing">Get Started Free &rarr;</a>
-        </div>
-
-        <!-- PRO -->
-        <div class="pricing-card featured">
-          <div class="pricing-badge">EARLY ACCESS</div>
-          <div class="pricing-tier">Base Synthesis</div>
-          <div class="pricing-price">$18<span>/mo</span></div>
-          <div class="pricing-desc">Server keys included. No API accounts needed. Just ask.</div>
-          <ul class="pricing-features">
-            <li>All 5 AI models</li>
-            <li>100 syntheses / month</li>
-            <li>Server keys — no setup</li>
-            <li>Konsole Mode</li>
-            <li>Priority support</li>
-            <li>Founding member price — locked in</li>
-          </ul>
-          <a href="https://buy.stripe.com/aFa8wJ8WU8Ei0Ie6dN7g403" class="btn-pricing primary" id="proBuyBtn">Subscribe Now &rarr;</a>
-          <div class="pricing-note">Cancel anytime &nbsp;·&nbsp; Founding price locked forever</div>
-        </div>
-
-        <!-- UNLIMITED -->
-        <div class="pricing-card">
-          <div class="pricing-tier">Foundational Synthesis</div>
-          <div class="pricing-price">$88<span>/mo</span></div>
-          <div class="pricing-desc">High-volume teams and power users. API access included.</div>
-          <ul class="pricing-features">
-            <li>All 5 AI models</li>
-            <li>1,000 syntheses / month</li>
-            <li>Server keys — no setup</li>
-            <li>API access</li>
-            <li>Priority support + SLA</li>
-            <li>Team seats (up to 5)</li>
-          </ul>
-          <a href="https://buy.stripe.com/7sY8wJgpm5s64Yu59J7g404" class="btn-pricing">Subscribe Now &rarr;</a>
-        </div>
-
-      </div>
-
-      <!-- Enterprise Card -->
-      <div class="enterprise-card">
-        <div class="enterprise-left">
-          <div class="enterprise-tier">Enterprise</div>
-          <div class="enterprise-headline">Built for teams that move at scale.</div>
-          <div class="enterprise-desc">Custom volume, dedicated support, white-label options, and direct integration. Reach out today and we&rsquo;ll have one of the crew get back to you.</div>
-        </div>
-        <div class="enterprise-right">
-          <a href="mailto:support@creativekonsoles.com" class="btn-enterprise">Contact Us &rarr;</a>
-        </div>
-      </div>
-
-      <!-- SBS Comparison -->
-      <div class="sbs-wrap">
-        <div class="sbs-label">Plan Comparison</div>
-        <table class="sbs-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th class="col-base">Base Synthesis<br><span style="font-size:20px;letter-spacing:0;font-family:var(--font-body);font-weight:700;color:var(--green);">$18</span><span style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:400;">/mo</span></th>
-              <th class="col-found">Foundational Synthesis<br><span style="font-size:20px;letter-spacing:0;font-family:var(--font-body);font-weight:700;color:rgba(255,255,255,0.75);">$88</span><span style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:400;">/mo</span></th>
-              <th class="col-ent">Enterprise<br><span style="font-size:16px;letter-spacing:0;font-family:var(--font-body);font-weight:600;color:rgba(255,255,255,0.55);">Custom</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Syntheses / month</td>
-              <td class="col-base">100</td>
-              <td class="col-found">1,000</td>
-              <td class="col-ent">Custom</td>
-            </tr>
-            <tr>
-              <td>AI models</td>
-              <td class="col-base">All 5</td>
-              <td class="col-found">All 5</td>
-              <td class="col-ent">All 5</td>
-            </tr>
-            <tr>
-              <td>Server API keys included</td>
-              <td class="col-base"><span class="sbs-check">✓</span></td>
-              <td class="col-found"><span class="sbs-check">✓</span></td>
-              <td class="col-ent"><span class="sbs-check">✓</span></td>
-            </tr>
-            <tr>
-              <td>Konsole Mode</td>
-              <td class="col-base"><span class="sbs-check">✓</span></td>
-              <td class="col-found"><span class="sbs-check">✓</span></td>
-              <td class="col-ent"><span class="sbs-check">✓</span></td>
-            </tr>
-            <tr>
-              <td>Priority support</td>
-              <td class="col-base"><span class="sbs-check">✓</span></td>
-              <td class="col-found"><span class="sbs-check">✓</span></td>
-              <td class="col-ent"><span class="sbs-check">✓</span></td>
-            </tr>
-            <tr>
-              <td>API access</td>
-              <td class="col-base"><span class="sbs-x">—</span></td>
-              <td class="col-found"><span class="sbs-check">✓</span></td>
-              <td class="col-ent"><span class="sbs-check">✓</span></td>
-            </tr>
-            <tr>
-              <td>SLA guarantee</td>
-              <td class="col-base"><span class="sbs-x">—</span></td>
-              <td class="col-found"><span class="sbs-check">✓</span></td>
-              <td class="col-ent"><span class="sbs-check">✓</span></td>
-            </tr>
-            <tr>
-              <td>Team seats</td>
-              <td class="col-base"><span class="sbs-x">—</span></td>
-              <td class="col-found">Up to 5</td>
-              <td class="col-ent">Unlimited</td>
-            </tr>
-            <tr>
-              <td>White-label options</td>
-              <td class="col-base"><span class="sbs-x">—</span></td>
-              <td class="col-found"><span class="sbs-x">—</span></td>
-              <td class="col-ent"><span class="sbs-check">✓</span></td>
-            </tr>
-            <tr>
-              <td>Dedicated onboarding</td>
-              <td class="col-base"><span class="sbs-x">—</span></td>
-              <td class="col-found"><span class="sbs-x">—</span></td>
-              <td class="col-ent"><span class="sbs-check">✓</span></td>
-            </tr>
-            <tr>
-              <td>Founding price locked</td>
-              <td class="col-base"><span class="sbs-check">✓</span></td>
-              <td class="col-found"><span class="sbs-check">✓</span></td>
-              <td class="col-ent"><span class="sbs-x">—</span></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td class="col-base" style="padding-bottom:20px;">
-                <a href="https://buy.stripe.com/aFa8wJ8WU8Ei0Ie6dN7g403" class="btn-pricing primary" style="margin-top:8px;">Get Base &rarr;</a>
-              </td>
-              <td class="col-found" style="padding-bottom:20px;">
-                <a href="https://buy.stripe.com/7sY8wJgpm5s64Yu59J7g404" class="btn-pricing" style="margin-top:8px;">Get Foundational &rarr;</a>
-              </td>
-              <td class="col-ent" style="padding-bottom:20px;">
-                <a href="mailto:support@creativekonsoles.com" class="btn-pricing" style="margin-top:8px;">Contact Us &rarr;</a>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ── BUILD TO SPEC ── -->
-  <section id="build" style="background:var(--white);padding:100px 0;border-top:1px solid var(--border);">
-    <div class="container">
-      <span class="eyebrow">Custom Builds</span>
-      <h2 class="section-headline" style="margin-top:16px;">Have an idea<br>but no developer?</h2>
-      <p class="section-sub" style="max-width:560px;margin-bottom:0;">You don't need to know how to code. You just need to know what problem you want solved. I've built trading bots, AI tools, music production dashboards, voice companions — all from scratch. If you can describe what you need, I can build it.</p>
-
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:56px 0;">
-
-        <div style="border-left:3px solid var(--green);padding-left:20px;">
-          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-dark);margin-bottom:10px;">Step 1</div>
-          <div style="font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:8px;">Tell me what you need</div>
-          <p style="font-size:14px;color:var(--muted);line-height:1.65;">No technical language required. Describe the problem. "I want a tool that does X" is enough to start. We'll figure out the rest together.</p>
-        </div>
-
-        <div style="border-left:3px solid var(--green);padding-left:20px;">
-          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-dark);margin-bottom:10px;">Step 2</div>
-          <div style="font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:8px;">I scope it and price it</div>
-          <p style="font-size:14px;color:var(--muted);line-height:1.65;">I'll tell you what's possible, what it'll cost, and how long it takes. Simple tools from $150. Full apps $500–$1,200. No hidden costs. No scope creep surprises.</p>
-        </div>
-
-        <div style="border-left:3px solid var(--green);padding-left:20px;">
-          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-dark);margin-bottom:10px;">Step 3</div>
-          <div style="font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:8px;">You get a working tool</div>
-          <p style="font-size:14px;color:var(--muted);line-height:1.65;">Not a mockup. Not a prototype. A deployed, running piece of software. You own it. The code is yours. It ships to a real URL.</p>
-        </div>
-
-      </div>
-
-      <div style="background:var(--off-white);border:1px solid var(--border);padding:40px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;">
+    <a class="product-card" href="https://gain.creativekonsoles.com" target="_blank">
+      <div class="card-accent" style="background:var(--gain)"></div>
+      <div class="card-body">
         <div>
-          <div style="font-family:var(--font-head);font-size:22px;font-weight:700;margin-bottom:8px;">What kinds of things can you build?</div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
-            <span style="font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);">AI tools</span>
-            <span style="font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);">Dashboards</span>
-            <span style="font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);">Automation bots</span>
-            <span style="font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);">Data trackers</span>
-            <span style="font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);">Voice apps</span>
-            <span style="font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);">Trading tools</span>
-            <span style="font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);">Internal tools</span>
-            <span style="font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border);color:var(--muted);">Browser tools</span>
-          </div>
+          <div class="card-name">Gain</div>
+          <div class="card-type">AI Behavioral Mixer</div>
         </div>
-        <div style="flex-shrink:0;">
-          <a href="https://build.creativekonsoles.com" target="_blank" class="btn-green" style="font-size:15px;padding:14px 32px;">Start a project &rarr;</a>
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:10px;text-align:center;">build.creativekonsoles.com</div>
-        </div>
+        <p class="card-desc">Dial in how AI thinks. Eight behavioral parameters — effort, confidence, verbosity, boldness — tuned in real time.</p>
+        <div class="card-link">gain.creativekonsoles.com <span class="card-arrow">→</span></div>
       </div>
+    </a>
 
+    <a class="product-card" href="https://web-production-94a13.up.railway.app" target="_blank">
+      <div class="card-accent" style="background:var(--5i)"></div>
+      <div class="card-body">
+        <div>
+          <div class="card-name">5i</div>
+          <div class="card-type">Parallel AI Synthesis</div>
+        </div>
+        <p class="card-desc">One prompt. Five models simultaneously. GPT-4o, Claude, Gemini, Grok, Mistral — parallel response plus unified synthesis verdict.</p>
+        <div class="card-link">5i synthesis engine <span class="card-arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="product-card" href="https://stream.creativekonsoles.com" target="_blank">
+      <div class="card-accent" style="background:var(--sf)"></div>
+      <div class="card-body">
+        <div>
+          <div class="card-name">StreamFader</div>
+          <div class="card-type">Live Mix Control</div>
+        </div>
+        <p class="card-desc">Real-time streaming mix control. Faders, levels, and state — managed from a single clean interface.</p>
+        <div class="card-link">stream.creativekonsoles.com <span class="card-arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="product-card" href="https://memoir.creativekonsoles.com" target="_blank">
+      <div class="card-accent" style="background:var(--memoir)"></div>
+      <div class="card-body">
+        <div>
+          <div class="card-name">Memoir</div>
+          <div class="card-type">Voice Memoir Engine</div>
+        </div>
+        <p class="card-desc">Speak your story. Memoir transcribes, structures, and preserves voice-recorded memories into a searchable personal archive.</p>
+        <div class="card-link">memoir.creativekonsoles.com <span class="card-arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="product-card" href="https://dawdoctor.creativekonsoles.com" target="_blank">
+      <div class="card-accent" style="background:#1a1a1a"></div>
+      <div class="card-body">
+        <div>
+          <div class="card-name">DAW Doctor</div>
+          <div class="card-type">Producer Diagnostic</div>
+        </div>
+        <p class="card-desc">Diagnose your DAW. Plugin conflicts, CPU spikes, routing problems — analyzed and explained in plain language.</p>
+        <div class="card-link">dawdoctor.creativekonsoles.com <span class="card-arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="product-card" href="https://build.creativekonsoles.com" target="_blank">
+      <div class="card-accent" style="background:#555"></div>
+      <div class="card-body">
+        <div>
+          <div class="card-name">Build</div>
+          <div class="card-type">Custom Software</div>
+        </div>
+        <p class="card-desc">Need something built to spec? One builder, no agency markup. Tools, dashboards, automations — scoped and shipped fast.</p>
+        <div class="card-link">build.creativekonsoles.com <span class="card-arrow">→</span></div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- CUSTOM BUILDS -->
+  <div class="builds-strip">
+    <div class="builds-left">
+      <div class="builds-eyebrow">Custom work</div>
+      <div class="builds-headline">Built to spec.<br>No agency markup.</div>
+      <p class="builds-sub">Tell us what you need. We scope it, price it, and ship it. Dashboards, automations, AI integrations — any stack.</p>
+      <a class="btn-white" href="https://build.creativekonsoles.com" target="_blank">Start a project</a>
     </div>
-  </section>
-
-  <!-- ── BETA CTA ── -->
-  <section class="section-beta" id="beta">
-    <div class="container">
-      <h2 class="beta-headline">Join the Creative<br>Konsoles beta.</h2>
-      <p class="beta-sub">Early access to 5i and all future tools. Toss that old AI UI to the side. We have 5i &mdash; 5 AIs. All delivered in seconds with a fully unbiased, synthesized output to your prompt, attachment, etc.</p>
-
-      <form class="beta-form" id="betaForm" onsubmit="handleBeta(event)">
-        <input type="hidden" name="access_key" value="eedb06aa-fe5c-464c-9d8a-31e3476efea7">
-        <input type="hidden" name="subject" value="New Creative Konsoles Beta Signup">
-        <input type="hidden" name="from_name" value="Creative Konsoles Website">
-        <input type="email" class="beta-input" placeholder="your@email.com" required id="betaEmail" name="email">
-        <button type="submit" class="beta-btn" id="betaBtn">Get Access</button>
-      </form>
-      <p class="beta-fine" id="betaFine">No spam. Cancel anytime.</p>
-      <div class="beta-success" id="betaSuccess">Access confirmed. You&rsquo;re on the list.</div>
-      <div class="beta-error" id="betaError">Something went wrong. Email us directly: <a href="mailto:support@creativekonsoles.com">support@creativekonsoles.com</a></div>
+    <div class="builds-right">
+      <div class="builds-item"><div class="builds-dot"></div>Internal tools and dashboards</div>
+      <div class="builds-item"><div class="builds-dot"></div>AI integrations and automations</div>
+      <div class="builds-item"><div class="builds-dot"></div>Data pipelines and monitors</div>
+      <div class="builds-item"><div class="builds-dot"></div>Audio and streaming utilities</div>
+      <div class="builds-item"><div class="builds-dot"></div>Scope to ship in days, not months</div>
     </div>
-  </section>
+  </div>
 
-  <!-- ── FOOTER ── -->
+  <!-- FOOTER -->
   <footer>
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <img src="assets/ck-icon-1024.png" alt="CK" onerror="this.style.opacity='0'; this.style.width='0'">
-          Creative Konsoles
-        </div>
-        <div class="footer-tagline">&copy; 2026 Creative Konsoles. Precision Milled Software.</div>
-      </div>
-
-      <div class="footer-links">
-        <div class="footer-col">
-          <div class="footer-col-title">Products</div>
-          <ul>
-            <li><a href="https://5i.creativekonsoles.com" target="_blank" rel="noopener">5i — Five Intelligences</a></li>
-            <li><a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener">DAW Doctor</a></li>
-            <li><a href="https://keeper.creativekonsoles.com" target="_blank" rel="noopener">Kode Keeper</a></li>
-            <li><a href="https://stream.creativekonsoles.com" target="_blank" rel="noopener">Stream Fader</a></li>
-            <li><a href="https://github.com/papjamzzz/Daw-Doctor" target="_blank" rel="noopener">DAW Doctor</a></li>
-            <li><a href="https://github.com/papjamzzz/Track-Tracks" target="_blank" rel="noopener">Track Tracks</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Company</div>
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="https://github.com/papjamzzz" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="mailto:jeremiah@creativekonsoles.com">jeremiah@creativekonsoles.com</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Follow</div>
-          <ul>
-            <li><a href="https://x.com/creativekonsole" target="_blank" rel="noopener">X @creativekonsole</a></li>
-            <li><a href="https://www.linkedin.com/in/jeremiahsmith3335/" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><a href="https://www.facebook.com/profile.php?id=61576497442325" target="_blank" rel="noopener">Facebook</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Contact</div>
-          <ul>
-            <li><a href="mailto:support@creativekonsoles.com">support@</a></li>
-            <li><a href="mailto:sales@creativekonsoles.com">sales@</a></li>
-            <li><a href="mailto:jeremiah@creativekonsoles.com">jeremiah@</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Platform</div>
-          <ul>
-            <li><a href="#suite">Web Apps</a></li>
-            <li><a href="https://build.creativekonsoles.com" target="_blank">Custom Builds</a></li>
-            <li><a href="https://github.com/papjamzzz" target="_blank" rel="noopener">Open Source</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Legal</div>
-          <ul>
-            <li><a href="/terms">Terms of Service</a></li>
-            <li><a href="mailto:jeremiah@creativekonsoles.com">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <span class="footer-copy">Built with precision. Shipped with purpose.</span>
-        <a href="https://github.com/papjamzzz" target="_blank" rel="noopener" class="footer-github">github.com/papjamzzz &#8599;</a>
-      </div>
+    <div class="footer-left">© 2026 Creative Konsoles</div>
+    <div class="footer-links">
+      <a href="https://x.com/RealRealEyes" target="_blank">X</a>
+      <a href="https://github.com/papjamzzz" target="_blank">GitHub</a>
+      <a href="mailto:support@creativekonsoles.com">Contact</a>
+      <a href="/terms.html">Terms</a>
     </div>
   </footer>
-
-  <script>
-    async function handleBeta(e) {
-      e.preventDefault();
-      var form = document.getElementById('betaForm');
-      var btn = document.getElementById('betaBtn');
-      var email = document.getElementById('betaEmail').value;
-      if (!email) return;
-
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-
-      try {
-        var data = new FormData(form);
-        var res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: data
-        });
-        var json = await res.json();
-
-        if (json.success) {
-          form.style.display = 'none';
-          document.getElementById('betaFine').style.display = 'none';
-          document.getElementById('betaSuccess').style.display = 'block';
-        } else {
-          throw new Error('API error');
-        }
-      } catch (err) {
-        form.style.display = 'none';
-        document.getElementById('betaFine').style.display = 'none';
-        document.getElementById('betaError').style.display = 'block';
-      }
-    }
-
-    // Nav active state on scroll
-    var sections = document.querySelectorAll('section[id]');
-    var navLinks = document.querySelectorAll('.nav-links a');
-
-    window.addEventListener('scroll', function() {
-      var current = '';
-      sections.forEach(function(section) {
-        if (pageYOffset >= section.offsetTop - 80) {
-          current = section.getAttribute('id');
-        }
-      });
-      navLinks.forEach(function(link) {
-        link.style.color = '';
-        if (link.getAttribute('href') === '#' + current) {
-          link.style.color = '#1a1a1a';
-        }
-      });
-    });
-  </script>
 
 </body>
 </html>

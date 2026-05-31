@@ -26,13 +26,15 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --black:  #111111;
-      --white:  #ffffff;
-      --gain:   #CC1800;
-      --5i:     #0040FF;
-      --sf:     #C49A00;
-      --memoir: #7700CC;
-      --grid:   1px solid #111111;
+      --black:      #111111;
+      --white:      #ffffff;
+      --gain:       #CC1800;
+      --5i:         #0040FF;
+      --sf:         #C49A00;
+      --memoir:     #7700CC;
+      --biosurface: #005533;
+      --sonar:      #8B5E14;
+      --grid:       1px solid #111111;
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
@@ -82,21 +84,23 @@
     .hero-right {
       display: grid;
       grid-template-columns: 3fr 1fr 2fr;
-      grid-template-rows: 2fr 1fr 2fr;
+      grid-template-rows: 2fr 1fr 2fr 2fr;
     }
 
     /* Base block */
     .block { border-right: var(--grid); border-bottom: var(--grid); }
     .block-white1 { background: var(--white); grid-column: 2; grid-row: 1; }
     .block-white2 { background: var(--white); grid-column: 2; grid-row: 2; }
-    .block-white3 { background: var(--white); grid-column: 1; grid-row: 3; border-bottom: none; }
+    .block-white3 { background: var(--white); grid-column: 1; grid-row: 3; }
 
     /* Interactive blocks — grid positions */
     .iblock { border-right: var(--grid); border-bottom: var(--grid); position: relative; overflow: hidden; cursor: pointer; }
     .iblock-gain   { grid-column: 1;   grid-row: 1; }
     .iblock-5i     { grid-column: 3;   grid-row: 1 / 3; border-right: none; }
     .iblock-sf     { grid-column: 1;   grid-row: 2; }
-    .iblock-memoir { grid-column: 2/4; grid-row: 3; border-right: none; border-bottom: none; }
+    .iblock-memoir     { grid-column: 2/4; grid-row: 3; border-right: none; }
+    .iblock-biosurface { grid-column: 1;   grid-row: 4; border-bottom: none; }
+    .iblock-sonar      { grid-column: 2/4; grid-row: 4; border-right: none; border-bottom: none; }
 
     /* Door panel — the colored face */
     .door-panel {
@@ -116,16 +120,20 @@
     .iblock:hover .door-panel::after { color: rgba(255,255,255,0.7); }
 
     /* Open states — each block slides a different direction (centrifugal) */
-    .iblock-gain.open   .door-panel { transform: translateY(-102%); }
-    .iblock-5i.open     .door-panel { transform: translateX(102%);  }
-    .iblock-sf.open     .door-panel { transform: translateY(102%);  }
-    .iblock-memoir.open .door-panel { transform: translateX(-102%); }
+    .iblock-gain.open       .door-panel { transform: translateY(-102%); }
+    .iblock-5i.open         .door-panel { transform: translateX(102%);  }
+    .iblock-sf.open         .door-panel { transform: translateY(102%);  }
+    .iblock-memoir.open     .door-panel { transform: translateX(-102%); }
+    .iblock-biosurface.open .door-panel { transform: translateY(102%);  }
+    .iblock-sonar.open      .door-panel { transform: translateX(102%);  }
 
     /* Closing gets slightly different feel (heavier return) */
-    .iblock-gain   .door-panel { transition-duration: 0.92s; }
-    .iblock-5i     .door-panel { transition-duration: 1.05s; }
-    .iblock-sf     .door-panel { transition-duration: 0.80s; }
-    .iblock-memoir .door-panel { transition-duration: 1.10s; }
+    .iblock-gain       .door-panel { transition-duration: 0.92s; }
+    .iblock-5i         .door-panel { transition-duration: 1.05s; }
+    .iblock-sf         .door-panel { transition-duration: 0.80s; }
+    .iblock-memoir     .door-panel { transition-duration: 1.10s; }
+    .iblock-biosurface .door-panel { transition-duration: 1.00s; }
+    .iblock-sonar      .door-panel { transition-duration: 0.96s; }
 
     /* Content hidden behind the door */
     .door-content {
@@ -284,6 +292,20 @@
       <span class="door-close" onclick="event.stopPropagation();closeBlock('swarm')">✕ close</span>
     </div>
 
+    <!-- BIOSURFACE — green / terrain block — slides DOWN -->
+    <div class="iblock iblock-biosurface" id="ib-bsurf" onclick="toggleBlock('bsurf')">
+      <div class="door-panel" style="background:var(--biosurface)" data-label="BioSurface"></div>
+      <div class="door-content"><canvas id="cv-bsurf"></canvas></div>
+      <span class="door-close" onclick="event.stopPropagation();closeBlock('bsurf')">✕ close</span>
+    </div>
+
+    <!-- SONAR — amber / particle flow block — slides RIGHT -->
+    <div class="iblock iblock-sonar" id="ib-sonar" onclick="toggleBlock('sonar')">
+      <div class="door-panel" style="background:var(--sonar)" data-label="Sonar"></div>
+      <div class="door-content"><canvas id="cv-sonar"></canvas></div>
+      <span class="door-close" onclick="event.stopPropagation();closeBlock('sonar')">✕ close</span>
+    </div>
+
   </div>
 </section>
 
@@ -368,13 +390,16 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script>
 // ── DOOR ENGINE ──────────────────────────────────────────────
 const blocks = {
-  blood: { el: 'ib-blood', cv: 'cv-blood', init: initBlood,   instance: null },
-  bio:   { el: 'ib-bio',   cv: 'cv-bio',   init: initBio,     instance: null },
-  rot:   { el: 'ib-rot',   cv: 'cv-rot',   init: initOrbital, instance: null },
-  swarm: { el: 'ib-swarm', cv: 'cv-swarm', init: initSwarm,   instance: null },
+  blood: { el: 'ib-blood', cv: 'cv-blood', init: initBlood,      instance: null },
+  bio:   { el: 'ib-bio',   cv: 'cv-bio',   init: initBio,        instance: null },
+  rot:   { el: 'ib-rot',   cv: 'cv-rot',   init: initOrbital,    instance: null },
+  swarm: { el: 'ib-swarm', cv: 'cv-swarm', init: initSwarm,      instance: null },
+  bsurf: { el: 'ib-bsurf', cv: 'cv-bsurf', init: initBioSurface, instance: null },
+  sonar: { el: 'ib-sonar', cv: 'cv-sonar', init: initSonar,      instance: null },
 };
 
 function toggleBlock(key) {
@@ -809,6 +834,260 @@ function initSwarm(cv) {
   return {
     start() { running = true; coherence = 0.5; tick(); },
     stop()  { running = false; if (raf) cancelAnimationFrame(raf); },
+  };
+}
+
+// ── BIOSURFACE — Three.js terrain mesh (from ailiv-biosurface) ─
+function initBioSurface(cv) {
+  if (typeof THREE === 'undefined') return { start(){}, stop(){} };
+  const W = cv.width, H = cv.height;
+  let raf, running = false;
+
+  const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H, false);
+  renderer.setClearColor(0x04040A, 1);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x04040A, 3, 12);
+
+  const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 50);
+  camera.position.set(0, -2.1, 2.4);
+  camera.lookAt(0, 0, 0);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+  const dirLight = new THREE.DirectionalLight(0xc9a96e, 1.2);
+  dirLight.position.set(1, -1, 2); scene.add(dirLight);
+  const rimLight = new THREE.DirectionalLight(0x3060ff, 0.4);
+  rimLight.position.set(-2, 2, 0.5); scene.add(rimLight);
+
+  // Color map: purple → red → orange → yellow → green → cyan
+  const CSTOPS = [
+    [0.0, [0.28,0.08,0.55]], [0.2, [0.60,0.10,0.30]],
+    [0.4, [0.82,0.35,0.10]], [0.6, [0.85,0.72,0.12]],
+    [0.8, [0.22,0.70,0.25]], [1.0, [0.05,0.80,0.80]],
+  ];
+  function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+  function mapColor(t) {
+    t = clamp01(t);
+    for (let i = 0; i < CSTOPS.length-1; i++) {
+      const [t0,c0] = CSTOPS[i], [t1,c1] = CSTOPS[i+1];
+      if (t >= t0 && t <= t1) {
+        const f = (t-t0)/(t1-t0);
+        return [c0[0]+(c1[0]-c0[0])*f, c0[1]+(c1[1]-c0[1])*f, c0[2]+(c1[2]-c0[2])*f];
+      }
+    }
+    return CSTOPS[CSTOPS.length-1][1];
+  }
+
+  function gaussian(gx,gy,cx,cy,sigma) {
+    const dx=gx-cx, dy=gy-cy;
+    return Math.exp(-(dx*dx+dy*dy)/(2*sigma*sigma));
+  }
+
+  // Biomarker triggers — fixed positions on the terrain surface
+  const triggers = [
+    { x:-0.4, y: 0.3, value:65, weight:0.9, status:'caution' },
+    { x: 0.5, y:-0.3, value:40, weight:0.8, status:'risk'    },
+    { x: 0.2, y: 0.5, value:30, weight:0.7, status:'caution' },
+    { x:-0.5, y:-0.4, value:15, weight:0.6, status:'stable'  },
+    { x: 0.1, y:-0.5, value:55, weight:0.7, status:'risk'    },
+  ];
+
+  function computeZ(gx, gy, t) {
+    const r2=gx*gx+gy*gy, r=Math.sqrt(r2);
+    const zBase = Math.max(0, (1-r2*1.1))*0.55;
+    let zDeform=0;
+    for (const tr of triggers) {
+      const nv=tr.value/100, sigma=0.28+(1-tr.weight)*0.18;
+      const g=gaussian(gx,gy,tr.x,tr.y,sigma);
+      if (tr.status==='risk')    zDeform -= g*tr.weight*nv*0.45;
+      else if (tr.status==='caution') zDeform -= g*tr.weight*nv*0.225;
+      else zDeform += g*tr.weight*(1-nv)*0.06;
+    }
+    const zBreathe = Math.sin(t*0.7+r*1.2)*0.018;
+    let zRipple=0;
+    for (const tr of triggers) {
+      if (tr.status!=='risk') continue;
+      const dx=gx-tr.x, dy=gy-tr.y, dist=Math.sqrt(dx*dx+dy*dy);
+      zRipple += Math.sin(dist*9-t*2.8)*Math.exp(-dist*4)*0.022*tr.weight;
+    }
+    const zNoise = Math.sin(gx*3.7+t*0.2)*Math.cos(gy*2.9+t*0.15)*0.008;
+    return zBase+zDeform+zBreathe+zRipple+zNoise;
+  }
+
+  const N = 40;
+  const vCount = N*N;
+  const positions = new Float32Array(vCount*3);
+  const colors    = new Float32Array(vCount*3);
+  const indices   = [];
+  for (let j=0; j<N-1; j++) {
+    for (let i=0; i<N-1; i++) {
+      const a=j*N+i, b=j*N+i+1, c=(j+1)*N+i, d=(j+1)*N+i+1;
+      indices.push(a,c,b, b,c,d);
+    }
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  geo.setAttribute('color',    new THREE.BufferAttribute(colors,3));
+  geo.setIndex(indices);
+
+  const mat = new THREE.MeshPhongMaterial({ vertexColors:true, side:THREE.DoubleSide, shininess:60 });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.scale.set(2.2, 2.2, 1.4);
+  scene.add(mesh);
+
+  const wireMat = new THREE.MeshBasicMaterial({ vertexColors:true, wireframe:true, opacity:0.12, transparent:true });
+  const wireMesh = new THREE.Mesh(geo, wireMat);
+  wireMesh.scale.copy(mesh.scale);
+  scene.add(wireMesh);
+
+  function updateSurface(t) {
+    const pos = geo.attributes.position, col = geo.attributes.color;
+    let zMin=Infinity, zMax=-Infinity;
+    const zCache = new Float32Array(vCount);
+    for (let j=0; j<N; j++) {
+      for (let i=0; i<N; i++) {
+        const idx=j*N+i;
+        const gx=(i/(N-1))*2-1, gy=(j/(N-1))*2-1;
+        const z = computeZ(gx,gy,t);
+        pos.array[idx*3]=gx; pos.array[idx*3+1]=gy; pos.array[idx*3+2]=z;
+        zCache[idx]=z;
+        if (z<zMin) zMin=z;
+        if (z>zMax) zMax=z;
+      }
+    }
+    const zRange=Math.max(0.001,zMax-zMin);
+    for (let idx=0; idx<vCount; idx++) {
+      const [r,g,b] = mapColor((zCache[idx]-zMin)/zRange);
+      col.array[idx*3]=r; col.array[idx*3+1]=g; col.array[idx*3+2]=b;
+    }
+    pos.needsUpdate=true; col.needsUpdate=true;
+    geo.computeVertexNormals();
+  }
+
+  let startTime = null;
+  function tick(ts) {
+    if (!startTime) startTime = ts;
+    const t = (ts-startTime)/1000;
+    camera.position.x = Math.sin(t*0.07)*0.15;
+    camera.position.y = -2.1+Math.sin(t*0.11)*0.08;
+    camera.lookAt(0, 0, 0.1);
+    updateSurface(t);
+    renderer.render(scene, camera);
+    if (running) raf = requestAnimationFrame(tick);
+  }
+
+  return {
+    start() { running=true; startTime=null; raf=requestAnimationFrame(tick); },
+    stop()  { running=false; if(raf) cancelAnimationFrame(raf); },
+  };
+}
+
+// ── SONAR — data particle flow (from ailiv-sonar-ecosystem) ──
+function initSonar(cv) {
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  let raf, running = false;
+
+  const COLORS = ['#C9A96E','#9B6FBF','#52C4AA','#6AB0E8','#E8916A','#A8D96E'];
+  const particles = [];
+  let lastSpawn = 0;
+  let t = 0;
+
+  const cx = W/2, cy = H/2;
+  const minD = Math.min(W,H);
+
+  function spawnParticle() {
+    const edge = Math.floor(Math.random()*4);
+    const color = COLORS[Math.floor(Math.random()*COLORS.length)];
+    let x, y;
+    if      (edge===0) { x=Math.random()*W;   y=0; }
+    else if (edge===1) { x=W;                 y=Math.random()*H; }
+    else if (edge===2) { x=Math.random()*W;   y=H; }
+    else               { x=0;                 y=Math.random()*H; }
+    particles.push({
+      x, y,
+      tx: cx+(Math.random()-0.5)*minD*0.12,
+      ty: cy+(Math.random()-0.5)*minD*0.12,
+      color, alpha:0,
+      size: 1.5+Math.random()*2,
+      spd: 0.0025+Math.random()*0.0035,
+      progress:0,
+    });
+  }
+
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return `${r},${g},${b}`;
+  }
+  const rgbCache = {};
+  COLORS.forEach(c => { rgbCache[c] = hexToRgb(c); });
+
+  function tick() {
+    t++;
+    ctx.fillStyle = 'rgba(4,4,10,0.28)';
+    ctx.fillRect(0, 0, W, H);
+
+    // Breathing center glow
+    const breath = Math.sin(t*0.025)*0.5+0.5;
+    const glowR = minD*0.13*(1+breath*0.1);
+    const gr = ctx.createRadialGradient(cx,cy,0, cx,cy, glowR);
+    gr.addColorStop(0,   'rgba(201,169,110,0.45)');
+    gr.addColorStop(0.5, 'rgba(201,169,110,0.12)');
+    gr.addColorStop(1,   'rgba(201,169,110,0)');
+    ctx.beginPath(); ctx.arc(cx,cy,glowR,0,Math.PI*2);
+    ctx.fillStyle=gr; ctx.fill();
+
+    // Sonar rings expanding outward
+    for (let i=0; i<3; i++) {
+      const prog = ((t*0.012+i*0.333)%1);
+      const rr = minD*0.055 + prog*minD*0.42;
+      const al = 0.18*(1-prog);
+      ctx.beginPath(); ctx.arc(cx,cy,rr,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(201,169,110,${al})`;
+      ctx.lineWidth=1; ctx.stroke();
+    }
+
+    // Center amber core
+    ctx.beginPath(); ctx.arc(cx,cy,minD*0.038,0,Math.PI*2);
+    ctx.fillStyle='rgba(201,169,110,0.85)'; ctx.fill();
+
+    // Horizontal flow lines (faint)
+    ctx.strokeStyle='rgba(201,169,110,0.04)';
+    ctx.lineWidth=1;
+    for (let i=0; i<4; i++) {
+      const fy = H*(0.2+i*0.2);
+      ctx.beginPath(); ctx.moveTo(0,fy); ctx.lineTo(W,fy); ctx.stroke();
+    }
+
+    // Spawn
+    if (t-lastSpawn > 4) { spawnParticle(); lastSpawn=t; }
+
+    // Update + draw particles
+    for (let i=particles.length-1; i>=0; i--) {
+      const p = particles[i];
+      p.progress += p.spd;
+      if (p.progress >= 1) { particles.splice(i,1); continue; }
+      const px = p.x+(p.tx-p.x)*p.progress;
+      const py = p.y+(p.ty-p.y)*p.progress;
+      // Fade in 0→0.2, full 0.2→0.7, fade out 0.7→1
+      const fade = p.progress<0.2 ? p.progress/0.2
+                 : p.progress>0.7 ? 1-(p.progress-0.7)/0.3 : 1;
+      ctx.globalAlpha = fade*0.88;
+      ctx.beginPath(); ctx.arc(px,py,p.size,0,Math.PI*2);
+      ctx.fillStyle=p.color; ctx.fill();
+    }
+    ctx.globalAlpha=1;
+
+    if (running) raf = requestAnimationFrame(tick);
+  }
+
+  return {
+    start() { running=true; tick(); },
+    stop()  { running=false; if(raf) cancelAnimationFrame(raf); },
   };
 }
 </script>

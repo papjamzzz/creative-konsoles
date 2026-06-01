@@ -110,14 +110,7 @@
       transition: transform 0.92s cubic-bezier(0.4, 0.0, 0.12, 1.0);
     }
     /* Hover: subtle label fades in */
-    .door-panel::after {
-      content: attr(data-label);
-      position: absolute; bottom: 12px; left: 14px;
-      font-size: 9px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      transition: color .2s;
-    }
-    .iblock:hover .door-panel::after { color: rgba(255,255,255,0.7); }
+    .door-panel::after { content: none; }
 
     /* Open states — each block slides a different direction (centrifugal) */
     .iblock-gain.open       .door-panel { transform: translateY(-102%); }

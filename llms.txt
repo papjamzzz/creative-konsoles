@@ -1,0 +1,30 @@
+# Creative Konsoles
+
+> Precision software for AI, audio, and data. Tools that think with you.
+
+Creative Konsoles builds specialized tools at the intersection of biometric intelligence, AI synthesis, behavioral science, and creative production. Founded by Jeremiah Smith.
+
+## Tools
+
+- [5i — Parallel AI Synthesis Engine](https://5i.creativekonsoles.com): Five frontier AI models run in parallel on every query. Disagreements are exposed, consensus is highlighted. Built for decisions where certainty matters.
+- [DAW Doctor](https://dawdoctor.creativekonsoles.com): Diagnostic and reference tool for music producers. Identifies DAW conflicts, plugin issues, and provides repair guidance with AI-assisted analysis.
+- [Memoir](https://memoir.creativekonsoles.com): Voice-to-memory system. Speak your thoughts; the system transcribes, structures, and stores them as searchable memory.
+- [Gain](https://gain.creativekonsoles.com): Behavioral intelligence mixer. Adjust behavioral parameters across individuals, teams, and organizations. Enterprise AI control layer.
+- [StreamFader](https://stream.creativekonsoles.com): Live stream production tool. Real-time audio and visual mixing for content creators.
+- [Equil](https://equil.creativekonsoles.com): Biometric sacred-geometry visualizer. Apple Watch biometrics drive generative geometry and responsive audio in real time.
+
+## Company
+
+- [Homepage](https://creativekonsoles.com): Company overview and product directory
+- [Custom Build](https://build.creativekonsoles.com): Commission custom tools ($500–$2k). We build fast.
+- [5i User Guide](https://creativekonsoles.com/5i-guide.html): How to use the 5i parallel synthesis engine
+- [Terms of Service](https://creativekonsoles.com/terms.html): Legal terms
+- [Contact](mailto:support@creativekonsoles.com): support@creativekonsoles.com
+
+## About
+
+Creative Konsoles is a boutique software studio. Every tool ships with a specific purpose — no bloat, no feature-padding. The focus is on tools that surface insight, reduce cognitive load, and extend what a person can do with the information they already have.
+
+- Founder: Jeremiah Smith
+- GitHub: https://github.com/papjamzzz
+- Twitter / X: https://x.com/RealRealEyes

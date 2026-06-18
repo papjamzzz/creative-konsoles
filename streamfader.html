@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>StreamFader — Find What to Watch, Your Way</title>
+<meta name="description" content="StreamFader blends critic and audience scores in real time with a DJ-style crossfader. Pull left for Rotten Tomatoes and Metacritic. Pull right for IMDB. Find exactly what to watch.">
+<meta name="author" content="Jeremiah Smith">
+<link rel="canonical" href="https://creativekonsoles.com/streamfader.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://creativekonsoles.com/streamfader.html">
+<meta property="og:title" content="StreamFader — Find What to Watch, Your Way">
+<meta property="og:description" content="A DJ-style crossfader that blends critic and audience scores in real time. Slide left for critical consensus. Slide right for what people actually love.">
+<meta property="og:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "StreamFader",
+  "url": "https://streamfader.creativekonsoles.com",
+  "description": "Streaming content ranker with a DJ-style crossfader. Blends critic scores (Rotten Tomatoes + Metacritic) and audience scores (IMDB) in real time. Pull the fader to weight what matters most to you.",
+  "applicationCategory": "EntertainmentApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "Creative Konsoles", "url": "https://creativekonsoles.com" },
+  "featureList": [
+    "DJ-style crossfader blending critic and audience scores",
+    "Critic score: Rotten Tomatoes + Metacritic averaged",
+    "Audience score: IMDB rating × 10",
+    "Real-time blend formula: critic × (1 − fader) + audience × fader",
+    "Genre filter pills for browsing by category",
+    "Card grid with posters, scores, and streaming metadata"
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --ink:   #333333;
+  --soft:  #666666;
+  --grid:  1px solid rgba(0,0,0,.09);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; font-size: 15px; line-height: 1.6; }
+a { color: inherit; }
+
+/* NAV */
+header { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-bottom: var(--grid); position: sticky; top: 0; background: var(--white); z-index: 100; }
+.wordmark { font-size: 13px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+nav { display: flex; }
+nav a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); transition: background .12s; }
+nav a:hover { background: var(--black); color: var(--white); }
+
+/* HERO */
+.hero { padding: 80px 40px 72px; border-bottom: var(--grid); max-width: 860px; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; margin-bottom: 20px; }
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 900; line-height: 1.0; letter-spacing: -.02em; margin-bottom: 24px; }
+.hero-sub { font-size: 18px; font-weight: 400; color: var(--ink); max-width: 560px; line-height: 1.65; margin-bottom: 36px; }
+.btn-primary { display: inline-block; height: 52px; padding: 0 32px; background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; margin-right: 12px; }
+.btn-primary:hover { background: var(--white); color: var(--black); }
+.btn-secondary { display: inline-block; height: 52px; padding: 0 32px; background: transparent; color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; }
+.btn-secondary:hover { background: var(--black); color: var(--white); }
+
+/* SECTIONS */
+.section { padding: 64px 40px; border-bottom: var(--grid); }
+.section-grid { display: grid; grid-template-columns: 260px 1fr; gap: 60px; max-width: 860px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; padding-top: 4px; }
+.section-body h2 { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 16px; }
+.section-body p { color: var(--ink); margin-bottom: 16px; max-width: 540px; }
+.section-body p:last-child { margin-bottom: 0; }
+ul.feats { list-style: none; margin-top: 20px; display: grid; gap: 10px; }
+ul.feats li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink); }
+ul.feats li::before { content: '—'; font-weight: 700; flex-shrink: 0; color: var(--black); }
+
+/* FADER DIAGRAM */
+.fader-diagram { margin-top: 28px; border: var(--grid); padding: 24px; max-width: 540px; }
+.fader-track { position: relative; height: 6px; background: #eee; border-radius: 3px; margin: 20px 0 12px; }
+.fader-fill { position: absolute; left: 0; top: 0; height: 100%; width: 40%; background: var(--black); border-radius: 3px; }
+.fader-thumb { position: absolute; top: 50%; left: 40%; transform: translate(-50%, -50%); width: 18px; height: 18px; background: var(--black); border-radius: 50%; }
+.fader-labels { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .5; }
+.fader-formula { font-size: 12px; color: var(--soft); margin-top: 16px; font-family: monospace; }
+
+/* FOOTER */
+footer { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-top: var(--grid); }
+.footer-left { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .35; }
+.footer-links { display: flex; }
+.footer-links a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); opacity: .4; transition: opacity .12s; }
+.footer-links a:hover { opacity: 1; }
+
+@media (max-width: 640px) {
+  header { padding: 0 20px; }
+  .hero { padding: 48px 20px 48px; }
+  .section { padding: 48px 20px; }
+  .section-grid { grid-template-columns: 1fr; gap: 24px; }
+  footer { flex-direction: column; height: auto; padding: 20px; gap: 12px; }
+  .footer-links a { border-left: none; border-top: var(--grid); }
+  nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="/">Creative Konsoles</a>
+  <nav>
+    <a href="/">Products</a>
+    <a href="https://streamfader.creativekonsoles.com" target="_blank">Open StreamFader</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Creative Konsoles — Streaming Tool</div>
+  <h1>Find exactly<br>what to watch.</h1>
+  <p class="hero-sub">StreamFader blends critic and audience scores with a DJ-style crossfader. Pull left for critical consensus. Pull right for what people actually love. The blend is yours.</p>
+  <a class="btn-primary" href="https://streamfader.creativekonsoles.com" target="_blank">Open StreamFader</a>
+  <a class="btn-secondary" href="/">All Tools</a>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">What it does</div>
+    <div class="section-body">
+      <h2>One fader. Three databases. Infinite taste.</h2>
+      <p>StreamFader pulls live data from three sources — Rotten Tomatoes, Metacritic, and IMDB — and puts you in control of how they're weighted. The crossfader sits at the top of the interface. Drag it. Everything below reranks in real time.</p>
+      <p>All the way left, you're watching what critics agree on. All the way right, you're watching what audiences love. Somewhere in the middle is usually the truth.</p>
+      <ul class="feats">
+        <li>Critic score: Rotten Tomatoes + Metacritic averaged into one number</li>
+        <li>Audience score: IMDB rating scaled to 100</li>
+        <li>Real-time blend driven by your fader position</li>
+        <li>Genre filter pills: Drama, Comedy, Thriller, Horror, Sci-Fi, and more</li>
+        <li>Card grid with posters, scores, and streaming metadata</li>
+        <li>6-hour cache so the data stays fresh without hammering the APIs</li>
+      </ul>
+      <div class="fader-diagram">
+        <div class="fader-labels"><span>Critics</span><span>Audience</span></div>
+        <div class="fader-track">
+          <div class="fader-fill"></div>
+          <div class="fader-thumb"></div>
+        </div>
+        <div class="fader-formula">blend = critics × (1 − fader) + audience × fader</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">Why it exists</div>
+    <div class="section-body">
+      <h2>Critics and audiences don't always agree. That's useful information.</h2>
+      <p>A film with 90% on RT and 6.2 on IMDB is telling you something. So is one with 45% from critics and an 8.1 from audiences. Conventional recommendation engines hide that tension. StreamFader puts it in your hands.</p>
+      <p>If you're in the mood to be challenged, pull left. If you want to watch something you'll actually enjoy, pull right. The scoring gap between left and right is the signal worth paying attention to.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">How to use it</div>
+    <div class="section-body">
+      <h2>Open, slide, watch.</h2>
+      <p>Open StreamFader in your browser. The crossfader defaults to a slight audience lean — a reasonable starting point. Browse the card grid, filter by genre, or adjust the fader until the list feels right.</p>
+      <p>No account required. No preferences to configure. StreamFader is free and works on any device with a browser.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Creative Konsoles</div>
+  <div class="footer-links">
+    <a href="https://streamfader.creativekonsoles.com" target="_blank">Open App</a>
+    <a href="/">All Tools</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>

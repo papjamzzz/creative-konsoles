@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DAW Doctor — Automatic Cloud Backup for Ableton Projects</title>
+<meta name="description" content="DAW Doctor watches your Ableton folder and backs up every save to Backblaze B2 instantly. Parses BPM, key, track count, and plugins from each version. Full history, one-click restore.">
+<meta name="author" content="Jeremiah Smith">
+<link rel="canonical" href="https://creativekonsoles.com/dawdoctor.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://creativekonsoles.com/dawdoctor.html">
+<meta property="og:title" content="DAW Doctor — Automatic Cloud Backup for Ableton Projects">
+<meta property="og:description" content="DAW Doctor watches your Ableton folder, backs up every .als save to the cloud instantly, and parses BPM, key, track count, and plugins. Never lose a version.">
+<meta property="og:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "DAW Doctor",
+  "url": "https://dawdoctor.creativekonsoles.com",
+  "description": "Automatic cloud backup for Ableton Live projects. Watches your WATCH_FOLDER recursively for .als and audio changes, uploads to Backblaze B2 within seconds of each save, and parses BPM, key, track count, and plugins from the .als XML. Full version history with one-click restore.",
+  "applicationCategory": "MusicApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "Creative Konsoles", "url": "https://creativekonsoles.com" },
+  "featureList": [
+    "Automatic backup on every Ableton .als save — no button to press",
+    "Cloud storage via Backblaze B2 with full version history",
+    "Parses BPM, musical key, track count, and plugin list from each .als",
+    "Version diff: see exactly what changed between saves",
+    "One-click restore from any historical version",
+    "Dashboard with live watcher status LED and auto-refreshing project table"
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --ink:   #333333;
+  --soft:  #666666;
+  --grid:  1px solid rgba(0,0,0,.09);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; font-size: 15px; line-height: 1.6; }
+a { color: inherit; }
+
+/* NAV */
+header { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-bottom: var(--grid); position: sticky; top: 0; background: var(--white); z-index: 100; }
+.wordmark { font-size: 13px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+nav { display: flex; }
+nav a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); transition: background .12s; }
+nav a:hover { background: var(--black); color: var(--white); }
+
+/* HERO */
+.hero { padding: 80px 40px 72px; border-bottom: var(--grid); max-width: 860px; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; margin-bottom: 20px; }
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 900; line-height: 1.0; letter-spacing: -.02em; margin-bottom: 24px; }
+.hero-sub { font-size: 18px; font-weight: 400; color: var(--ink); max-width: 560px; line-height: 1.65; margin-bottom: 36px; }
+.btn-primary { display: inline-block; height: 52px; padding: 0 32px; background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; margin-right: 12px; }
+.btn-primary:hover { background: var(--white); color: var(--black); }
+.btn-secondary { display: inline-block; height: 52px; padding: 0 32px; background: transparent; color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; }
+.btn-secondary:hover { background: var(--black); color: var(--white); }
+
+/* SECTIONS */
+.section { padding: 64px 40px; border-bottom: var(--grid); }
+.section-grid { display: grid; grid-template-columns: 260px 1fr; gap: 60px; max-width: 860px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; padding-top: 4px; }
+.section-body h2 { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 16px; }
+.section-body p { color: var(--ink); margin-bottom: 16px; max-width: 540px; }
+.section-body p:last-child { margin-bottom: 0; }
+ul.feats { list-style: none; margin-top: 20px; display: grid; gap: 10px; }
+ul.feats li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink); }
+ul.feats li::before { content: '—'; font-weight: 700; flex-shrink: 0; color: var(--black); }
+
+/* FLOW */
+.flow { display: grid; gap: 0; margin-top: 24px; border: var(--grid); max-width: 540px; }
+.flow-step { padding: 18px 20px; border-bottom: var(--grid); display: flex; gap: 16px; align-items: flex-start; }
+.flow-step:last-child { border-bottom: none; }
+.flow-num { font-size: 10px; font-weight: 900; letter-spacing: .12em; opacity: .3; flex-shrink: 0; padding-top: 2px; }
+.flow-text { font-size: 14px; color: var(--ink); }
+.flow-text strong { color: var(--black); }
+
+/* FOOTER */
+footer { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-top: var(--grid); }
+.footer-left { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .35; }
+.footer-links { display: flex; }
+.footer-links a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); opacity: .4; transition: opacity .12s; }
+.footer-links a:hover { opacity: 1; }
+
+@media (max-width: 640px) {
+  header { padding: 0 20px; }
+  .hero { padding: 48px 20px 48px; }
+  .section { padding: 48px 20px; }
+  .section-grid { grid-template-columns: 1fr; gap: 24px; }
+  footer { flex-direction: column; height: auto; padding: 20px; gap: 12px; }
+  .footer-links a { border-left: none; border-top: var(--grid); }
+  nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="/">Creative Konsoles</a>
+  <nav>
+    <a href="/">Products</a>
+    <a href="https://dawdoctor.creativekonsoles.com" target="_blank">Open DAW Doctor</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Creative Konsoles — Music Production Tool</div>
+  <h1>Never lose<br>a version again.</h1>
+  <p class="hero-sub">DAW Doctor watches your Ableton folder and backs up every save to the cloud the moment it happens. No buttons. No workflows. Just save as you normally would — the rest is automatic.</p>
+  <a class="btn-primary" href="https://dawdoctor.creativekonsoles.com" target="_blank">Open DAW Doctor</a>
+  <a class="btn-secondary" href="/">All Tools</a>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">What it does</div>
+    <div class="section-body">
+      <h2>Automatic backup and version history for Ableton projects</h2>
+      <p>DAW Doctor runs a background watcher on your Ableton folder. Every time you save a .als file, the watcher detects the change, waits 3 seconds to let the write complete, then uploads the file to Backblaze B2 cloud storage immediately.</p>
+      <p>It also parses the .als XML to extract BPM, musical key, track count, and the full list of plugins used — stored alongside each backup so you can see exactly what each version contained, without opening Ableton.</p>
+      <ul class="feats">
+        <li>Background watcher — triggers on every .als and audio file save, no manual step</li>
+        <li>Backblaze B2 cloud storage — fast, low-cost, S3-compatible</li>
+        <li>Parses BPM, key, track count, and plugin list from each .als</li>
+        <li>Version diff — see what changed between any two consecutive saves</li>
+        <li>One-click restore — download any historical version directly from the dashboard</li>
+        <li>Live watcher LED in the dashboard — green means active, you always know it's running</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">How it works</div>
+    <div class="section-body">
+      <h2>Save. Watch. Done.</h2>
+      <p>DAW Doctor is designed to disappear into your workflow. Once running, there is nothing to operate.</p>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <div class="flow-text"><strong>You save</strong> in Ableton as usual — Cmd+S, Cmd+Shift+S, doesn't matter.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <div class="flow-text"><strong>The watcher detects</strong> the file change within seconds.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <div class="flow-text"><strong>The .als is uploaded</strong> to Backblaze B2 and parsed for BPM, key, tracks, and plugins.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <div class="flow-text"><strong>The dashboard updates</strong> — new version appears in the table, version diff computed automatically.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">Who it's for</div>
+    <div class="section-body">
+      <h2>For producers who have lost work before</h2>
+      <p>Ableton's built-in backup helps, but it lives on the same drive. Hard drive fails, stolen laptop, corrupted project — it's all gone. DAW Doctor puts every version offsite, automatically, so recovery is a dashboard visit away.</p>
+      <p>The version history is also useful outside of disaster recovery. Finished a session and want to go back to the arrangement you had two hours ago? It's there. Changed a mix and can't remember what it sounded like before? The timestamp is in the table.</p>
+      <p>DAW Doctor is free to use. Backblaze B2 storage is billed by Backblaze at their own rates — typically cents per GB per month.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Creative Konsoles</div>
+  <div class="footer-links">
+    <a href="https://dawdoctor.creativekonsoles.com" target="_blank">Open App</a>
+    <a href="/">All Tools</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>

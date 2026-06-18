@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Equil — Biometric Sacred-Geometry Visualizer</title>
+<meta name="description" content="Equil turns your Apple Watch biometrics into generative sacred geometry and responsive audio. Heart rate, HRV, breath, and oxygen drive the geometry in real time. A love app.">
+<meta name="author" content="Jeremiah Smith">
+<link rel="canonical" href="https://creativekonsoles.com/equil.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://creativekonsoles.com/equil.html">
+<meta property="og:title" content="Equil — Biometric Sacred-Geometry Visualizer">
+<meta property="og:description" content="Your Apple Watch biometrics drive generative sacred geometry and responsive audio in real time.">
+<meta property="og:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Equil",
+  "url": "https://equil.creativekonsoles.com",
+  "description": "Biometric sacred-geometry visualizer. Apple Watch heart rate, HRV, breath rate, and SpO2 drive generative geometry and responsive audio in real time. As your nervous system settles, the geometry opens. As you activate, it tightens.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "Creative Konsoles", "url": "https://creativekonsoles.com" },
+  "featureList": [
+    "Real-time Apple Watch biometric ingest via webhook",
+    "Generative sacred geometry driven by HRV and coherence score",
+    "Responsive ambient audio matched to biometric phase",
+    "Spoken-word session library",
+    "Multi-device support: Apple Watch, WHOOP, Oura, Garmin",
+    "Demo mode with lifelike simulated biometrics"
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --ink:   #333333;
+  --soft:  #666666;
+  --grid:  1px solid rgba(0,0,0,.09);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; font-size: 15px; line-height: 1.6; }
+a { color: inherit; }
+
+/* NAV */
+header { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-bottom: var(--grid); position: sticky; top: 0; background: var(--white); z-index: 100; }
+.wordmark { font-size: 13px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+nav { display: flex; }
+nav a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); transition: background .12s; }
+nav a:hover { background: var(--black); color: var(--white); }
+
+/* HERO */
+.hero { padding: 80px 40px 72px; border-bottom: var(--grid); max-width: 860px; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; margin-bottom: 20px; }
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 900; line-height: 1.0; letter-spacing: -.02em; margin-bottom: 24px; }
+.hero-sub { font-size: 18px; font-weight: 400; color: var(--ink); max-width: 560px; line-height: 1.65; margin-bottom: 36px; }
+.btn-primary { display: inline-block; height: 52px; padding: 0 32px; background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; margin-right: 12px; }
+.btn-primary:hover { background: var(--white); color: var(--black); }
+.btn-secondary { display: inline-block; height: 52px; padding: 0 32px; background: transparent; color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; }
+.btn-secondary:hover { background: var(--black); color: var(--white); }
+
+/* SECTIONS */
+.section { padding: 64px 40px; border-bottom: var(--grid); }
+.section-grid { display: grid; grid-template-columns: 260px 1fr; gap: 60px; max-width: 860px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; padding-top: 4px; }
+.section-body h2 { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 16px; }
+.section-body p { color: var(--ink); margin-bottom: 16px; max-width: 540px; }
+.section-body p:last-child { margin-bottom: 0; }
+ul.feats { list-style: none; margin-top: 20px; display: grid; gap: 10px; }
+ul.feats li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink); }
+ul.feats li::before { content: '—'; font-weight: 700; flex-shrink: 0; color: var(--black); }
+
+/* PHASES */
+.phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: var(--grid); margin-top: 24px; }
+.phase { padding: 20px; border-right: var(--grid); }
+.phase:last-child { border-right: none; }
+.phase-dot { width: 10px; height: 10px; border-radius: 50%; margin-bottom: 10px; }
+.phase-name { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 6px; }
+.phase-desc { font-size: 12px; color: var(--soft); line-height: 1.5; }
+
+/* FOOTER */
+footer { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-top: var(--grid); }
+.footer-left { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .35; }
+.footer-links { display: flex; }
+.footer-links a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); opacity: .4; transition: opacity .12s; }
+.footer-links a:hover { opacity: 1; }
+
+@media (max-width: 640px) {
+  header { padding: 0 20px; }
+  .hero { padding: 48px 20px 48px; }
+  .section { padding: 48px 20px; }
+  .section-grid { grid-template-columns: 1fr; gap: 24px; }
+  .phases { grid-template-columns: repeat(2, 1fr); }
+  .phase:nth-child(2) { border-right: none; }
+  footer { flex-direction: column; height: auto; padding: 20px; gap: 12px; }
+  .footer-links a { border-left: none; border-top: var(--grid); }
+  nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="/">Creative Konsoles</a>
+  <nav>
+    <a href="/">Products</a>
+    <a href="https://equil.creativekonsoles.com" target="_blank">Open Equil</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Creative Konsoles — Biometric Tool</div>
+  <h1>Your body<br>is the interface.</h1>
+  <p class="hero-sub">Equil turns your Apple Watch biometrics into generative sacred geometry and responsive audio. As your nervous system settles, the geometry opens. As you activate, it tightens. There is nothing to read and nothing to do but be here.</p>
+  <a class="btn-primary" href="https://equil.creativekonsoles.com" target="_blank">Open Equil</a>
+  <a class="btn-secondary" href="/">All Tools</a>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">What it does</div>
+    <div class="section-body">
+      <h2>Sacred geometry driven by your heartbeat</h2>
+      <p>Equil reads four biometric signals from your Apple Watch — heart rate, HRV (heart rate variability), breath rate, and blood oxygen — and synthesizes them into a single coherence score between 0 and 1. That score drives everything you see and hear.</p>
+      <p>When coherence is high — slow heart rate, elevated HRV, breath near 6 breaths per minute, oxygen above 97% — the geometry blooms open, rotating slowly in teal and green. When coherence falls, the geometry tightens and warms toward amber and rose. The color and form are not decorative. They are the readout.</p>
+      <ul class="feats">
+        <li>Heart rate, HRV, breath rate, and SpO2 ingested live via /webhook</li>
+        <li>Coherence score blended from all four signals in real time</li>
+        <li>Geometry opens, expands, and brightens as you settle</li>
+        <li>Ambient audio beds matched to your biometric phase</li>
+        <li>Spoken-word sessions selectable inside the app</li>
+        <li>Works with Apple Watch, WHOOP, Oura, Garmin, and any device that can POST to a webhook</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">The phases</div>
+    <div class="section-body">
+      <h2>Four states, one continuous signal</h2>
+      <p>Equil reads your nervous system as a continuous signal, not a binary on/off. The four phase names are reference points, not categories.</p>
+      <div class="phases">
+        <div class="phase">
+          <div class="phase-dot" style="background:#6FDBC7;"></div>
+          <div class="phase-name">Settling</div>
+          <div class="phase-desc">Teal and blue. Transitioning toward calm. HRV rising, breath slowing.</div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot" style="background:#8CEF9A;"></div>
+          <div class="phase-name">Coherent</div>
+          <div class="phase-desc">Green and gold. Open, balanced. High HRV, breath near 6/min.</div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot" style="background:#F0A030;"></div>
+          <div class="phase-name">Active</div>
+          <div class="phase-desc">Amber. Heart rate elevated, energy outward. Not stress — engagement.</div>
+        </div>
+        <div class="phase">
+          <div class="phase-dot" style="background:#E8607A;"></div>
+          <div class="phase-name">Stressed</div>
+          <div class="phase-desc">Rose. Compressed geometry. HRV suppressed, system under load.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">How it works</div>
+    <div class="section-body">
+      <h2>One tap, then autonomous</h2>
+      <p>Open Equil and tap the geometry at the center. The heart blooms open and audio unlocks. From that point, the app runs on its own — no controls to operate, no settings to adjust. Just the geometry responding to your body.</p>
+      <p>Biometric data arrives via Health Auto Export on your iPhone, which forwards live Apple Watch readings to Equil's webhook endpoint. The app normalizes input from any device that can POST JSON — WHOOP, Oura, Garmin, and others are supported.</p>
+      <p>When no wearable is connected, Equil runs in demo mode: a simulator drifts through lifelike biometrics so the space continues to breathe on its own. Real data takes over automatically the moment your device connects.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">Who it's for</div>
+    <div class="section-body">
+      <h2>For anyone who wants to see their inner state, not just measure it</h2>
+      <p>Equil is built for people who wear a smartwatch and want more from that data than a number on a screen. Meditators who want ambient feedback during practice. Biohackers who track HRV and want to feel the signal, not just log it. Anyone curious about what their nervous system looks like in real time.</p>
+      <p>The spoken-word layer makes Equil useful during active sessions — twelve voiced expressions play on demand and respond to your phase. The app is free to use. No account required.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Creative Konsoles</div>
+  <div class="footer-links">
+    <a href="https://equil.creativekonsoles.com" target="_blank">Open App</a>
+    <a href="/">All Tools</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>

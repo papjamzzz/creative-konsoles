@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gain — Behavioral Mixing Board for AI</title>
+<meta name="description" content="Gain is a mixing board for AI behavior. Four tracks — Mode, Confidence, Scope, Voice — write to a Claude system prompt in real time. The Compare engine runs the same prompt through two presets and scores the difference on six metrics.">
+<meta name="author" content="Jeremiah Smith">
+<link rel="canonical" href="https://creativekonsoles.com/gain.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://creativekonsoles.com/gain.html">
+<meta property="og:title" content="Gain — Behavioral Mixing Board for AI">
+<meta property="og:description" content="Gain gives you four tracks — Mode, Confidence, Scope, Voice — that write to a Claude system prompt in real time. The Compare engine scores the difference between any two presets on 6 metrics.">
+<meta property="og:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Gain",
+  "url": "https://gain.creativekonsoles.com",
+  "description": "Behavioral mixing board for AI. Four tracks — Mode, Confidence, Scope, Voice — control how Claude thinks via faders, knobs, and buttons that write to a system prompt in real time. The Compare engine runs the same prompt through two saved presets and scores the output difference on six metrics: Adherence, Depth, Clarity, Efficiency, Confidence, and Token Efficiency.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "Creative Konsoles", "url": "https://creativekonsoles.com" },
+  "featureList": [
+    "Four behavioral tracks: Mode, Confidence, Scope, Voice",
+    "Faders, knobs, and mode buttons write to a live system prompt",
+    "Compare engine: same prompt, two presets, scored diff on 6 metrics",
+    "Scoring metrics: Adherence, Depth, Clarity, Efficiency, Confidence, Token Efficiency",
+    "Preset save/load system — build and name configurations",
+    "Physical controller support: Korg nanoKONTROL2 with LED feedback",
+    "Stats database accumulates scores across all comparison runs"
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --ink:   #333333;
+  --soft:  #666666;
+  --grid:  1px solid rgba(0,0,0,.09);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; font-size: 15px; line-height: 1.6; }
+a { color: inherit; }
+
+/* NAV */
+header { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-bottom: var(--grid); position: sticky; top: 0; background: var(--white); z-index: 100; }
+.wordmark { font-size: 13px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+nav { display: flex; }
+nav a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); transition: background .12s; }
+nav a:hover { background: var(--black); color: var(--white); }
+
+/* HERO */
+.hero { padding: 80px 40px 72px; border-bottom: var(--grid); max-width: 860px; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; margin-bottom: 20px; }
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 900; line-height: 1.0; letter-spacing: -.02em; margin-bottom: 24px; }
+.hero-sub { font-size: 18px; font-weight: 400; color: var(--ink); max-width: 560px; line-height: 1.65; margin-bottom: 36px; }
+.btn-primary { display: inline-block; height: 52px; padding: 0 32px; background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; margin-right: 12px; }
+.btn-primary:hover { background: var(--white); color: var(--black); }
+.btn-secondary { display: inline-block; height: 52px; padding: 0 32px; background: transparent; color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; }
+.btn-secondary:hover { background: var(--black); color: var(--white); }
+
+/* SECTIONS */
+.section { padding: 64px 40px; border-bottom: var(--grid); }
+.section-grid { display: grid; grid-template-columns: 260px 1fr; gap: 60px; max-width: 860px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; padding-top: 4px; }
+.section-body h2 { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 16px; }
+.section-body p { color: var(--ink); margin-bottom: 16px; max-width: 540px; }
+.section-body p:last-child { margin-bottom: 0; }
+ul.feats { list-style: none; margin-top: 20px; display: grid; gap: 10px; }
+ul.feats li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink); }
+ul.feats li::before { content: '—'; font-weight: 700; flex-shrink: 0; color: var(--black); }
+
+/* TRACKS */
+.tracks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: var(--grid); margin-top: 24px; }
+.track { padding: 20px; border-right: var(--grid); }
+.track:last-child { border-right: none; }
+.track-name { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 6px; }
+.track-controls { font-size: 12px; color: var(--soft); line-height: 1.5; margin-bottom: 8px; }
+.track-modes { font-size: 11px; font-weight: 700; color: var(--black); letter-spacing: .08em; }
+
+/* METRICS */
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: var(--grid); margin-top: 24px; }
+.metric { padding: 18px 16px; border-right: var(--grid); border-bottom: var(--grid); }
+.metric:nth-child(3), .metric:nth-child(6) { border-right: none; }
+.metric:nth-child(4), .metric:nth-child(5), .metric:nth-child(6) { border-bottom: none; }
+.metric-name { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
+.metric-desc { font-size: 12px; color: var(--soft); line-height: 1.4; }
+
+/* FOOTER */
+footer { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-top: var(--grid); }
+.footer-left { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .35; }
+.footer-links { display: flex; }
+.footer-links a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); opacity: .4; transition: opacity .12s; }
+.footer-links a:hover { opacity: 1; }
+
+@media (max-width: 640px) {
+  header { padding: 0 20px; }
+  .hero { padding: 48px 20px 48px; }
+  .section { padding: 48px 20px; }
+  .section-grid { grid-template-columns: 1fr; gap: 24px; }
+  .tracks { grid-template-columns: repeat(2, 1fr); }
+  .track:nth-child(2) { border-right: none; }
+  .track:nth-child(1), .track:nth-child(2) { border-bottom: var(--grid); }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .metric:nth-child(2), .metric:nth-child(4), .metric:nth-child(6) { border-right: none; }
+  .metric:nth-child(3) { border-right: var(--grid); }
+  .metric:nth-child(5), .metric:nth-child(6) { border-bottom: none; }
+  .metric:nth-child(3), .metric:nth-child(4) { border-bottom: var(--grid); }
+  footer { flex-direction: column; height: auto; padding: 20px; gap: 12px; }
+  .footer-links a { border-left: none; border-top: var(--grid); }
+  nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="/">Creative Konsoles</a>
+  <nav>
+    <a href="/">Products</a>
+    <a href="https://gain.creativekonsoles.com" target="_blank">Open Gain</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Creative Konsoles — AI Control Tool</div>
+  <h1>Mix how<br>AI thinks.</h1>
+  <p class="hero-sub">Gain is a behavioral mixing board for Claude. Four tracks — Mode, Confidence, Scope, Voice — write to a system prompt in real time. The Compare engine runs the same prompt through two presets and scores exactly what changed.</p>
+  <a class="btn-primary" href="https://gain.creativekonsoles.com" target="_blank">Open Gain</a>
+  <a class="btn-secondary" href="/">All Tools</a>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">What it does</div>
+    <div class="section-body">
+      <h2>Four tracks that write to a live system prompt</h2>
+      <p>Gain gives you four behavioral tracks. Each one controls a different dimension of how Claude reasons. Faders set intensity. Knobs set depth. Mode buttons switch between discrete behavioral states — EXPLORE, BUILD, DECIDE, and others. Move anything and the system prompt updates instantly.</p>
+      <p>The result is measurably different output from the same model, using the same user message, because the behavioral framing changes what the model optimizes for. EXPLORE asks for analysis and open questions. BUILD executes a single approach without alternatives. The same sentence, run through both, produces fundamentally different work.</p>
+      <div class="tracks">
+        <div class="track">
+          <div class="track-name">Mode</div>
+          <div class="track-controls">Effort fader · Thinking Time knob</div>
+          <div class="track-modes">EXPLORE / BUILD</div>
+        </div>
+        <div class="track">
+          <div class="track-name">Confidence</div>
+          <div class="track-controls">Certainty fader · Boldness knob</div>
+          <div class="track-modes">LIST / DECIDE</div>
+        </div>
+        <div class="track">
+          <div class="track-name">Scope</div>
+          <div class="track-controls">Zoom Level fader · Context Size knob</div>
+          <div class="track-modes">FILE / PROJECT</div>
+        </div>
+        <div class="track">
+          <div class="track-name">Voice</div>
+          <div class="track-controls">Verbosity fader · Memory Persistence knob</div>
+          <div class="track-modes">DIRECT / OPEN</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">The Compare engine</div>
+    <div class="section-body">
+      <h2>Same prompt. Two presets. Scored diff.</h2>
+      <p>The core feature is Compare. Save two presets — any two behavioral configurations — then run the same prompt through both. Gain runs them sequentially, then feeds both outputs to a scoring model that evaluates the difference on six metrics and writes a plain-English behavioral diagnosis.</p>
+      <p>Every run appends to a local stats database. Over time, per-preset averages emerge — you can see which configurations consistently produce deeper analysis, which produce tighter code, which waste tokens.</p>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-name">Adherence</div>
+          <div class="metric-desc">How closely the output followed the behavioral intent of the preset</div>
+        </div>
+        <div class="metric">
+          <div class="metric-name">Depth</div>
+          <div class="metric-desc">Analysis quality, reasoning completeness, engagement with nuance</div>
+        </div>
+        <div class="metric">
+          <div class="metric-name">Clarity</div>
+          <div class="metric-desc">Structural clarity, signal-to-noise ratio, ease of reading</div>
+        </div>
+        <div class="metric">
+          <div class="metric-name">Efficiency</div>
+          <div class="metric-desc">Task completion per unit of output — how much work per word</div>
+        </div>
+        <div class="metric">
+          <div class="metric-name">Confidence</div>
+          <div class="metric-desc">Decisiveness, hedging frequency, assertion quality</div>
+        </div>
+        <div class="metric">
+          <div class="metric-name">Token Efficiency</div>
+          <div class="metric-desc">Output quality relative to token count — hard numbers, not estimates</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">Hardware</div>
+    <div class="section-body">
+      <h2>Physical control via Korg nanoKONTROL2</h2>
+      <p>Gain supports the Korg nanoKONTROL2 MIDI controller as a primary hardware interface. Faders 1–4 map to intensity, certainty, scope, and room. Knobs 1–4 map to depth, risk, bandwidth, and decay. S and R buttons trigger the mode switches. LED feedback is fully wired — the hardware reflects the current state.</p>
+      <p>The result: behavioral control without touching the mouse. The cursor stays still while the system prompt changes under your hands. This is what Gain was built to demonstrate.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">Who it's for</div>
+    <div class="section-body">
+      <h2>For anyone serious about controlling AI output, not just prompting it</h2>
+      <p>Prompt engineering is mostly intuition. Gain makes it empirical. If you use Claude heavily — for writing, coding, analysis, research — and you've ever wondered whether a different framing would produce better output, Compare gives you the answer with numbers.</p>
+      <p>Gain is also built for teams and organizations through AiGain, an enterprise layer that extends behavioral control to org-level, team-level, and individual throttles. Contact us for enterprise access.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Creative Konsoles</div>
+  <div class="footer-links">
+    <a href="https://gain.creativekonsoles.com" target="_blank">Open App</a>
+    <a href="/">All Tools</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>

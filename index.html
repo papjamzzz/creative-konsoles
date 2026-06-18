@@ -195,6 +195,7 @@
     .product-card:nth-child(4) { border-top: var(--grid); }
     .product-card:nth-child(5) { border-top: var(--grid); }
     .product-card:nth-child(6) { border-top: var(--grid); border-right: none; }
+    .product-card:nth-child(7) { border-top: var(--grid); }
     .product-card:hover { background: #f5f5f5; }
     .product-card:hover .card-arrow { opacity: 1; transform: translate(0,0); }
     .card-accent { height: 6px; width: 100%; }
@@ -237,7 +238,8 @@
       .product-card:nth-child(3) { border-top: var(--grid); border-right: var(--grid); }
       .product-card:nth-child(4) { border-top: var(--grid); border-right: none; }
       .product-card:nth-child(5) { border-top: var(--grid); border-right: var(--grid); }
-      .product-card:nth-child(6) { border-top: var(--grid); }
+      .product-card:nth-child(6) { border-top: var(--grid); border-right: none; }
+      .product-card:nth-child(7) { border-top: var(--grid); border-right: var(--grid); }
       .builds-strip { grid-template-columns: 1fr; }
       .builds-left { border-right: none; border-bottom: var(--grid); padding: 40px 28px; }
       .builds-right { padding: 40px 28px; }
@@ -333,44 +335,52 @@
 <!-- PRODUCTS -->
 <div class="section-label" id="products">Products</div>
 <div class="products">
-  <a class="product-card" href="https://gain.creativekonsoles.com" target="_blank">
+  <a class="product-card" href="/gain.html">
     <div class="card-accent" style="background:var(--gain)"></div>
     <div class="card-body">
       <div><div class="card-name">Gain</div><div class="card-type">AI Behavioral Mixer</div></div>
-      <p class="card-desc">Dial in how AI thinks. Eight behavioral parameters — effort, confidence, verbosity, boldness — tuned in real time.</p>
+      <p class="card-desc">A mixing board for AI behavior. Four tracks — Mode, Confidence, Scope, Voice — write to a system prompt in real time. Compare two presets, scored on six metrics.</p>
       <div class="card-link">gain.creativekonsoles.com <span class="card-arrow">→</span></div>
     </div>
   </a>
-  <a class="product-card" href="https://web-production-94a13.up.railway.app" target="_blank">
+  <a class="product-card" href="/5i.html">
     <div class="card-accent" style="background:var(--5i)"></div>
     <div class="card-body">
       <div><div class="card-name">5i</div><div class="card-type">Parallel AI Synthesis</div></div>
       <p class="card-desc">One prompt. Five models simultaneously. GPT-4o, Claude, Gemini, Grok, Mistral — parallel response plus unified synthesis verdict.</p>
-      <div class="card-link">5i synthesis engine <span class="card-arrow">→</span></div>
+      <div class="card-link">5i.creativekonsoles.com <span class="card-arrow">→</span></div>
     </div>
   </a>
-  <a class="product-card" href="https://stream.creativekonsoles.com" target="_blank">
+  <a class="product-card" href="/streamfader.html">
     <div class="card-accent" style="background:var(--sf)"></div>
     <div class="card-body">
-      <div><div class="card-name">StreamFader</div><div class="card-type">Live Mix Control</div></div>
-      <p class="card-desc">Real-time streaming mix control. Faders, levels, and state — managed from a single clean interface.</p>
-      <div class="card-link">stream.creativekonsoles.com <span class="card-arrow">→</span></div>
+      <div><div class="card-name">StreamFader</div><div class="card-type">Content Ranker</div></div>
+      <p class="card-desc">A DJ-style crossfader that blends critic (RT + Metacritic) and audience (IMDB) scores in real time. Slide left for critical consensus, right for crowd favorites.</p>
+      <div class="card-link">streamfader.creativekonsoles.com <span class="card-arrow">→</span></div>
     </div>
   </a>
-  <a class="product-card" href="https://memoir.creativekonsoles.com" target="_blank">
+  <a class="product-card" href="/memoir.html">
     <div class="card-accent" style="background:var(--memoir)"></div>
     <div class="card-body">
-      <div><div class="card-name">Memoir</div><div class="card-type">Voice Memoir Engine</div></div>
-      <p class="card-desc">Speak your story. Memoir transcribes, structures, and preserves voice-recorded memories into a searchable personal archive.</p>
+      <div><div class="card-name">Memoir</div><div class="card-type">Voice-to-Code Memoir</div></div>
+      <p class="card-desc">Speak memories into the Voice Studio. Whisper transcribes them. Claude weaves them into running Python chapters where code constructs carry narrative weight.</p>
       <div class="card-link">memoir.creativekonsoles.com <span class="card-arrow">→</span></div>
     </div>
   </a>
-  <a class="product-card" href="https://dawdoctor.creativekonsoles.com" target="_blank">
+  <a class="product-card" href="/dawdoctor.html">
     <div class="card-accent" style="background:#1a1a1a"></div>
     <div class="card-body">
-      <div><div class="card-name">DAW Doctor</div><div class="card-type">Producer Diagnostic</div></div>
-      <p class="card-desc">Diagnose your DAW. Plugin conflicts, CPU spikes, routing problems — analyzed and explained in plain language.</p>
+      <div><div class="card-name">DAW Doctor</div><div class="card-type">Ableton Backup</div></div>
+      <p class="card-desc">Automatic cloud backup for Ableton projects. Every .als save uploads to Backblaze B2 instantly, parsed for BPM, key, and plugins. Full version history, one-click restore.</p>
       <div class="card-link">dawdoctor.creativekonsoles.com <span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="product-card" href="/equil.html">
+    <div class="card-accent" style="background:#6FDBC7"></div>
+    <div class="card-body">
+      <div><div class="card-name">Equil</div><div class="card-type">Biometric Visualizer</div></div>
+      <p class="card-desc">Your Apple Watch biometrics drive generative sacred geometry and responsive audio in real time. As your nervous system settles, the geometry opens.</p>
+      <div class="card-link">equil.creativekonsoles.com <span class="card-arrow">→</span></div>
     </div>
   </a>
   <a class="product-card" href="https://build.creativekonsoles.com" target="_blank">

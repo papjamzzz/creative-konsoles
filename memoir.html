@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Memoir — Speak Your Life Into Code</title>
+<meta name="description" content="Memoir is a voice-to-code memoir tool. You speak memories. Whisper transcribes them. Claude weaves them into running Python chapters where code is metaphor — class is identity, return is what you carried forward.">
+<meta name="author" content="Jeremiah Smith">
+<link rel="canonical" href="https://creativekonsoles.com/memoir.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://creativekonsoles.com/memoir.html">
+<meta property="og:title" content="Memoir — Speak Your Life Into Code">
+<meta property="og:description" content="Memoir turns spoken memories into running Python chapters. Code as metaphor: class is identity, def is a moment, try/except is survival.">
+<meta property="og:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Memoir",
+  "url": "https://memoir.creativekonsoles.com",
+  "description": "A voice-to-code memoir. Speak memories into the Voice Studio. Whisper transcribes them. Claude weaves them into running Python chapters where code constructs carry narrative weight — class is a phase of life, def is a memory, try/except is when things broke and you survived.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "Creative Konsoles", "url": "https://creativekonsoles.com" },
+  "featureList": [
+    "Voice Studio: tap mic, speak a memory, Whisper transcribes it",
+    "Claude weaves raw transcripts into structured Python chapters",
+    "Code as narrative: class = identity, def = moment, try/except = survival",
+    "Chapter browser with rendered, runnable code on the right panel",
+    "Raw voice log preserved alongside each chapter",
+    "No writing required — the whole book is spoken"
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --ink:   #333333;
+  --soft:  #666666;
+  --grid:  1px solid rgba(0,0,0,.09);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; font-size: 15px; line-height: 1.6; }
+a { color: inherit; }
+
+/* NAV */
+header { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-bottom: var(--grid); position: sticky; top: 0; background: var(--white); z-index: 100; }
+.wordmark { font-size: 13px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+nav { display: flex; }
+nav a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); transition: background .12s; }
+nav a:hover { background: var(--black); color: var(--white); }
+
+/* HERO */
+.hero { padding: 80px 40px 72px; border-bottom: var(--grid); max-width: 860px; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; margin-bottom: 20px; }
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 900; line-height: 1.0; letter-spacing: -.02em; margin-bottom: 24px; }
+.hero-sub { font-size: 18px; font-weight: 400; color: var(--ink); max-width: 560px; line-height: 1.65; margin-bottom: 36px; }
+.btn-primary { display: inline-block; height: 52px; padding: 0 32px; background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; margin-right: 12px; }
+.btn-primary:hover { background: var(--white); color: var(--black); }
+.btn-secondary { display: inline-block; height: 52px; padding: 0 32px; background: transparent; color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; }
+.btn-secondary:hover { background: var(--black); color: var(--white); }
+
+/* SECTIONS */
+.section { padding: 64px 40px; border-bottom: var(--grid); }
+.section-grid { display: grid; grid-template-columns: 260px 1fr; gap: 60px; max-width: 860px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; padding-top: 4px; }
+.section-body h2 { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 16px; }
+.section-body p { color: var(--ink); margin-bottom: 16px; max-width: 540px; }
+.section-body p:last-child { margin-bottom: 0; }
+ul.feats { list-style: none; margin-top: 20px; display: grid; gap: 10px; }
+ul.feats li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink); }
+ul.feats li::before { content: '—'; font-weight: 700; flex-shrink: 0; color: var(--black); }
+
+/* LANGUAGE TABLE */
+.lang-table { margin-top: 24px; border: var(--grid); max-width: 540px; }
+.lang-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--grid); }
+.lang-row:last-child { border-bottom: none; }
+.lang-code { padding: 12px 16px; font-family: monospace; font-size: 13px; border-right: var(--grid); background: #f8f8f8; }
+.lang-meaning { padding: 12px 16px; font-size: 13px; color: var(--ink); }
+.lang-header .lang-code, .lang-header .lang-meaning { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .4; background: transparent; padding: 10px 16px; }
+
+/* FOOTER */
+footer { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-top: var(--grid); }
+.footer-left { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .35; }
+.footer-links { display: flex; }
+.footer-links a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); opacity: .4; transition: opacity .12s; }
+.footer-links a:hover { opacity: 1; }
+
+@media (max-width: 640px) {
+  header { padding: 0 20px; }
+  .hero { padding: 48px 20px 48px; }
+  .section { padding: 48px 20px; }
+  .section-grid { grid-template-columns: 1fr; gap: 24px; }
+  .lang-table { overflow-x: auto; }
+  footer { flex-direction: column; height: auto; padding: 20px; gap: 12px; }
+  .footer-links a { border-left: none; border-top: var(--grid); }
+  nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="/">Creative Konsoles</a>
+  <nav>
+    <a href="/">Products</a>
+    <a href="https://memoir.creativekonsoles.com" target="_blank">Open Memoir</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Creative Konsoles — Writing Tool</div>
+  <h1>Your life,<br>written in code.</h1>
+  <p class="hero-sub">Memoir turns spoken memories into running Python chapters. You speak. Whisper transcribes. Claude weaves each memory into code where every construct carries narrative weight. No writing required.</p>
+  <a class="btn-primary" href="https://memoir.creativekonsoles.com" target="_blank">Open Memoir</a>
+  <a class="btn-secondary" href="/">All Tools</a>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">What it does</div>
+    <div class="section-body">
+      <h2>A memoir where the code is the prose</h2>
+      <p>Memoir is a voice-to-code memoir builder. Open the Voice Studio, tap the microphone, and speak a memory. OpenAI's Whisper transcribes what you said and saves it to your voice log. From there, Claude reads the raw transcript and weaves it into a Python chapter — real, runnable code where the constructs aren't technical decoration but narrative choices.</p>
+      <p>A class is a phase of life. A function is a moment. A try/except block is the chapter where things broke — and where you survived. The code runs. The story holds.</p>
+      <ul class="feats">
+        <li>Tap mic, speak a memory — Whisper transcribes it in seconds</li>
+        <li>Raw voice log saved alongside every chapter for reference</li>
+        <li>Claude weaves transcripts into structured, runnable Python</li>
+        <li>Chapter browser with rendered code in the right panel</li>
+        <li>No writing required — the entire book can be spoken</li>
+        <li>Dark warm writing-desk interface — Lora prose, JetBrains Mono code</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">The language</div>
+    <div class="section-body">
+      <h2>Every Python construct is a narrative choice</h2>
+      <p>The mapping between code and story is consistent across every chapter. Once you learn what each construct means in Memoir's language, you can read the code as prose — and read the prose as code.</p>
+      <div class="lang-table">
+        <div class="lang-row lang-header">
+          <div class="lang-code">Code</div>
+          <div class="lang-meaning">Narrative meaning</div>
+        </div>
+        <div class="lang-row"><div class="lang-code">class</div><div class="lang-meaning">A phase of life, an identity</div></div>
+        <div class="lang-row"><div class="lang-code">def</div><div class="lang-meaning">A moment, an event, a memory</div></div>
+        <div class="lang-row"><div class="lang-code">try / except</div><div class="lang-meaning">When things broke — and survival</div></div>
+        <div class="lang-row"><div class="lang-code">if / else</div><div class="lang-meaning">A crossroads, a decision</div></div>
+        <div class="lang-row"><div class="lang-code">while</div><div class="lang-meaning">Patterns, cycles</div></div>
+        <div class="lang-row"><div class="lang-code">return</div><div class="lang-meaning">What you carried forward</div></div>
+        <div class="lang-row"><div class="lang-code">import</div><div class="lang-meaning">Who shaped you</div></div>
+        <div class="lang-row"><div class="lang-code">break</div><div class="lang-meaning">The moment of escape</div></div>
+        <div class="lang-row"><div class="lang-code">None</div><div class="lang-meaning">Absence. Loss.</div></div>
+        <div class="lang-row"><div class="lang-code">raise</div><div class="lang-meaning">When you stood up</div></div>
+        <div class="lang-row"><div class="lang-code"># comment</div><div class="lang-meaning">The inner voice</div></div>
+        <div class="lang-row"><div class="lang-code">"""docstring"""</div><div class="lang-meaning">The full narrative — prose</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">Who it's for</div>
+    <div class="section-body">
+      <h2>For anyone who wants to write a memoir but has never started</h2>
+      <p>Most memoirs never get written because writing is hard. Memoir removes that barrier: you don't write anything. You speak. The structured output emerges from the conversation between your raw voice and Claude's ability to find form in it.</p>
+      <p>Memoir is also built for people who think in systems — engineers, developers, anyone who finds code more natural than prose. The code-as-memoir format offers a way into self-expression that doesn't feel like creative writing. It feels like architecture.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Creative Konsoles</div>
+  <div class="footer-links">
+    <a href="https://memoir.creativekonsoles.com" target="_blank">Open App</a>
+    <a href="/">All Tools</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>

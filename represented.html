@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Represented — AI Legal Platform for Self-Represented Litigants</title>
+<meta name="description" content="Represented is an AI legal companion for the ~80% who face the legal system without a lawyer. Log your situation, let AI organize your evidence, draft court-ready documents, and understand the judge you're facing.">
+<meta name="author" content="Jeremiah Smith">
+<link rel="canonical" href="https://creativekonsoles.com/represented.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://creativekonsoles.com/represented.html">
+<meta property="og:title" content="Represented — AI Legal Platform for Self-Represented Litigants">
+<meta property="og:description" content="Go to court with an AI in your corner. Log your situation, organize evidence, draft documents, and understand the judge you're facing.">
+<meta property="og:image" content="https://creativekonsoles.com/assets/ck-icon-1024.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --ink:   #333333;
+  --soft:  #666666;
+  --grid:  1px solid rgba(0,0,0,.09);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; font-size: 15px; line-height: 1.6; }
+a { color: inherit; }
+
+header { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-bottom: var(--grid); position: sticky; top: 0; background: var(--white); z-index: 100; }
+.wordmark { font-size: 13px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+nav { display: flex; }
+nav a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); transition: background .12s; }
+nav a:hover { background: var(--black); color: var(--white); }
+
+.hero { padding: 80px 40px 72px; border-bottom: var(--grid); max-width: 860px; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; margin-bottom: 20px; }
+h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 900; line-height: 1.0; letter-spacing: -.02em; margin-bottom: 24px; }
+.hero-sub { font-size: 18px; font-weight: 400; color: var(--ink); max-width: 560px; line-height: 1.65; margin-bottom: 36px; }
+.btn-primary { display: inline-block; height: 52px; padding: 0 32px; background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; margin-right: 12px; }
+.btn-primary:hover { background: var(--white); color: var(--black); }
+.btn-secondary { display: inline-block; height: 52px; padding: 0 32px; background: transparent; color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; line-height: 52px; border: 2px solid var(--black); transition: all .12s; }
+.btn-secondary:hover { background: var(--black); color: var(--white); }
+
+.section { padding: 64px 40px; border-bottom: var(--grid); }
+.section-grid { display: grid; grid-template-columns: 260px 1fr; gap: 60px; max-width: 860px; }
+.section-label { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; opacity: .4; padding-top: 4px; }
+.section-body h2 { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 16px; }
+.section-body p { color: var(--ink); margin-bottom: 16px; max-width: 540px; }
+.section-body p:last-child { margin-bottom: 0; }
+
+.features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: var(--grid); margin-top: 24px; }
+.feature { padding: 24px; border-right: var(--grid); border-bottom: var(--grid); }
+.feature:nth-child(2n) { border-right: none; }
+.feature:nth-last-child(-n+2) { border-bottom: none; }
+.feature-name { font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+.feature-desc { font-size: 13px; color: var(--soft); line-height: 1.55; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: var(--grid); margin-top: 24px; }
+.stat { padding: 24px 20px; border-right: var(--grid); }
+.stat:last-child { border-right: none; }
+.stat-num { font-size: 36px; font-weight: 900; letter-spacing: -.02em; line-height: 1; margin-bottom: 6px; }
+.stat-label { font-size: 11px; color: var(--soft); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+
+footer { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 60px; border-top: var(--grid); }
+.footer-left { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .35; }
+.footer-links { display: flex; }
+.footer-links a { display: block; padding: 0 20px; height: 60px; line-height: 60px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-left: var(--grid); opacity: .4; transition: opacity .12s; }
+.footer-links a:hover { opacity: 1; }
+
+@media (max-width: 640px) {
+  header { padding: 0 20px; }
+  .hero { padding: 48px 20px 48px; }
+  .section { padding: 48px 20px; }
+  .section-grid { grid-template-columns: 1fr; gap: 24px; }
+  .features { grid-template-columns: 1fr; }
+  .feature { border-right: none; }
+  .feature:nth-last-child(-n+2) { border-bottom: var(--grid); }
+  .feature:last-child { border-bottom: none; }
+  .stat-row { grid-template-columns: 1fr; }
+  .stat { border-right: none; border-bottom: var(--grid); }
+  .stat:last-child { border-bottom: none; }
+  footer { flex-direction: column; height: auto; padding: 20px; gap: 12px; }
+  .footer-links a { border-left: none; border-top: var(--grid); }
+  nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="/">Creative Konsoles</a>
+  <nav>
+    <a href="/">Products</a>
+    <a href="https://github.com/papjamzzz/represented" target="_blank">View on GitHub</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Creative Konsoles — AI Legal Platform</div>
+  <h1>Go to court<br>with AI in<br>your corner.</h1>
+  <p class="hero-sub">80% of people facing the legal system have no lawyer. Represented gives them one — an AI that logs the incident, organizes the evidence, drafts the documents, and tells you who the judge is before you walk in.</p>
+  <a class="btn-primary" href="https://github.com/papjamzzz/represented" target="_blank">View on GitHub</a>
+  <a class="btn-secondary" href="/">All Tools</a>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">The problem</div>
+    <div class="section-body">
+      <h2>The legal system was built assuming you have a lawyer. Most people don't.</h2>
+      <p>Self-represented litigants lose at dramatically higher rates — not because their cases are weaker, but because they don't know the procedural rules, can't draft proper filings, and walk into hearings without knowing anything about the judge. The gap between represented and unrepresented is almost entirely informational.</p>
+      <p>Represented closes that gap. It does not give legal advice. It gives access to the same organizational infrastructure a good lawyer would build for you — and tells you what you're walking into.</p>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">80%</div>
+          <div class="stat-label">without a lawyer in family court</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3x</div>
+          <div class="stat-label">higher loss rate, self-represented</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$0</div>
+          <div class="stat-label">cost to use Represented</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">What it does</div>
+    <div class="section-body">
+      <h2>Four tools. One platform.</h2>
+      <p>Represented is built around the four things a self-represented litigant actually needs: a record, organized evidence, proper documents, and intelligence on the judge.</p>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-name">Incident Log</div>
+          <div class="feature-desc">Log what happened, when, and who was involved. Build a timestamped record AI can search, summarize, and reference when drafting documents.</div>
+        </div>
+        <div class="feature">
+          <div class="feature-name">Document AI</div>
+          <div class="feature-desc">Upload documents — orders, letters, filings — and ask questions in plain English. AI reads them and answers without legal jargon.</div>
+        </div>
+        <div class="feature">
+          <div class="feature-name">Document Drafting</div>
+          <div class="feature-desc">Generate court-ready documents from your log and uploaded materials. Motions, declarations, responses — structured for filing, not for reading.</div>
+        </div>
+        <div class="feature">
+          <div class="feature-name">Know Your Judge</div>
+          <div class="feature-desc">Search any judge by name and jurisdiction. Get their background, known tendencies, notable rulings, and what they respond to — before you walk in.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-grid">
+    <div class="section-label">Who it's for</div>
+    <div class="section-body">
+      <h2>Anyone navigating the legal system without a lawyer</h2>
+      <p>Family law. Landlord-tenant disputes. Small claims. Protective orders. Custody modifications. These are the proceedings where most people go unrepresented — and where the informational gap does the most damage.</p>
+      <p>Represented is not a lawyer and does not give legal advice. It is an organizational and research tool that puts self-represented litigants on equal informational footing with the other side.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Creative Konsoles</div>
+  <div class="footer-links">
+    <a href="https://github.com/papjamzzz/represented" target="_blank">GitHub</a>
+    <a href="/">All Tools</a>
+    <a href="mailto:support@creativekonsoles.com">Contact</a>
+    <a href="/terms.html">Terms</a>
+  </div>
+</footer>
+
+</body>
+</html>

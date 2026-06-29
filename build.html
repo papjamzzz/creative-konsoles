@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build — Creative Konsoles</title>
+  <meta name="description" content="Custom software built to spec. No agency. No markup. One builder who actually gives a damn.">
+  <link rel="icon" type="image/png" href="https://creativekonsoles.com/assets/ck-icon-1024.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:      #ffffff;
+      --black:      #1a1a1a;
+      --green:      #5EE88A;
+      --green-dark: #1F5A38;
+      --off-white:  #f5f5f0;
+      --muted:      #6b6b6b;
+      --border:     #e8e8e8;
+      --blue:       #004be3;
+      --font-head:  'Space Grotesk', sans-serif;
+      --font-body:  'Inter', sans-serif;
+      --font-mono:  'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo .tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--green);
+      color: var(--black);
+      padding: 2px 7px;
+      font-weight: 600;
+    }
+    .nav-cta {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 20px;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: #333; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 140px 0 100px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow { margin-bottom: 24px; }
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+      max-width: 800px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--green-dark);
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--green);
+      color: var(--black);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #4bd977; }
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--black);
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 32px;
+      border: 1.5px solid var(--black);
+      letter-spacing: 0.01em;
+      transition: all 0.15s;
+    }
+    .btn-ghost:hover { background: var(--black); color: var(--white); }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .section { padding: 96px 0; border-bottom: 1px solid var(--border); }
+    .section-head { margin-bottom: 56px; }
+    .section-head h2 {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-top: 12px;
+    }
+
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .step {
+      padding: 40px 36px;
+      border-right: 1px solid var(--border);
+    }
+    .step:last-child { border-right: none; }
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .step h3 {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .step p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .portfolio-item {
+      background: var(--white);
+      padding: 36px;
+      transition: background 0.15s;
+    }
+    .portfolio-item:hover { background: var(--off-white); }
+    .portfolio-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      background: rgba(94, 232, 138, 0.12);
+      border: 1px solid rgba(94, 232, 138, 0.3);
+      padding: 3px 10px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .portfolio-item h3 {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .portfolio-item p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .portfolio-link {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .portfolio-link:hover { border-color: var(--blue); }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .pricing-tier {
+      background: var(--white);
+      padding: 40px 36px;
+    }
+    .pricing-tier.featured { background: var(--black); color: var(--white); }
+    .tier-name {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      color: var(--muted);
+    }
+    .pricing-tier.featured .tier-name { color: rgba(255,255,255,0.5); }
+    .tier-price {
+      font-family: var(--font-head);
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .tier-range {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .pricing-tier.featured .tier-range { color: rgba(255,255,255,0.4); }
+    .tier-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    .tier-features li {
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+    }
+    .pricing-tier.featured .tier-features li {
+      border-color: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.75);
+    }
+    .tier-features li::before {
+      content: "—";
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--green);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .tier-cta {
+      display: block;
+      text-align: center;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 13px;
+      letter-spacing: 0.01em;
+      transition: all 0.15s;
+    }
+    .pricing-tier:not(.featured) .tier-cta {
+      border: 1.5px solid var(--black);
+      color: var(--black);
+    }
+    .pricing-tier:not(.featured) .tier-cta:hover { background: var(--black); color: var(--white); }
+    .pricing-tier.featured .tier-cta {
+      background: var(--green);
+      color: var(--black);
+    }
+    .pricing-tier.featured .tier-cta:hover { background: #4bd977; }
+
+    /* ── WHAT PEOPLE ASK ── */
+    .faq { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+    .faq-item {
+      padding: 28px 36px;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .faq-a { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+    /* ── FORM ── */
+    .form-wrap {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      padding: 56px;
+      max-width: 640px;
+    }
+    .form-wrap h2 {
+      font-family: var(--font-head);
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+    .form-sub { font-size: 15px; color: var(--muted); margin-bottom: 36px; }
+    .form-row { margin-bottom: 20px; }
+    .form-row label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      width: 100%;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--black);
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus,
+    .form-row select:focus { border-color: var(--black); }
+    .form-row textarea { min-height: 120px; resize: vertical; }
+    .form-submit {
+      width: 100%;
+      background: var(--green);
+      color: var(--black);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 16px;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+      margin-top: 8px;
+    }
+    .form-submit:hover { background: #4bd977; }
+    .form-note {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-brand {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--black); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .steps { grid-template-columns: 1fr; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .form-wrap { padding: 32px 24px; }
+      .hero-stats { gap: 32px; }
+      .nav-inner { padding: 0 20px; }
+      .container { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="https://creativekonsoles.com" class="nav-logo">
+        Creative Konsoles
+        <span class="tag">Build</span>
+      </a>
+      <a href="#request" class="nav-cta">Start a Project</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow eyebrow">Custom Software · Built to Spec</div>
+      <h1>You tell me what.<br>I <em>build</em> it.</h1>
+      <p class="hero-sub">
+        No agency. No bloat. One builder with an AI stack that ships fast.
+        Dashboards, automation, trading tools, scrapers, full apps —
+        whatever you actually need.
+      </p>
+      <div class="hero-actions">
+        <a href="#request" class="btn-primary">Tell Me What You Need</a>
+        <a href="#portfolio" class="btn-ghost">See What's Been Built</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div>
+          <div class="stat-num">~1wk</div>
+          <div class="stat-label">Avg Turnaround</div>
+        </div>
+        <div>
+          <div class="stat-num">0</div>
+          <div class="stat-label">Agency Markup</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Process</div>
+        <h2>Three steps, then it's yours.</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">Step 01</div>
+          <h3>Tell me what you need</h3>
+          <p>Fill out the form below. No brief required — describe it how you'd explain it to a friend. The rougher the better, I'll make sense of it.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 02</div>
+          <h3>We align on scope + price</h3>
+          <p>I'll come back within 24 hours with a clear scope, fixed price, and timeline. No surprises, no scope creep billing.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 03</div>
+          <h3>It ships</h3>
+          <p>You get a working build with source code, install instructions, and a 30-day window for bug fixes. No recurring fees.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Portfolio</div>
+        <h2>Things that actually got built.</h2>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <span class="portfolio-tag">AI · Web App</span>
+          <h3>5i — Five Intelligences</h3>
+          <p>Parallel AI synthesis engine. Runs GPT, Claude, Gemini, Mistral, and Grok simultaneously on any prompt. Finds convergence and surfaces disagreement. Flask + Railway.</p>
+          <a href="https://creativekonsoles.com" class="portfolio-link">View →</a>
+        </div>
+        <div class="portfolio-item">
+          <span class="portfolio-tag">Trading · Automation</span>
+          <h3>KK Trader</h3>
+          <p>Autonomous prediction market trading bot. Cross-market edge detection, injury signal scanning, dynamic position sizing, CLV tracking. Fully self-running.</p>
+          <a href="https://creativekonsoles.com" class="portfolio-link">View →</a>
+        </div>
+        <div class="portfolio-item">
+          <span class="portfolio-tag">Dashboard · Tool</span>
+          <h3>Kode Keeper</h3>
+          <p>Claude Code mission control. Real-time project status, session tracking, GitHub integration. Built for developers who use AI to ship.</p>
+          <a href="https://creativekonsoles.com" class="portfolio-link">View →</a>
+        </div>
+        <div class="portfolio-item">
+          <span class="portfolio-tag">Music · macOS</span>
+          <h3>DAW Doctor + Track Tracks</h3>
+          <p>Ableton Live diagnostics and per-track CPU monitoring. Catches plugin conflicts, scans for performance issues. Native macOS tooling.</p>
+          <a href="https://creativekonsoles.com" class="portfolio-link">View →</a>
+        </div>
+        <div class="portfolio-item">
+          <span class="portfolio-tag">Data · Web App</span>
+          <h3>StreamFader</h3>
+          <p>Content discovery tool that crossfades critic scores with audience ratings. Pulls from multiple review APIs, surfaces hidden gems.</p>
+          <a href="https://creativekonsoles.com" class="portfolio-link">View →</a>
+        </div>
+        <div class="portfolio-item">
+          <span class="portfolio-tag">AI · Companion</span>
+          <h3>WithYou</h3>
+          <p>Voice-first AI wellness companion with 12 distinct support types. Cognitive empathy engine. Private alpha — built from scratch in weeks.</p>
+          <a href="https://creativekonsoles.com" class="portfolio-link">View →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">FAQ</div>
+        <h2>What people usually ask.</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <div class="faq-q">What platforms do you build for?</div>
+          <div class="faq-a">Primarily web apps (Python/Flask), macOS desktop tools, and automation scripts. Can also handle iOS/Android if the scope warrants it. If it runs on a computer, I can probably build it.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do I need a technical background to work with you?</div>
+          <div class="faq-a">No. Describe it how you'd explain it to someone who isn't a developer. The vaguer the better — I'll ask the right questions to get to a tight spec.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Who actually builds it?</div>
+          <div class="faq-a">Me. One person. No outsourcing, no team of contractors. This is why it's fast and cheap and you can actually talk to the person writing your code.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What's the payment structure?</div>
+          <div class="faq-a">50% upfront, 50% on delivery. Nothing changes hands until we've agreed on a scope, price, and timeline.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Do I get the source code?</div>
+          <div class="faq-a">Always. You own everything I build for you — code, assets, all of it. I don't retain rights or hold your build hostage behind a subscription.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What if I need changes after delivery?</div>
+          <div class="faq-a">Bug fixes are covered for 30 days at no cost. Feature additions after delivery are scoped as a new project — usually discounted since we're already in sync.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUEST FORM -->
+  <section class="section" id="request">
+    <div class="container">
+      <div class="form-wrap">
+        <div class="eyebrow" style="margin-bottom:16px;">Start a Project</div>
+        <h2>Tell me what you need.</h2>
+        <p class="form-sub">No pitch deck required. Just describe it. I'll respond within 24 hours.</p>
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="eedb06aa-fe5c-464c-9d8a-31e3476efea7">
+          <input type="hidden" name="subject" value="New Build Request — Creative Konsoles">
+          <input type="hidden" name="redirect" value="https://creativekonsoles.com/build.html?sent=1">
+
+          <div class="form-row">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="First name is fine" required>
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" required>
+          </div>
+          <div class="form-row">
+            <label for="budget">Budget Range</label>
+            <select id="budget" name="budget" required>
+              <option value="" disabled selected>Select a range</option>
+              <option value="under-200">Under $200</option>
+              <option value="200-500">$200 – $500</option>
+              <option value="500-1200">$500 – $1,200</option>
+              <option value="1200+">$1,200+</option>
+              <option value="not-sure">Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="description">What do you need built?</label>
+            <textarea id="description" name="description" placeholder="Describe it how you'd explain it to a friend. The rougher the better." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send It →</button>
+          <p class="form-note">No spam. No newsletter. Just a reply from one human.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">Creative Konsoles</div>
+        <div class="footer-links">
+          <a href="https://creativekonsoles.com">Main Site</a>
+          <a href="https://github.com/papjamzzz">GitHub</a>
+          <a href="mailto:jeremiah@creativekonsoles.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Success toast -->
+  <script>
+    if (new URLSearchParams(window.location.search).get('sent') === '1') {
+      const toast = document.createElement('div');
+      toast.style.cssText = 'position:fixed;bottom:32px;right:32px;background:#1a1a1a;color:#fff;font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:14px;padding:16px 24px;z-index:9999;';
+      toast.textContent = 'Sent. I\'ll be in touch within 24h.';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 5000);
+    }
+  </script>
+
+</body>
+</html>

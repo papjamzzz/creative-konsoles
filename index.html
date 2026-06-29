@@ -35,7 +35,7 @@
       "name": "Creative Konsoles Tools",
       "itemListElement": [
         { "@type": "SoftwareApplication", "name": "5i", "url": "https://5i.creativekonsoles.com", "description": "Parallel AI synthesis engine — five models, one answer." },
-        { "@type": "SoftwareApplication", "name": "DAW Doctor", "url": "https://dawdoctor.creativekonsoles.com", "description": "AI-assisted DAW diagnostics for music producers." },
+        { "@type": "SoftwareApplication", "name": "Represented", "url": "https://represented.creativekonsoles.com", "description": "AI legal companion for self-represented litigants." },
         { "@type": "SoftwareApplication", "name": "Memoir", "url": "https://memoir.creativekonsoles.com", "description": "Voice-to-memory system for structured personal recall." },
         { "@type": "SoftwareApplication", "name": "Gain", "url": "https://gain.creativekonsoles.com", "description": "Behavioral intelligence mixer for individuals, teams, and organizations." },
         { "@type": "SoftwareApplication", "name": "Equil", "url": "https://equil.creativekonsoles.com", "description": "Biometric sacred-geometry visualizer driven by Apple Watch data." },
@@ -60,6 +60,7 @@
       --5i:         #0040FF;
       --sf:         #C49A00;
       --memoir:     #7700CC;
+      --rep:        #1A6B45;
       --biosurface: #005533;
       --sonar:      #8B5E14;
       --grid:       1px solid #111111;
@@ -195,7 +196,6 @@
     .product-card:nth-child(4) { border-top: var(--grid); }
     .product-card:nth-child(5) { border-top: var(--grid); }
     .product-card:nth-child(6) { border-top: var(--grid); border-right: none; }
-    .product-card:nth-child(7) { border-top: var(--grid); }
     .product-card:hover { background: #f5f5f5; }
     .product-card:hover .card-arrow { opacity: 1; transform: translate(0,0); }
     .card-accent { height: 6px; width: 100%; }
@@ -205,6 +205,10 @@
     .card-desc { font-size: 15px; line-height: 1.55; opacity: .7; margin-top: auto; }
     .card-link { font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; opacity: .4; margin-top: 24px; display: flex; align-items: center; gap: 8px; }
     .card-arrow { opacity: 0; transform: translate(-4px,0); transition: all .15s; }
+
+    /* ── BUILD CTA (single card, set apart) ── */
+    .build-cta { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: var(--grid); }
+    .build-card { border-right: none; }
 
     /* ── BUILDS STRIP ── */
     .builds-strip { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--grid); min-height: 280px; }
@@ -367,12 +371,12 @@
       <div class="card-link">memoir.creativekonsoles.com <span class="card-arrow">→</span></div>
     </div>
   </a>
-  <a class="product-card" href="/dawdoctor.html">
-    <div class="card-accent" style="background:#1a1a1a"></div>
+  <a class="product-card" href="https://github.com/papjamzzz/represented" target="_blank">
+    <div class="card-accent" style="background:var(--rep)"></div>
     <div class="card-body">
-      <div><div class="card-name">DAW Doctor</div><div class="card-type">Ableton Backup</div></div>
-      <p class="card-desc">Automatic cloud backup for Ableton projects. Every .als save uploads to Backblaze B2 instantly, parsed for BPM, key, and plugins. Full version history, one-click restore.</p>
-      <div class="card-link">dawdoctor.creativekonsoles.com <span class="card-arrow">→</span></div>
+      <div><div class="card-name">Represented</div><div class="card-type">AI Legal Platform</div></div>
+      <p class="card-desc">An AI legal companion for the ~80% who go to court without a lawyer. Log your situation, let AI organize the evidence, draft court-ready documents, and understand the judge you're facing.</p>
+      <div class="card-link">represented.creativekonsoles.com <span class="card-arrow">→</span></div>
     </div>
   </a>
   <a class="product-card" href="/equil.html">
@@ -383,7 +387,12 @@
       <div class="card-link">equil.creativekonsoles.com <span class="card-arrow">→</span></div>
     </div>
   </a>
-  <a class="product-card" href="https://build.creativekonsoles.com" target="_blank">
+</div>
+
+<!-- BUILD CTA — set apart from active products -->
+<div class="section-label">Work with us</div>
+<div class="build-cta">
+  <a class="product-card build-card" href="https://build.creativekonsoles.com" target="_blank">
     <div class="card-accent" style="background:#555"></div>
     <div class="card-body">
       <div><div class="card-name">Build</div><div class="card-type">Custom Software</div></div>
